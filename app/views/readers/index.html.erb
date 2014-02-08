@@ -1,0 +1,8 @@
+<h1>Welcome to the Aspire Reader Tool </h1>
+
+
+
+<%= form_for @reader, html: {class: "login_form"} do |f| %>
+	<%= f.text_field :email, placeholder: "Enter your Aspire Email" %>
+	<%= f.submit "Login", id: "login-button" %>
+<% end %>
