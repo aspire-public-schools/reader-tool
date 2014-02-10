@@ -1,1 +1,2 @@
-reader.rb
+class Reader < ActiveRecord::Base
+end
