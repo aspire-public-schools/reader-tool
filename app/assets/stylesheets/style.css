@@ -1,0 +1,12 @@
+body {
+	background-color: red;
+}
+
+h1 {
+	text-align: center;
+}
+
+.login_form {
+	text-align: center;
+	border-style: none;
+}
