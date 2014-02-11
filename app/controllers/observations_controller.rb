@@ -1,6 +1,9 @@
 class ObservationsController < ApplicationController
+  include SessionHelper
+
 	def index
-		@reader = Reader.new
+    p current_user
+		@reader = current_user
 	end
 
 	def show
