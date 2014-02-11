@@ -1,2 +1,8 @@
-<%= @reader.first_name %>
-<%= button_to "logout", logout_path, method: 'delete', class: "btn btn-default btn-sm" %>
+<nav>
+  <ul>
+    <li><%= button_to "logout", logout_path, method: 'delete', class: "btn btn-default btn-sm" %></li>
+    <li>Welcome, <%= @reader.first_name %></li>
+  </ul>
+</nav>
+
+
