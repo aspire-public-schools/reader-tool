@@ -1,0 +1,13 @@
+.container {
+  background-color: purple;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h1 {
+	text-align: center;
+}
+
+input#reader_email {
+	text-align: center;
+}

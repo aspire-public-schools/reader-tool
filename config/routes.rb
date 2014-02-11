@@ -1,8 +1,12 @@
 ReaderTool::Application.routes.draw do
 
   root to: 'readers#index'
-  
+
   resources :readers, only: [:index]
+  resources :sessions, only: [:create, :destroy]
+  resources :observations
+
+  match '/logout', to: 'sessions#destroy', via: 'delete'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

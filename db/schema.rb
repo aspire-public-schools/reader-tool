@@ -11,13 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140206222450) do
+ActiveRecord::Schema.define(:version => 20140210195913) do
 
   create_table "readers", :force => true do |t|
     t.integer "empolyeenumber"
     t.string  "first_name"
     t.string  "last_name"
     t.string  "password_digest"
+    t.string  "email"
   end
 
 end
