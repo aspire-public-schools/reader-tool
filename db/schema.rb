@@ -11,10 +11,41 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140210195913) do
+ActiveRecord::Schema.define(:version => 20140212195147) do
+
+  create_table "domain_scores", :force => true do |t|
+    t.integer "observation_read_id"
+    t.integer "domain_id"
+    t.integer "quality_score"
+  end
+
+  create_table "domains", :force => true do |t|
+    t.integer "number"
+    t.string  "description"
+  end
+
+  create_table "observation_reads", :force => true do |t|
+    t.integer  "observations_group_id"
+    t.integer  "employee_id_observer"
+    t.integer  "employee_id_learner"
+    t.string   "alignment_overall"
+    t.string   "quality_overall"
+    t.decimal  "correlation"
+    t.decimal  "average_difference"
+    t.decimal  "percent_correct"
+    t.string   "error_pattern_1"
+    t.string   "error_pattern_2"
+    t.string   "error_pattern_3"
+    t.integer  "reader_number"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+    t.integer  "reader_id"
+  end
+
+  add_index "observation_reads", ["reader_id"], :name => "index_observations_on_reader_id"
 
   create_table "readers", :force => true do |t|
-    t.integer "empolyeenumber"
+    t.integer "employeenumber"
     t.string  "first_name"
     t.string  "last_name"
     t.string  "password_digest"
