@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140211234500) do
+ActiveRecord::Schema.define(:version => 20140212195147) do
+
+  create_table "domain", :force => true do |t|
+    t.integer "number"
+    t.string  "description"
+  end
+
+  create_table "domain_scores", :force => true do |t|
+    t.integer "observation_read_id"
+    t.integer "domain_id"
+    t.integer "quality_score"
+  end
 
   create_table "observation_reads", :force => true do |t|
     t.integer  "observations_group_id"
