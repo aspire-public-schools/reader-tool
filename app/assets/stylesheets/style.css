@@ -1,34 +1,39 @@
-.container {
-  background-color: purple;
-  margin-left: auto;
-  margin-right: auto;
+/*.container {
+  padding-top: 60px
 }
+*/
 
-h1 {
+.navbar-text {
+  margin-bottom: 0;
+  line-height: 30px;
+  color: #777777;
+}
+/*h1 {
 	text-align: center;
 }
 
 input#reader_email {
 	text-align: center;
 }
+*/
 
-nav {
+/*.navbar .navbar-inverse{
   background-color: purple;
   width: 100%;
   overflow: hidden;
   display: block;
   text-decoration: none;
   color: white;
-}
+  border-radius: 0px;
+  top: 0px;
+  padding-top: 0;
+}*/
 
-nav ul {
-  float: right;
-  list-style-type: none;
+/*p.navbar-text.navbar-left{
+  margin: 0 0 0;
+}*/
+/*
+form{
+  margin: 0 0 0;
 }
-
-nav li {
-  color: white;
-  float: right;
-  padding: 10px 5px 5px 5px;
-  cursor: pointer;
-}
+*/
