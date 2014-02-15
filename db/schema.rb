@@ -11,12 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140212195147) do
+ActiveRecord::Schema.define(:version => 20140215042950) do
 
   create_table "domain_scores", :force => true do |t|
-    t.integer "observation_read_id"
-    t.integer "domain_id"
+    t.integer "observation_reads_id"
     t.integer "quality_score"
+    t.integer "domain_id"
   end
 
   create_table "domains", :force => true do |t|
@@ -24,28 +24,43 @@ ActiveRecord::Schema.define(:version => 20140212195147) do
     t.string  "description"
   end
 
+  create_table "evidence", :force => true do |t|
+    t.integer "indicator_scores_id"
+    t.string  "description"
+    t.string  "type"
+    t.integer "true_score_id"
+  end
+
+  create_table "indicator_scores", :force => true do |t|
+    t.integer "domain_scores_id"
+    t.integer "indicator_id"
+    t.integer "alignment_score"
+  end
+
+  create_table "indicators", :force => true do |t|
+    t.integer "number"
+    t.string  "description"
+  end
+
   create_table "observation_reads", :force => true do |t|
-    t.integer  "observations_group_id"
+    t.integer  "observation_group_id"
     t.integer  "employee_id_observer"
     t.integer  "employee_id_learner"
     t.string   "alignment_overall"
-    t.string   "quality_overall"
-    t.decimal  "correlation"
-    t.decimal  "average_difference"
-    t.decimal  "percent_correct"
+    t.integer  "correlation"
+    t.integer  "average_difference"
+    t.integer  "percent_correct"
+    t.integer  "reader_id"
     t.string   "error_pattern_1"
     t.string   "error_pattern_2"
     t.string   "error_pattern_3"
     t.integer  "reader_number"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
-    t.integer  "reader_id"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
   end
 
-  add_index "observation_reads", ["reader_id"], :name => "index_observations_on_reader_id"
-
   create_table "readers", :force => true do |t|
-    t.integer "employeenumber"
+    t.integer "employee_number"
     t.string  "first_name"
     t.string  "last_name"
     t.string  "password_digest"
