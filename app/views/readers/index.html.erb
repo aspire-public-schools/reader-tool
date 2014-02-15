@@ -1,15 +1,9 @@
-
-<div class="container">
-  <div class="content">
-  <h1>Welcome to the Aspire Reader Tool </h1>
-
-    <div class="hero-unit">
-      <%= form_for @reader, url: sessions_path do |f| %>
-        <%= f.text_field :email, placeholder: "Enter your Aspire Email" %>
-        <%= f.submit "Login", class: "btn btn-default btn-sm" %>
+<div id="main" class="container">
+  <div class="jumbotron">
+    <h2>Welcome to the Aspire Reader Tool</h2>
+      <%= simple_form_for @reader, :html => {:class => 'input-group-lg'}, url: sessions_path do |f| %>
+          <%= f.text_field :email, class: "form-control", placeholder: "Enter your Aspire Email" %>
+          <%= f.submit "Login", class: "btn btn-primary" %>
       <% end %>
-    </div>
   </div>
 </div>
-
-
