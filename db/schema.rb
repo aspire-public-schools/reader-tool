@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(:version => 20140215042950) do
 
   create_table "domain_scores", :force => true do |t|
-    t.integer "observation_reads_id"
+    t.integer "observation_read_id"
     t.integer "quality_score"
     t.integer "domain_id"
   end
@@ -24,22 +24,24 @@ ActiveRecord::Schema.define(:version => 20140215042950) do
     t.string  "description"
   end
 
-  create_table "evidence", :force => true do |t|
-    t.integer "indicator_scores_id"
+  create_table "evidences", :force => true do |t|
+    t.integer "indicator_score_id"
     t.string  "description"
     t.string  "type"
     t.integer "true_score_id"
   end
 
   create_table "indicator_scores", :force => true do |t|
-    t.integer "domain_scores_id"
+    t.integer "domain_score_id"
     t.integer "indicator_id"
     t.integer "alignment_score"
+    t.integer "evidence_id"
   end
 
   create_table "indicators", :force => true do |t|
     t.integer "number"
     t.string  "description"
+    t.integer "domain_id"
   end
 
   create_table "observation_reads", :force => true do |t|
@@ -63,7 +65,6 @@ ActiveRecord::Schema.define(:version => 20140215042950) do
     t.integer "employee_number"
     t.string  "first_name"
     t.string  "last_name"
-    t.string  "password_digest"
     t.string  "email"
   end
 

@@ -1,5 +1,5 @@
 class Indicator < ActiveRecord::Base
-  has_many :domains
+  belongs_to :domain
   has_many :indicator_scores
-  has_many :domain_scores, through: :indcator_scores
+  has_many :domain_scores, through: :indicator_scores
 end
