@@ -28,6 +28,7 @@ group :development, :test do
   gem 'faker'
   gem 'dotenv'
   gem "rack_session_access"
+  gem 'populator'
 end
 
 group :assets do

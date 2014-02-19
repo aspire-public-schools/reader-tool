@@ -10,53 +10,104 @@
   </div>
 </nav>
 
-<div class="btn-group-vertical">
-  <div class="btn-group">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-      Domain 1
-      <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu">
-      <li><a href="#">1.1A</a></li>
-      <li><a href="#">1.1B</a></li>
-      <li><a href="#">1.1C</a></li>
-    </ul>
+
+  <div class="panel-group" id="accordion">
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+              <%= @domain.first.description %>
+            </a>
+          </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse">
+          <div class="panel-body">
+            <ul>
+              <% @indicator.each do |indicator| %>
+                <div class="button">
+                  <li><%= indicator.description %><li>
+                </div>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+              <%= @domain.second.description %>
+            </a>
+          </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse">
+          <div class="panel-body">
+            <ul>
+              <% @indicator.each do |indicator| %>
+                <div class="button">
+                  <li><%= indicator.description %><li>
+                </div>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+              <%= @domain.third.description %>
+            </a>
+          </h4>
+        </div>
+        <div id="collapseThree" class="panel-collapse collapse">
+          <div class="panel-body">
+            <ul>
+              <% @indicator.each do |indicator| %>
+                <div class="button">
+                  <li><%= indicator.description %><li>
+                </div>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+              <%= @domain.fourth.description %>
+            </a>
+          </h4>
+        </div>
+        <div id="collapseFour" class="panel-collapse collapse">
+          <div class="panel-body">
+            <ul>
+              <% @indicator.each do |indicator| %>
+                <div class="button">
+                  <li><%= indicator.description %><li>
+                </div>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
   </div>
 
-  <div class="btn-group">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-      Domain 2
-      <span class="caret"></span>
-    </button>
-      <ul class="dropdown-menu">
-        <li><a href="#">2.1A</a></li>
-        <li><a href="#">2.1B</a></li>
-        <li><a href="#">2.1C</a></li>
-      </ul>
-  </div>
-
-  <div class="btn-group">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-      Domain 3
-      <span class="caret"></span>
-    </button>
-      <ul class="dropdown-menu">
-        <li><a href="#">3.1A</a></li>
-        <li><a href="#">3.1B</a></li>
-        <li><a href="#">3.1C</a></li>
-      </ul>
-  </div>
-
-  <div class="btn-group">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-      Domain 4
-      <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu">
-      <li><a href="#">4.1A</a></li>
-      <li><a href="#">4.1B</a></li>
-      <li><a href="#">4.1C</a></li>
-    </ul>
-  </div>
-</div>
-
+<!-- <div class="dropdown">
+  <button class="btn dropdown-toggle sr-only" type="button" id="dropdownMenu1" data-toggle="dropdown">
+    Dropdown
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+    <li role="presentation" class="divider"></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+  </ul>
+</div> -->

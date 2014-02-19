@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(:version => 20140215042950) do
   end
 
   create_table "indicators", :force => true do |t|
-    t.integer "number"
+    t.string  "number"
     t.string  "description"
     t.integer "domain_id"
   end
