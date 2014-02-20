@@ -3,7 +3,7 @@ class CreateIndicators < ActiveRecord::Migration
     create_table :indicators do |t|
       t.string :number
       t.string :description
-      t.integer :domain_id
+      t.belongs_to :domain
     end
   end
 end
