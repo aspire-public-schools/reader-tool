@@ -12,6 +12,8 @@
 # %x(rake db:migrate:reset)
 # %x(rake db:seed)
 
+
+
 reader_list = [
   [ "benjamin.crosby@aspirepublicschools.org", 2043, "Benjamin", "Crosby"],
   [ "matt.seigel@aspirepublicschools.org", 1491, "Matthew", "Seigel"],
@@ -64,11 +66,9 @@ indicator_list.each do |number, description, domain_id|
   Indicator.create( number: number, description: description, domain_id: domain_id )
 end
 
-# namespace :db do
-#   desc "Erase and fill database"
-#   task :populate => :environment do
-#     require 'populator'
-#       require 'faker'
+# evidence1 = EvidenceScore.create(indicator_score_id: 1, description: "Teacher walks around the room")
+# evidence2 = EvidenceScore.create(indicator_score_id: 2, description: "Wait-time")
+# evidence3 = EvidenceScore.create(indicator_score_id: 3, description: "Checks for understanding")
+# evidence4 = EvidenceScore.create(indicator_score_id: 4, description: "calls on students")
+# evidence5 = EvidenceScore.create(indicator_score_id: 5, description: "disciplines student")
 
-#     Domain.populate 4 do |domain|
-#       domain.name =

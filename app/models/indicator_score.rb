@@ -1,5 +1,5 @@
 class IndicatorScore < ActiveRecord::Base
-  belongs_to :evidence
+  has_many :evidence_scores
   belongs_to :indicator
   belongs_to :domain_score
 end

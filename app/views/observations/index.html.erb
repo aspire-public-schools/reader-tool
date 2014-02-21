@@ -11,25 +11,5 @@
 </nav>
 
 
-<div class="panel-group" id="accordion">
-  <div class="panel panel-default">
-    <% @domain.each do |domain_obj| %>
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-          <%= domain_obj.description %>
-        </a>
-      </h4>
-    </div>
-    <div id="collapse<%= int_to_words(domain_obj.id) %>" class="panel-collapse collapse in">
-      <div class="panel-body">
-        <ul>
-          <% domain_obj.indicators.each do |indicator| %>
-          <li><%= indicator.description %></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-    <% end %>
-  </div>
-</div>
+<%= render partial: "sidebar" %>
+

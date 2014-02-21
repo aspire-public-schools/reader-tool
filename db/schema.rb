@@ -11,12 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140215042950) do
+ActiveRecord::Schema.define(:version => 20140221001628) do
 
   create_table "domain_scores", :force => true do |t|
-    t.integer "observation_read_id"
-    t.integer "quality_score"
-    t.integer "domain_id"
+    t.integer  "observation_read_id"
+    t.integer  "quality_score"
+    t.integer  "domain_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "domains", :force => true do |t|
@@ -24,18 +26,20 @@ ActiveRecord::Schema.define(:version => 20140215042950) do
     t.string  "description"
   end
 
-  create_table "evidences", :force => true do |t|
+  create_table "evidence_scores", :force => true do |t|
     t.integer "indicator_score_id"
     t.string  "description"
-    t.string  "type"
-    t.integer "true_score_id"
+    t.boolean "quality",            :default => true
+    t.boolean "alignment",          :default => true
   end
 
   create_table "indicator_scores", :force => true do |t|
-    t.integer "domain_score_id"
-    t.integer "indicator_id"
-    t.integer "alignment_score"
-    t.integer "evidence_id"
+    t.integer  "domain_score_id"
+    t.integer  "indicator_id"
+    t.integer  "alignment_score"
+    t.integer  "evidence_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "indicators", :force => true do |t|
