@@ -1,0 +1,11 @@
+
+<% @domain.each do |domain_obj| %>
+      <h4>
+        <%= domain_obj.description %>
+      </h4>
+        <ul>
+          <% domain_obj.indicators.each do |indicator| %>
+            <li><a href="#"><strong><%=indicator.code %></strong>:<%= indicator.description %></li></a>
+          <% end %>
+        </ul>
+    <% end %>
