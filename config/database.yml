@@ -3,6 +3,7 @@ development:
   encoding: unicode
   database: reader_tool_development
 
+
 test:
   adapter: postgresql
   encoding: unicode

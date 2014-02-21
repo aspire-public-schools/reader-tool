@@ -4,6 +4,7 @@ class CreateIndicators < ActiveRecord::Migration
       t.string :number
       t.string :description
       t.integer :domain_id
+
     end
   end
 end

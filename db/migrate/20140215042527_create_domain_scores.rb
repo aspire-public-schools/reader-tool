@@ -4,6 +4,8 @@ class CreateDomainScores < ActiveRecord::Migration
       t.integer :observation_read_id
       t.integer :quality_score
       t.integer :domain_id
+
+      t.timestamps
     end
   end
 end

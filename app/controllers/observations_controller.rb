@@ -5,6 +5,7 @@ class ObservationsController < ApplicationController
     # p current_user
 		@reader = current_user
     @domain = Domain.all
+    @evidence = Evidence.all
   end
 end
 

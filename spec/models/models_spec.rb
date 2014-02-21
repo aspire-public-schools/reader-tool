@@ -28,14 +28,14 @@ describe Indicator do
   it { should have_many(:domain_scores).through(:indicator_scores)}
 end
 
-describe Evidence do
-  it { should have_many(:indicator_scores)}
+describe EvidenceScore do
+  it { should belong_to(:indicator_score)}
   it { should have_many(:domain_scores).through(:indicator_scores)}
   it { should have_many(:indicators).through(:indicator_scores)}
 end
 
 describe IndicatorScore do
-  it { should belong_to(:evidence)}
+  it { should have_many(:evidence_scores)}
   it { should belong_to(:indicator)}
   it { should belong_to(:domain_score)}
 end
