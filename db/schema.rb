@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140221001628) do
+ActiveRecord::Schema.define(:version => 20140221223507) do
 
   create_table "domain_scores", :force => true do |t|
     t.integer  "observation_read_id"
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(:version => 20140221001628) do
   end
 
   create_table "indicators", :force => true do |t|
-    t.string  "number"
+    t.string  "code"
     t.string  "description"
     t.integer "domain_id"
   end

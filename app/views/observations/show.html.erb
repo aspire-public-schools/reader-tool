@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Aspire Reader</a>
       <ul class="nav navbar-right">
-        <li><p class="navbar-text navbar-left">Welcome, <%= @reader.first_name %><p></li>
+        <li><p class="navbar-text navbar-left">Welcome, <%= current_user.first_name %><p></li>
         <li><%= button_to "logout", logout_path, method: 'delete', class: "btn btn-default navbar-btn navbar-right" %></li>
       </ul>
     </div>
@@ -15,5 +15,3 @@
 <% end %>
 
 <%= render partial: "sidebar" %>
-
-

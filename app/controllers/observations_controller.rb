@@ -2,10 +2,21 @@ class ObservationsController < ApplicationController
   include SessionHelper
 
 	def index
-    # p current_user
-		@reader = current_user
+    # p "I'm hereeeeeeee"
+    # p session
+    @reader = current_user
+    if current_user
+      @observation_reads = @reader.observation_reads
+    end
     @domain = Domain.all
-    # @evidence = Evidence.all
   end
+
+  def show
+    @reader = current_user
+    @observation_reads = @reader.observation_reads
+
+    @domain = Domain.all
+  end
+
 end
 
