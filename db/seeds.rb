@@ -62,13 +62,13 @@ indicator_list = [
 
 ]
 
-indicator_list.each do |number, description, domain_id|
-  Indicator.create( number: number, description: description, domain_id: domain_id )
+indicator_list.each do |code, description, domain_id|
+  Indicator.create( code: code, description: description, domain_id: domain_id )
 end
 
-# evidence1 = EvidenceScore.create(indicator_score_id: 1, description: "Teacher walks around the room")
-# evidence2 = EvidenceScore.create(indicator_score_id: 2, description: "Wait-time")
-# evidence3 = EvidenceScore.create(indicator_score_id: 3, description: "Checks for understanding")
-# evidence4 = EvidenceScore.create(indicator_score_id: 4, description: "calls on students")
-# evidence5 = EvidenceScore.create(indicator_score_id: 5, description: "disciplines student")
+evidence1 = EvidenceScore.create(indicator_score_id: 1, description: "Teacher walks around the room")
+evidence2 = EvidenceScore.create(indicator_score_id: 2, description: "Wait-time")
+evidence3 = EvidenceScore.create(indicator_score_id: 3, description: "Checks for understanding")
+evidence4 = EvidenceScore.create(indicator_score_id: 4, description: "calls on students")
+evidence5 = EvidenceScore.create(indicator_score_id: 5, description: "disciplines student")
 

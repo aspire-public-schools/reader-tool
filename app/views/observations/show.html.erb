@@ -1,0 +1,18 @@
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Aspire Reader</a>
+      <ul class="nav navbar-right">
+        <li><p class="navbar-text navbar-left">Welcome, <%= current_user.first_name %><p></li>
+        <li><%= button_to "logout", logout_path, method: 'delete', class: "btn btn-default navbar-btn navbar-right" %></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+Observation Numbers:
+<% @observation_reads.each do |observation| %>
+  |<%= link_to "#{observation.observation_group_id}", observation_path(observation) %>
+<% end %>
+
+<%= render partial: "sidebar" %>

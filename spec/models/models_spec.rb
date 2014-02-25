@@ -20,24 +20,26 @@ end
 describe Domain do
   it { should have_many(:domain_scores)}
   it { should have_many(:indicators)}
+  it { should accept_nested_attributes_for(:indicators)}
 end
 
 describe Indicator do
   it { should belong_to(:domain)}
-  it { should have_many(:indicator_scores)}
+  it { should have_one(:indicator_score)}
+  it { should accept_nested_attributes_for(:evidence_score)}
+  it { should have_many(:evidence_scores).through(:indicator_scores)}
   it { should have_many(:domain_scores).through(:indicator_scores)}
 end
 
 describe EvidenceScore do
   it { should belong_to(:indicator_score)}
-  it { should have_many(:domain_scores).through(:indicator_scores)}
-  it { should have_many(:indicators).through(:indicator_scores)}
 end
 
 describe IndicatorScore do
   it { should have_many(:evidence_scores)}
   it { should belong_to(:indicator)}
   it { should belong_to(:domain_score)}
+  it { should have_one(:indicator)}
 end
 
 

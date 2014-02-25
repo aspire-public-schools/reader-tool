@@ -112,7 +112,8 @@
 <table x="672" y="16" name="Indicator_scores">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
-<default>NULL</default></row>
+<default>NULL</default><relation table="Evidence_scores" row="indicator_scores_id" />
+</row>
 <row name="domain_score_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="domain_scores" row="id" />
@@ -124,42 +125,41 @@
 <row name="alignment_score" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="comments" null="1" autoincrement="0">
+<row name="evidence_id" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>
-<row name="evidence_id" null="1" autoincrement="0">
+<row name="created_at" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="Evidence" row="id" />
-</row>
+<default>NULL</default></row>
+<row name="updated_at" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
 </table>
-<table x="1177" y="18" name="Evidence">
-<row name="id" null="1" autoincrement="1">
+<table x="935" y="37" name="Evidence_scores">
+<row name="indicator_scores_id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="description" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>
-<row name="type" null="1" autoincrement="0">
+<row name="quality" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="alignment" null="1" autoincrement="0">
 <datatype>BINARY</datatype>
 <default>NULL</default></row>
-<row name="true_score_id" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
-<row name="indicator_score_id" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
 <key type="PRIMARY" name="">
-<part>id</part>
+<part>indicator_scores_id</part>
 </key>
 </table>
-<table x="924" y="159" name="Indicators">
+<table x="763" y="240" name="Indicators">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="number" null="1" autoincrement="0">
+<row name="code" null="1" autoincrement="0">
 <datatype>CHAR</datatype>
 <default>NULL</default></row>
 <row name="description" null="1" autoincrement="0">
@@ -167,7 +167,7 @@
 <default>NULL</default></row>
 <row name="domain_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="domains" row="id" />
+<default>NULL</default><relation table="domain" row="id" />
 </row>
 <key type="PRIMARY" name="">
 <part>id</part>
@@ -177,7 +177,7 @@
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="observation_read_id" null="1" autoincrement="0">
+<row name="observation_reads_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="Observation_Reads" row="id" />
 </row>
@@ -186,13 +186,13 @@
 <default>NULL</default></row>
 <row name="domain_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="domains" row="id" />
+<default>NULL</default><relation table="domain" row="id" />
 </row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
 </table>
-<table x="537" y="275" name="domains">
+<table x="485" y="303" name="domain">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>

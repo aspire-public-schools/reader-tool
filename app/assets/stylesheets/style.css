@@ -2,7 +2,6 @@
   padding-top: 60px
 }
 
-
 .navbar-text {
   margin-bottom: 0;
   line-height: 30px;
@@ -12,3 +11,65 @@
 .navbar .btn {
   margin-top: 12px
 }
+
+#reader{
+  width: 100%;
+  background-color: red;
+  overflow: hidden;
+}
+
+.sidebar.fixed {
+  position: fixed;
+  background-color: #9b59b6;
+  top: 71px;
+  width: 26%;
+  float: left;
+  bottom: 0;
+  border-right: 1px solid #eee;
+  display: block;
+  overflow-x: hidden;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.content.right {
+  margin-right: 0%;
+  padding: 0rem;
+  background: yellow;
+  width: 74%;
+  float: right;
+  position: relative;
+  top: 80px
+}
+
+dt:hover {
+  background-color: #8e44ad;
+}
+
+
+dl {
+  text-indent: 1em;
+  background-color: #9b59b6;
+}
+
+dt {
+  text-indent: 1em;
+  padding: .5rem;
+  cursor: pointer;
+  background-color: #9b59b6;
+  color:#ecf0f1;
+}
+
+
+dl dd{
+    display: none;
+    text-indent: 1em;
+    cursor: pointer;
+    color: grey;
+}
+
+dd:hover {
+  background-color: #8e44ad;
+  color: white;
+}
+
