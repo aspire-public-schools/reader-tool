@@ -8,4 +8,3 @@ class ReadersController < ApplicationController
 	end
 end
 
-

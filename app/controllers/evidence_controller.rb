@@ -1,4 +1,6 @@
 class EvidenceController < ApplicationController
-  def index
+
+  def create
+    @evidence_score = EvidenceScore.new
   end
 end

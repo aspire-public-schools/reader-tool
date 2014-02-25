@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="navbar-inner">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Aspire Reader</a>
@@ -10,10 +10,50 @@
   </div>
 </nav>
 
-<% @observation_reads.each do |observation| %>
-  <%= link_to "#{observation.observation_group_id}", observation_path(observation) %>
-<% end %>
+<div class="container-fluid">
 
-<%= render partial: "sidebar" %>
+      <div class="row">
+        <div class="sidebar">
+                <div class="sidebar fixed">
+                  <%= render partial: "sidebar" %>
+                </div>
+        </div>
+      </div>
+
+    <div class="content">
+      <div class="content right">
+      Observation Numbers:
+      <% @observation_reads.each do |observation| %>
+        |<%= link_to "#{observation.observation_group_id}", observation_path(observation) %>
+      <% end %>
+
+
+        <p>Try-hard hella consectetur, Terry Richardson plaid culpa vero pariatur mustache photo booth keytar tattooed reprehenderit retro trust fund. Reprehenderit deserunt PBR&B, Williamsburg forage elit cray mumblecore. Cupidatat aute Thundercats, readymade sed direct trade nisi Neutra trust fund next level hella ex. Kogi fugiat McSweeney's, pariatur Pitchfork selvage slow-carb veniam tote bag cardigan drinking vinegar. Tumblr twee ethnic PBR&B, Vice letterpress sriracha roof party swag ut banh mi. Cardigan fap viral before they sold out kitsch labore elit, dreamcatcher tote bag fingerstache selfies master cleanse fashion axe slow-carb. Viral excepteur deserunt wolf, kale chips quinoa ethical next level.
+        </p>
+        <p>Try-hard hella consectetur, Terry Richardson plaid culpa vero pariatur mustache photo booth keytar tattooed reprehenderit retro trust fund. Reprehenderit deserunt PBR&B, Williamsburg forage elit cray mumblecore. Cupidatat aute Thundercats, readymade sed direct trade nisi Neutra trust fund next level hella ex. Kogi fugiat McSweeney's, pariatur Pitchfork selvage slow-carb veniam tote bag cardigan drinking vinegar. Tumblr twee ethnic PBR&B, Vice letterpress sriracha roof party swag ut banh mi. Cardigan fap viral before they sold out kitsch labore elit, dreamcatcher tote bag fingerstache selfies master cleanse fashion axe slow-carb. Viral excepteur deserunt wolf, kale chips quinoa ethical next level.
+        </p>
+        <p>Try-hard hella consectetur, Terry Richardson plaid culpa vero pariatur mustache photo booth keytar tattooed reprehenderit retro trust fund. Reprehenderit deserunt PBR&B, Williamsburg forage elit cray mumblecore. Cupidatat aute Thundercats, readymade sed direct trade nisi Neutra trust fund next level hella ex. Kogi fugiat McSweeney's, pariatur Pitchfork selvage slow-carb veniam tote bag cardigan drinking vinegar. Tumblr twee ethnic PBR&B, Vice letterpress sriracha roof party swag ut banh mi. Cardigan fap viral before they sold out kitsch labore elit, dreamcatcher tote bag fingerstache selfies master cleanse fashion axe slow-carb. Viral excepteur deserunt wolf, kale chips quinoa ethical next level.
+        </p>
+        <p>Try-hard hella consectetur, Terry Richardson plaid culpa vero pariatur mustache photo booth keytar tattooed reprehenderit retro trust fund. Reprehenderit deserunt PBR&B, Williamsburg forage elit cray mumblecore. Cupidatat aute Thundercats, readymade sed direct trade nisi Neutra trust fund next level hella ex. Kogi fugiat McSweeney's, pariatur Pitchfork selvage slow-carb veniam tote bag cardigan drinking vinegar. Tumblr twee ethnic PBR&B, Vice letterpress sriracha roof party swag ut banh mi. Cardigan fap viral before they sold out kitsch labore elit, dreamcatcher tote bag fingerstache selfies master cleanse fashion axe slow-carb. Viral excepteur deserunt wolf, kale chips quinoa ethical next level.
+        </p>
+        <p>Try-hard hella consectetur, Terry Richardson plaid culpa vero pariatur mustache photo booth keytar tattooed reprehenderit retro trust fund. Reprehenderit deserunt PBR&B, Williamsburg forage elit cray mumblecore. Cupidatat aute Thundercats, readymade sed direct trade nisi Neutra trust fund next level hella ex. Kogi fugiat McSweeney's, pariatur Pitchfork selvage slow-carb veniam tote bag cardigan drinking vinegar. Tumblr twee ethnic PBR&B, Vice letterpress sriracha roof party swag ut banh mi. Cardigan fap viral before they sold out kitsch labore elit, dreamcatcher tote bag fingerstache selfies master cleanse fashion axe slow-carb. Viral excepteur deserunt wolf, kale chips quinoa ethical next level.
+        </p>        <p>Try-hard hella consectetur, Terry Richardson plaid culpa vero pariatur mustache photo booth keytar tattooed reprehenderit retro trust fund. Reprehenderit deserunt PBR&B, Williamsburg forage elit cray mumblecore. Cupidatat aute Thundercats, readymade sed direct trade nisi Neutra trust fund next level hella ex. Kogi fugiat McSweeney's, pariatur Pitchfork selvage slow-carb veniam tote bag cardigan drinking vinegar. Tumblr twee ethnic PBR&B, Vice letterpress sriracha roof party swag ut banh mi. Cardigan fap viral before they sold out kitsch labore elit, dreamcatcher tote bag fingerstache selfies master cleanse fashion axe slow-carb. Viral excepteur deserunt wolf, kale chips quinoa ethical next level.
+        </p>        <p>Try-hard hella consectetur, Terry Richardson plaid culpa vero pariatur mustache photo booth keytar tattooed reprehenderit retro trust fund. Reprehenderit deserunt PBR&B, Williamsburg forage elit cray mumblecore. Cupidatat aute Thundercats, readymade sed direct trade nisi Neutra trust fund next level hella ex. Kogi fugiat McSweeney's, pariatur Pitchfork selvage slow-carb veniam tote bag cardigan drinking vinegar. Tumblr twee ethnic PBR&B, Vice letterpress sriracha roof party swag ut banh mi. Cardigan fap viral before they sold out kitsch labore elit, dreamcatcher tote bag fingerstache selfies master cleanse fashion axe slow-carb. Viral excepteur deserunt wolf, kale chips quinoa ethical next level.
+        </p>        <p>Try-hard hella consectetur, Terry Richardson plaid culpa vero pariatur mustache photo booth keytar tattooed reprehenderit retro trust fund. Reprehenderit deserunt PBR&B, Williamsburg forage elit cray mumblecore. Cupidatat aute Thundercats, readymade sed direct trade nisi Neutra trust fund next level hella ex. Kogi fugiat McSweeney's, pariatur Pitchfork selvage slow-carb veniam tote bag cardigan drinking vinegar. Tumblr twee ethnic PBR&B, Vice letterpress sriracha roof party swag ut banh mi. Cardigan fap viral before they sold out kitsch labore elit, dreamcatcher tote bag fingerstache selfies master cleanse fashion axe slow-carb. Viral excepteur deserunt wolf, kale chips quinoa ethical next level.
+        </p>        <p>Try-hard hella consectetur, Terry Richardson plaid culpa vero pariatur mustache photo booth keytar tattooed reprehenderit retro trust fund. Reprehenderit deserunt PBR&B, Williamsburg forage elit cray mumblecore. Cupidatat aute Thundercats, readymade sed direct trade nisi Neutra trust fund next level hella ex. Kogi fugiat McSweeney's, pariatur Pitchfork selvage slow-carb veniam tote bag cardigan drinking vinegar. Tumblr twee ethnic PBR&B, Vice letterpress sriracha roof party swag ut banh mi. Cardigan fap viral before they sold out kitsch labore elit, dreamcatcher tote bag fingerstache selfies master cleanse fashion axe slow-carb. Viral excepteur deserunt wolf, kale chips quinoa ethical next level.
+        </p>        <p>Try-hard hella consectetur, Terry Richardson plaid culpa vero pariatur mustache photo booth keytar tattooed reprehenderit retro trust fund. Reprehenderit deserunt PBR&B, Williamsburg forage elit cray mumblecore. Cupidatat aute Thundercats, readymade sed direct trade nisi Neutra trust fund next level hella ex. Kogi fugiat McSweeney's, pariatur Pitchfork selvage slow-carb veniam tote bag cardigan drinking vinegar. Tumblr twee ethnic PBR&B, Vice letterpress sriracha roof party swag ut banh mi. Cardigan fap viral before they sold out kitsch labore elit, dreamcatcher tote bag fingerstache selfies master cleanse fashion axe slow-carb. Viral excepteur deserunt wolf, kale chips quinoa ethical next level.
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+
 
 

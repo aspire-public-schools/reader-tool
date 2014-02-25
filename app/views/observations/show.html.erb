@@ -10,8 +10,9 @@
   </div>
 </nav>
 
+Observation Numbers:
 <% @observation_reads.each do |observation| %>
-  <%= link_to "#{observation.observation_group_id}", observation_path(observation) %>
+  |<%= link_to "#{observation.observation_group_id}", observation_path(observation) %>
 <% end %>
 
 <%= render partial: "sidebar" %>
