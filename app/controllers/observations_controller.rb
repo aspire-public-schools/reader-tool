@@ -11,6 +11,15 @@ class ObservationsController < ApplicationController
 	def index
     @reader = current_user
     @observation_reads = @reader.observation_reads
+       @observation_read = @reader.observation_reads.find(params[:id])
+    @domains = @observation_read.domains
+    if params[:domain_id]
+      @indicator = Domains.find(params[:domain_id]).indicators
+      if params[:indicator_id]
+        @evidence_scores = Indicator.find(params[:indicator_id]).evidence_scores
+      end
+    end
+    @domain = Domain.all
   end
 
   def show

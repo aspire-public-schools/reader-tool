@@ -3,9 +3,6 @@ class ObservationRead < ActiveRecord::Base
   belongs_to :reader
 
   def domains
-    domain_scores.
-      joins(:domain).
-      select("distinct domains.id as id, domains.description as description").
-      map { |d| [d.id, d.description] }
+    domain_scores.joins(:domain).select("distinct domains.id as id, domains.description as description").map { |d| [d.id, d.description] }
   end
 end

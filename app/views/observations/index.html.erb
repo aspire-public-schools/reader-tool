@@ -12,11 +12,8 @@
 
 <div class="container-fluid">
 
-<div class="tabs">
-  <% @observation_reads.each do |read| %>
-    <%= link_to read.id, read, :domain_id => domain.id, :indicator_id => indicator.id %> |
-  <% end %>
-</div>
+
+<%= @observation_read %>
 
 <% if @domains %>
   <div class="row">

@@ -1,0 +1,17 @@
+<h1>Evidences</h1>
+
+<%= form_tag evidence_path, method: :put do %>
+
+  <table>
+    <tr>
+      <th> Evidence </th>
+      <th> Alignment </th>
+      <th> Quality </th>
+    </tr>
+    <% @evidence_scores.each do |evidence_score| %>
+      <tr>
+        <td> <%= check_box_tag "evidence_score_ids[]", evidence_score.id%></td>
+        <td> <%= evidence_score.description %></td>
+        <td> <%= link_to 'Edit', edit_product_path(product) %></td>
+      </tr>
+  </table>
