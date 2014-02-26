@@ -1,6 +1,12 @@
 class EvidenceController < ApplicationController
 
-  def create
+  def new
     @evidence_score = EvidenceScore.new
   end
+
+  def update
+
+  end
+
+
 end

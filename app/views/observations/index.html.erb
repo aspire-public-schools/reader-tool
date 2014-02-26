@@ -12,29 +12,41 @@
 
 <div class="container-fluid">
 
-      <div class="row">
-        <div class="sidebar">
-                <div class="sidebar fixed">
-                  <%= render partial: "sidebar" %>
-                </div>
-        </div>
-      </div>
+<div class="tabs">
+  <% @observation_reads.each do |read| %>
+    <%= link_to read.id, read, :domain_id => domain.id, :indicator_id => indicator.id %> |
+  <% end %>
+</div>
 
-    <div class="content">
+<% if @domains %>
+  <div class="row">
+    <div class="sidebar">
+      <div class="sidebar fixed">
+        <%= render partial: "sidebar" %>
+      </div>
+    </div>
+  </div>
+  <% if @indicators %>
+      <div class="content">
       <div class="content right">
       Observation Numbers:
       <% @observation_reads.each do |observation| %>
         |<%= link_to "#{observation.observation_group_id}", observation_path(observation) %>
       <% end %>
 
-        <% @EvidenceScores.each do |banana| %>
+        <% evidence_scores.each do |banana| %>
           <p><%= banana.description %></p>
         <% end %>
 
+        <%= form_for @reader do |f| %>
+          <%= check_box_tag(:description) %>
+          <%= label_tag(:pet_dog, "I own a dog") %>
+        <% end %>
       </div>
     </div>
   </div>
-
+  <% end %>
+<% end %>
 </div>
 
 
