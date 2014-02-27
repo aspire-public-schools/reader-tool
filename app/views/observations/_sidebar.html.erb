@@ -8,9 +8,7 @@
       </dt>
           <% domain_obj.indicators.each do |indicator| %>
             <dd class="indicators">
-              <a href="#">
-                <strong><%=indicator.code %></strong>:<%= indicator.description %>
-              </a>
+              <%= link_to "#{indicator.code}: #{indicator.description}", domain_indicator_evidences_path(indicator.domain, indicator) %>
             </dd>
           <% end %>
     <% end %>

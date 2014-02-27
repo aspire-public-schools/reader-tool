@@ -13,6 +13,8 @@ group :development do
   gem 'binding_of_caller'
   gem 'awesome_print'
   gem 'debugger'
+  gem 'quiet_assets'
+  gem 'sextant'
 end
 
 group :test do

@@ -6,6 +6,4 @@ class Indicator < ActiveRecord::Base
   has_many :domain_scores
   has_many :evidence_scores, through: :indicator_scores
 
-  accepts_nested_attributes_for :evidence_score
-
 end

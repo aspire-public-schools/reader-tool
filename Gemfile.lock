@@ -100,6 +100,8 @@ GEM
     pg (0.17.1)
     polyglot (0.3.3)
     populator (1.0.0)
+    quiet_assets (1.0.2)
+      railties (>= 3.1, < 5.0)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -152,6 +154,8 @@ GEM
       multi_json (~> 1.0)
       rubyzip (~> 1.0)
       websocket (~> 1.0.4)
+    sextant (0.2.4)
+      rails (>= 3.2)
     shoulda-matchers (2.5.0)
       activesupport (>= 3.0.0)
     simple_form (2.1.1)
@@ -207,11 +211,13 @@ DEPENDENCIES
   less-rails
   pg
   populator
+  quiet_assets
   rack_session_access
   rails (= 3.2.14)
   rspec-rails
   sass-rails (~> 3.2.3)
   selenium-webdriver
+  sextant
   shoulda-matchers
   simple_form
   simplecov

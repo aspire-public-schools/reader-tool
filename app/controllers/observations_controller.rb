@@ -12,9 +12,8 @@ class ObservationsController < ApplicationController
     # debugger  # ROUTING OBSERVATION INDEX -> localhost://3000/observations/3
     @reader = current_user
     @observation_reads = @reader.observation_reads
-    # @observation_read = @reader.observation_reads # READER -> OBSERVATIONS
-    debugger
-    # @domains = @observation_read.domains    ## OBSERVATION HAS MANY DOMAINS
+    @observation_read = @reader.observation_reads # READER -> OBSERVATIONS
+    @domains = Domain.all    ## OBSERVATION HAS MANY DOMAINS
     if params[:domain_id]
       @indicator = Domains.find(params[:domain_id]).indicators
       if params[:indicator_id]
