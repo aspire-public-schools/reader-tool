@@ -6,9 +6,6 @@ ReaderTool::Application.routes.draw do
   resources :sessions, only: [:create, :destroy]
   resources :observations
   resources :evidences
-    colleciton do
-  end
-
 
 
   match '/logout', to: 'sessions#destroy', via: 'delete'
