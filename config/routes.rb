@@ -5,7 +5,12 @@ ReaderTool::Application.routes.draw do
   resources :readers, only: [:index, :create, :update]
   resources :sessions, only: [:create, :destroy]
   resources :observations
-  resources :evidences, only: [:new, :create, :show]
+  resources :domains do
+    resources :indicators do
+      resources :evidences
+    end
+  end
+
 
   match '/logout', to: 'sessions#destroy', via: 'delete'
   # The priority is based upon order of creation:

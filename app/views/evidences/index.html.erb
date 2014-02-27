@@ -1,0 +1,15 @@
+
+
+  <table>
+    <tr>
+      <th> Evidence </th>
+      <th> Quality </th>
+      <th> Alignment </th>
+    </tr>
+  <% @evidence_scores.each do |evidence_score| %>
+    <li><%= evidence_score.description %></li>
+    <% end %>
+  </table>
+
+<%= submit_tag "Submit Tags" %>
+
