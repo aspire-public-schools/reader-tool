@@ -27,7 +27,7 @@ class ObservationsController < ApplicationController
     @reader = current_user
     @observation_reads = @reader.observation_reads
     @observation_read = @reader.observation_reads.find(params[:id])
-    @domains = @observation_read.domains
+    @domains = @observation_read.domain_scores
     if params[:domain_id]
       @indicator = Domains.find(params[:domain_id]).indicators
       if params[:indicator_id]

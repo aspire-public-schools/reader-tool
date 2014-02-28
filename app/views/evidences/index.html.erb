@@ -1,15 +1,20 @@
-
-
-  <table>
-    <tr>
-      <th> Evidence </th>
-      <th> Quality </th>
-      <th> Alignment </th>
-    </tr>
-  <% @evidence_scores.each do |evidence_score| %>
-    <li><%= evidence_score.description %></li>
-    <% end %>
-  </table>
-
-<%= submit_tag "Submit Tags" %>
+<% form_tag(observation_domain_indicator_evidence_path, action: "update") do %>
+  <div class="table-responsive">
+      <table class="table table-bordered table-striped table-hover">
+        <tr>
+          <th><h4> Evidence </h4></th>
+          <th><h4> Quality </h4></th>
+          <th><h4> Alignment</h4></th>
+        </tr>
+      <% @indicator.evidence_scores.each do |evidence_score| %>
+          <tr>
+            <td><%= evidence_score.description %></td>
+            <td><%= check_box_tag(:quality, {:checked => "checked"}) %></td>
+            <td><%= check_box_tag(:alignment, {:checked => "checked"}) %></td>
+          </tr>
+        <% end %>
+      </table>
+    <%= submit_tag "Submit Scores" %>
+  </div>
+  <% end %>
 

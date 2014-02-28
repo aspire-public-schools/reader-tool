@@ -4,12 +4,14 @@ ReaderTool::Application.routes.draw do
 
   resources :readers, only: [:index, :create, :update]
   resources :sessions, only: [:create, :destroy]
-  resources :observations
-  resources :domains do
-    resources :indicators do
-      resources :evidences
+  resources :observations do
+    resources :domains do
+      resources :indicators do
+       resources :evidences
+      end
     end
   end
+
 
 
   match '/logout', to: 'sessions#destroy', via: 'delete'
