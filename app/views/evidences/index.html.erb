@@ -1,20 +1,25 @@
-<% form_tag(observation_domain_indicator_evidence_path, action: "update") do %>
+<%= form_tag(score_observation_domain_indicator_evidences_path, :method => 'put') do %>
   <div class="table-responsive">
       <table class="table table-bordered table-striped table-hover">
         <tr>
           <th><h4> Evidence </h4></th>
           <th><h4> Quality </h4></th>
           <th><h4> Alignment</h4></th>
+          <th><h4> Quality(Your Score) </h4></th>
+          <th><h4> Alignment(Your Score) </h4></th>
         </tr>
       <% @indicator.evidence_scores.each do |evidence_score| %>
           <tr>
             <td><%= evidence_score.description %></td>
-            <td><%= check_box_tag(:quality, {:checked => "checked"}) %></td>
-            <td><%= check_box_tag(:alignment, {:checked => "checked"}) %></td>
+            <td><%= check_box_tag("quality_score_ids[]", evidence_score.id) %></td>
+            <td><%= check_box_tag("evidence_score_ids[]", evidence_score.id) %></td>
+            <td><%= evidence_score.quality ? "Yes" : "No" %></td>
+            <td><%= evidence_score.alignment ? "Yes" : "No" %></td>
           </tr>
         <% end %>
       </table>
     <%= submit_tag "Submit Scores" %>
   </div>
-  <% end %>
+<% end %>
+
 

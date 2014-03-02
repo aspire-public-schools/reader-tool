@@ -43,4 +43,5 @@ class ObservationsController < ApplicationController
   def require_reader
     redirect_to "/login" unless current_user
   end
+
 end

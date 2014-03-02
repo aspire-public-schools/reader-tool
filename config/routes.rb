@@ -7,12 +7,12 @@ ReaderTool::Application.routes.draw do
   resources :observations do
     resources :domains do
       resources :indicators do
-       resources :evidences
+       resources :evidences do
+          put :score, on: :collection
+        end
       end
     end
   end
-
-
 
   match '/logout', to: 'sessions#destroy', via: 'delete'
   # The priority is based upon order of creation:
