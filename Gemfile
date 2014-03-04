@@ -15,6 +15,7 @@ group :development do
   gem 'debugger'
   gem 'quiet_assets'
   gem 'sextant'
+  gem 'thin'
 end
 
 group :test do
