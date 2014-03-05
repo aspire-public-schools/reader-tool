@@ -1,0 +1,25 @@
+= form_for @parent, remote: true do |f|
+  = f.fields_for :children do |c|
+    Child
+    = c.label :attr1
+    = c.check_box :attr1
+    = c.label :attr2
+    = c.check_box :attr2
+  = f.submit
+
+
+  template
+    = link_to thing, remote: true
+      $(document).on 'ajax:success', (response) ->
+        $('otherdiv').append(response.html)
+
+  def show
+    @thing = Thing.find(params[:id])
+    render json: { html: render_to_string('/shared/thing') }
+  end
+
+  partial
+    %ul
+      - @thing.each do |whatevs|
+        %li= whatevs.name
+
