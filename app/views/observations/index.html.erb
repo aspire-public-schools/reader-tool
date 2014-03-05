@@ -9,14 +9,17 @@
 
     <div class="content">
       <div class="content right">
-      Observation Numbers:
-      <% @observation_reads.each do |observation| %>
-        |<%= link_to "#{observation.observation_group_id}", observation_path(observation) %>
-      <% end %>
+        Observation Numbers:
+        <% @observation_reads.each do |observation| %>
+          |<%= link_to "#{observation.observation_group_id}", observation_path(observation) %>
+        <% end %>
+
+        <% if @indicator_score %>
+          <%= render partial: 'evidences/evidence_score_form' %>
+        <% end %>
+
       </div>
     </div>
-  </div>
-
 </div>
 
 
