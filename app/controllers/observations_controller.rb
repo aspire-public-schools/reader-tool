@@ -21,7 +21,7 @@ class ObservationsController < ApplicationController
       end
     end
     @domain = Domain.all
-    # render 'evidences/index'
+    render 'index'
   end
 
   def show
