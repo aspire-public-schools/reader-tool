@@ -1,1 +1,21 @@
-<%= render partial: 'evidences/evidence_score_form' %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="sidebar">
+      <div class="sidebar fixed">
+        <%= render partial: "observations/sidebar" %>
+      </div>
+    </div>
+  </div>
+
+    <div class="content">
+      <div class="content right">
+
+        <%= render partial: "observations/observation_reads" %>
+
+        <% if @indicator_score %>
+          <%= render partial: 'evidences/evidence_score_form' %>
+        <% end %>
+
+      </div>
+    </div>
+</div>
