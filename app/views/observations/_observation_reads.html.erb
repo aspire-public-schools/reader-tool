@@ -1,0 +1,8 @@
+Observation Numbers:
+<% @observation_reads.each do |observation| %>
+  |<%= link_to "#{observation.observation_group_id}", observation_path(observation) %>
+<% end %>
+  <h1> Score Form </h1>
+<% if @indicator_score %>
+  <p>"test"</p>
+<% end %>
