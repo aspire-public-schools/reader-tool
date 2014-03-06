@@ -4,10 +4,6 @@ class ObservationsController < ApplicationController
 
   before_filter :require_reader
 
-  def new
-
-  end
-
 	def index
     # debugger  # ROUTING OBSERVATION INDEX -> localhost://3000/observations/3
     @reader = current_user

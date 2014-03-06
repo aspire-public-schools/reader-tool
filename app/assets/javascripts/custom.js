@@ -14,7 +14,7 @@ var evidenceScore = {
       $(document).on("ajax:success", this.appendEvidence)
     },
     appendEvidence: function(event, data, status, xhr) {
-        $('form').remove()
+        $('#evidence-form').remove()
         $('.evidence-form').append(data.evidence_list)
     }
   }
