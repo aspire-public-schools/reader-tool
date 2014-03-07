@@ -35,11 +35,15 @@
 .content.right {
   margin-right: 0%;
   padding: 0rem;
-  background: yellow;
+  /*background: yellow;*/
   width: 74%;
   float: right;
   position: relative;
   top: 80px
+}
+
+.content h1{
+  text-align: center;
 }
 
 dt:hover {

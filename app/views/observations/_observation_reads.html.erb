@@ -1,8 +1,9 @@
-Observation Numbers:
-<% @observation_reads.each do |observation| %>
-  |<%= link_to "#{observation.observation_group_id}", observation_path(observation) %>
-<% end %>
+Click on a specific tab for each observation to grade
   <h1> Score Form </h1>
-<% if @indicator_score %>
-  <p>"test"</p>
-<% end %>
+
+
+<ul class="nav nav-tabs">
+  <% @observation_reads.each do |observation| %>
+    <li><%= link_to "#{observation.observation_group_id}", observation_path(observation), :data => {:'toggle' => "tab" } %>
+  <% end %>
+</ul>

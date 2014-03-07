@@ -1,4 +1,4 @@
-<%= form_tag(score_observation_domain_indicator_evidences_path, :method => 'get', :id => "evidence-form") do %>
+<%= form_tag(score_observation_domain_indicator_evidences_path, :method => 'get', :class => "evidence-form") do %>
   <div class="table-responsive">
       <table class="table table-bordered table-striped table-hover">
         <tr>
@@ -23,6 +23,6 @@
           </tr>
         <% end %>
       </table>
-    <%= submit_tag "Submit Scores" %>
+    <%= submit_tag "Submit Scores", :remote => true, :id => 'submit-evidence' %>
   </div>
 <% end %>
