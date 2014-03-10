@@ -23,8 +23,11 @@
           </tr>
         <% end %>
 
-       text_area_tag('comments')
       </table>
-    <%= submit_tag "Submit Scores", :id => 'submit-evidence' %>
+
+      <h4> Your Feedback to the Principal </h4>
+       <%= text_area_tag('comments') %><br>
+
+      <%= submit_tag "Submit Scores", :id => 'submit-evidence' %>
   </div>
 <% end %>
