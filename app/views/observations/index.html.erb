@@ -9,11 +9,40 @@
 
     <div class="content">
       <div class="content right">
-        <%= render partial: "observation_reads" %>
 
-      <div class="evidence-form">
+      <div class="table-responsive">
+        <table class="table table-condensed table-bordered">
+          <tr>
+            <td></td>
+            <td>Domain 1</td>
+            <td>Domain 2</td>
+            <td>Domain 3</td>
+            <td>Domain 4</td>
+          </tr>
+          <tr>
+            <td>Quality</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Alignment</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </table>
       </div>
 
+        <%= render partial: "observation_reads" %>
+
+      <div class="evidence-form-holder">
+      </div>
+
+      <div class="evidence-form-update">
+      </div>
 
       </div>
     </div>
