@@ -1,4 +1,4 @@
-<%= form_tag(score_observation_domain_indicator_evidences_path, :method => 'get', :class => "evidence-form") do %>
+<%= form_tag(score_observation_domain_indicator_evidences_path, :method => 'get', :remote => true, :class => "evidence-form") do %>
   <div class="table-responsive">
       <table class="table table-bordered table-striped table-hover">
         <tr>
@@ -22,7 +22,12 @@
             <td><%= evidence_score.alignment ? "Yes" : "No" %></td>
           </tr>
         <% end %>
+
       </table>
-    <%= submit_tag "Submit Scores", :remote => true, :id => 'submit-evidence' %>
+
+      <h4> Your Feedback to the Principal </h4>
+       <%= text_area_tag('comments') %><br>
+
+      <%= submit_tag "Submit Scores", :id => 'submit-evidence' %>
   </div>
 <% end %>

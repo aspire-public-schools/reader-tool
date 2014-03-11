@@ -22,7 +22,6 @@ class EvidencesController < ApplicationController
       end
         if @evidence_score_update
           render :json => { :submit_list => render_to_string( :partial => "evidence_score_form", locals: { :indicator_score => @indicator_score } ) }
-      debugger
         else
           render :json => { :status => :unprocessable_entity }
       end

@@ -20,21 +20,21 @@ var evidenceScore = {
 }
 
 
+var submitScore = {
+  init: function () {
+    $('.evidence-form-holder').on("ajax:success", this.submitScore)
+  },
+  submitScore: function(event, data, status, xhr){
+    $('.evidence-form').remove()
+    $('.evidence-form-update').append(data.submit_list)
+  }
 
-// var submitScore = {
-//   init: function () {
-//     $('#submit-evidence').on("ajax:success", this.submitScore)
-//   },
-//   submitScore: function(event, data, status, xhr){
-//     $('.evidence-form-update').append(data.submit_list)
-//   }
-
-// }
+}
 
 $(document).ready(function(){
   sideBar.toggle();
   evidenceScore.init();
-  // submitScore.init();
+  submitScore.init();
 
   $('#myTab a').click(function (e) {
     e.preventDefault()

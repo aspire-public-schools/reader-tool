@@ -77,3 +77,11 @@ dd:hover {
   color: white;
 }
 
+textarea#comments {
+width: 50rem;
+height: 20rem;
+}
+
+#submit-evidence{
+  margin-top: 3rem;
+}
