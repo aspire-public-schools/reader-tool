@@ -7,4 +7,5 @@ class ObservationRead < ActiveRecord::Base
       select("distinct domains.id as id, domains.description as description").
         map { |d| [d.id, d.description] }
   end
+
 end

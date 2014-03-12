@@ -14,17 +14,17 @@ class EvidencesController < ApplicationController
   end
 
   def score
-      @indicator_score = IndicatorScore.find(params[:indicator_id])
       params[:evidence_scores].keys.each do |score_id|
         quality = params[:evidence_scores][score_id][:quality] || false
         alignment = params[:evidence_scores][score_id][:alignment] || false
         @evidence_score_update = EvidenceScore.update(score_id,{quality: quality, alignment: alignment})
       end
+        @indicator_score_update = IndicatorScore.update(params[:indicator_id], {comments: params[:comments] })
+        @indicator_score = IndicatorScore.find(params[:indicator_id])
         if @evidence_score_update
           render :json => { :submit_list => render_to_string( :partial => "evidence_score_form", locals: { :indicator_score => @indicator_score } ) }
         else
           render :json => { :status => :unprocessable_entity }
       end
-      # redirect_to observation_domain_indicator_evidences_path
   end
 end
