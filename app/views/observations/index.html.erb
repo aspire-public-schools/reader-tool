@@ -20,18 +20,18 @@
             <td>Domain 4</td>
           </tr>
           <tr>
-            <td>Quality</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+              <td>Quality</td>
+                <td><%= @domain_percentages[0].quality_average.to_f.round(2) %></td>
+                <td><%= @domain_percentages[1].quality_average.to_f.round(2) %></td>
+                <td><%= @domain_percentages[2].quality_average.to_f.round(2) %></td>
+                <td><%= @domain_percentages[3].quality_average.to_f.round(2) %></td>
           </tr>
           <tr>
             <td>Alignment</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+                <td><%= @domain_percentages[0].alignment_average.to_f.round(2) %></td>
+                <td><%= @domain_percentages[1].alignment_average.to_f.round(2) %></td>
+                <td><%= @domain_percentages[2].alignment_average.to_f.round(2) %></td>
+                <td><%= @domain_percentages[3].alignment_average.to_f.round(2) %></td>
           </tr>
         </table>
       </div>

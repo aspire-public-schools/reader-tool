@@ -31,6 +31,12 @@ class ObservationsController < ApplicationController
         @evidence_scores = Indicator.find(params[:indicator_id]).evidence_scores # ON THIS PAGE: 1 observation, ALL DOMAINS
       end
     end
+    p @domain_percentages = get_percentages(params[:id])
+    @domain_percentages.each do |domain_percentages|
+      p domain_percentages.quality_average
+    end
+
+    @domain_percentages.sort! { |a,b| a.number <=> b.number }
     @domain = Domain.all
     render 'index'
   end
