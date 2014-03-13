@@ -31,14 +31,19 @@ var submitScore = {
 
 }
 
+var domainPercentages = {
+  init: function() {
+    $('#domain-table').on("ajax:success", this.appendDashboard)
+  }
+  appendDashboard: function(event, data, status, xhr){
+    $('.dashboard').remove()
+    $('.dashboard').append(data.domain_percentages)
+  }
+}
+
 $(document).ready(function(){
   sideBar.toggle();
   evidenceScore.init();
   submitScore.init();
-
-  $('#myTab a').click(function (e) {
-    e.preventDefault()
-    $(this).tab('show')
-  })
-
+  domainPercentages.init();
 })
