@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
          session[:current_reader_id] = reader.id
          redirect_to observations_path
       else
-         redirect_to root_path
+         redirect_to root_path, flash: {error: "Godzilla didn't like your e-mail"}
       end
    end
 

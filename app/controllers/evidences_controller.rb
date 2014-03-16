@@ -7,9 +7,9 @@ class EvidencesController < ApplicationController
     @indicator_score = IndicatorScore.find(params[:indicator_id])
     # @evidence_score = @indicator.evidence_scores
     if @indicator_score
-      render :json => { :evidence_list => render_to_string( :partial => "evidence_score_form", locals: { :indicator_score => @indicator_score} ) }
+      render :json => { :evidence_list => render_to_string( :partial => "evidence_score_form", locals: { :indicator_score => @indicator_score} ), :domain_percentages => render_to_string( :partial => 'observations/domain_percentages'), locals: { :domain_percentages_sort => @domain_percentages_sort} }
     else
-      render :json => { :status => :unprocessable_entity }
+      render :json => { :error => reader.errors.full_messages.join(", ")}, :status => :unprocessable_entity
     end
   end
 

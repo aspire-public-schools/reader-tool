@@ -14,19 +14,18 @@ var evidenceScore = {
       $('.indicators').on("ajax:success", this.appendEvidence)
     },
     appendEvidence: function(event, data, status, xhr) {
-      $('.evidence-form').remove()
-      $('.evidence-form-holder').append(data.evidence_list)
+      $('#evidence-form').remove()
+      $('#evidence-form-holder').append(data.evidence_list)
     }
 }
 
-
 var submitScore = {
   init: function () {
-    $('.evidence-form-holder').on("ajax:success", this.submitScore)
+    $('#evidence-form-holder').on("ajax:success", '#evidence-form', this.submitScore)
   },
   submitScore: function(event, data, status, xhr){
-    $('.evidence-form').remove()
-    $('.evidence-form-update').append(data.submit_list)
+    $('#evidence-form').remove()
+    $('#evidence-form-holder').append(data.submit_list)
   }
 
 }
@@ -34,8 +33,9 @@ var submitScore = {
 var domainPercentages = {
   init: function() {
     $('#domain-table').on("ajax:success", this.appendDashboard)
-  }
+  },
   appendDashboard: function(event, data, status, xhr){
+    debugger
     $('.dashboard').remove()
     $('.dashboard').append(data.domain_percentages)
   }
