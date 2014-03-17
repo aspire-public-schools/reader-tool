@@ -21,29 +21,19 @@ var evidenceScore = {
 
 var submitScore = {
   init: function () {
-    $('#evidence-form-holder').on("ajax:success", '#evidence-form', this.submitScore)
+    $('#evidence-form-holder').on("ajax:success", '#evidence-form', this.submitScoreAndDashboard)
   },
-  submitScore: function(event, data, status, xhr){
+  submitScoreAndDashboard: function(event, data, status, xhr){
     $('#evidence-form').remove()
+    $('#domain-table').remove()
     $('#evidence-form-holder').append(data.submit_list)
+    $('.dashboard-holder').append(data.domain_percentages)
   }
 
-}
-
-var domainPercentages = {
-  init: function() {
-    $('#domain-table').on("ajax:success", this.appendDashboard)
-  },
-  appendDashboard: function(event, data, status, xhr){
-    debugger
-    $('.dashboard').remove()
-    $('.dashboard').append(data.domain_percentages)
-  }
 }
 
 $(document).ready(function(){
   sideBar.toggle();
   evidenceScore.init();
   submitScore.init();
-  domainPercentages.init();
 })

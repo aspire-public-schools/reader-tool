@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(:version => 20140221223507) do
     t.string   "error_pattern_1"
     t.string   "error_pattern_2"
     t.string   "error_pattern_3"
-    t.integer  "reader_number"
+    t.string  "reader_number"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
   end
