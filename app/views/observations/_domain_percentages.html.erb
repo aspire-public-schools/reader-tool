@@ -1,0 +1,25 @@
+<% if @domain_percentages %>
+  <table class="table table-condensed table-bordered" id="domain-table">
+      <tr>
+        <td></td>
+        <td colspan="2">Domain 1</td>
+        <td colspan="2">Domain 2</td>
+        <td colspan="2">Domain 3</td>
+        <td colspan="2">Domain 4</td>
+      </tr>
+      <tr>
+        <td>Quality</td>
+        <% @domain_percentages.each do |domain_percentage| %>
+          <td><%= domain_percentage.quality_average.to_f.round(2) %></td>
+          <td></td>
+        <% end %>
+      </tr>
+      <tr>
+        <td>Alignment</td>
+        <% @domain_percentages.each do |domain_percentage| %>
+          <td><%= domain_percentage.alignment_average.to_f.round(2) %></td>
+          <td></td>
+        <% end %>
+      </tr>
+  </table>
+<% end %>

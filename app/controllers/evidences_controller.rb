@@ -1,4 +1,5 @@
 class EvidencesController < ApplicationController
+  include EvidenceScoreHelper
 
   def index
     # @domains = @observation_read.domain_scores
@@ -9,7 +10,7 @@ class EvidencesController < ApplicationController
     if @indicator_score
       render :json => { :evidence_list => render_to_string( :partial => "evidence_score_form", locals: { :indicator_score => @indicator_score} ) }
     else
-      render :json => { :status => :unprocessable_entity }
+      render :json => { :error => reader.errors.full_messages.join(", ")}, :status => :unprocessable_entity
     end
   end
 
@@ -22,7 +23,9 @@ class EvidencesController < ApplicationController
         @indicator_score_update = IndicatorScore.update(params[:indicator_id], {comments: params[:comments] })
         @indicator_score = IndicatorScore.find(params[:indicator_id])
         if @evidence_score_update
-          render :json => { :submit_list => render_to_string( :partial => "evidence_score_form", locals: { :indicator_score => @indicator_score } ) }
+        @domain_percentages = get_percentages(params[:observation_id])
+        @domain_percentages_sort = @domain_percentages.sort! { |a,b| a.number <=> b.number }
+          render :json => { :submit_list => render_to_string( :partial => "evidence_score_form", locals: { :indicator_score => @indicator_score } ), :domain_percentages => render_to_string( :partial => 'observations/domain_percentages'), locals: { :domain_percentages_sort => @domain_percentages_sort} }
         else
           render :json => { :status => :unprocessable_entity }
       end

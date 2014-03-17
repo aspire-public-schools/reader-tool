@@ -12,7 +12,7 @@ class CreateObservationReads < ActiveRecord::Migration
       t.string :error_pattern_1
       t.string :error_pattern_2
       t.string :error_pattern_3
-      t.integer :reader_number
+      t.string :reader_number
 
       t.timestamps
     end

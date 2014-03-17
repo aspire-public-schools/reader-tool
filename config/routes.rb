@@ -16,4 +16,5 @@ ReaderTool::Application.routes.draw do
 
   match '/logout', to: 'sessions#destroy', via: 'delete'
 
+  get 'login' => 'readers#index', as: 'login'
 end

@@ -14,19 +14,20 @@ var evidenceScore = {
       $('.indicators').on("ajax:success", this.appendEvidence)
     },
     appendEvidence: function(event, data, status, xhr) {
-      $('.evidence-form').remove()
-      $('.evidence-form-holder').append(data.evidence_list)
+      $('#evidence-form').remove()
+      $('#evidence-form-holder').append(data.evidence_list)
     }
 }
 
-
 var submitScore = {
   init: function () {
-    $('.evidence-form-holder').on("ajax:success", this.submitScore)
+    $('#evidence-form-holder').on("ajax:success", '#evidence-form', this.submitScoreAndDashboard)
   },
-  submitScore: function(event, data, status, xhr){
-    $('.evidence-form').remove()
-    $('.evidence-form-update').append(data.submit_list)
+  submitScoreAndDashboard: function(event, data, status, xhr){
+    $('#evidence-form').remove()
+    $('#domain-table').remove()
+    $('#evidence-form-holder').append(data.submit_list)
+    $('.dashboard-holder').append(data.domain_percentages)
   }
 
 }
@@ -35,10 +36,4 @@ $(document).ready(function(){
   sideBar.toggle();
   evidenceScore.init();
   submitScore.init();
-
-  $('#myTab a').click(function (e) {
-    e.preventDefault()
-    $(this).tab('show')
-  })
-
 })

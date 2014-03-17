@@ -1,24 +1,21 @@
 class ObservationsController < ApplicationController
-  include SessionHelper
   include EvidenceScoreHelper
 
   before_filter :require_reader
 
-	# def index
- #    # debugger  # ROUTING OBSERVATION INDEX -> localhost://3000/observations/3
- #    @reader = current_user
- #    @observation_reads = @reader.observation_reads
- #    @observation_read = @reader.observation_reads # READER -> OBSERVATIONS
- #    @domains = Domain.all    ## OBSERVATION HAS MANY DOMAINS
- #    if params[:domain_id]
- #      @indicator = Domains.find(params[:domain_id]).indicators
- #      if params[:indicator_id]
- #        @evidence_scores = Indicator.find(params[:indicator_id]).evidence_scores
- #      end
- #    end
- #    @domain = Domain.all
- #    render 'index'
- #  end
+	def index
+    @reader = current_user
+    @observation_reads = @reader.observation_reads
+    @observation_read = @reader.observation_reads
+    @domain = Domain.all    ## OBSERVATION HAS MANY DOMAINS
+    if params[:domain_id]
+        @indicator = Domains.find(params[:domain_id]).indicators
+      if params[:indicator_id]
+        @evidence_scores = Indicator.find(params[:indicator_id]).evidence_scores
+      end
+    end
+    render 'index'
+  end
 
   def show
     @reader = current_user
@@ -32,8 +29,13 @@ class ObservationsController < ApplicationController
       end
     end
     @domain_percentages = get_percentages(params[:id])
-    @domain_percentages.sort! { |a,b| a.number <=> b.number }
+    @domain_percentages_sort = @domain_percentages.sort! { |a,b| a.number <=> b.number }
     @domain = Domain.all
+    # if @domain_percentages_sort
+    #   render :json => { :domain_percentages => render_to_string( :partial => 'observations/domain_percentages'), locals: { :domain_percentages_sort => @domain_percentages_sort} }
+    # else
+    #   render :json => { :error => reader.errors.full_messages.join(", ")}, :status => :unprocessable_entity
+    # end
     render 'index'
   end
 
