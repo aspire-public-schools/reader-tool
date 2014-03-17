@@ -2,10 +2,10 @@
   <table class="table table-condensed table-bordered" id="domain-table">
       <tr>
         <td></td>
-        <td colspan="2">Domain 1</td>
-        <td colspan="2">Domain 2</td>
-        <td colspan="2">Domain 3</td>
-        <td colspan="2">Domain 4</td>
+        <% @domain_percentages.each do |domain_percentage| %>
+          <td> Domain <%=domain_percentage.number%> </td>
+          <td></td>
+        <% end %>
       </tr>
       <tr>
         <td>Quality</td>
