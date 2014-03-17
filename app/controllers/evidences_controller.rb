@@ -22,10 +22,7 @@ class EvidencesController < ApplicationController
       end
         @indicator_score_update = IndicatorScore.update(params[:indicator_id], {comments: params[:comments] })
         @indicator_score = IndicatorScore.find(params[:indicator_id])
-        @indicator_score.evidence_score
         if @evidence_score_update
-        p "*" * 1000
-        p params
         @domain_percentages = get_percentages(params[:observation_id])
         @domain_percentages_sort = @domain_percentages.sort! { |a,b| a.number <=> b.number }
           render :json => { :submit_list => render_to_string( :partial => "evidence_score_form", locals: { :indicator_score => @indicator_score } ), :domain_percentages => render_to_string( :partial => 'observations/domain_percentages'), locals: { :domain_percentages_sort => @domain_percentages_sort} }
