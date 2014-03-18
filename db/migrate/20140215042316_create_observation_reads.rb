@@ -17,6 +17,7 @@ class CreateObservationReads < ActiveRecord::Migration
       t.integer :document_quality
       t.integer :live_alignment
       t.integer :live_quality
+      t.integer :observation_status
 
       t.timestamps
     end

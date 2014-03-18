@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20140215042926) do
     t.integer  "document_quality"
     t.integer  "live_alignment"
     t.integer  "live_quality"
+    t.integer  "observation_status"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
   end

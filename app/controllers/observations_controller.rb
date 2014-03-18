@@ -35,9 +35,9 @@ class ObservationsController < ApplicationController
   end
 
   def update
-    @reader = current_user
-    @observation_read = @reader.observation_reads.find(params[:id])
-    render 'index'
+    #@reader = current_user
+   # @observation_read = @reader.observation_reads.find(params[:id])
+   # render 'index'
   end
 
 
