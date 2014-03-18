@@ -31,8 +31,17 @@ var submitScore = {
   }
 }
 
+var successAlert = {
+  display: function(e){
+    e.preventDefault()
+    $('#blast').css({'display':'block'});
+  }
+}
+
 $(document).ready(function(){
   sideBar.toggle();
   evidenceScore.init();
   submitScore.init();
+  $('.content').on('click','.score-button', successAlert.display)
+  //use event delegation to listen to the dom-node on the click.  Form doesn't exist because of the ajax.
 })

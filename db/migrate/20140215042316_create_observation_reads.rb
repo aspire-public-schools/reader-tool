@@ -13,6 +13,11 @@ class CreateObservationReads < ActiveRecord::Migration
       t.string :error_pattern_2
       t.string :error_pattern_3
       t.string :reader_number
+      t.integer :document_alignment
+      t.integer :document_quality
+      t.integer :live_alignment
+      t.integer :live_quality
+      t.integer :observation_status
 
       t.timestamps
     end

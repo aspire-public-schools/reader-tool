@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140221223507) do
+ActiveRecord::Schema.define(:version => 20140215042926) do
 
   create_table "domain_scores", :force => true do |t|
     t.integer  "observation_read_id"
@@ -24,13 +24,6 @@ ActiveRecord::Schema.define(:version => 20140221223507) do
   create_table "domains", :force => true do |t|
     t.integer "number"
     t.string  "description"
-  end
-
-  create_table "evidence_scores", :force => true do |t|
-    t.integer "indicator_score_id"
-    t.string  "description"
-    t.boolean "quality",            :default => true
-    t.boolean "alignment",          :default => true
   end
 
   create_table "indicator_scores", :force => true do |t|
@@ -60,7 +53,12 @@ ActiveRecord::Schema.define(:version => 20140221223507) do
     t.string   "error_pattern_1"
     t.string   "error_pattern_2"
     t.string   "error_pattern_3"
-    t.string  "reader_number"
+    t.string   "reader_number"
+    t.integer  "document_alignment"
+    t.integer  "document_quality"
+    t.integer  "live_alignment"
+    t.integer  "live_quality"
+    t.integer  "observation_status"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
   end
