@@ -28,6 +28,8 @@
       <h4> Your Feedback to the Principal </h4>
        <%= text_area_tag('comments', @indicator_score.comments) %><br>
 
-      <%= submit_tag "Submit Scores", :id => 'submit-evidence', :remote => true %>
+
+      <%= submit_tag "Submit Scores", :id => 'submit-evidence', :remote => true, class: "btn btn-primary" %>
+
   </div>
 <% end %>
