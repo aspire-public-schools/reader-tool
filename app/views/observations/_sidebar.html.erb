@@ -2,22 +2,18 @@
   <% if @observation_read.is_a?(Array) %>
 
   <% else %>
-  <% @domain.each do |domain_obj| %>
+  <% @domains.each do |domain_score| %>
      <dt>
         <h5>
-          <%= domain_obj.description %>
+          <%= domain_score.domain.description %>
           <span class="caret"></span>
         </h5>
       </dt>
-        <% @domains.each do |domain_score| %>
           <% domain_score.indicator_scores.each do |indicator_score| %>
-            <% if domain_obj.id == domain_score.domain.id %>
               <dd class="indicators">
                 <%= link_to "#{Indicator.find(indicator_score.indicator_id).code}: #{Indicator.find(indicator_score.indicator_id).description}", observation_domain_indicator_evidences_path(@observation_read, domain_score.domain, indicator_score), class: "#{indicator_score.id}", id: "indicator", :remote => true %>
               </dd>
-            <% end %>
           <% end %>
         <% end %>
-    <% end %>
     <% end %>
 </dl>

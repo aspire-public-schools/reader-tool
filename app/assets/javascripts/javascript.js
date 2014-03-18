@@ -29,7 +29,6 @@ var submitScore = {
     $('#evidence-form-holder').append(data.submit_list)
     $('.dashboard-holder').append(data.domain_percentages)
   }
-
 }
 
 $(document).ready(function(){
