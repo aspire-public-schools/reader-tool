@@ -1,9 +1,0 @@
-<% if @observation_read %>
-  <%= simple_form_for @observation_read, url: {action: "update"} do |f| %>
-      <%= f.input :document_alignment, collection: [['CWD', 1], ['CERT', 2], ['CC', 3], ['NYC', 4]],prompt: "Select Score" %>
-      <%= f.input :document_quality, collection: [['CWD', 1], ['CERT', 2], ['CC', 3], ['NYC', 4]], prompt: "Select Score" %>
-      <%= f.input :live_alignment, collection: [['CWD', 1], ['CERT', 2], ['CC', 3], ['NYC', 4]], prompt: "Select Score" %>
-      <%= f.input :live_quality, collection: [['CWD', 1], ['CERT', 2], ['CC', 3], ['NYC', 4]], prompt: "Select Score" %>
-      <%= f.button :submit %>
-    <% end %>
-<% end %>

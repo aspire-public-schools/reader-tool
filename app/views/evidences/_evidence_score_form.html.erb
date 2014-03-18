@@ -29,12 +29,12 @@
        <%= text_area_tag('comments', @indicator_score.comments) %><br>
 
 
-      <%= submit_tag "Submit Scores", :id => 'submit-evidence', :remote => true, class: "btn btn-primary" %>
+      <%= submit_tag "Submit Scores", :id => 'submit-evidence', :remote => true, class: "btn btn-primary score-button" %>
       <br>
       <br>
 
   </div>
-    <div id="alert">
+    <div id="blast">
       <div class="alert alert-success alert-dismissable"> You Successfully Submitted Your Scores! </div>
     </div>
 <% end %>
