@@ -31,13 +31,15 @@ class ObservationsController < ApplicationController
     @domain_percentages = get_percentages(params[:id])
     @domain_percentages_sort = @domain_percentages.sort! { |a,b| a.number <=> b.number }
     @domain = Domain.all
-    # if @domain_percentages_sort
-    #   render :json => { :domain_percentages => render_to_string( :partial => 'observations/domain_percentages'), locals: { :domain_percentages_sort => @domain_percentages_sort} }
-    # else
-    #   render :json => { :error => reader.errors.full_messages.join(", ")}, :status => :unprocessable_entity
-    # end
     render 'index'
   end
+
+  def update
+    @reader = current_user
+    @observation_read = @reader.observation_reads.find(params[:id])
+    render 'index'
+  end
+
 
   private
 

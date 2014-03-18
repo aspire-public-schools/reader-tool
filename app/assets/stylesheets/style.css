@@ -82,6 +82,10 @@ width: 50rem;
 height: 20rem;
 }
 
-#submit-evidence{
+#submit-evidence {
   margin-top: 3rem;
+}
+
+#alert {
+  display: none;
 }

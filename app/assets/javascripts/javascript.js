@@ -31,8 +31,20 @@ var submitScore = {
   }
 }
 
+var successAlert = {
+  // init: function(){
+  //   debugger
+  //   $('#submit-evidence').on('submit', this.display)
+  // },
+  display: function(){
+    e.preventDefault()
+    $('#alert').css('display','block');
+  }
+}
+
 $(document).ready(function(){
   sideBar.toggle();
   evidenceScore.init();
   submitScore.init();
+  $('#submit-evidence').on('click', successAlert.display)
 })
