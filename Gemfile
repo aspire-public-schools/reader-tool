@@ -7,6 +7,7 @@ gem 'jquery-rails'
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'simple_form'
 gem 'pg'
+gem 'thin'
 
 group :development do
   gem 'better_errors'
