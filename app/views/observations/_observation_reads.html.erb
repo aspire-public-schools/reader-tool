@@ -1,6 +1,8 @@
 <h1> Score Form </h1>
 
 Observation Reads:
+
+
 <% @observation_reads.each do |observation| %>
   |<%= link_to "#{observation.observation_group_id}", observation_path(observation) %>
 <% end %>
