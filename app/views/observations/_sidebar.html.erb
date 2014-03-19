@@ -1,7 +1,5 @@
 <dl>
-  <% if @observation_read.is_a?(Array) %>
-
-  <% else %>
+  <% unless @observation_read.is_a?(Array) %>
   <% @domains.each do |domain_score| %>
      <dt>
         <h5>

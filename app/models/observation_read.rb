@@ -1,4 +1,5 @@
 class ObservationRead < ActiveRecord::Base
+  attr_accessible :document_quality, :document_alignment, :live_alignment, :live_quality
   has_many :domain_scores
   belongs_to :reader
 

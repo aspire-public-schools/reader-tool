@@ -31,6 +31,15 @@ var submitScore = {
   }
 }
 
+var docLiveForm = {
+  init: function() {
+    $('.document-live-form-holder').on("ajax:success", this.updateDocLiveForm)
+  },
+  updateDocLiveForm: function(event, data, status, xhr){
+  debugger
+  }
+}
+
 var successAlert = {
   display: function(e){
     e.preventDefault()
@@ -42,6 +51,7 @@ $(document).ready(function(){
   sideBar.toggle();
   evidenceScore.init();
   submitScore.init();
+  docLiveForm.init();
   $('.content').on('click','.score-button', successAlert.display)
   //use event delegation to listen to the dom-node on the click.  Form doesn't exist because of the ajax.
 })
