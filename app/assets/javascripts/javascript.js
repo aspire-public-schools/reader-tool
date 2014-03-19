@@ -28,20 +28,28 @@ var submitScore = {
     $('#domain-table').remove()
     $('#evidence-form-holder').append(data.submit_list)
     $('.dashboard-holder').append(data.domain_percentages)
+    $('#blast div').text(data.info)
+    $('#blast').css({'display':'block'})
   }
 }
 
-var successAlert = {
-  display: function(e){
-    e.preventDefault()
-    $('#blast').css({'display':'block'});
-  }
-}
+// var successAlert = {
+//   display: function(e){
+//     e.preventDefault()
+//     //do an ajax post
+//     $.ajax({
+//       'url':
+//       'method': 'post',
+
+//     })
+//     $('#blast').css({'display':'block'});
+//   }
+// }
 
 $(document).ready(function(){
   sideBar.toggle();
   evidenceScore.init();
   submitScore.init();
-  $('.content').on('click','.score-button', successAlert.display)
+  // $('.content').on('click','.score-button', successAlert.display)
   //use event delegation to listen to the dom-node on the click.  Form doesn't exist because of the ajax.
 })
