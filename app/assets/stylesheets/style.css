@@ -128,12 +128,12 @@ select {
 }
 
 .document h4 {
-  background-color: red;
+  background-color: darkseagreen;
   text-align: center;
 }
 
 .live h4 {
-  background-color: red;
+  background-color: darkorange;
   text-align: center;
 }
 
@@ -157,7 +157,7 @@ form .live {
 }
 
 .document-live-form-holder{
-  float: left;
+  float: right;
   overflow: hidden;
   /*display: inline;*/
 }
@@ -168,4 +168,17 @@ div.observation-read-button {
 
 div.observation-reads{
   float: left;
+}
+
+div.main-forms{
+  float: right;
+}
+
+p#submit-message{
+  font-size: 20px;
+  text-align: center;
+}
+
+p.alert-success{
+  display: none;
 }
