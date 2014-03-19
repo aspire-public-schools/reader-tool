@@ -36,7 +36,7 @@ var docLiveForm = {
     $('.document-live-form-holder').on("ajax:success", this.updateDocLiveForm)
   },
   updateDocLiveForm: function(event, data, status, xhr){
-  debugger
+    alert("all forms have been submitted!")
   }
 }
 

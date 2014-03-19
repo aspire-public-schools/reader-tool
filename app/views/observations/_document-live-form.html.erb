@@ -1,9 +1,10 @@
 <% if @observation_read %>
   <%= simple_form_for @observation_read, url: {action: "update"}, :remote => true, id: 'document-live-form' do |f| %>
-    <%= f.input :document_quality, priority: ["CERT"], collection: [["CERT", 2], ["NOTCERT", 1]] %>
-    <%= f.input :document_alignment, priority: ["CERT"], collection: [["CERT", 2], ["NOTCERT", 1]] %>
-    <%= f.input :live_alignment, priority: ["CERT"], collection: [["CERT", 2], ["NOTCERT", 1]] %>
-    <%= f.input :live_quality, priority: ["CERT"], collection: [["CERT", 2], ["NOTCERT", 1]] %>
+    <%= f.input :document_quality, collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"] %>
+    <%= f.input :document_alignment, collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"] %>
+    <%= f.input :live_alignment, collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"] %>
+    <%= f.input :live_quality, collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"] %>
     <%= f.button :submit %>
   <% end %>
 <% end %>
+
