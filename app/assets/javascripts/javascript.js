@@ -28,6 +28,7 @@ var submitScore = {
     $('#domain-table').remove()
     $('#evidence-form-holder').append(data.submit_list)
     $('.dashboard-holder').append(data.domain_percentages)
+    debugger
     $('#blast div').text(data.info)
     $('#blast').css({'display':'block'})
   }
@@ -38,14 +39,7 @@ var docLiveForm = {
     $('.document-live-form-holder').on("ajax:success", this.updateDocLiveForm)
   },
   updateDocLiveForm: function(event, data, status, xhr){
-    alert("all forms have been submitted!")
-  }
-}
-
-var successAlert = {
-  display: function(e){
-    e.preventDefault()
-    $('#blast').css({'display':'block'});
+    $('')
   }
 }
 
@@ -54,5 +48,4 @@ $(document).ready(function(){
   evidenceScore.init();
   submitScore.init();
   docLiveForm.init();
-
 })

@@ -9,7 +9,6 @@ class ObservationsController < ApplicationController
     @observation_read = @reader.observation_reads
     @domains = Domain.all
     @domain = Domain.all    ## OBSERVATION HAS MANY DOMAINS
-    p "********************************************"
     p params[:domain_id]
     if params[:domain_id]
         @indicator = Domain.find(params[:domain_id]).indicators
@@ -38,15 +37,13 @@ class ObservationsController < ApplicationController
   end
 
   def update
-
     @observation_read = ObservationRead.find(params[:id])
     if @observation_read.update_attributes(params[:observation_read])
-      render :json => { :document_live_form => render_to_string(:partial => "document-live-form", locals: { :observation_read => @observation_read } ) }
+      render :json => { :saved_message => "You've Successfuly Submitted the Certifications!", :document_live_form => render_to_string(:partial => "document-live-form", locals: { :observation_read => @observation_read } ) }
     else
       render :json => { :error => reader.errors.full_messages.join(", ")}, :status => :unprocessable_entity
     end
   end
-
 
   private
 

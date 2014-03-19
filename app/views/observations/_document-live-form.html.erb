@@ -1,10 +1,25 @@
 <% if @observation_read %>
+
   <%= simple_form_for @observation_read, url: {action: "update"}, :remote => true, id: 'document-live-form' do |f| %>
-    <%= f.input :document_quality, collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"] %>
-    <%= f.input :document_alignment, collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"] %>
-    <%= f.input :live_alignment, collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"] %>
-    <%= f.input :live_quality, collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"] %>
-    <%= f.button :submit %>
-  <% end %>
+
+    <div class="document">
+    <h4>Document</h4>
+        <%= f.input :document_quality, label: "Quality", collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"], wrapper_html: { class: 'document' }, prompt: "Select" %>
+        <%= f.input :document_alignment, label: "Alignment", collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"], wrapper_html: { class: 'document'}, prompt: "Select" %>
+    </div>
+
+    <div class="live">
+    <h4>Live</h4>
+      <%= f.input :live_alignment, label: "Alignment", collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"], wrapper_html: {class: 'live' }, prompt: "Select" %>
+      <%= f.input :live_quality, label: "Quality", collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"], wrapper_html: {class: 'live' }, prompt: "Select" %>
+    </div>
+
+    <div class="observation-read-button">
+      <%= f.button :submit, value: "Submit Certifications", id: "observation-read-button" %>
+    </div>
+    <% end %>
+
+  </table>
+
 <% end %>
 

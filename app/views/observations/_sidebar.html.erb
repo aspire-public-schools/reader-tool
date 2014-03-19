@@ -2,10 +2,10 @@
   <% unless @observation_read.is_a?(Array) %>
   <% @domains.each do |domain_score| %>
      <dt>
-        <h5>
+        <h4>
           <%= domain_score.domain.description %>
           <span class="caret"></span>
-        </h5>
+        </h4>
       </dt>
           <% domain_score.indicator_scores.each do |indicator_score| %>
               <dd class="indicators">
