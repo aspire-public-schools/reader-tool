@@ -43,7 +43,7 @@
 }
 
 .content h1{
-  text-align: center;
+  /* text-align: center; */
 }
 
 dt:hover {
@@ -87,5 +87,98 @@ height: 15rem;
 }
 
 #blast {
+  display: none;
+}
+
+
+
+select {
+  width: 108px;
+/*  border: 0px white;
+  background-color: #ffffff;*/
+}
+
+/*select, textarea, input[type="text"], input[type="password"] {
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: none;
+    color: white;
+    /*height: 22px;
+    /*line-height: 22px;
+}
+*/
+
+.observation_read_button {
+  margin: 0 auto;
+  float: right;
+  width: 40px;
+  background-color: green;
+}
+
+
+/*form#document-live-form {
+  background-color: green;
+  overflow: hidden;
+  margin: auto 0;
+}
+*/
+
+.document-live-form{
+  border: 5px solid black;
+}
+
+.document h4 {
+  background-color: darkseagreen;
+  text-align: center;
+}
+
+.live h4 {
+  background-color: darkorange;
+  text-align: center;
+}
+
+form .document{
+  /*background-color: ;*/
+  /*float: left;*/
+ /*   border: 5px solid black;*/
+
+  display: inline-block;
+  padding: 8px;
+}
+
+form .live {
+  display: inline-block;
+  padding: 8px;
+}
+
+.dashboard-holder{
+  float: left;
+  /*overflow: hidden;*/
+}
+
+.document-live-form-holder{
+  float: right;
+  overflow: hidden;
+  /*display: inline;*/
+}
+
+div.observation-read-button {
+  text-align: center;
+}
+
+div.observation-reads{
+  float: left;
+}
+
+div.main-forms{
+  float: right;
+}
+
+p#submit-message{
+  font-size: 20px;
+  text-align: center;
+}
+
+p.alert-success{
   display: none;
 }

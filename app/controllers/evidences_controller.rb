@@ -25,7 +25,7 @@ class EvidencesController < ApplicationController
         if @evidence_score_update
         @domain_percentages = get_percentages(params[:observation_id])
         @domain_percentages_sort = @domain_percentages.sort! { |a,b| a.number <=> b.number }
-          render :json => { :info => 'succesfully saved', :submit_list => render_to_string( :partial => "evidence_score_form", locals: { :indicator_score => @indicator_score } ), :domain_percentages => render_to_string( :partial => 'observations/domain_percentages'), locals: { :domain_percentages_sort => @domain_percentages_sort} }
+          render :json => { :info => "Godzilla says it's saved!  Click on more indicators to score more! :)", :submit_list => render_to_string( :partial => "evidence_score_form", locals: { :indicator_score => @indicator_score } ), :domain_percentages => render_to_string( :partial => 'observations/domain_percentages'), locals: { :domain_percentages_sort => @domain_percentages_sort} }
         else
           render :json => { :status => :unprocessable_entity }
       end

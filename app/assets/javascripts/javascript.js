@@ -33,23 +33,22 @@ var submitScore = {
   }
 }
 
-// var successAlert = {
-//   display: function(e){
-//     e.preventDefault()
-//     //do an ajax post
-//     $.ajax({
-//       'url':
-//       'method': 'post',
-
-//     })
-//     $('#blast').css({'display':'block'});
-//   }
-// }
+var docLiveForm = {
+  init: function() {
+    $('.document-live-form-holder').on("ajax:success", this.updateDocLiveForm)
+  },
+  updateDocLiveForm: function(event, data, status, xhr){
+    $('#submit-message').fadeIn('slow')
+    $('#submit-message').fadeOut(2500)
+    $('#submit-message').text(data.saved_message)
+    $('.alert-success p').css({'display':'block'})
+    // $('#submit-message').remove()
+  }
+}
 
 $(document).ready(function(){
   sideBar.toggle();
   evidenceScore.init();
   submitScore.init();
-  // $('.content').on('click','.score-button', successAlert.display)
-  //use event delegation to listen to the dom-node on the click.  Form doesn't exist because of the ajax.
+  docLiveForm.init();
 })
