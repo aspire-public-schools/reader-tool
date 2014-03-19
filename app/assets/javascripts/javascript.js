@@ -28,6 +28,8 @@ var submitScore = {
     $('#domain-table').remove()
     $('#evidence-form-holder').append(data.submit_list)
     $('.dashboard-holder').append(data.domain_percentages)
+    $('#blast div').text(data.info)
+    $('#blast').css({'display':'block'})
   }
 }
 
@@ -52,6 +54,5 @@ $(document).ready(function(){
   evidenceScore.init();
   submitScore.init();
   docLiveForm.init();
-  $('.content').on('click','.score-button', successAlert.display)
-  //use event delegation to listen to the dom-node on the click.  Form doesn't exist because of the ajax.
+
 })
