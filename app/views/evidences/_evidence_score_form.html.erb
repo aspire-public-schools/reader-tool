@@ -13,6 +13,8 @@
       <h4><%= @indicator_score.indicator.code %> <%= @indicator_score.indicator.description %></h4>
       <br>
 
+      <% @indicator_score.evidence_scores.sort! { |a,b| a.id <=> b.id} %>
+
       <% @indicator_score.evidence_scores.each do |evidence_score| %>
           <tr>
             <td><%= evidence_score.id %></td>
