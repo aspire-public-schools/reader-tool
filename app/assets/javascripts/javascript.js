@@ -42,7 +42,6 @@ var docLiveForm = {
     $('#submit-message').fadeOut(2500)
     $('#submit-message').text(data.saved_message)
     $('.alert-success p').css({'display':'block'})
-    // $('#submit-message').remove()
   }
 }
 
