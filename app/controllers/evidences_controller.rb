@@ -31,8 +31,3 @@ class EvidencesController < ApplicationController
       end
   end
 end
-
-
-1 = Being ready reader 1a
-2 = Being read by reader 1b
-3 = Being read by reader 2
