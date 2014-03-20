@@ -6,16 +6,16 @@
           <td> Domain <%=domain_percentage.number%> </td>
         <% end %>
       </tr>
-      <tr>
+      <tr class="quality">
         <td>Quality</td>
-        <% @domain_percentages.each do |domain_percentage| %>
-          <td><%= number_with_precision(domain_percentage.quality_average.to_f*100, precision: 1) %> %</td>
+        <% @domain_percentages.each_with_index do |domain_percentage, index| %>
+          <td id=<%= "#{index + 1}" %>><%= number_with_precision(domain_percentage.quality_average.to_f*100, precision: 1) %> %</td>
         <% end %>
       </tr>
-      <tr>
+      <tr class="alignment">
         <td>Alignment</td>
-        <% @domain_percentages.each do |domain_percentage| %>
-          <td><%= domain_percentage.alignment_average.to_f.round(3)*100 %> %</td>
+        <% @domain_percentages.each_with_index do |domain_percentage, index| %>
+          <td id=<%= "#{index + 5}" %>><%= number_with_precision(domain_percentage.alignment_average.to_f*100, precision: 1) %> %</td>
         <% end %>
       </tr>
   </table>
