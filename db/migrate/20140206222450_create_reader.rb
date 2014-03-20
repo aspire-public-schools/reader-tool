@@ -8,5 +8,3 @@ class CreateReader < ActiveRecord::Migration
   	end
   end
 end
-
-before_validation: :reader_name |name| name.downcase
