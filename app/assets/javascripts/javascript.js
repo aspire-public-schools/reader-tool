@@ -32,6 +32,8 @@ var submitScore = {
     $('#blast div').fadeOut(2500)
     $('#blast div').text(data.info)
     $('#blast').css({'display':'block'})
+    setCert.documentCert();
+    setCert.liveCert();
   }
 }
 
@@ -47,9 +49,57 @@ var docLiveForm = {
   }
 }
 
+var setCert = {
+  documentCert: function() {
+    var q1Value = parseFloat($('.quality #1').text())
+    var q4Value = parseFloat($('.quality #4').text())
+    if (q1Value >= 80 && q4Value >= 80) {
+      $('#observation_read_document_quality').val(2)
+    } else {
+      $('#observation_read_document_quality').val(1)
+    }
+
+    var a1Value = parseFloat($('.alignment #5').text())
+    var a4Value = parseFloat($('.alignment #8').text())
+
+    if (a1Value >= 75 && a4Value >= 75) {
+      $('#observation_read_document_alignment').val(2)
+    } else {
+      $('#observation_read_document_alignment').val(1)
+    }
+  },
+  liveCert: function() {
+    var q2Value = parseFloat($('.quality #2').text())
+    var q3Value = parseFloat($('.quality #3').text())
+
+    if (q2Value >= 80 && q3Value >= 80) {
+      $('#observation_read_live_quality').val(2)
+    } else {
+      $('#observation_read_live_quality').val(1)
+    }
+
+    var a2Value = parseFloat($('.alignment #6').text())
+    var a3Value = parseFloat($('.alignment #7').text())
+
+    if (a2Value >= 75 && a3Value >= 75) {
+      $('#observation_read_live_alignment').val(2)
+    } else {
+      $('#observation_read_live_alignment').val(1)
+    }
+  }
+}
+
 $(document).ready(function(){
   sideBar.toggle();
   evidenceScore.init();
   submitScore.init();
   docLiveForm.init();
+  setCert.documentCert();
+  setCert.liveCert();
+
+
+
+
+
+
 })
