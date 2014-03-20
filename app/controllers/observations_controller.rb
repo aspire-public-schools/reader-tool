@@ -6,7 +6,6 @@ class ObservationsController < ApplicationController
 	def index
     @reader = current_user
     @observation_reads = @reader.observation_reads
-    @observation_read = @reader.observation_reads
     @domains = Domain.all
     @domain = Domain.all    ## OBSERVATION HAS MANY DOMAINS
     p params[:domain_id]
