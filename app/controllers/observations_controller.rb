@@ -31,7 +31,7 @@ class ObservationsController < ApplicationController
       end
     end
     @domain_percentages = get_percentages(params[:id])
-    @domain_percentages_sort = @domain_percentages.sort! { |a,b| a.number <=> b.number }
+    @domain_percentages.sort! { |a,b| a.number <=> b.number }
     @domain = Domain.all
     render 'index'
   end

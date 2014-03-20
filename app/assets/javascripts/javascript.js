@@ -28,6 +28,8 @@ var submitScore = {
     $('#domain-table').remove()
     $('#evidence-form-holder').append(data.submit_list)
     $('.dashboard-holder').append(data.domain_percentages)
+    $('#blast div').fadeIn('slow')
+    $('#blast div').fadeOut(2500)
     $('#blast div').text(data.info)
     $('#blast').css({'display':'block'})
   }
@@ -42,7 +44,6 @@ var docLiveForm = {
     $('#submit-message').fadeOut(2500)
     $('#submit-message').text(data.saved_message)
     $('.alert-success p').css({'display':'block'})
-    // $('#submit-message').remove()
   }
 }
 

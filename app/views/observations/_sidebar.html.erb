@@ -7,9 +7,12 @@
           <span class="caret"></span>
         </h4>
       </dt>
+          <% domain_score.indicator_scores.sort! { |a,b| a.indicator.code <=> b.indicator.code} %>
           <% domain_score.indicator_scores.each do |indicator_score| %>
               <dd class="indicators">
-                <%= link_to "#{Indicator.find(indicator_score.indicator_id).code}: #{Indicator.find(indicator_score.indicator_id).description}", observation_domain_indicator_evidences_path(@observation_read, domain_score.domain, indicator_score), class: "#{indicator_score.id}", id: "indicator", :remote => true %>
+                <span>
+                <%= link_to "#{indicator_score.indicator.code}: #{indicator_score.indicator.description}", observation_domain_indicator_evidences_path(@observation_read, domain_score.domain, indicator_score), class: "#{indicator_score.id}", id: "indicator", :remote => true %>
+                </span>
               </dd>
           <% end %>
         <% end %>
