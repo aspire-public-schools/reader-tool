@@ -153,12 +153,16 @@ form .live {
 
 .dashboard-holder{
   float: left;
+  margin: 17px 58px;
+/*  margin-top: 17px;
+  margin-left: 58px;*/
   /*overflow: hidden;*/
 }
 
 .document-live-form-holder{
   float: right;
   overflow: hidden;
+  margin-right: 73px;
   /*display: inline;*/
 }
 
