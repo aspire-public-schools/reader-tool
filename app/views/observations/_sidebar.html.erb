@@ -1,5 +1,5 @@
 <dl>
-  <% unless @observation_read.is_a?(Array) %>
+  <% unless current_page?(action: 'index') %>
   <% @domains.each do |domain_score| %>
      <dt>
         <h4>
