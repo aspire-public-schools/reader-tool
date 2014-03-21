@@ -24,6 +24,7 @@ var submitScore = {
     $('#evidence-form-holder').on("ajax:success", '#evidence-form', this.submitScoreAndDashboard)
   },
   submitScoreAndDashboard: function(event, data, status, xhr){
+    debugger
     $('#evidence-form').remove()
     $('#domain-table').remove()
     $('#evidence-form-holder').append(data.submit_list)
@@ -51,16 +52,16 @@ var docLiveForm = {
 
 var setCert = {
   documentCert: function() {
-    var q1Value = parseFloat($('.quality #1').text())
-    var q4Value = parseFloat($('.quality #4').text())
+    var q1Value = parseFloat($('.quality #domain1-hidden').text())
+    var q4Value = parseFloat($('.quality #domain4-hidden').text())
     if (q1Value >= 80 && q4Value >= 80) {
       $('#observation_read_document_quality').val(2)
     } else {
       $('#observation_read_document_quality').val(1)
     }
 
-    var a1Value = parseFloat($('.alignment #5').text())
-    var a4Value = parseFloat($('.alignment #8').text())
+    var a1Value = parseFloat($('.alignment #domain5-hidden').text())
+    var a4Value = parseFloat($('.alignment #domain8-hidden').text())
 
     if (a1Value >= 75 && a4Value >= 75) {
       $('#observation_read_document_alignment').val(2)

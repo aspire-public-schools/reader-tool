@@ -186,3 +186,19 @@ p#submit-message{
 p.alert-success{
   display: none;
 }
+
+.quality #domain4-hidden{
+  display: none;
+}
+
+.quality #domain1-hidden{
+  display: none;
+}
+
+.alignment #domain5-hidden{
+  display: none;
+}
+
+.alignment #domain8-hidden{
+  display: none;
+}

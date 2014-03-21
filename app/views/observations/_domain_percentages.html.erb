@@ -1,22 +1,29 @@
-<% if @domain_percentages %>
-  <table class="table table-condensed table-bordered" id="domain-table">
+<% if @domain_percentages && @section_scores %>
+
+  <table class="table table-condensed table-bordered table-responsive" id="domain-table-view">
       <tr>
         <td></td>
-        <% @domain_percentages.each do |domain_percentage| %>
-          <td> Domain <%=domain_percentage.number%> </td>
-        <% end %>
+          <% @domain_percentages.each do |domain_percentage| %>
+            <td> Domain <%=domain_percentage.number%> </td>
+          <% end %>
       </tr>
       <tr class="quality">
         <td>Quality</td>
-        <% @domain_percentages.each_with_index do |domain_percentage, index| %>
-          <td id=<%= "#{index + 1}" %>><%= number_with_precision(domain_percentage.quality_average.to_f*100, precision: 1) %> %</td>
-        <% end %>
+          <td id='1' ><%= number_with_precision(@domain_percentages[0].quality_average.to_f*100, precision: 1) %>%</td>
+          <td id='domain1-hidden' ><%= number_with_precision(@section_scores[0].quality_average.to_f*100, precision: 1) %></td>
+          <td id='2' ><%= number_with_precision(@domain_percentages[1].quality_average.to_f*100, precision: 1) %>%</td>
+          <td id='3' ><%= number_with_precision(@domain_percentages[2].quality_average.to_f*100, precision: 1) %>%</td>
+          <td id='4' ><%= number_with_precision(@domain_percentages[3].quality_average.to_f*100, precision: 1) %>%</td>
+          <td id='domain4-hidden' ><%= number_with_precision(@section_scores[1].quality_average.to_f*100, precision: 1) %></td>
       </tr>
       <tr class="alignment">
         <td>Alignment</td>
-        <% @domain_percentages.each_with_index do |domain_percentage, index| %>
-          <td id=<%= "#{index + 5}" %>><%= number_with_precision(domain_percentage.alignment_average.to_f*100, precision: 1) %> %</td>
-        <% end %>
+           <td id = '5' ><%= number_with_precision(@domain_percentages[0].alignment_average.to_f*100, precision: 1)%>%</td>
+           <td id = 'domain5-hidden' ><%= number_with_precision(@section_scores[0].alignment_average.to_f*100, precision: 1)%>%</td>
+           <td id = '6' ><%= number_with_precision(@domain_percentages[1].alignment_average.to_f*100, precision: 1)%>%</td>
+           <td id = '7' ><%= number_with_precision(@domain_percentages[2].alignment_average.to_f*100, precision: 1)%>%</td>
+           <td id = '8' ><%= number_with_precision(@domain_percentages[3].alignment_average.to_f*100, precision: 1)%>%</td>
+           <td id = 'domain8-hidden' ><%= number_with_precision(@section_scores[1].alignment_average.to_f*100, precision: 1)%>%</td>
       </tr>
-  </table>
+    </table>
 <% end %>
