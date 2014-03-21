@@ -34,6 +34,7 @@ var submitScore = {
     $('#blast div').text(data.info)
     $('#blast').css({'display':'block'})
     setCert.documentCert();
+    setCert.liveCert();
   }
 }
 
@@ -94,10 +95,4 @@ $(document).ready(function(){
   docLiveForm.init();
   setCert.documentCert();
   setCert.liveCert();
-
-
-
-
-
-
 })
