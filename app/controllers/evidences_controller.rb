@@ -22,10 +22,11 @@ class EvidencesController < ApplicationController
       end
         @indicator_score_update = IndicatorScore.update(params[:indicator_id], {comments: params[:comments] })
         @indicator_score = IndicatorScore.find(params[:indicator_id])
-        if @evidence_score_update
+      if @evidence_score_update
+        @get_section_scores = get_section_scores(params[:observation_id])
         @domain_percentages = get_percentages(params[:observation_id])
         @domain_percentages_sort = @domain_percentages.sort! { |a,b| a.number <=> b.number }
-          render :json => { :info => "Godzilla says it's saved!  Click on more indicators to score more! :)", :submit_list => render_to_string( :partial => "evidence_score_form", locals: { :indicator_score => @indicator_score } ), :domain_percentages => render_to_string( :partial => 'observations/domain_percentages'), locals: { :domain_percentages_sort => @domain_percentages_sort} }
+          render :json => { :info => "Godzilla says it's saved!  Click on more indicators to score more! :)", :submit_list => render_to_string( :partial => "evidence_score_form", locals: { :indicator_score => @indicator_score } ), :domain_percentages => render_to_string( :partial => 'observations/domain_percentages'), locals: { :domain_percentages_sort => @domain_percentages_sort, :get_section_scores => @get_section_scores} }
         else
           render :json => { :status => :unprocessable_entity }
       end
