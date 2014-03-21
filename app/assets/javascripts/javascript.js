@@ -26,7 +26,7 @@ var submitScore = {
   submitScoreAndDashboard: function(event, data, status, xhr){
     $('#evidence-form').remove()
     $('#domain-table').remove()
-    $('#domain-table-hidden').remove()
+    $('#domain-table-weighted').remove()
     $('#evidence-form-holder').append(data.submit_list)
     $('.dashboard-holder').append(data.domain_percentages)
     $('#blast div').fadeIn('slow')
@@ -34,7 +34,6 @@ var submitScore = {
     $('#blast div').text(data.info)
     $('#blast').css({'display':'block'})
     setCert.documentCert();
-    setCert.liveCert();
   }
 }
 
@@ -52,37 +51,35 @@ var docLiveForm = {
 
 var setCert = {
   documentCert: function() {
-    var q1Value = parseFloat($('.quality #1').text())
-    var q4Value = parseFloat($('.quality #4').text())
-    if (q1Value >= 80 && q4Value >= 80) {
+    var qualityWeightedDomainOneFour = parseFloat($('.quality-weighted #0').text())
+
+    if (qualityWeightedDomainOneFour >= 80) {
       $('#observation_read_document_quality').val(2)
     } else {
       $('#observation_read_document_quality').val(1)
     }
 
-    var a1Value = parseFloat($('.alignment #5').text())
-    var a4Value = parseFloat($('.alignment #8').text())
+    var alignmentWeightedDomainOneFour = parseFloat($('.alignment-weighted #2').text())
 
-    if (a1Value >= 75 && a4Value >= 75) {
+    if (alignmentWeightedDomainOneFour >= 75) {
       $('#observation_read_document_alignment').val(2)
     } else {
       $('#observation_read_document_alignment').val(1)
     }
   },
-  liveCert: function() {
-    var q2Value = parseFloat($('.quality #2').text())
-    var q3Value = parseFloat($('.quality #3').text())
 
-    if (q2Value >= 80 && q3Value >= 80) {
+  liveCert: function() {
+    var qualityWeightedDomainTwoThree = parseFloat($('.quality-weighted #1').text())
+
+    if (qualityWeightedDomainTwoThree >= 80) {
       $('#observation_read_live_quality').val(2)
     } else {
       $('#observation_read_live_quality').val(1)
     }
 
-    var a2Value = parseFloat($('.alignment #6').text())
-    var a3Value = parseFloat($('.alignment #7').text())
+    var alignmentWeightedDomainTwoThree = parseFloat($('.alignment-weighted #3').text())
 
-    if (a2Value >= 75 && a3Value >= 75) {
+    if (alignmentWeightedDomainTwoThree >= 75) {
       $('#observation_read_live_alignment').val(2)
     } else {
       $('#observation_read_live_alignment').val(1)
