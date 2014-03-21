@@ -18,8 +18,8 @@ module EvidenceScoreHelper
 
   def get_section_scores(observation_id)
      sql = "SELECT obr.id, 'document' AS Type, AVG(evds.quality::integer) AS quality_average,  AVG(evds.alignment::integer) AS alignment_average
-       FROM observation_reads obr
-       LEFT JOIN domain_scores doms
+      FROM observation_reads obr
+      LEFT JOIN domain_scores doms
            ON doms.observation_read_id = obr.id
       LEFT JOIN domains dom
           ON doms.domain_id = dom.id

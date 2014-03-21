@@ -26,6 +26,7 @@ var submitScore = {
   submitScoreAndDashboard: function(event, data, status, xhr){
     $('#evidence-form').remove()
     $('#domain-table').remove()
+    $('#domain-table-hidden').remove()
     $('#evidence-form-holder').append(data.submit_list)
     $('.dashboard-holder').append(data.domain_percentages)
     $('#blast div').fadeIn('slow')

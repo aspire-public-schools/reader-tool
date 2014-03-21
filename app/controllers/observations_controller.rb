@@ -8,7 +8,6 @@ class ObservationsController < ApplicationController
     @observation_reads = @reader.observation_reads
     @domains = Domain.all
     @domain = Domain.all    ## OBSERVATION HAS MANY DOMAINS
-    p params[:domain_id]
     if params[:domain_id]
         @indicator = Domain.find(params[:domain_id]).indicators
       if params[:indicator_id]
@@ -21,7 +20,7 @@ class ObservationsController < ApplicationController
   def show
     @reader = current_user
     @observation_reads = @reader.observation_reads
-    p @observation_read = @reader.observation_reads.find(params[:id])
+    @observation_read = @reader.observation_reads.find(params[:id])
     @domains = @observation_read.domain_scores
     if params[:domain_id]
       @indicator = Domain.find(params[:domain_id]).indicators
@@ -29,7 +28,9 @@ class ObservationsController < ApplicationController
         @evidence_scores = Indicator.find(params[:indicator_id]).evidence_scores # ON THIS PAGE: 1 observation, ALL DOMAINS
       end
     end
+
     @domain_percentages = get_percentages(params[:id])
+    @get_section_scores = get_section_scores(params[:id])
     @domain_percentages.sort! { |a,b| a.number <=> b.number }
     @domain = Domain.all
     render 'index'

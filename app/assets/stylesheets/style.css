@@ -186,3 +186,7 @@ p#submit-message{
 p.alert-success{
   display: none;
 }
+
+#domain-table-hidden {
+  display: none;
+}
