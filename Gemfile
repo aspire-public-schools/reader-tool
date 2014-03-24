@@ -8,7 +8,7 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'simple_form'
 gem 'pg'
 gem 'thin'
-gem 'role_model'
+gem 'amoeba'
 
 group :development do
   gem 'better_errors'

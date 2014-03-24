@@ -55,7 +55,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="215" y="37" name="Observation_Reads">
+<table x="211" y="52" name="observation_read">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -103,6 +103,9 @@
 <datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>
 <row name="reader_number" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="observation_status" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <key type="PRIMARY" name="">
@@ -179,7 +182,7 @@
 <default>NULL</default></row>
 <row name="observation_reads_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="Observation_Reads" row="id" />
+<default>NULL</default><relation table="observation_read" row="id" />
 </row>
 <row name="quality_score" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>

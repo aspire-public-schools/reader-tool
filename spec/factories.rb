@@ -4,4 +4,8 @@ FactoryGirl.define do
 		first_name { Faker::Name.first_name}
 		last_name { Faker::Name.last_name}
 	end
+
+  factory :observation_reader do
+    observation_reader '1a'
+  end
 end

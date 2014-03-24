@@ -11,14 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140215042926) do
+ActiveRecord::Schema.define(:version => 20140215042950) do
 
   create_table "domain_scores", :force => true do |t|
     t.integer  "observation_read_id"
     t.integer  "quality_score"
     t.integer  "domain_id"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at"
+    t.datetime "modified_at"
   end
 
   create_table "domains", :force => true do |t|
@@ -26,41 +26,46 @@ ActiveRecord::Schema.define(:version => 20140215042926) do
     t.string  "description"
   end
 
+  create_table "evidence_scores", :force => true do |t|
+    t.integer  "indicator_score_id"
+    t.text     "description"
+    t.boolean  "quality"
+    t.boolean  "alignment"
+    t.datetime "created_at"
+    t.datetime "modified_at"
+  end
+
   create_table "indicator_scores", :force => true do |t|
     t.integer  "domain_score_id"
     t.integer  "indicator_id"
     t.integer  "alignment_score"
-    t.integer  "evidence_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at"
+    t.datetime "modified_at"
+    t.text     "comments"
   end
 
   create_table "indicators", :force => true do |t|
-    t.string  "code"
-    t.string  "description"
-    t.integer "domain_id"
+    t.string   "code",        :limit => 10
+    t.string   "description"
+    t.integer  "domain_id"
+    t.datetime "created_at"
   end
 
   create_table "observation_reads", :force => true do |t|
     t.integer  "observation_group_id"
     t.integer  "employee_id_observer"
     t.integer  "employee_id_learner"
-    t.string   "alignment_overall"
-    t.integer  "correlation"
-    t.integer  "average_difference"
-    t.integer  "percent_correct"
+    t.float    "correlation"
+    t.float    "average_difference"
+    t.float    "percent_correct"
     t.integer  "reader_id"
-    t.string   "error_pattern_1"
-    t.string   "error_pattern_2"
-    t.string   "error_pattern_3"
-    t.string   "reader_number"
-    t.integer  "document_alignment"
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.string   "reader_number",        :limit => 10
     t.integer  "document_quality"
-    t.integer  "live_alignment"
+    t.integer  "document_alignment"
     t.integer  "live_quality"
-    t.integer  "observation_status"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.integer  "live_alignment"
   end
 
   create_table "readers", :force => true do |t|
