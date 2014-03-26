@@ -5,6 +5,7 @@ class ObservationsController < ApplicationController
 
 	def index
     @reader = current_user
+    debugger
     @observation_reads = @reader.observation_reads
     @observation_reads = @reader.observation_reads.where(observation_status: 1, reader_number: ['1a', '1b'])
     @observation_reads += @reader.observation_reads.where(observation_status: 2, reader_number: '2')

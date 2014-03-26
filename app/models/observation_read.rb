@@ -12,14 +12,6 @@ class ObservationRead < ActiveRecord::Base
         map { |d| [d.id, d.description] }
   end
 
-  # def grader?
-  #   reader_number == '1a' || '1b'
-  # end
-
-  # def supervisor?
-  #   !grader?
-  # end
-
   def complete
 
     p r1_observation_read = self
@@ -42,42 +34,22 @@ class ObservationRead < ActiveRecord::Base
       r2_indicator_scores = r2_observation_read.indicator_scores.where("domain_scores.domain_id IN (2,3)").order(:indicator_id)
     end
 
+
     r1_indicator_scores = r1_observation_read.indicator_scores.order(:indicator_id)
 
 
     r2_indicator_scores.count.times{ |i|
-      r2_indicator_scores[i].comments = r1_indicator_scores[i].comments
+      r2_indicator_scores[i].update_attributes(:comments => r1_indicator_scores[i].comments )
 
-      #TODO Sort the evidence_scores by description
       sorted_r1_indicator_scores = r1_indicator_scores[i].evidence_scores.order(:description)
       sorted_r2_indicator_scores = r2_indicator_scores[i].evidence_scores.order(:description)
-
-      #r1_indicator_scores[i].evidence_scores = r1_indicator_scores[i].evidence_scores.order(:description)
-      #r2_indicator_scores[i].evidence_scores = r2_indicator_scores[i].evidence_scores.order(:description)
-
-      # p "            Unsorted:"
-      # p r1_indicator_scores[i].evidence_scores
-      # p "            Sorted: R1"
-      # p sorted_r1_indicator_scores
-      # p "            Sorted: R2"
-      # p sorted_r2_indicator_scores
-      # debugger
-
 
         r1_indicator_scores[i].evidence_scores.count.times { |j|
 
              new_scores = {:quality => sorted_r1_indicator_scores[j].quality, :alignment => sorted_r1_indicator_scores[j].alignment }
-            #  if  (r1_indicator_scores[i].evidence_scores[j].id == 83 || r1_indicator_scores[i].evidence_scores[j].id == 1439)
-            #   p "          R1 scores:"
-            #   p r1_indicator_scores[i].evidence_scores
-            #   #p new_scores
-            #   p "          R2 scores:"
-            #   p r2_indicator_scores[i].evidence_scores
-            # end
+
              sorted_r2_indicator_scores[j].update_attributes(new_scores)
 
-            #r2_indicator_scores[i].evidence_scores[j].quality = r1_indicator_scores[i].evidence_scores[j].quality
-            #r2_indicator_scores[i].evidence_scores[j].alignment = r1_indicator_scores[i].evidence_scores[j].alignment
         }
 
     }
@@ -93,7 +65,7 @@ class ObservationRead < ActiveRecord::Base
 
 
 
-    # p old_evidence_scores = self.evidence_scores
+    # p old_evidence_scores = self.evidence_sco
     # p new_evidence_scores = EvidenceScores.new
 
 
