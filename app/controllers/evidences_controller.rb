@@ -15,6 +15,8 @@ class EvidencesController < ApplicationController
   end
 
   def score
+      @reader = current_user
+      @observation_read = @reader.observation_reads.find(params[:observation_id])
       params[:evidence_scores].keys.each do |score_id|
         quality = params[:evidence_scores][score_id][:quality] || false
         alignment = params[:evidence_scores][score_id][:alignment] || false
@@ -26,9 +28,13 @@ class EvidencesController < ApplicationController
         @get_section_scores = get_section_scores(params[:observation_id])
         @domain_percentages = get_percentages(params[:observation_id])
         @domain_percentages_sort = @domain_percentages.sort! { |a,b| a.number <=> b.number }
-          render :json => { :info => "Godzilla says it's saved!  Click on more indicators to score more! :)", :submit_list => render_to_string( :partial => "evidence_score_form", locals: { :indicator_score => @indicator_score } ), :domain_percentages => render_to_string( :partial => 'observations/domain_percentages'), locals: { :domain_percentages_sort => @domain_percentages_sort, :get_section_scores => @get_section_scores} }
+          render :json => { :info => "Godzilla says it's saved!  Click on more indicators to score more! :)",
+                            :submit_list => render_to_string( :partial => "evidence_score_form",
+                                            locals: { :indicator_score => @indicator_score } ),
+                            :domain_percentages => render_to_string(:partial => 'observations/domain_percentages'),
+                                            locals: { :domain_percentages_sort => @domain_percentages_sort, :get_section_scores => @get_section_scores, :observation_read => @observation_read} }
         else
-          render :json => { :status => :unprocessable_entity }
+          render :json => { :error => reader.errors.full_messages.join(", ")}, :status => :unprocessable_entity
       end
   end
 end

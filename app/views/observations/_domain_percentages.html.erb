@@ -19,13 +19,15 @@
         <% end %>
       </tr>
   </table>
-
-
   <table class="table table-condensed table-bordered" id="domain-table-weighted">
       <tr>
-        <th> Weighted Score</th>
-        <td> Domains (1 + 4) </td>
-        <td> Domains (2 + 3) </td>
+          <th> Weighted Score</th>
+        <% if @observation_read.reader_number != '1b'%>
+          <td> Domains (1 + 4) </td>
+        <% end %>
+        <% if @observation_read.reader_number != '1a' %>
+          <td> Domains (2 + 3) </td>
+        <% end %>
       </tr>
       <tr class="quality-weighted">
         <td>Quality</td>
@@ -36,7 +38,8 @@
       <tr class="alignment-weighted">
         <td>Alignment</td>
         <% @get_section_scores.each_with_index do |section_score, index| %>
-          <td id=<%="#{index+2}"%>><%= number_with_precision(section_score.alignment_average.to_f*100, precision: 1) %> %</td>
+          <td id=<%="#{index+2}"%>><%= number_with_precision(section_score.alignment_average.to_f*100, precision: 1) %> %
+          </td>
         <% end %>
       </tr>
   </table>
