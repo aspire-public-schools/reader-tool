@@ -1,30 +1,38 @@
 <% if @observation_read %>
-  <div class="well">
-    <%= simple_form_for @observation_read, url: {action: "update"}, :remote => true, id: 'document-live-form' do |f| %>
-      <% if @observation_read.reader_number != '1b' %>
-        <div class="document">
-        <h4>Document</h4>
+  <%= simple_form_for @observation_read, url: {action: "update"}, :remote => true, id: 'document-live-form' do |f| %>
+
+    <div class="well well-sm">
+      <div class="row">
+        <div class="col-md-6">
+          <% if @observation_read.reader_number != '1b' %>
+          <div class="document">
+            <h4>Document</h4>
             <%= f.input :document_quality, label: "Quality", collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"], wrapper_html: { class: 'document' }, prompt: "Select" %>
             <%= f.input :document_alignment, label: "Alignment", collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"], wrapper_html: { class: 'document'}, prompt: "Select" %>
+          </div>
+          <% end %>
         </div>
+
+        <div class="col-md-6">
+          <%if @observation_read.reader_number != '1a' %>
+
+          <div class="live">
+            <h4>Live</h4>
+            <%= f.input :live_quality, label: "Quality", collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"], wrapper_html: {class: 'live' }, prompt: "Select" %>
+            <%= f.input :live_alignment, label: "Alignment", collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"], wrapper_html: {class: 'live' }, prompt: "Select" %>
+          </div>
+
+          <% end %>
+        </div>
+      </div>
+
+      <div class="observation-read-button">
+        <%= f.button :submit, value: "Finalize Read", id: "observation-read-button", class: "btn-danger" %>
+      </div>
       <% end %>
-      <%if @observation_read.reader_number != '1a' %>
+    </div>
 
-        <div class="live">
-        <h4>Live</h4>
-          <%= f.input :live_quality, label: "Quality", collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"], wrapper_html: {class: 'live' }, prompt: "Select" %>
-          <%= f.input :live_alignment, label: "Alignment", collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"], wrapper_html: {class: 'live' }, prompt: "Select" %>
-        </div>
-
-      <% end %>
-        <div class="observation-read-button">
-          <%= f.button :submit, value: "Finalize Read", id: "observation-read-button", class: "btn-danger" %>
-        </div>
-    <% end %>
-
-
-          <p class="alert alert-success", id="submit-message">
-          </p>
-      <br/>
-  </div>
+  <p class="alert alert-success", id="submit-message">
+  </p>
+  <br/>
 <% end %>

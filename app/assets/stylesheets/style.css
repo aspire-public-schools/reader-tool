@@ -80,8 +80,8 @@ dd:hover {
 }
 
 textarea#comments {
-width: 50rem;
-height: 15rem;
+  width: 50rem;
+  height: 15rem;
 }
 
 #submit-evidence {
@@ -92,6 +92,7 @@ height: 15rem;
   display: none;
 }
 
+/* dashboard */
 
 select {
   width: 108px;
@@ -99,25 +100,24 @@ select {
   background-color: #ffffff;*/
 }
 
+
 .document-live-form{
   border: 5px solid black;
 }
 
 .document h4 {
-  background-color: darkseagreen;
+  background-color: #3498db;
   text-align: center;
 }
 
 .live h4 {
-  background-color: darkorange;
+  background-color: #f1c40f;
   text-align: center;
 }
 
 form .document{
-/*  float: left;*/
   display: inline-block;
   padding: 8px;
-  margin: auto 0;
 }
 
 form .live {
