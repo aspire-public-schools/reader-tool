@@ -1,3 +1,7 @@
+.landing {
+  background-image:url('low_contrast_linen.png');
+}
+
 #main.container {
   padding-top: 60px
 }
@@ -21,7 +25,7 @@
 .sidebar.fixed {
   position: fixed;
   background-color: #9b59b6;
-  top: 71px;
+  top: 70px;
   width: 24%;
   float: left;
   bottom: 0;
@@ -35,7 +39,6 @@
 .content.right {
   margin-right: 0%;
   padding: 0rem;
-  /*background: yellow;*/
   width: 74%;
   float: right;
   position: relative;
@@ -64,7 +67,6 @@ dt {
   color:#ecf0f1;
 }
 
-
 dl dd{
     display: none;
     text-indent: 1em;
@@ -78,8 +80,8 @@ dd:hover {
 }
 
 textarea#comments {
-width: 50rem;
-height: 15rem;
+  width: 50rem;
+  height: 15rem;
 }
 
 #submit-evidence {
@@ -90,7 +92,7 @@ height: 15rem;
   display: none;
 }
 
-
+/* dashboard */
 
 select {
   width: 108px;
@@ -98,50 +100,22 @@ select {
   background-color: #ffffff;*/
 }
 
-/*select, textarea, input[type="text"], input[type="password"] {
-    background-color: white;
-    border-radius: 4px;
-    box-shadow: none;
-    color: white;
-    /*height: 22px;
-    /*line-height: 22px;
-}
-*/
-
-.observation_read_button {
-  margin: 0 auto;
-  float: right;
-  width: 40px;
-  background-color: green;
-}
-
-
-/*form#document-live-form {
-  background-color: green;
-  overflow: hidden;
-  margin: auto 0;
-}
-*/
 
 .document-live-form{
   border: 5px solid black;
 }
 
 .document h4 {
-  background-color: darkseagreen;
+  background-color: #3498db;
   text-align: center;
 }
 
 .live h4 {
-  background-color: darkorange;
+  background-color: #f1c40f;
   text-align: center;
 }
 
 form .document{
-  /*background-color: ;*/
-  /*float: left;*/
- /*   border: 5px solid black;*/
-
   display: inline-block;
   padding: 8px;
 }
@@ -151,31 +125,8 @@ form .live {
   padding: 8px;
 }
 
-.dashboard-holder{
-  float: left;
-  margin: 17px 58px;
-/*  margin-top: 17px;
-  margin-left: 58px;*/
-  /*overflow: hidden;*/
-}
-
-.document-live-form-holder{
-  float: right;
-  overflow: hidden;
-  margin-right: 73px;
-  /*display: inline;*/
-}
-
 div.observation-read-button {
   text-align: center;
-}
-
-div.observation-reads{
-  float: left;
-}
-
-div.main-forms{
-  float: right;
 }
 
 p#submit-message{
@@ -185,4 +136,56 @@ p#submit-message{
 
 p.alert-success{
   display: none;
+  z-index: 1000;
+  position: absolute;
+}
+
+.observation-reads{
+  width: 50%;
+  margin: 0 auto;
+}
+
+
+.observation-reads h3 {
+  text-align: center;
+}
+
+/* observation-reads buttons */
+
+.observation-reads-links:hover{
+  background-color:rgba(0,0,0,.5)
+}
+
+.observation-reads-link:visited{
+  background-color: #E74C3C;
+}
+
+span a{
+  color: white;
+  list-style-type: none;
+  text-decoration: none;
+}
+
+span.observation-reads-links{
+  font-size: 15px;
+  margin-top: 5px;
+  display: inline-block;
+  padding: 5px 14px;
+  background-color: #18bc9c;
+  border: 1px solid transparent;
+  border-radius: 15px;
+}
+
+/*evidence form */
+
+#evidence-form h3{
+  text-align: center;
+}
+
+h3#indicator-heading{
+  color: #e74c3c;
+}
+
+#evidence-form .panel-primary{
+  border-color: #ecf0f1;
 }

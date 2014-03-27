@@ -1,46 +1,47 @@
 <% if @domain_percentages && @get_section_scores %>
-  <table class="table table-condensed table-bordered" id="domain-table">
-      <tr>
-        <td></td>
-        <% @domain_percentages.each do |domain_percentage| %>
-          <td> Domain <%=domain_percentage.number%> </td>
-        <% end %>
-      </tr>
-      <tr class="quality">
-        <td>Quality</td>
-        <% @domain_percentages.each_with_index do |domain_percentage, index| %>
-        <td><%= number_with_precision(domain_percentage.quality_average.to_f*100, precision: 1) %> %</td>
-        <% end %>
-      </tr>
-      <tr class="alignment">
-        <td>Alignment</td>
-        <% @domain_percentages.each_with_index do |domain_percentage, index| %>
-          <td><%= number_with_precision(domain_percentage.alignment_average.to_f*100, precision: 1) %> %</td>
-        <% end %>
-      </tr>
-  </table>
-  <table class="table table-condensed table-bordered" id="domain-table-weighted">
-      <tr>
-          <th> Weighted Score</th>
-        <% if @observation_read.reader_number != '1b'%>
-          <td> Domains (1 + 4) </td>
-        <% end %>
-        <% if @observation_read.reader_number != '1a' %>
-          <td> Domains (2 + 3) </td>
-        <% end %>
-      </tr>
-      <tr class="quality-weighted">
-        <td>Quality</td>
-        <% @get_section_scores.each_with_index  do |section_score, index| %>
-        <td id=<%="#{index}"%>><%= number_with_precision(section_score.quality_average.to_f*100, precision: 1) %> %</td>
-        <% end %>
-      </tr>
-      <tr class="alignment-weighted">
-        <td>Alignment</td>
-        <% @get_section_scores.each_with_index do |section_score, index| %>
-          <td id=<%="#{index+2}"%>><%= number_with_precision(section_score.alignment_average.to_f*100, precision: 1) %> %
-          </td>
-        <% end %>
-      </tr>
-  </table>
+    <table class="table table-condensed table-bordered table-resonsive" id="domain-table">
+
+        <tr>
+          <td></td>
+          <% @domain_percentages.each do |domain_percentage| %>
+            <td> Domain <%=domain_percentage.number%> </td>
+          <% end %>
+        </tr>
+        <tr class="quality">
+          <td>Quality</td>
+          <% @domain_percentages.each_with_index do |domain_percentage, index| %>
+          <td><%= number_with_precision(domain_percentage.quality_average.to_f*100, precision: 1) %> %</td>
+          <% end %>
+        </tr>
+        <tr class="alignment">
+          <td>Alignment</td>
+          <% @domain_percentages.each_with_index do |domain_percentage, index| %>
+            <td><%= number_with_precision(domain_percentage.alignment_average.to_f*100, precision: 1) %> %</td>
+          <% end %>
+        </tr>
+    </table>
+    <table class="table table-condensed table-bordered" id="domain-table-weighted">
+        <tr>
+            <th> Weighted Score</th>
+          <% if @observation_read.reader_number != '1b'%>
+            <td> Domains (1 + 4) </td>
+          <% end %>
+          <% if @observation_read.reader_number != '1a' %>
+            <td> Domains (2 + 3) </td>
+          <% end %>
+        </tr>
+        <tr class="quality-weighted">
+          <td>Quality</td>
+          <% @get_section_scores.each_with_index  do |section_score, index| %>
+          <td id=<%="#{index}"%>><%= number_with_precision(section_score.quality_average.to_f*100, precision: 1) %> %</td>
+          <% end %>
+        </tr>
+        <tr class="alignment-weighted">
+          <td>Alignment</td>
+          <% @get_section_scores.each_with_index do |section_score, index| %>
+            <td id=<%="#{index+2}"%>><%= number_with_precision(section_score.alignment_average.to_f*100, precision: 1) %> %
+            </td>
+          <% end %>
+        </tr>
+    </table>
 <% end %>
