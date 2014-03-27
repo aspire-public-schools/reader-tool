@@ -34,9 +34,8 @@ class ObservationRead < ActiveRecord::Base
       r2_indicator_scores = r2_observation_read.indicator_scores.where("domain_scores.domain_id IN (2,3)").order(:indicator_id)
     end
 
-
+# this copies reader 1 scores into reader 2
     r1_indicator_scores = r1_observation_read.indicator_scores.order(:indicator_id)
-
 
     r2_indicator_scores.count.times{ |i|
       r2_indicator_scores[i].update_attributes(:comments => r1_indicator_scores[i].comments )

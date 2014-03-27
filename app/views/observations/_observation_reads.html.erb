@@ -1,8 +1,9 @@
-<h1> Score Form </h1>
+<div class="row">
+  <h3>Your Observation Reads</h3>
 
-Observation Reads:
-
-<% @observation_reads.each do |observation| %>
-  |<%= link_to "#{observation.observation_group_id}", observation_path(observation) %>
-<% end %>
-
+  <div class="read-links">
+    <% @observation_reads.each do |observation| %>
+        <span class='observation-reads-links'><%= link_to "#{observation.observation_group_id}", observation_path(observation) %></span>
+    <% end %>
+  </div>
+</div>
