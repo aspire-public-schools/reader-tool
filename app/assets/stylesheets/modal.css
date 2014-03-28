@@ -22,7 +22,8 @@
 }
 
 
-.login_modal h3{
+.login_modal p{
+  margin-top: 10px;
   text-align: center;
   text-decoration: bold;
   color: white;
@@ -37,3 +38,4 @@
   margin: 0 1em;
   padding: 10px 28px;
 }
+
