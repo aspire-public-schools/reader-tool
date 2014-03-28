@@ -8,9 +8,13 @@
           <div class="document">
             <h4>Document</h4>
             <%= f.input :document_quality, label: "Quality", collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"], wrapper_html: { class: 'document' }, prompt: "Select" %>
-            <%= @observation_read.document_quality %>
+            <% if @observation_read.reader_number == "2" %>
+              Reader 1 Score: <%= @observation_read.document_quality_string %>
+            <% end %>
             <%= f.input :document_alignment, label: "Alignment", collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"], wrapper_html: { class: 'document'}, prompt: "Select" %>
-            <%= @observation_read.document_alignment %>
+             <% if @observation_read.reader_number == "2" %>
+              Reader 1 Score: <%= @observation_read.document_alignment_string %>
+            <% end %>
           </div>
           <% end %>
         </div>
@@ -20,9 +24,15 @@
             <div class="live">
               <h4>Live</h4>
               <%= f.input :live_quality, label: "Quality", collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"], wrapper_html: {class: 'live' }, prompt: "Select" %>
-              <%= @observation_read.live_quality %>
-              <%= f.input :live_alignment, label: "Alignment", collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"], wrapper_html: {class: 'live' }, prompt: "Select" %>
-              <%= @observation_read.live_alignment %>
+              <% if @observation_read.reader_number == "2" %>
+                  Reader 1 Score:
+                  <%= @observation_read.live_quality_string %>
+              <% end %>
+                  <%= f.input :live_alignment, label: "Alignment", collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"], wrapper_html: {class: 'live' }, prompt: "Select" %>
+              <% if @observation_read.reader_number == "2" %>
+                  Reader 1 Score:
+                  <%= @observation_read.live_alignment_string %>
+              <% end %>
             </div>
           <% end %>
         </div>

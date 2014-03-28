@@ -21,9 +21,6 @@ class ObservationsController < ApplicationController
   def show
     @reader = current_user
     @observation_reads = @reader.observation_reads.where(observation_status: 2)
-    # p "-------------------------------------------------"
-    # p @observation_read_reader2 = @reader.observation_reads.where(reader_number: "2")
-    #@observation_reads += @reader.observation_reads.where(observation_status: 2, reader_number: '2')
     @observation_read = @reader.observation_reads.find(params[:id])
     @domains = @observation_read.domain_scores
     if params[:domain_id]

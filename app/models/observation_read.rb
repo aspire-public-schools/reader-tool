@@ -67,6 +67,44 @@ class ObservationRead < ActiveRecord::Base
     end
   end
 
+  def document_quality_string
+    doc_quality_string = document_quality.to_s
+    if document_quality == 1
+      doc_quality_string.replace "NOTCERT"
+    elsif document_quality == 2
+      doc_quality_string.replace "CERT"
+    end
+  end
+
+  def document_alignment_string
+    doc_align_string = document_alignment.to_s
+    if document_alignment == 1
+      doc_align_string.replace "NOTCERT"
+    elsif document_alignment == 2
+      doc_align_string.replace "CERT"
+    end
+  end
+
+  def live_quality_string
+    live_quality_string = live_quality.to_s
+    if live_quality == 1
+      live_quality_string.replace "NOTCERT"
+    elsif live_quality == 2
+      live_quality_string = live_quality.to_s
+      live_quality_string.replace "CERT"
+    end
+  end
+
+  def live_alignment_string
+    live_align_string = live_alignment.to_s
+    if live_alignment == 1
+      live_align_string.replace "NOTCERT"
+    elsif live_alignment == 2
+      live_align_string.replace "CERT"
+    end
+  end
+
+
 end
 
 
