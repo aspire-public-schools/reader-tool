@@ -29,8 +29,9 @@ var submitScore = {
     $('#domain-table-weighted').remove()
     $('#evidence-form-holder').append(data.submit_list)
     $('.dashboard-holder').append(data.domain_percentages)
+    $("html, body").animate({ scrollTop: 0 }, 600);
     $('#blast div').fadeIn('slow')
-    $('#blast div').fadeOut(2500)
+    $('#blast div').fadeOut(4000)
     $('#blast div').text(data.info)
     $('#blast').css({'display':'block'})
     setCert.documentCert();

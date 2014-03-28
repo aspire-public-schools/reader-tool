@@ -90,6 +90,16 @@ textarea#comments {
 
 #blast {
   display: none;
+  position: absolute;
+  top: 4rem;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 50%;
+  padding: 35px 30px 10px;
+  z-index: 1000;
+  font-size: 30px;
+  text-align: center;
 }
 
 /* dashboard */
@@ -142,6 +152,7 @@ p.alert-success{
   z-index: 1000;
   position: absolute;
 }
+
 
 .observation-reads{
   width: 50%;

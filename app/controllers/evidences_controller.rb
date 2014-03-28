@@ -28,7 +28,7 @@ class EvidencesController < ApplicationController
         @get_section_scores = get_section_scores(params[:observation_id])
         @domain_percentages = get_percentages(params[:observation_id])
         @domain_percentages_sort = @domain_percentages.sort! { |a,b| a.number <=> b.number }
-          render :json => { :info => "Godzilla says it's saved!  Click on more indicators to score more! :)",
+          render :json => { :info => "Godzilla says it's saved!",
                             :submit_list => render_to_string( :partial => "evidence_score_form",
                                             locals: { :indicator_score => @indicator_score } ),
                             :domain_percentages => render_to_string(:partial => 'observations/domain_percentages'),

@@ -36,6 +36,7 @@
       <h4> Your Feedback for the Observer </h4>
           <%= text_area_tag('comments', @indicator_score.comments, class: 'form-control') %><br>
           <%= submit_tag "Submit Scores", :id => 'submit-evidence', :remote => true, class: "btn btn-primary score-button" %>
+
     </div>
   </div>
 <% end %>
