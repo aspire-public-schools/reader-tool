@@ -147,6 +147,8 @@ p.alert-success{
   display: none;
   z-index: 1000;
   position: absolute;
+  left: -32%;
+  top: 27%;
 }
 
 .observation-reads h3 {
