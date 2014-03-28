@@ -28,18 +28,28 @@
         </div>
       </div>
 
-
         <%= f.text_area :comments, class: 'form-control', rows: "1", placeholder: "Comments"  %>
 
-
-
       <div class="observation-read-button">
-        <%= f.button :submit, value: "Finalize Read", id: "observation-read-button", class: "btn-danger" %>
+        <div class="btn btn-danger" id="finalize-button">Finalize Read</div>
       </div>
-      <% end %>
     </div>
+
+      <div class="login_modal">
+        <h3>Are you sure?</h3>
+        <div class="login_close">
+          <i class="fa fa-times-circle"></i>
+        </div>
+        <div class="modal-buttons">
+          <%= f.button :submit, value: "Yes", class: "btn-success", id: "observation-read-button" %>
+          <div class="btn btn-warning" id="cancel-read">Cancel</div>
+        </div>
+      </div>
+  <% end %>
 
   <p class="alert alert-success", id="submit-message">
   </p>
   <br/>
+
+
 <% end %>

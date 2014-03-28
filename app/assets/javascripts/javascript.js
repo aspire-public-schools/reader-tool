@@ -93,6 +93,15 @@ var setCert = {
   }
 }
 
+var LogIn = {
+  displayIt: function(){
+    $('.login_modal').css('display','block')
+  },
+  hide: function(){
+    $('.login_modal').css('display','none')
+  }
+}
+
 $(document).ready(function(){
   sideBar.toggle();
   evidenceScore.init();
@@ -100,4 +109,9 @@ $(document).ready(function(){
   docLiveForm.init();
   setCert.documentCert();
   setCert.liveCert();
+  $('#finalize-button').on('click', LogIn.displayIt)
+  $('.fa-times-circle').on('click', LogIn.hide)
+  $('#cancel-read').on('click', LogIn.hide)
+  $('#observation-read-button').on('click', LogIn.hide)
+
 })
