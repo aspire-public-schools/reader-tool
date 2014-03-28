@@ -27,7 +27,7 @@ class ObservationRead < ActiveRecord::Base
     if r2_observation_read.comments == nil
       comments = "#{self.reader_number}: #{self.comments}"
     else
-      comments = "#{self.reader_number}: #{self.comments} - #{r2_observation_read.comments}"
+      comments = "#{self.reader_number}: #{self.comments}\n#{r2_observation_read.comments}"
     end
     r2_observation_read.update_attributes(comments: comments)
 
