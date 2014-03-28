@@ -26,7 +26,10 @@
         </div>
       </div>
 
-      <%= f.text_field :comments %>
+
+        <%= f.text_area :comments, class: 'form-control', rows: "1" %>
+
+
 
       <div class="observation-read-button">
         <%= f.button :submit, value: "Finalize Read", id: "observation-read-button", class: "btn-danger" %>

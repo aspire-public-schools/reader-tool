@@ -126,6 +126,7 @@ form .live {
 }
 
 div.observation-read-button {
+  margin-top: 4px;
   text-align: center;
 }
 
