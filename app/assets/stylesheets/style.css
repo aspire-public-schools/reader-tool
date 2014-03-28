@@ -45,10 +45,6 @@
   top: 80px
 }
 
-.content h1{
-  /* text-align: center; */
-}
-
 dt:hover {
   background-color: #8e44ad;
 }
@@ -153,13 +149,6 @@ p.alert-success{
   position: absolute;
 }
 
-
-.observation-reads{
-  width: 50%;
-  margin: 0 auto;
-}
-
-
 .observation-reads h3 {
   text-align: center;
 }
@@ -182,12 +171,16 @@ span a{
 
 span.observation-reads-links{
   font-size: 15px;
-  margin-top: 5px;
+  margin: 10px 2px;
   display: inline-block;
-  padding: 5px 14px;
+  padding: 6px 14px;
   background-color: #18bc9c;
   border: 1px solid transparent;
   border-radius: 15px;
+}
+
+.read-links{
+  text-align: center;
 }
 
 /*evidence form */
