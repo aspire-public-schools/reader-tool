@@ -6,8 +6,7 @@ class ObservationsController < ApplicationController
 	def index
     @reader = current_user
     @observation_reads = @reader.observation_reads
-    @observation_reads = @reader.observation_reads.where(observation_status: 1, reader_number: ['1a', '1b'])
-    @observation_reads += @reader.observation_reads.where(observation_status: 2, reader_number: '2')
+    @observation_reads = @reader.observation_reads.where(observation_status: 2)
     @domains = Domain.all
     @domain = Domain.all    ## OBSERVATION HAS MANY DOMAINS
     if params[:domain_id]
@@ -21,8 +20,8 @@ class ObservationsController < ApplicationController
 
   def show
     @reader = current_user
-    @observation_reads = @reader.observation_reads.where(observation_status: 1, reader_number: ['1a', '1b'])
-    @observation_reads += @reader.observation_reads.where(observation_status: 2, reader_number: '2')
+    @observation_reads = @reader.observation_reads.where(observation_status: 2)
+    #@observation_reads += @reader.observation_reads.where(observation_status: 2, reader_number: '2')
     @observation_read = @reader.observation_reads.find(params[:id])
     @domains = @observation_read.domain_scores
     if params[:domain_id]
@@ -40,17 +39,17 @@ class ObservationsController < ApplicationController
   end
 
   def update
-    p "Im about to update!--------------"
-    # p ObservationRead.count
     @observation_read = ObservationRead.find(params[:id])
-
-    if @observation_read.complete
-    # if @observation_read.update_attributes(params[:observation_read])
-      render :json => { :saved_message => "You've Successfuly Submitted the Certifications!", :document_live_form => render_to_string(:partial => "document-live-form", locals: { :observation_read => @observation_read } ) }
+    if @observation_read.update_attributes(params[:observation_read]) && @observation_read.copy_to_reader2
+      @observation_read.update_status
+      render :json => { :saved_message => "You've Successfully Finalized!", :document_live_form => render_to_string(:partial => "document-live-form", locals: { :observation_read => @observation_read } ) }
+    elsif @observation_read.update_attributes(params[:observation_read])
+      @observation_read.update_attributes(observation_status: 3)
+      render :json => { :saved_message => "You've Successfully Finalized!", :document_live_form => render_to_string(:partial => "document-live-form", locals: { :observation_read => @observation_read } ) }
     else
-      render :json => { :error => reader.errors.full_messages.join(", ")}, :status => :unprocessable_entity
+      render :json => { :error => @observation_read.errors.full_messages.join(", ")}, :status => :unprocessable_entity
     end
-    p ObservationRead.count
+
   end
 
   private
@@ -60,3 +59,7 @@ class ObservationsController < ApplicationController
   end
 
 end
+    #TODO Save section scores
+    # Done     IF reader 1a or 1b then copy 1a/b scores into 2
+    #          Set observation_status for reader 1a/b to 3.
+    #          If both 1a & 1b are 3 then set reader 2 to 2

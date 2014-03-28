@@ -126,12 +126,15 @@ form .live {
 }
 
 div.observation-read-button {
+  margin-top: 4px;
   text-align: center;
 }
 
 p#submit-message{
   font-size: 20px;
   text-align: center;
+  z-index: 1000;
+  position: absolute;
 }
 
 p.alert-success{
