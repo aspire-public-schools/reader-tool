@@ -132,6 +132,8 @@ div.observation-read-button {
 p#submit-message{
   font-size: 20px;
   text-align: center;
+  z-index: 1000;
+  position: absolute;
 }
 
 p.alert-success{

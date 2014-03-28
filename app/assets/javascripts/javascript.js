@@ -70,15 +70,19 @@ var setCert = {
   },
 
   liveCert: function() {
-    var qualityWeightedDomainTwoThree = parseFloat($('.quality-weighted #1').text())
+    if ($('#domain-table-weighted').find("tr:first td").length == 2) {
+      var qualityWeightedDomainTwoThree = parseFloat($('.quality-weighted #1').text())
+      var alignmentWeightedDomainTwoThree = parseFloat($('.alignment-weighted #3').text())
+    } else {
+      var qualityWeightedDomainTwoThree = parseFloat($('.quality-weighted #0').text())
+      var alignmentWeightedDomainTwoThree = parseFloat($('.alignment-weighted #2').text())
+    }
 
     if (qualityWeightedDomainTwoThree >= 80) {
       $('#observation_read_live_quality').val(2)
     } else {
       $('#observation_read_live_quality').val(1)
     }
-
-    var alignmentWeightedDomainTwoThree = parseFloat($('.alignment-weighted #3').text())
 
     if (alignmentWeightedDomainTwoThree >= 75) {
       $('#observation_read_live_alignment').val(2)

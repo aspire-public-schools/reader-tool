@@ -1,6 +1,6 @@
 class ObservationRead < ActiveRecord::Base
 
-  attr_accessible :document_quality, :document_alignment, :live_alignment, :live_quality, :observation_status, :id, :observation_group_id, :employee_id_observer, :employee_id_learner, :correlation, :average_difference, :percent_correct, :reader_id, :created_at, :updated_at, :reader_number
+  attr_accessible :document_quality, :document_alignment, :live_alignment, :live_quality, :observation_status, :id, :observation_group_id, :employee_id_observer, :employee_id_learner, :correlation, :average_difference, :percent_correct, :reader_id, :created_at, :updated_at, :reader_number, :comments
   has_many :domain_scores
   has_many :indicator_scores, :through => :domain_scores
   has_many :evidence_scores, :through => :indicator_scores
@@ -12,21 +12,24 @@ class ObservationRead < ActiveRecord::Base
         map { |d| [d.id, d.description] }
   end
 
-  def complete
+  def copy_to_reader2
 
-    p r1_observation_read = self
-
-    p self.observation_group_id
-
-    p "new_observation_read"
-    p r2_observation_read = ObservationRead.where("observation_group_id = ? AND reader_number = ?", self.observation_group_id, '2').first
+    r1_observation_read = self
+    r2_observation_read = ObservationRead.where("observation_group_id = ? AND reader_number = ?", self.observation_group_id, '2').first
 
     if reader_number == '1a'
       certification_scores = {:document_quality => self.document_quality, :document_alignment => self.document_alignment}
     elsif reader_number == '1b'
       certification_scores = {:live_quality => self.live_quality, :live_alignment => self.live_alignment}
     end
+
     r2_observation_read.update_attributes(certification_scores)
+    if r2_observation_read.comments == nil
+      comments = "#{self.reader_number}: #{self.comments}"
+    else
+      comments = "#{self.reader_number}: #{self.comments} - #{r2_observation_read.comments}"
+    end
+    r2_observation_read.update_attributes(comments: comments)
 
     if reader_number == '1a'
       r2_indicator_scores = r2_observation_read.indicator_scores.where("domain_scores.domain_id IN (1,4)").order(:indicator_id)
@@ -34,24 +37,40 @@ class ObservationRead < ActiveRecord::Base
       r2_indicator_scores = r2_observation_read.indicator_scores.where("domain_scores.domain_id IN (2,3)").order(:indicator_id)
     end
 
-# this copies reader 1 scores into reader 2
-    r1_indicator_scores = r1_observation_read.indicator_scores.order(:indicator_id)
+    if reader_number == '1a' || reader_number == '1b'
+    # this copies reader 1 scores into reader 2
+        r1_indicator_scores = r1_observation_read.indicator_scores.order(:indicator_id)
 
-    r2_indicator_scores.count.times{ |i|
-      r2_indicator_scores[i].update_attributes(:comments => r1_indicator_scores[i].comments )
+      r2_indicator_scores.count.times{ |i|
+          r2_indicator_scores[i].update_attributes(:comments => r1_indicator_scores[i].comments )
 
-      sorted_r1_indicator_scores = r1_indicator_scores[i].evidence_scores.order(:description)
-      sorted_r2_indicator_scores = r2_indicator_scores[i].evidence_scores.order(:description)
+          sorted_r1_indicator_scores = r1_indicator_scores[i].evidence_scores.order(:description)
+          sorted_r2_indicator_scores = r2_indicator_scores[i].evidence_scores.order(:description)
 
-        r1_indicator_scores[i].evidence_scores.count.times { |j|
+            r1_indicator_scores[i].evidence_scores.count.times { |j|
 
-             new_scores = {:quality => sorted_r1_indicator_scores[j].quality, :alignment => sorted_r1_indicator_scores[j].alignment }
+                 new_scores = {:quality => sorted_r1_indicator_scores[j].quality, :alignment => sorted_r1_indicator_scores[j].alignment }
 
-             sorted_r2_indicator_scores[j].update_attributes(new_scores)
+                 sorted_r2_indicator_scores[j].update_attributes(new_scores)
 
+            }
         }
+    end
+  end
 
-    }
+  def update_status
+    update_attributes(observation_status: 3)
+    completed_group_reads = ObservationRead.where(observation_group_id: self.observation_group_id, reader_number: ['1a','1b'], observation_status: 3)
+    if completed_group_reads.count == 2
+      read_2 = ObservationRead.where(observation_group_id: self.observation_group_id, reader_number: '2').first
+      read_2.update_attributes(observation_status: 2)
+    end
+  end
+
+end
+
+
+
 
 # new_indicator_scores.each do |indicator_score|
 #   indicator_score.evidence_scores.each do |evidence_score|
@@ -87,7 +106,7 @@ class ObservationRead < ActiveRecord::Base
     # end
     # false
 
-  end
+
 
   # def copy_scores
   #   # self.domain_scores.each do |domain_score|
@@ -115,7 +134,7 @@ class ObservationRead < ActiveRecord::Base
   #   update_attributes(observation_status: 3)
   # end
 
-end
+
 
 
 # IF @observation_read.reader_number = '1a' OR '1b' THEN SET observation_status = 2 AND Copy reader 1 scores to reader 2
