@@ -121,14 +121,8 @@ select {
   text-align: center;
 }
 
-form .document{
-  display: inline-block;
-  padding: 8px;
-}
-
-form .live {
-  display: inline-block;
-  padding: 8px;
+p.r1score {
+  font-size: 10px;
 }
 
 div.observation-read-button {
