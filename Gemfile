@@ -13,7 +13,6 @@ gem 'role_model'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'awesome_print'
   gem 'debugger'
   gem 'quiet_assets'
   gem 'sextant'
