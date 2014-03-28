@@ -8,36 +8,48 @@
           <div class="document">
             <h4>Document</h4>
             <%= f.input :document_quality, label: "Quality", collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"], wrapper_html: { class: 'document' }, prompt: "Select" %>
+            <%= @observation_read.document_quality %>
             <%= f.input :document_alignment, label: "Alignment", collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"], wrapper_html: { class: 'document'}, prompt: "Select" %>
+            <%= @observation_read.document_alignment %>
           </div>
           <% end %>
         </div>
 
         <div class="col-md-6">
           <%if @observation_read.reader_number != '1a' %>
-
-          <div class="live">
-            <h4>Live</h4>
-            <%= f.input :live_quality, label: "Quality", collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"], wrapper_html: {class: 'live' }, prompt: "Select" %>
-            <%= f.input :live_alignment, label: "Alignment", collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"], wrapper_html: {class: 'live' }, prompt: "Select" %>
-          </div>
-
+            <div class="live">
+              <h4>Live</h4>
+              <%= f.input :live_quality, label: "Quality", collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"], wrapper_html: {class: 'live' }, prompt: "Select" %>
+              <%= @observation_read.live_quality %>
+              <%= f.input :live_alignment, label: "Alignment", collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"], wrapper_html: {class: 'live' }, prompt: "Select" %>
+              <%= @observation_read.live_alignment %>
+            </div>
           <% end %>
         </div>
       </div>
 
-
-        <%= f.text_area :comments, class: 'form-control', rows: "1" %>
-
-
+        <%= f.text_area :comments, class: 'form-control', rows: "1", placeholder: "Comments"  %>
 
       <div class="observation-read-button">
-        <%= f.button :submit, value: "Finalize Read", id: "observation-read-button", class: "btn-danger" %>
+        <div class="btn btn-danger" id="finalize-button">Finalize Read</div>
       </div>
-      <% end %>
     </div>
+
+      <div class="login_modal">
+        <h3>Are you sure?</h3>
+        <div class="login_close">
+          <i class="fa fa-times-circle"></i>
+        </div>
+        <div class="modal-buttons">
+          <%= f.button :submit, value: "Yes", class: "btn-success", id: "observation-read-button" %>
+          <div class="btn btn-warning" id="cancel-read">Cancel</div>
+        </div>
+      </div>
+  <% end %>
 
   <p class="alert alert-success", id="submit-message">
   </p>
   <br/>
+
+
 <% end %>

@@ -29,8 +29,9 @@ var submitScore = {
     $('#domain-table-weighted').remove()
     $('#evidence-form-holder').append(data.submit_list)
     $('.dashboard-holder').append(data.domain_percentages)
+    $("html, body").animate({ scrollTop: 0 }, 600);
     $('#blast div').fadeIn('slow')
-    $('#blast div').fadeOut(2500)
+    $('#blast div').fadeOut(4000)
     $('#blast div').text(data.info)
     $('#blast').css({'display':'block'})
     setCert.documentCert();
@@ -92,6 +93,15 @@ var setCert = {
   }
 }
 
+var LogIn = {
+  displayIt: function(){
+    $('.login_modal').css('display','block')
+  },
+  hide: function(){
+    $('.login_modal').css('display','none')
+  }
+}
+
 $(document).ready(function(){
   sideBar.toggle();
   evidenceScore.init();
@@ -99,4 +109,9 @@ $(document).ready(function(){
   docLiveForm.init();
   setCert.documentCert();
   setCert.liveCert();
+  $('#finalize-button').on('click', LogIn.displayIt)
+  $('.fa-times-circle').on('click', LogIn.hide)
+  $('#cancel-read').on('click', LogIn.hide)
+  $('#observation-read-button').on('click', LogIn.hide)
+
 })
