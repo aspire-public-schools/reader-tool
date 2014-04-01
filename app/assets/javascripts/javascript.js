@@ -113,5 +113,4 @@ $(document).ready(function(){
   $('.fa-times-circle').on('click', LogIn.hide)
   $('#cancel-read').on('click', LogIn.hide)
   $('#observation-read-button').on('click', LogIn.hide)
-
 })

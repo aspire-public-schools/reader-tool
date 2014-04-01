@@ -8,7 +8,7 @@ class ObservationsController < ApplicationController
     @observation_reads = @reader.observation_reads
     @observation_reads = @reader.observation_reads.where(observation_status: 2)
     @domains = Domain.all
-    @domain = Domain.all    ## OBSERVATION HAS MANY DOMAINS
+    @domain = Domain.all
     if params[:domain_id]
         @indicator = Domain.find(params[:domain_id]).indicators
       if params[:indicator_id]
@@ -26,7 +26,7 @@ class ObservationsController < ApplicationController
     if params[:domain_id]
       @indicator = Domain.find(params[:domain_id]).indicators
       if params[:indicator_id]
-        @evidence_scores = Indicator.find(params[:indicator_id]).evidence_scores # ON THIS PAGE: 1 observation, ALL DOMAINS
+        @evidence_scores = Indicator.find(params[:indicator_id]).evidence_scores
       end
     end
 
@@ -58,7 +58,3 @@ class ObservationsController < ApplicationController
   end
 
 end
-    #TODO Save section scores
-    # Done     IF reader 1a or 1b then copy 1a/b scores into 2
-    #          Set observation_status for reader 1a/b to 3.
-    #          If both 1a & 1b are 3 then set reader 2 to 2

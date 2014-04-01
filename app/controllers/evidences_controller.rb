@@ -2,11 +2,7 @@ class EvidencesController < ApplicationController
   include EvidenceScoreHelper
 
   def index
-    # @domains = @observation_read.domain_scores
-    # observation = ObservationRead.find(params[:observation_id])
-    # domain = DomainScore.find(params[:domain_id])
     @indicator_score = IndicatorScore.find(params[:indicator_id])
-    # @evidence_score = @indicator.evidence_scores
     if @indicator_score
       render :json => { :evidence_list => render_to_string( :partial => "evidence_score_form", locals: { :indicator_score => @indicator_score} ) }
     else
