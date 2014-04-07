@@ -1,6 +1,6 @@
 .login_modal{
   background: #e74c3c;
-  position: absolute;
+  position: fixed;
   top: 4rem;
   left: 0;
   right: 0;
