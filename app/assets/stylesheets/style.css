@@ -33,7 +33,7 @@
   display: block;
   overflow-x: hidden;
   overflow-y: auto;
-  z-index: 1000;
+  z-index: 1010;
 }
 
 .content.right {
@@ -93,7 +93,7 @@ textarea#comments {
   margin: 0 auto;
   width: 50%;
   padding: 35px 30px 10px;
-  z-index: 1000;
+  z-index: 1010;
   font-size: 30px;
   text-align: center;
 }
@@ -139,7 +139,7 @@ p#submit-message{
 
 p.alert-success{
   display: none;
-  z-index: 1000;
+  z-index: 1010;
   position: absolute;
   left: -32%;
   top: 27%;
