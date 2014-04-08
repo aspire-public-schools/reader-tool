@@ -62,12 +62,12 @@
       </div>
   </div>
       <div class="login_modal">
-        <p>Are you sure you want to finalize the read?</p>
-        <p>Doing so will lock your scores.</p>
         <div class="login_close">
           <i class="fa fa-times-circle"></i>
         </div>
         <div class="modal-buttons">
+          <p>Are you sure you want to finalize the read?</p>
+          <p>Doing so will lock your scores.</p>
           <%= f.button :submit, value: "Yes", class: "btn-success", id: "observation-read-button" %>
           <div class="btn btn-warning" id="cancel-read">Cancel</div>
         </div>
