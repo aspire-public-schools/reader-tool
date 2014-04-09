@@ -1,6 +1,5 @@
 class ObservationsController < ApplicationController
   include EvidenceScoreHelper
-
   before_filter :require_reader
 
 	def index
