@@ -7,11 +7,8 @@ class IndicatorScore < ActiveRecord::Base
 
   accepts_nested_attributes_for :evidence_scores
 
-	def modified?
-		if self.modified_at != nil
-			return self.modified_at > self.created_at
-		end
-			return false
+	def updated?
+		return true if self.updated_at != nil
 	end
 
 end
