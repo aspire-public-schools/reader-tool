@@ -10,7 +10,7 @@ var sideBar = {
 }
 
 var indicatorLinks = {
-  listen: function() {
+  highlight: function() {
     var classHighlight = 'highlight-current'
       var $indicators = $('dd').on('click', function(e){
         e.preventDefault()
@@ -122,7 +122,7 @@ $(document).ready(function(){
   docLiveForm.init();
   setCert.documentCert();
   setCert.liveCert();
-  indicatorLinks.listen();
+  indicatorLinks.highlight();
   $('#finalize-button').on('click', LogIn.displayIt)
   $('.fa-times-circle').on('click', LogIn.hide)
   $('#cancel-read').on('click', LogIn.hide)
