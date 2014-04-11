@@ -7,7 +7,17 @@ var sideBar = {
       $this.siblings('dd').not($firstGroup).hide()
     })
   }
+}
 
+var indicatorLinks = {
+  listen: function() {
+    var classHighlight = 'highlight-current'
+      var $indicators = $('dd').on('click', function(e){
+        e.preventDefault()
+        $indicators.removeClass(classHighlight)
+        $(this).addClass(classHighlight)
+    })
+  }
 }
 
 var evidenceScore = {
@@ -112,6 +122,7 @@ $(document).ready(function(){
   docLiveForm.init();
   setCert.documentCert();
   setCert.liveCert();
+  indicatorLinks.listen();
   $('#finalize-button').on('click', LogIn.displayIt)
   $('.fa-times-circle').on('click', LogIn.hide)
   $('#cancel-read').on('click', LogIn.hide)

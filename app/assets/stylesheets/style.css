@@ -212,3 +212,7 @@ div.highlight{
   background-color: #27ae60;
 }
 
+.highlight-current {
+    background-color: #f39c12;
+    font-weight: bold;
+}

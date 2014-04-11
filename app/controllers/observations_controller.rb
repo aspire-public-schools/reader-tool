@@ -27,7 +27,7 @@ class ObservationsController < ApplicationController
         @evidence_scores = Indicator.find(params[:indicator_id]).evidence_scores
       end
     end
-
+    @domains = @observation_read.domain_scores
     @domain_percentages = get_percentages(params[:id])
     @get_section_scores = get_section_scores(params[:id])
     @domain_percentages.sort! { |a,b| a.number <=> b.number }
