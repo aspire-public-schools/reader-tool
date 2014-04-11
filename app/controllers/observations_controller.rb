@@ -21,14 +21,13 @@ class ObservationsController < ApplicationController
     @reader = current_user
     @observation_reads = @reader.observation_reads.where(observation_status: 2)
     @observation_read = @reader.observation_reads.find(params[:id])
-    @domains = @observation_read.domain_scores
     if params[:domain_id]
       @indicator = Domain.find(params[:domain_id]).indicators
       if params[:indicator_id]
         @evidence_scores = Indicator.find(params[:indicator_id]).evidence_scores
       end
     end
-
+    @domains = @observation_read.domain_scores
     @domain_percentages = get_percentages(params[:id])
     @get_section_scores = get_section_scores(params[:id])
     @domain_percentages.sort! { |a,b| a.number <=> b.number }

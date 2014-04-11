@@ -24,7 +24,7 @@
 
 .sidebar.fixed {
   position: fixed;
-  background-color: #9b59b6;
+  background-color: #611f73;
   top: 70px;
   width: 24%;
   float: left;
@@ -46,33 +46,39 @@
 }
 
 dt:hover {
-  background-color: #8e44ad;
+  background-color:#611f73;
 }
-
 
 dl {
   text-indent: 1em;
-  background-color: #9b59b6;
+  background-color: #611f73;
 }
 
 dt {
   text-indent: 1em;
   padding: .5rem;
   cursor: pointer;
-  background-color: #9b59b6;
+  background-color: #611f73;
   color:#ecf0f1;
 }
 
-dl dd{
+dl dd {
     display: none;
     text-indent: 1em;
     cursor: pointer;
-    color: grey;
+}
+
+dl dd a:link, a:visited, a:hover, a:active {
+  text-decoration: none;
+  color: white;
 }
 
 dd:hover {
   background-color: #8e44ad;
-  color: white;
+}
+
+dd a:visited {
+  color: blue;
 }
 
 textarea#comments {
@@ -150,13 +156,22 @@ p.alert-success{
 }
 
 /* observation-reads buttons */
+.observation-reads-links{
+  color: white;
+  cursor: pointer;
+}
 
-.observation-reads-links:hover{
-  background-color:rgba(0,0,0,.5)
+.observation-reads-links:hover {
+  background-color:rgba(0,0,0,.5);
+}
+
+.observation-reads-links a:hover{
+  text-decoration: none;
 }
 
 .observation-reads-link:visited{
-  background-color: #E74C3C;
+/*  background-color: #E74C3C;*/
+  background-color: red;
 }
 
 span a{
@@ -191,4 +206,13 @@ h3#indicator-heading{
 
 #evidence-form .panel-primary{
   border-color: #ecf0f1;
+}
+
+div.highlight{
+  background-color: #27ae60;
+}
+
+.highlight-current {
+    background-color: #f39c12;
+    font-weight: bold;
 }
