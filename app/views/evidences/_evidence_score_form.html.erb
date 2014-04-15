@@ -19,8 +19,7 @@
 
             <% @indicator_score.evidence_scores.sort! { |a,b| a.id <=> b.id} %>
             <% @indicator_score.evidence_scores.each do |evidence_score| %>
-                <tr>
-                  <td><%= evidence_score.description %></td>
+                  <td><%= evidence_score.description.gsub(/&#x27;|&quot;|&#x2F;/, "&#x27;" => "\'", "&quot;" => "\"", "&#x2F;" => "\/") %></td>
                   <td><%= check_box_tag("evidence_scores[#{evidence_score.id}][quality]", true, evidence_score.quality) %></td>
                   <%= hidden_field_tag("evidence_scores[#{evidence_score.id}][alignment]", '0') %>
                   <td><%= check_box_tag("evidence_scores[#{evidence_score.id}][alignment]", true, evidence_score.alignment) %></td>
