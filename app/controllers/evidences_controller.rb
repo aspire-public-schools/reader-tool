@@ -17,10 +17,10 @@ class EvidencesController < ApplicationController
         params[:evidence_scores].keys.each do |score_id|
           quality = params[:evidence_scores][score_id][:quality] || false
           alignment = params[:evidence_scores][score_id][:alignment] || false
-          @evidence_score_update = EvidenceScore.update(score_id,{quality: quality, alignment: alignment})
+          @evidence_score_update = EvidenceScore.update(score_id,{quality: quality, alignment: alignment}).touch
         end
       end
-        @indicator_score_update = IndicatorScore.update(params[:indicator_id], {comments: params[:comments] })
+        @indicator_score_update = IndicatorScore.update(params[:indicator_id], {comments: params[:comments]}).touch
       if @indicator_score_update
         @indicator_score = IndicatorScore.find(params[:indicator_id])
         @get_section_scores = get_section_scores(params[:observation_id])

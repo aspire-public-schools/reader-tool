@@ -42,7 +42,7 @@ class ObservationsController < ApplicationController
       render :json => { :saved_message => "You've Successfully Finalized!", :document_live_form => render_to_string(:partial => "document-live-form", locals: { :observation_read => @observation_read } ) }
     elsif @observation_read.update_attributes(params[:observation_read])
       @observation_read.update_attributes(observation_status: 3)
-      render :json => { :saved_message => "You've Successfully Finalized!", :document_live_form => render_to_string(:partial => "document-live-form", locals: { :observation_read => @observation_read } ) }
+      render :json => { :saved_message => "You've Successfully Finalized!", :document_live_form => render_to_string(:partial => "document-live-form", locals: { :observation_read => @observation_read } )}
     else
       render :json => { :error => @observation_read.errors.full_messages.join(", ")}, :status => :unprocessable_entity
     end

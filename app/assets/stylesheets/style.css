@@ -216,3 +216,8 @@ div.highlight{
     background-color: #f39c12;
     font-weight: bold;
 }
+
+h5.read-title{
+  text-align: center;
+  background-color: #1abc9c;
+}

@@ -11,7 +11,7 @@
           <% domain_score.indicator_scores.each do |indicator_score| %>
               <dd class="indicators">
                 <%= content_tag :div, class: "#{'highlight' if indicator_score.updated?}" do %>
-                  <%= link_to "#{indicator_score.indicator.code}: #{indicator_score.indicator.description}", observation_domain_indicator_evidences_path(@observation_read, domain_score.domain, indicator_score), class: "#{indicator_score.id} indicator-link", id: "indicator", :remote => true %>
+                  <%= link_to "#{indicator_score.indicator.code}: #{indicator_score.indicator.description} (#{indicator_score.evidence_scores.count})", observation_domain_indicator_evidences_path(@observation_read, domain_score.domain, indicator_score), class: "#{indicator_score.id} indicator-link", id: "indicator", :remote => true %>
                 <% end %>
               </dd>
           <% end %>
