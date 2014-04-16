@@ -1,6 +1,9 @@
 <% if @observation_read %>
   <div class="well well-sm">
     <%= simple_form_for @observation_read, url: {action: "update"}, :remote => true, id: 'document-live-form' do |f| %>
+      <% if @observation_read.reader_number == '2' %>
+        <h5 class="read-title">Second Read</h5>
+      <% end %>
       <% if @observation_read.reader_number != '1b' %>
           <div class="col-md-6">
             <div class="document">
