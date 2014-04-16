@@ -22,11 +22,20 @@ class SamlController < ApplicationController
     settings.assertion_consumer_service_url = "aspirereader.herokuapp.com"
     settings.issuer                         = "https://app.onelogin.com/saml/metadata/365951"
     settings.idp_sso_target_url             = "https://app.onelogin.com/saml/signon/365951"
+    settings.idp_cert_fingerprint           = OneLoginAppCertFingerPrint
     settings.name_identifier_format         = "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress"
 
     settings.authn_context = "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport"
 
     settings
   end
+
+  def metadata
+    settings = Account.get_saml_settings
+    meta = OneLogin::RubySaml::Metadata.new
+    render :xml => meta.generate(settings)
+  end
+
+end
 
 
