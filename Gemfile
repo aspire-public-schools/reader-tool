@@ -9,6 +9,8 @@ gem 'simple_form'
 gem 'pg'
 gem 'thin'
 gem 'role_model'
+gem 'XMLCanonicalizer'
+gem 'ruby-saml'
 
 group :development do
   gem 'better_errors'
@@ -16,7 +18,6 @@ group :development do
   gem 'debugger'
   gem 'quiet_assets'
   gem 'sextant'
-  gem 'thin'
 end
 
 group :test do
