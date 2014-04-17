@@ -111,10 +111,10 @@ textarea#comments {
 
 /* dashboard */
 
-select {
-  width: 108px;
-/*  border: 0px white;
-  background-color: #ffffff;*/
+select.optional{
+  height: 2rem;
+  width: 8rem;
+  font-size: 1rem;
 }
 
 
