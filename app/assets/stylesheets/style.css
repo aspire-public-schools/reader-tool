@@ -45,8 +45,13 @@
   top: 80px
 }
 
+dd a {
+  display: block;
+  padding: 1px 5px;
+}
+
 dt:hover {
-  background-color:#611f73;
+  background-color: #8e44ad;
 }
 
 dl {
