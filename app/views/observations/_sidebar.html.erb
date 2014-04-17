@@ -2,10 +2,10 @@
   <% unless current_page?(action: 'index') %>
   <% @domains.each do |domain_score| %>
      <dt>
-        <h4>
+        <h5>
           <%= domain_score.domain.description %>
           <span class="caret"></span>
-        </h4>
+        </h5>
       </dt>
           <% domain_score.indicator_scores.sort! { |a,b| a.indicator.code <=> b.indicator.code} %>
           <% domain_score.indicator_scores.each do |indicator_score| %>

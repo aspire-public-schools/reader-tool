@@ -45,8 +45,13 @@
   top: 80px
 }
 
+dd a {
+  display: block;
+  padding: 1px 5px;
+}
+
 dt:hover {
-  background-color:#611f73;
+  background-color: #8e44ad;
 }
 
 dl {
@@ -106,10 +111,10 @@ textarea#comments {
 
 /* dashboard */
 
-select {
-  width: 108px;
-/*  border: 0px white;
-  background-color: #ffffff;*/
+select.optional{
+  height: 2rem;
+  width: 8rem;
+  font-size: 1rem;
 }
 
 

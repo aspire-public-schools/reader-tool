@@ -27,6 +27,7 @@ var evidenceScore = {
     appendEvidence: function(event, data, status, xhr) {
       $('#evidence-form').remove()
       $('#evidence-form-holder').append(data.evidence_list)
+      scrollOn.indicator()
     }
 }
 
@@ -42,7 +43,7 @@ var submitScore = {
     $indicator.parent().css('background-color', '#27ae60')
     $('#evidence-form-holder').append(data.submit_list)
     $('.dashboard-holder').append(data.domain_percentages)
-    $("html, body").animate({ scrollTop: 0 }, 600);
+    scrollOn.submit()
     $('#blast div').fadeIn('slow')
     $('#blast div').fadeOut(4000)
     $('#blast div').text(data.info)
@@ -103,6 +104,17 @@ var setCert = {
     } else {
       $('#observation_read_live_alignment').val(1)
     }
+  }
+}
+
+var scrollOn = {
+  indicator: function(){
+    var $mainDashboard = $('.main-dashboard').position().top
+    $('body').animate({scrollTop: $mainDashboard}, 300)
+  },
+  submit: function(){
+    debugger
+    $('html body').animate({ scrollTop: 0 }, 600);
   }
 }
 
