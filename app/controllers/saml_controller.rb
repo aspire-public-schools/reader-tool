@@ -25,7 +25,7 @@ class SamlController < ApplicationController
 
     settings = OneLogin::RubySaml::Settings.new
 
-    settings.assertion_consumer_service_url = "aspirereader.herokuapp.com"
+    settings.assertion_consumer_service_url = "http://aspirereader.herokuapp.com"
     settings.issuer                         = "https://app.onelogin.com/saml/metadata/365951"
     settings.idp_sso_target_url             = "https://app.onelogin.com/saml/signon/365951"
     settings.idp_cert_fingerprint           = ENV['ONELOGIN_FINGERPRINT']
