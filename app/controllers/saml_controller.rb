@@ -1,4 +1,10 @@
 class SamlController < ApplicationController
+  begin
+    require 'dotenv'
+    Dotenv.load
+  rescue LoadError
+  end
+
   def init
     request = OneLogin::RubySaml::Authrequest.new
     redirect_to(request.create(saml_settings))
@@ -22,7 +28,7 @@ class SamlController < ApplicationController
     settings.assertion_consumer_service_url = "aspirereader.herokuapp.com"
     settings.issuer                         = "https://app.onelogin.com/saml/metadata/365951"
     settings.idp_sso_target_url             = "https://app.onelogin.com/saml/signon/365951"
-    settings.idp_cert_fingerprint           = OneLoginAppCertFingerPrint
+    settings.idp_cert_fingerprint           = ENV['ONELOGIN_FINGERPRINT']
     settings.name_identifier_format         = "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress"
 
     settings.authn_context = "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport"
