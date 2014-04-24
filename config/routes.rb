@@ -2,6 +2,7 @@ ReaderTool::Application.routes.draw do
 
   root to: 'readers#index'
 
+  resources :saml
   resources :readers, only: [:index, :create, :update]
   resources :sessions, only: [:create, :destroy]
   resources :observations do

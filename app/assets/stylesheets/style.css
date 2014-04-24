@@ -91,6 +91,10 @@ textarea#comments {
   height: 15rem;
 }
 
+textarea#observation-read-comment {
+  width: 100%;
+}
+
 #submit-evidence {
   margin-top: 3rem;
 }
