@@ -5,19 +5,19 @@ class SamlController < ApplicationController
   rescue LoadError
   end
 
-  def init
+  def index
     request = OneLogin::RubySaml::Authrequest.new
     redirect_to(request.create(saml_settings))
   end
 
-  def consume
+  def create
     response = OneLogin::RubySaml::Response.new(params[:SAMLResponse])
     response.settings = saml_settings
-
-    if response.is_valid? && reader = current_account.users.find_by_email(response.name_id)
-      authorize_success(reader)
+    if response.is_valid? && reader = Reader.find_by_email(response.name_id)
+      session[:current_reader_id] = reader.id
+      redirect_to observations_path
     else
-      authorize_failure(reader)
+      redirect_to root_path, flash: {error: "Godzilla didn't like your e-mail"}
     end
   end
 
@@ -25,7 +25,7 @@ class SamlController < ApplicationController
 
     settings = OneLogin::RubySaml::Settings.new
 
-    settings.assertion_consumer_service_url = "http://aspirereader.herokuapp.com"
+    settings.assertion_consumer_service_url = "http://localhost:3000/saml"
     settings.issuer                         = "https://app.onelogin.com/saml/metadata/365951"
     settings.idp_sso_target_url             = "https://app.onelogin.com/saml/signon/365951"
     settings.idp_cert_fingerprint           = ENV['ONELOGIN_FINGERPRINT']

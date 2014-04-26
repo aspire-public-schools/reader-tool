@@ -1,6 +1,6 @@
 ReaderTool::Application.routes.draw do
 
-  root to: 'readers#index'
+  root to: 'saml#index'
 
   resources :saml
   resources :readers, only: [:index, :create, :update]
@@ -9,13 +9,12 @@ ReaderTool::Application.routes.draw do
     resources :domains do
       resources :indicators do
        resources :evidences do
-          get :score, on: :collection
+          get :score, on: :collecti
         end
       end
     end
   end
 
   match '/logout', to: 'sessions#destroy', via: 'delete'
-
-  get 'login' => 'readers#index', as: 'login'
+  get 'login' => 'saml#index', as: 'login'
 end
