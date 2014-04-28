@@ -9,7 +9,7 @@ ReaderTool::Application.routes.draw do
     resources :domains do
       resources :indicators do
        resources :evidences do
-          get :score, on: :collecti
+          get :score, on: :collection
         end
       end
     end
