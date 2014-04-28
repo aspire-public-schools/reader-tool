@@ -9,7 +9,6 @@ gem 'pg'
 gem 'thin'
 gem 'role_model'
 gem 'XMLCanonicalizer'
-gem 'dotenv'
 
 group :development do
   gem 'better_errors'
@@ -33,6 +32,7 @@ group :development, :test do
   gem 'faker'
   gem "rack_session_access"
   gem 'populator'
+  gem 'dotenv'
 end
 
 group :assets do
