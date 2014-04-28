@@ -4,13 +4,12 @@ ruby "1.9.3"
 
 gem 'rails', '3.2.14'
 gem 'jquery-rails'
-gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'simple_form'
 gem 'pg'
 gem 'thin'
 gem 'role_model'
 gem 'XMLCanonicalizer'
-gem 'ruby-saml'
+gem 'dotenv'
 
 group :development do
   gem 'better_errors'
@@ -32,7 +31,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem "factory_girl_rails", "~> 4.0"
   gem 'faker'
-  gem 'dotenv'
   gem "rack_session_access"
   gem 'populator'
 end
