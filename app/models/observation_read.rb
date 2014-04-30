@@ -6,6 +6,10 @@ class ObservationRead < ActiveRecord::Base
   has_many :evidence_scores, :through => :indicator_scores
   belongs_to :reader
 
+  scope :first_read, where(:observation_status => 1)
+  scope :second_read, where(:observation_status => 2)
+  scope :completed_read, where(:observation_status => 3)
+
   def domains
     domain_scores.joins(:domain).
       select("distinct domains.id as id, domains.description as description").

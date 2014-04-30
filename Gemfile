@@ -3,12 +3,14 @@ source 'https://rubygems.org'
 ruby "1.9.3"
 
 gem 'rails', '3.2.14'
-gem 'jquery-rails'
 gem 'simple_form'
 gem 'pg'
 gem 'thin'
 gem 'role_model'
 gem 'XMLCanonicalizer'
+gem "activeadmin", github: "gregbell/active_admin"
+gem "jquery-rails"
+
 
 group :development do
   gem 'better_errors'
