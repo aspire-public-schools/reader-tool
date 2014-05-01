@@ -1,0 +1,6 @@
+<%= semantic_form_for @observation_read do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :reader, :as => :select, :collection => [reader.full_name] %>
+    <%= f.actions :commit %>
+  <% end %>
+<% end %>
