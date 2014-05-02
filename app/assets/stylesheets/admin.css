@@ -1,0 +1,11 @@
+.dashboard-links, a:link {
+  color: purple;
+}
+
+.dashboard-links, a:visited {
+  color: blue;
+}
+
+.dashboard-links, a:hover {
+  color: red;
+}

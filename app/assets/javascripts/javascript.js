@@ -89,7 +89,7 @@ var setCert = {
       var qualityWeightedDomainTwoThree = parseFloat($('.quality-weighted #1').text())
       var alignmentWeightedDomainTwoThree = parseFloat($('.alignment-weighted #3').text())
     } else {
-      var qualityWeightedDomainTwoThree = parseFloat($('.quality-weighted #0').text())
+   var qualityWeightedDomainTwoThree = parseFloat($('.quality-weighted #0').text())
       var alignmentWeightedDomainTwoThree = parseFloat($('.alignment-weighted #2').text())
     }
 
