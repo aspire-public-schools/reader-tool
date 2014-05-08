@@ -1,5 +1,22 @@
-<div id="main" class="container">
-  <h1> Employee Numbers </h1>
-    <%= render partial: "observation_read", collection: @observation_reads %>
-</div>
+<h1> Edit your readers here </h1>
 
+  <%= form_tag(admin_observations_updates_path, method: :put) %>
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-hover">
+          <tr>
+            <th><h4> Employee Number </h4></th>
+            <th><h4> Document </h4></th>
+            <th><h4> Live</h4></th>
+            <th><h4> Second Read</h4></th>
+          </tr>
+          <% @observation_reads.each do |read| %>
+          <tr>
+            <td><%= read.employee_id_observer %></td>
+            <td><%= select_tag("#{read.id}-document", options_for_select(@readers, ObservationRead.where(employee_id_observer: read.employee_id_observer, reader_number: "1a").first.try(:reader).try(:id)), prompt: "Select a reader") %></td>
+            <td><%= select_tag("#{read.id}-live", options_for_select(@readers, ObservationRead.where(employee_id_observer: read.employee_id_observer, reader_number: "1b").first.try(:reader).try(:id)), prompt: "Select a reader") %></td>
+            <td><%= select_tag("#{read.id}-second-reader", options_for_select(@readers, ObservationRead.where(employee_id_observer: read.employee_id_observer, reader_number: "2").first.try(:reader).try(:id)), prompt: "Select a reader") %></td>
+          <% end %>
+          </tr>
+      </table>
+    </div>
+<%= submit_tag %>

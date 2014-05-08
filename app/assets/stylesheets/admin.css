@@ -9,3 +9,7 @@
 .dashboard-links, a:hover {
   color: red;
 }
+
+ul.admin-employee, li {
+  list-style-type: none;
+}

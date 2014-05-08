@@ -4,8 +4,9 @@ ReaderTool::Application.routes.draw do
 
   namespace :admin do
     get '', to: 'dashboard#index', as: '/'
-    resources :readers
-    resources :observations, on: :collection
+    resources :readers, only: [:index]
+    resources :observations
+    put 'observations_updates', to: 'observations#update'
   end
 
   resources :readers, only: [:index, :create, :update]
