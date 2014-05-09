@@ -12,9 +12,18 @@
           <% @edit_reader_list.each do |read| %>
           <tr>
             <td><%= read['employee_id_observer'] %></td>
-            <td><%= select_tag("observation_read_id[" + read['document_observation_read_id'] + "]", options_for_select(@readers, read['document_reader_id']), prompt: "Select a reader") %></td>
-            <td><%= select_tag("observation_read_id[" + read['live_observation_read_id'] + "]", options_for_select(@readers, read['live_reader_id']), prompt: "Select a reader") %></td>
-            <td><%= select_tag("observation_read_id[" + read['second_observation_read_id'] + "]", options_for_select(@readers, read['second_reader_id']), prompt: "Select a reader")%></td>
+            <td>
+              <%= select_tag("observation_read_id[" + read['document_observation_read_id'] + "]", options_for_select(@readers, read['document_reader_id']), prompt: "Select a reader") %><br>
+              <%= link_to "Observation Read", observation_path(read['document_observation_read_id']) %>
+            </td>
+            <td>
+              <%= select_tag("observation_read_id[" + read['live_observation_read_id'] + "]", options_for_select(@readers, read['live_reader_id']), prompt: "Select a reader") %><br>
+              <%= link_to "Observation Read", observation_path(read['live_observation_read_id']) %>
+            </td>
+            <td>
+              <%= select_tag("observation_read_id[" + read['second_observation_read_id'] + "]", options_for_select(@readers, read['second_reader_id']), prompt: "Select a reader")%><br>
+              <%= link_to "Observation Read", observation_path(read['second_observation_read_id']) %>
+            </td>
           <% end %>
           </tr>
       </table>

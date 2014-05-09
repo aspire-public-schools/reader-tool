@@ -7,7 +7,7 @@ module ApplicationHelper
     JOIN observation_reads two
                   ON two.reader_number = '2' AND onea.observation_group_id = two.observation_group_id
     WHERE onea.reader_number = '1a'
-    ORDER BY onea.employee_id_observer "
+    ORDER BY onea.employee_id_observer"
     edit_reader_list = ObservationRead.find_by_sql(sql)
   end
 end
