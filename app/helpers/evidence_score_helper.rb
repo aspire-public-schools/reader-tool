@@ -13,7 +13,7 @@ module EvidenceScoreHelper
           ON evds.indicator_score_id = inds.id
       WHERE obr.id = #{observation_id}
       GROUP BY obr.id, dom.number"
-      @observation_scores = ObservationRead.find_by_sql(sql)
+      observation_scores = ObservationRead.find_by_sql(sql)
   end
 
   def get_section_scores(observation_id)
@@ -44,7 +44,7 @@ module EvidenceScoreHelper
       WHERE dom.number IN (2,3)
         AND obr.id = #{observation_id}
       GROUP BY obr.id"
-    @section_scores = ObservationRead.find_by_sql(sql)
+    section_scores = ObservationRead.find_by_sql(sql)
   end
 
 end

@@ -1,27 +1,22 @@
 class Admin::ObservationsController < ApplicationController
+  include ApplicationHelper
 
   def create
     render 'index'
   end
 
   def index
-    @observation_reads = ObservationRead.all.uniq { |r| r.employee_id_observer }.sort_by { |r| r.employee_id_observer }
     @readers = Reader.all.map { |reader| [reader.first_name, reader.id] }
-    # render 'update'
+    @edit_reader_list = edit_reader_list
   end
 
   def update
-
-    redirect_to admin_observations_path
+    if params[:observation_read_id]
+        params[:observation_read_id].each do |observation_id|
+         ObservationRead.update(observation_id[0], {reader_id: observation_id[1]})
+      end
+      redirect_to admin_observations_path
+     end
   end
-
-  def show
-  end
-
-  # def update_readers
-  #   Observation_read.update_all(id: params[:observation_read_ids])
-  #   redirect admin_observation_path
-  # end
-
 
 end

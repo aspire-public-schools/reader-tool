@@ -9,12 +9,12 @@
             <th><h4> Live</h4></th>
             <th><h4> Second Read</h4></th>
           </tr>
-          <% @observation_reads.each do |read| %>
+          <% @edit_reader_list.each do |read| %>
           <tr>
-            <td><%= read.employee_id_observer %></td>
-            <td><%= select_tag("#{read.id}-document", options_for_select(@readers, ObservationRead.where(employee_id_observer: read.employee_id_observer, reader_number: "1a").first.try(:reader).try(:id)), prompt: "Select a reader") %></td>
-            <td><%= select_tag("#{read.id}-live", options_for_select(@readers, ObservationRead.where(employee_id_observer: read.employee_id_observer, reader_number: "1b").first.try(:reader).try(:id)), prompt: "Select a reader") %></td>
-            <td><%= select_tag("#{read.id}-second-reader", options_for_select(@readers, ObservationRead.where(employee_id_observer: read.employee_id_observer, reader_number: "2").first.try(:reader).try(:id)), prompt: "Select a reader") %></td>
+            <td><%= read['employee_id_observer'] %></td>
+            <td><%= select_tag("observation_read_id[" + read['document_observation_read_id'] + "]", options_for_select(@readers, read['document_reader_id']), prompt: "Select a reader") %></td>
+            <td><%= select_tag("observation_read_id[" + read['live_observation_read_id'] + "]", options_for_select(@readers, read['live_reader_id']), prompt: "Select a reader") %></td>
+            <td><%= select_tag("observation_read_id[" + read['second_observation_read_id'] + "]", options_for_select(@readers, read['second_reader_id']), prompt: "Select a reader")%></td>
           <% end %>
           </tr>
       </table>

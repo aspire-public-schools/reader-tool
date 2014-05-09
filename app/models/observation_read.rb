@@ -6,6 +6,7 @@ class ObservationRead < ActiveRecord::Base
   has_many :evidence_scores, :through => :indicator_scores
   belongs_to :reader
 
+
   def domains
     domain_scores.joins(:domain).
       select("distinct domains.id as id, domains.description as description").
@@ -13,7 +14,6 @@ class ObservationRead < ActiveRecord::Base
   end
 
   def copy_to_reader2
-
     r1_observation_read = self
     r2_observation_read = ObservationRead.where("observation_group_id = ? AND reader_number = ?", self.observation_group_id, '2').first
 
