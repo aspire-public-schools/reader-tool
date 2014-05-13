@@ -1,22 +1,8 @@
-<h1> Edit your readers here </h1>
+<div class="container-fluid">
+  <h1> Edit your readers here </h1>
 
-  <%= form_tag(admin_observations_updates_path, method: :put) %>
-    <div class="table-responsive">
-      <table class="table table-bordered table-striped table-hover">
-          <tr>
-            <th><h4> Employee Number </h4></th>
-            <th><h4> Document </h4></th>
-            <th><h4> Live</h4></th>
-            <th><h4> Second Read</h4></th>
-          </tr>
-          <% @edit_reader_list.each do |read| %>
-          <tr>
-            <td><%= read['employee_id_observer'] %></td>
-            <td><%= select_tag("observation_read_id[" + read['document_observation_read_id'] + "]", options_for_select(@readers, read['document_reader_id']), prompt: "Select a reader") %></td>
-            <td><%= select_tag("observation_read_id[" + read['live_observation_read_id'] + "]", options_for_select(@readers, read['live_reader_id']), prompt: "Select a reader") %></td>
-            <td><%= select_tag("observation_read_id[" + read['second_observation_read_id'] + "]", options_for_select(@readers, read['second_reader_id']), prompt: "Select a reader")%></td>
-          <% end %>
-          </tr>
-      </table>
-    </div>
-<%= submit_tag %>
+  <%= render partial: "accuracy" %>
+  <%= render partial: "counts" %>
+  <%= render partial: "reads_list" %>
+
+</div>
