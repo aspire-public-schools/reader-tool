@@ -128,28 +128,28 @@ var LogIn = {
 }
 
 var observationAdmin = {
-  highlightYellow: function(){
+  highlightGreen: function(){
     if ( $('.admin-form td.two') ) {
-      $('td.two').css('background-color', '#f1c40f')
+      $('td.two').css('background-color', '#1abc9c')
     }
   },
-  highlightBlue: function(){
-    if ( $('.admin-form td.three') ){
-      $('td.one').css('background-color', '#3498db')
-    }
-  },
-  highlightRed: function(){
+  highlightGrey: function(){
     if ( $('.admin-form td.one') ){
-      $('td.three').css('background-color', '#e74c3c')
+      $('td.one').css('background-color', '#7f8c8d')
+    }
+  },
+  highlightYellow: function(){
+    if ( $('.admin-form td.three') ){
+      $('td.three').css('background-color', '#f1c40f')
     }
   }
 }
 
 
 $(document).ready(function(){
+  observationAdmin.highlightGreen();
   observationAdmin.highlightYellow();
-  observationAdmin.highlightRed();
-  observationAdmin.highlightBlue();
+  observationAdmin.highlightGrey();
   sideBar.toggle();
   evidenceScore.init();
   submitScore.init();

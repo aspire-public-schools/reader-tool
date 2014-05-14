@@ -13,7 +13,7 @@ class Admin::ObservationsController < ApplicationController
         params[:observation_read_id].each do |observation_id|
          ObservationRead.update(observation_id[0], {reader_id: observation_id[1]})
       end
-      redirect_to admin_observations_path
+      redirect_to admin_observations_path, :flash => { :success => "Your changes were saved!" }
      end
   end
 

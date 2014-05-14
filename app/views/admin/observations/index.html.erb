@@ -1,7 +1,12 @@
 <div class="container-fluid">
   <h1> Edit your readers here </h1>
 
-  <%= render partial: "accuracy" %>
+
+<div class="alert alert-warning alert-dismissable">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <strong><%= flash[:success] %></strong>
+</div>
+
   <%= render partial: "counts" %>
   <%= render partial: "reads_list" %>
 

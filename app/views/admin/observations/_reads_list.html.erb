@@ -1,7 +1,9 @@
 <div class="row">
+<div class="well">
+      <div class="panel-heading">Change Reader Assignments</div>
   <%= form_tag(admin_observations_updates_path, method: :put, class: 'admin-form') %>
     <div class="table-responsive">
-      <table class="table table-bordered table-striped table-hover">
+      <table class="table table-bordered table-striped">
           <tr>
             <th><h4> Employee Number </h4></th>
             <th><h4> Document </h4></th>
@@ -27,5 +29,6 @@
           <% end %>
       </table>
     </div>
-<%= submit_tag %>
+<%= submit_tag nil, class: "btn btn-primary" %>
+</div>
 </div>

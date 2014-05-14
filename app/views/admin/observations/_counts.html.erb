@@ -1,36 +1,41 @@
   <div class = "row">
-    <div class="col-md-6">
-      <table class="table table-striped">
-      <tr>
-        <td class="active">...</td>
-        <td class="success">...</td>
-        <td class="warning">...</td>
-        <td class="danger">...</td>
-        <td class="info">...</td>
-      </tr>
-    </table>
+    <div class="col-md-8">
+      <div class="well">
+        <div class="panel-heading">Reader Assignments</div>
+          <table class="table table-striped">
+            <tr>
+              <th> Reader </th>
+              <th> Reads for 1a </th>
+              <th> Reads for 1b </th>
+              <th> Reads for 2 </th>
+              <th> Last Read </th>
+            </tr>
+            <% @readers.each do |reader| if reader.observation_reads.count != 0 %>
+            <tr>
+              <td> <%= reader.first_name %> </td>
+              <td> <%= reader.observation_reads.reader_1a_count %> </td>
+              <td> <%= reader.observation_reads.reader_1b_count %> </td>
+              <td> <%= reader.observation_reads.reader_2_count %> </td>
+              <td> <%= reader.observation_reads.last_read %> </td>
+            </tr>
+            <% end %>
+            <% end %>
+          </table>
+        </div>
     </div>
-    <div class="col-md-6">
-      <table class="table table-striped">
-        <tr>
-          <th> Reader </th>
-          <th> Reads for 1a </th>
-          <th> Reads for 1b </th>
-          <th> Reads for 2 </th>
-          <th> Last Read </th>
-        </tr>
-        <% @readers.each do |reader| if reader.observation_reads.count != 0 %>
-        <tr>
-          <td> <%= reader.first_name %> </td>
-          <td> <%= reader.observation_reads.reader_1a_count %> </td>
-          <td> <%= reader.observation_reads.reader_1b_count %> </td>
-          <td> <%= reader.observation_reads.reader_2_count %> </td>
-          <td> <%= reader.observation_reads.last_read %> </td>
-        </tr>
-        <% end %>
-        <% end %>
-      </table>
-    </div>
-  </div>
 
+    <div class="col-md-4">
+      <div class='my-legend'>
+        <div class='legend-title'> Color Code for Reads </div>
+        <div class='legend-scale'>
+          <ul class='legend-labels'>
+            <li><span class='green' style='background:#1abc9c;'></span> Ready to Read </li>
+            <li><span class='yellow' style='background:#f1c40f;'></span> Waiting for Reader 2 to Read  </li>
+            <li><span class='grey' style='background:#7f8c8d;'></span> Completed Reads </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
 
