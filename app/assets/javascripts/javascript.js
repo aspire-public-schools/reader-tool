@@ -127,7 +127,29 @@ var LogIn = {
   }
 }
 
+var observationAdmin = {
+  highlightYellow: function(){
+    if ( $('.admin-form td.two') ) {
+      $('td.two').css('background-color', '#f1c40f')
+    }
+  },
+  highlightBlue: function(){
+    if ( $('.admin-form td.three') ){
+      $('td.one').css('background-color', '#3498db')
+    }
+  },
+  highlightRed: function(){
+    if ( $('.admin-form td.one') ){
+      $('td.three').css('background-color', '#e74c3c')
+    }
+  }
+}
+
+
 $(document).ready(function(){
+  observationAdmin.highlightYellow();
+  observationAdmin.highlightRed();
+  observationAdmin.highlightBlue();
   sideBar.toggle();
   evidenceScore.init();
   submitScore.init();
