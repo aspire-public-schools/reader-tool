@@ -1,9 +1,9 @@
-
-.dashboard-links, a:link {
+/*
+.admin-form, a:link {
   color: purple;
 }
 
-/*.dashboard-links, a:visited {
+.dashboard-links, a:visited {
   color: blue;
 }
 
@@ -47,5 +47,3 @@ ul.admin-employee, li {
     margin-left: 0;
     border: 1px solid #999;
   }
-
-

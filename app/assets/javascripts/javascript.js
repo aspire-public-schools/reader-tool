@@ -134,13 +134,13 @@ var observationAdmin = {
     }
   },
   highlightGrey: function(){
-    if ( $('.admin-form td.one') ){
-      $('td.one').css('background-color', '#7f8c8d')
+    if ( $('.admin-form td.three') ){
+      $('td.three').css('background-color', '#7f8c8d')
     }
   },
   highlightYellow: function(){
-    if ( $('.admin-form td.three') ){
-      $('td.three').css('background-color', '#f1c40f')
+    if ( $('.admin-form td.one') ){
+      $('td.one').css('background-color', '#f1c40f')
     }
   }
 }
