@@ -6,6 +6,26 @@ class ObservationRead < ActiveRecord::Base
   has_many :evidence_scores, :through => :indicator_scores
   belongs_to :reader
 
+  # scope :reader_1a_count, where(reader_number: '1a').count
+  # scope :reader_1b_count, where(reader_number: '1b').count
+  # scope :reader_2_count, where(reader_number: '2').count
+
+  def self.reader_1a_count
+    where(reader_number: '1a').count
+  end
+
+  def self.reader_1b_count
+    where(reader_number: '1a').count
+  end
+
+  def self.reader_2_count
+    where(reader_number: '2').count
+  end
+
+  def self.last_read
+    order('updated_at DESC').first.try(:updated_at)
+  end
+
   def domains
     domain_scores.joins(:domain).
       select("distinct domains.id as id, domains.description as description").
@@ -13,7 +33,6 @@ class ObservationRead < ActiveRecord::Base
   end
 
   def copy_to_reader2
-
     r1_observation_read = self
     r2_observation_read = ObservationRead.where("observation_group_id = ? AND reader_number = ?", self.observation_group_id, '2').first
 
@@ -103,7 +122,6 @@ class ObservationRead < ActiveRecord::Base
       live_align_string.replace "CERT"
     end
   end
-
 
 end
 

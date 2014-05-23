@@ -9,6 +9,7 @@ gem 'pg'
 gem 'thin'
 gem 'role_model'
 gem 'XMLCanonicalizer'
+gem 'humanize'
 
 group :development do
   gem 'better_errors'
