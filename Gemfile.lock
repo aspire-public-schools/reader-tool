@@ -79,6 +79,7 @@ GEM
       i18n (~> 0.5)
     ffi (1.9.3)
     hike (1.2.3)
+    humanize (1.1.0)
     i18n (0.6.9)
     journey (1.0.4)
     jquery-rails (3.1.0)
@@ -214,6 +215,7 @@ DEPENDENCIES
   dotenv
   factory_girl_rails (~> 4.0)
   faker
+  humanize
   jquery-rails
   less-rails
   pg

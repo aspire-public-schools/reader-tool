@@ -1,0 +1,34 @@
+<div class="row">
+<div class="well">
+      <div class="panel-heading">Change Reader Assignments</div>
+  <%= form_tag(admin_observations_updates_path, method: :put, class: 'admin-form') %>
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+          <tr>
+            <th><h4> Employee Number </h4></th>
+            <th><h4> Document </h4></th>
+            <th><h4> Live</h4></th>
+            <th><h4> Second Read</h4></th>
+          </tr>
+          <tr>
+          <% @edit_reader_list.each do |read| %>
+            <td><%= read['employee_id_observer'] %></td>
+            <td class=<%= read['document_status'].to_i.humanize %>>
+              <%= select_tag("observation_read_id[#{read['document_observation_read_id']}]", options_for_select(@readers_for_select, read['document_reader_id']), prompt: "Select a reader") %><br>
+              <%= link_to "Observation Read", observation_path(read['document_observation_read_id'])%>
+            </td>
+            <td class=<%= read['live_status'].to_i.humanize %>>
+              <%= select_tag("observation_read_id[#{read['live_observation_read_id']}]", options_for_select(@readers_for_select, read['live_reader_id']), prompt: "Select a reader") %><br>
+              <%= link_to "Observation Read", observation_path(read['live_observation_read_id'])%>
+            </td>
+            <td class=<%= read['second_status'].to_i.humanize %>>
+              <%= select_tag("observation_read_id[#{read['second_observation_read_id']}]", options_for_select(@readers_for_select, read['second_reader_id']), prompt: "Select a reader")%><br>
+              <%= link_to "Observation Read", observation_path(read['second_observation_read_id'])%>
+            </td>
+          </tr>
+          <% end %>
+      </table>
+    </div>
+<%= submit_tag nil, class: "btn btn-primary" %>
+</div>
+</div>

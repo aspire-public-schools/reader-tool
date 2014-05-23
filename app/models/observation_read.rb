@@ -6,6 +6,25 @@ class ObservationRead < ActiveRecord::Base
   has_many :evidence_scores, :through => :indicator_scores
   belongs_to :reader
 
+  # scope :reader_1a_count, where(reader_number: '1a').count
+  # scope :reader_1b_count, where(reader_number: '1b').count
+  # scope :reader_2_count, where(reader_number: '2').count
+
+  def self.reader_1a_count
+    where(reader_number: '1a').count
+  end
+
+  def self.reader_1b_count
+    where(reader_number: '1a').count
+  end
+
+  def self.reader_2_count
+    where(reader_number: '2').count
+  end
+
+  def self.last_read
+    order('updated_at DESC').first.try(:updated_at)
+  end
 
   def domains
     domain_scores.joins(:domain).
@@ -103,7 +122,6 @@ class ObservationRead < ActiveRecord::Base
       live_align_string.replace "CERT"
     end
   end
-
 
 end
 
