@@ -9,12 +9,14 @@ class Admin::ObservationsController < ApplicationController
   end
 
   def update
-    if params[:observation_read_id]
-        params[:observation_read_id].each do |observation_id|
-         ObservationRead.update(observation_id[0], {reader_id: observation_id[1]})
+      if params[:observation_read_id]
+          params[:observation_read_id].each do |observation_id|
+           ObservationRead.update(observation_id[0], {reader_id: observation_id[1]})
+          end
+        redirect_to admin_observations_path, :flash => { :success => "Your changes were saved!" }
+      else
+        redirect_to admin_observations_path, :flash => { :error => "Your changes didn't save, contact Godzilla"}
       end
-      redirect_to admin_observations_path, :flash => { :success => "Your changes were saved!" }
-     end
   end
 
 end
