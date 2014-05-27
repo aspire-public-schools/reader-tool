@@ -2,8 +2,8 @@
   background-image:url('low_contrast_linen.png');
 }
 
-#main.container {
-  padding-top: 60px
+.container-fluid {
+  padding-top: 80px
 }
 
 .navbar-text {
@@ -42,7 +42,7 @@
   width: 74%;
   float: right;
   position: relative;
-  top: 80px
+  top: 20px
 }
 
 dd a {
