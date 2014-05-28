@@ -1,17 +1,19 @@
 class Admin::ReadersController < ApplicationController
 
   def create
-    reader = Reader.new(params[:reader])
-    if reader.save
+    @reader = Reader.new(params[:reader])
+    if @reader.save
       redirect_to admin_readers_path, :flash => { :success => "Your changes were saved!" }
     else
-      render new_admin_reader_path, :flash => { :error => "Check your fields"}
+      flash[:error] = "#{@reader.errors.full_messages.to_sentence}."
+      render :new
     end
   end
 
   def new
     @reader = Reader.new
   end
+
 
   def index
     @readers = Reader.all
