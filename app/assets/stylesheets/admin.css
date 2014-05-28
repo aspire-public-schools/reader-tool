@@ -47,3 +47,19 @@ ul.admin-employee, li {
     margin-left: 0;
     border: 1px solid #999;
   }
+
+#create-button {
+    font-size: 15px;
+    margin: 10px 2px;
+    display: inline-block;
+    padding: 6px 14px;
+    background-color: #611f73;
+    border: 1px solid transparent;
+    border-radius: 15px;
+}
+
+/*#new_reader input{
+  height: 37px;
+
+}*/
+
