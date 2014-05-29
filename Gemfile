@@ -7,7 +7,6 @@ gem 'jquery-rails'
 gem 'simple_form'
 gem 'pg'
 gem 'thin'
-gem 'role_model'
 gem 'XMLCanonicalizer'
 gem 'humanize'
 
