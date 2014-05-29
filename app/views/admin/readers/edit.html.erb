@@ -1,1 +1,36 @@
-<h1> Hi  </h1>
+<h1>Create Readers Edit Readers</h1><br>
+
+<%= render partial: "flash_messages", flash: flash %>
+  <div class="panel panel-default panel-info">
+    <div class="panel-heading">Edit <%= @reader.first_name %> <%=@reader.last_name%></div>
+    <div class="panel-body">
+      <%= form_for(@reader, :url => {:action => 'update', :id => @reader.id} ) do |f| %>
+            <div class="form-group">
+              <%= f.label :employee_number, "Employee Number:", class: "col-xs-4 control-label" %>
+              <div class="col-md-8">
+                <%= f.text_field :employee_number, class: "form-control" %>
+              </div>
+            </div>
+            <div class="form-group">
+               <%= f.label :first_name, "First Name:", class: "col-xs-4 control-label" %>
+              <div class="col-md-8">
+                <%= f.text_field :first_name, class: "form-control input" %>
+              </div>
+            </div>
+            <div class="form-group">
+                <%= f.label :last_name, "Last Name:", class: "col-xs-4 control-label" %>
+              <div class="col-md-8">
+                <%= f.text_field :last_name, class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :email, "Email:", class: "col-xs-4 control-label" %>
+              <div class="col-md-8">
+                <%= f.text_field :email, class: "form-control" %>
+              </div>
+            </div>
+     </div>
+  </div>
+      <%= f.submit "Update Reader", class: "btn btn-default btn-primary" %>
+ <% end %>
