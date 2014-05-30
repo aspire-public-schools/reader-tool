@@ -17,7 +17,7 @@ class ObservationRead < ActiveRecord::Base
   def status_words
     case observation_status
       when 1
-        "Waiting for Reader 1"
+        "Waiting"
       when 3
         "Finished"
       else
