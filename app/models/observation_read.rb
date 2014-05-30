@@ -14,7 +14,7 @@ class ObservationRead < ActiveRecord::Base
   scope :waiting_status, -> { where(observation_status: '1') }
   scope :finished_status, -> { where(observation_status: '3') }
 
-  def observation_status_words
+  def status_words
     case observation_status
       when 1
         "Waiting for Reader 1"
