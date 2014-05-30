@@ -1,10 +1,51 @@
+<div class="container-fluid">
+  <h1><%=@reader.first_name %> <%=@reader.last_name %></h1>
+
+  <div class="row">
+    <div class="col-md-10">
+      <div class="panel panel-default panel-info">
+        <div class="panel-heading">Observation Reads</div>
+            <div class="panel-body">
+              <table class="table table-hover table-bordered">
+                <tr>
+                  <th> Employee ID </th>
+                  <th> State </th>
+                  <th> As reader_number</th>
+                  <th> As Comments</th>
+                <tr>
+              <% @reader.observation_reads.each do |observation_read| %>
+                <tr>
+                    <td><%= observation_read.employee_id_observer %></td>
+                    <td><%= observation_read.observation_status_words %></td>
+                    <td><%= observation_read.reader_number %></td>
+                    <td><%= observation_read.comments %></td>
+                </tr>
+                  <% end %>
+
+              </table>
+            </div>
+        </div>
+      </div>
+
+    <div class="col-md-2">
+       <div class="panel panel-default panel-info">
+        <div class="panel-heading">Status of Reads</div>
+            <div class="panel-body">
+              <table class="table table-hover table-bordered">
+                <tr>
+                  <th scope="row"> Ready to Read </th> <td> <%= @reader.observation_reads.ready_status.count %> </td>
+                </tr>
+                <tr>
+                  <th scope="row"> Waiting for Reader 1 </th> <td> <%= @reader.observation_reads.waiting_status.count %> </td>
+                </tr>
+                <tr>
+                  <th scope="row"> Finished </th> <td> <%= @reader.observation_reads.finished_status.count %> </td>
+                </tr>
+              </table>
+            </div>
+        </div>
+      </div>
+  </div>
 
 
-
-
-<h1> Show Page </h1>
-<h1> Show Page </h1>
-<h1> Show Page </h1>
-<h1> Show Page </h1>
-<h1> Show Page </h1>
-<h1> Show Page </h1>
+</div>

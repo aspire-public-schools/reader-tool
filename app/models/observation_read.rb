@@ -137,9 +137,6 @@ class ObservationRead < ActiveRecord::Base
       live_align_string.replace "CERT"
     end
   end
-
-
-
 end
 
 

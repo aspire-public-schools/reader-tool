@@ -1,18 +1,16 @@
-<br>
-<br>
-<br>
-<div id="create-button">
-  <%= link_to "New Reader", new_admin_reader_path(@reader) %>
+<div class="container-fluid container">
+  <div id="create-button">
+    <%= link_to "New Reader", new_admin_reader_path(@reader) %>
+  </div>
+
+  <%= render partial: "flash_messages", flash: flash %>
+  <table class="table table-hover table-bordered">
+
+  <tr>
+    <th> Reader Name </th>
+    <th> Reader Email</th>
+  <tr>
+    <%= render partial: "reader", collection: @readers %>
+
+  </table>
 </div>
-
-<%= render partial: "flash_messages", flash: flash %>
-<table class="table table-hover table-bordered">
-
-<tr>
-  <th> Reader Name </th>
-  <th> Reader Email</th>
-<tr>
-  <%= render partial: "reader", collection: @readers %>
-
-</table>
-
