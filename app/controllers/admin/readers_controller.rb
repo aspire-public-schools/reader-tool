@@ -37,7 +37,7 @@ class Admin::ReadersController < ApplicationController
   end
 
   def show
-    @readers = Reader.all
+    @reader = Reader.find(params[:id])
   end
 
 end
