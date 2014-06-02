@@ -1,38 +1,13 @@
 <h1>Create Readers new page</h1><br>
-
-<%= render partial: "flash_messages", flash: flash %>
-  <div class="panel panel-default panel-info">
-    <div class="panel-heading">Create your readers</div>
-    <div class="panel-body">
-      <%= form_for ([:admin, @reader]), class: "form-horizontal center" do |f| %>
-            <div class="form-group">
-              <%= f.label :employee_number, "Employee Number:", class: "col-xs-4 control-label" %>
-              <div class="col-md-8">
-                <%= f.text_field :employee_number, class: "form-control" %>
-              </div>
-            </div>
-            <div class="form-group">
-               <%= f.label :first_name, "First Name:", class: "col-xs-4 control-label" %>
-              <div class="col-md-8">
-                <%= f.text_field :first_name, class: "form-control input" %>
-              </div>
-            </div>
-            <div class="form-group">
-                <%= f.label :last_name, "Last Name:", class: "col-xs-4 control-label" %>
-              <div class="col-md-8">
-                <%= f.text_field :last_name, class: "form-control" %>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <%= f.label :email, "Email:", class: "col-xs-4 control-label" %>
-              <div class="col-md-8">
-                <%= f.text_field :email, class: "form-control" %>
-              </div>
-            </div>
-     </div>
-  </div>
-      <%= f.submit "Create Reader", class: "btn btn-default btn-primary" %>
- <% end %>
-
-
+<div class="container container-fluid">
+  <%= render partial: "flash_messages", flash: flash %>
+    <div class="panel panel-default panel-info">
+      <div class="panel-heading">Create your readers</div>
+      <div class="panel-body">
+        <%= form_for ([:admin, @reader]), class: "form-horizontal center" do |f| %>
+        <%= render partial: "reader_form", :locals => { :f => f } %>
+       </div>
+    </div>
+        <%= f.submit "Create Reader", class: "btn btn-default btn-primary" %>
+   <% end %>
+</div>
