@@ -58,6 +58,11 @@ ul.admin-employee, li {
     border-radius: 15px;
 }
 
+input#reader_email.form-control, input#reader_last_name.form-control, input#reader_first_name.form-control, input#reader_employee_number.form-control {
+  height: 40px;
+  width: 300px;
+}
+
 /*#new_reader input{
   height: 37px;
 

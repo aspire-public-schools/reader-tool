@@ -16,7 +16,7 @@ class Admin::ReadersController < ApplicationController
 
 
   def index
-    @readers = Reader.all
+    @readers = Reader.all.sort
   end
 
   def edit
