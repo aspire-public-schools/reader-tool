@@ -1,5 +1,6 @@
 <h1>Create Readers Edit Readers</h1><br>
 
+<div class='container container-fluid'>
 <%= render partial: "flash_messages", flash: flash %>
   <div class="panel panel-default panel-info">
     <div class="panel-heading">Edit <%= @reader.first_name %> <%=@reader.last_name%></div>
@@ -34,3 +35,4 @@
   </div>
       <%= f.submit "Update Reader", class: "btn btn-default btn-primary" %>
  <% end %>
+ </div>
