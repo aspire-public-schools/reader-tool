@@ -6,9 +6,19 @@ class ObservationRead < ActiveRecord::Base
   has_many :evidence_scores, :through => :indicator_scores
   belongs_to :reader
 
-  # scope :reader_1a_count, where(reader_number: '1a').count
-  # scope :reader_1b_count, where(reader_number: '1b').count
-  # scope :reader_2_count, where(reader_number: '2').count
+  # scope :reader_1a_count, -> where(reader_number: '1a').count
+  # scope :reader_1b_count, -> where(reader_number: '1b').count
+  # scope :reader_2_count, -> where(reader_number: '2').count
+
+  scope :ready_status, -> { where(observation_status: '2') }
+  scope :waiting_status, -> { where(observation_status: '1') }
+  scope :finished_status, -> { where(observation_status: '3') }
+
+STATUS_WORD_MAPPING = {1 => :waiting, 2 => :ready, 3 => :finish}.freeze
+
+  def status_words
+    STATUS_WORD_MAPPING[observation_status]
+  end
 
   def self.reader_1a_count
     where(reader_number: '1a').count
@@ -122,7 +132,6 @@ class ObservationRead < ActiveRecord::Base
       live_align_string.replace "CERT"
     end
   end
-
 end
 
 
