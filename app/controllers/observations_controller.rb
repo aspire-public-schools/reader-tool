@@ -19,7 +19,7 @@
 
   def show
     @reader = current_user
-    @observation_reads = @reader.observation_reads.where(observation_status: 2)
+    @observation_reads = ObservationRead.where(observation_status: 2)
     @observation_read = ObservationRead.find(params[:id])
     if params[:domain_id]
       @indicator = Domain.find(params[:domain_id]).indicators
