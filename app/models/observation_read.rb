@@ -14,15 +14,10 @@ class ObservationRead < ActiveRecord::Base
   scope :waiting_status, -> { where(observation_status: '1') }
   scope :finished_status, -> { where(observation_status: '3') }
 
+STATUS_WORD_MAPPING = {1 => :waiting, 2 => :ready, 3 => :finish}.freeze
+
   def status_words
-    case observation_status
-      when 1
-        "Waiting"
-      when 3
-        "Finished"
-      else
-        "Ready"
-    end
+    STATUS_WORD_MAPPING[observation_status]
   end
 
   def self.reader_1a_count
