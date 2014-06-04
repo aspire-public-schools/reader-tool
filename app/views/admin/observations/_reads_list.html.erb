@@ -7,7 +7,9 @@
           <tr>
             <th><h4> Employee Number </h4></th>
             <th><h4> Document </h4></th>
+            <th><h4> Flagged</h4></th>
             <th><h4> Live</h4></th>
+            <th><h4> Flagged</h4></th>
             <th><h4> Second Read</h4></th>
           </tr>
           <tr>
@@ -17,9 +19,15 @@
               <%= select_tag("observation_read_id[#{read['document_observation_read_id']}]", options_for_select(@readers_for_select, read['document_reader_id']), prompt: "Select a reader") %><br>
               <%= link_to "Observation Read", observation_path(read['document_observation_read_id'])%>
             </td>
+            <td class=<%= "flagged-#{read.onea_flags}" %> >
+              <%= read.onea_flags == "t" ? "Yes" : "No" %>
+            </td>
             <td class=<%= read['live_status'].to_i.humanize %>>
               <%= select_tag("observation_read_id[#{read['live_observation_read_id']}]", options_for_select(@readers_for_select, read['live_reader_id']), prompt: "Select a reader") %><br>
               <%= link_to "Observation Read", observation_path(read['live_observation_read_id'])%>
+            </td>
+            <td class=<%= "flagged-#{read.oneb_flags}" %> >
+              <%= read.oneb_flags == "t" ? "Yes" : "No" %>
             </td>
             <td class=<%= read['second_status'].to_i.humanize %>>
               <%= select_tag("observation_read_id[#{read['second_observation_read_id']}]", options_for_select(@readers_for_select, read['second_reader_id']), prompt: "Select a reader")%><br>

@@ -1,6 +1,5 @@
 class ObservationRead < ActiveRecord::Base
-
-  attr_accessible :document_quality, :document_alignment, :live_alignment, :live_quality, :observation_status, :id, :observation_group_id, :employee_id_observer, :employee_id_learner, :correlation, :average_difference, :percent_correct, :reader_id, :created_at, :updated_at, :reader_number, :comments
+  attr_accessible :document_quality, :document_alignment, :live_alignment, :live_quality, :observation_status, :id, :observation_group_id, :employee_id_observer, :employee_id_learner, :correlation, :average_difference, :percent_correct, :reader_id, :created_at, :updated_at, :reader_number, :comments, :flags
   has_many :domain_scores
   has_many :indicator_scores, :through => :domain_scores
   has_many :evidence_scores, :through => :indicator_scores
@@ -13,6 +12,7 @@ class ObservationRead < ActiveRecord::Base
   scope :ready_status, -> { where(observation_status: '2') }
   scope :waiting_status, -> { where(observation_status: '1') }
   scope :finished_status, -> { where(observation_status: '3') }
+
 
 STATUS_WORD_MAPPING = {1 => :waiting, 2 => :ready, 3 => :finish}.freeze
 

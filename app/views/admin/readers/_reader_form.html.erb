@@ -1,0 +1,40 @@
+    <div class="form-group">
+      <%= f.label :employee_number, "Employee Number:", class: "col-xs-4 control-label" %>
+      <div class="col-md-8">
+        <%= f.text_field :employee_number, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+       <%= f.label :first_name, "First Name:", class: "col-md-4 control-label" %>
+      <div class="col-md-6">
+        <%= f.text_field :first_name, class: "form-control input" %>
+      </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :last_name, "Last Name:", class: "col-xs-4 control-label" %>
+      <div class="col-md-8">
+        <%= f.text_field :last_name, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+        <%= f.label :email, "Email:", class: "col-xs-4 control-label" %>
+      <div class="col-md-8">
+        <%= f.text_field :email, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-xs-4">
+          <%= f.label :is_reader1a, "Reader 1a", class: "col-xs-4 control-label" %>
+          <%= f.check_box :is_reader1a, class: "form-control" %>
+        </div>
+        <div class="col-xs-4">
+          <%= f.label :is_reader1b, "Reader 1b", class: "col-xs-4 control-label" %>
+          <%= f.check_box :is_reader1b, class: "form-control" %>
+        </div>
+        <div class="col-xs-4">
+          <%= f.label :is_reader2, "Reader 2", class: "col-xs-4 control-label" %>
+          <%= f.check_box :is_reader2, class: "form-control" %>
+        </div>
+    </div>
