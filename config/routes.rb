@@ -1,6 +1,6 @@
 ReaderTool::Application.routes.draw do
 
-  root to: 'readers#index'
+  root to: 'saml#index'
 
   namespace :admin do
     get '', to: 'dashboard#index', as: '/'
@@ -25,5 +25,5 @@ match 'admin/readers/:id' => 'admin/readers#edit'
 
   match '/logout', to: 'sessions#destroy', via: 'delete'
 
-  get 'login' => 'readers#index', as: 'login'
+  get 'login' => 'saml#index', as: 'login'
 end
