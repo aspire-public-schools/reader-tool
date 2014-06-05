@@ -4,4 +4,13 @@ class Reader < ActiveRecord::Base
   validates :first_name, :presence => true
 	validates :email, :presence => true
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+
+  def show_yes_no
+    if is_reader1a == 1
+      return "Yes"
+    else
+      return "No"
+    end
+  end
+
 end

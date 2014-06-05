@@ -11,6 +11,21 @@
   color: red;
 }*/
 
+.reader-assignment a:link{
+  color: white;
+  text-decoration: none;
+}
+
+.reader-assignment a:visited{
+  color: blue;
+  text-decoration: none;
+}
+
+.reader-assignment a:hover {
+  color: #2980b9;
+  text-decoration: none;
+}
+
 ul.admin-employee, li {
   list-style-type: none;
 }
@@ -58,13 +73,7 @@ ul.admin-employee, li {
     border-radius: 15px;
 }
 
-input#reader_email.form-control, input#reader_last_name.form-control, input#reader_first_name.form-control, input#reader_employee_number.form-control {
+.form-control.reader-admin-label {
   height: 40px;
   width: 300px;
 }
-
-/*#new_reader input{
-  height: 37px;
-
-}*/
-
