@@ -9,6 +9,7 @@ ReaderTool::Application.routes.draw do
     put 'observations_updates', to: 'observations#update'
   end
 
+  resources :saml
   resources :readers, only: [:index, :create, :update, :new]
   resources :sessions, only: [:create, :destroy]
   resources :observations do
@@ -21,7 +22,7 @@ ReaderTool::Application.routes.draw do
     end
   end
 
-match 'admin/readers/:id' => 'admin/readers#edit'
+  match 'admin/readers/:id' => 'admin/readers#edit'
 
   match '/logout', to: 'sessions#destroy', via: 'delete'
 
