@@ -1,7 +1,7 @@
  class ObservationsController < ApplicationController
   include EvidenceScoreHelper
   before_filter :require_reader
-  before_filter :reader_observations, :only => [:index, :show]
+  before_filter :current_reads, :only => [:index, :show]
 
 	def index
   end
@@ -36,7 +36,7 @@
     redirect_to "/login" unless current_user
   end
 
-  def reader_observations
+  def current_reads
     @reader = current_user
     @observation_reads = @reader.observation_reads.where(observation_status: 2)
   end
