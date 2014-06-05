@@ -17,7 +17,7 @@ class SamlController < ApplicationController
       session[:current_reader_id] = reader.id
       redirect_to observations_path
     else
-      redirect_to root_path, flash: {error: "Godzilla didn't like your e-mail"}
+      redirect_to "http://aspire.onelogin.com", flash: {error: "Godzilla didn't like your e-mail"}
     end
   end
 
