@@ -60,9 +60,12 @@
           </div>
       <% end %>
         <%= f.text_area :comments, class: 'form-control', rows: "1", placeholder: "Comments"  %>
+        <%= f.input :flags, as: :radio_buttons %>
       <div class="observation-read-button">
         <div class="btn btn-danger" id="finalize-button">Finalize Read</div>
       </div>
+
+
   </div>
       <div class="login_modal">
         <div class="login_close">

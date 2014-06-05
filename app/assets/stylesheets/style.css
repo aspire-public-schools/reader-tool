@@ -231,3 +231,7 @@ h5.read-title{
   text-align: center;
   background-color: #1abc9c;
 }
+
+.flagged-t {
+  background-color: #e74c3c;
+}
