@@ -33,6 +33,7 @@
   private
 
   def require_reader
+    store_location
     redirect_to "/login" unless current_user
   end
 

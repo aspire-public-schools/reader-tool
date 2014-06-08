@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
    include SessionHelper
 
-   #Onelogin creates your session
+   #Onelogin creates your session no need for this
 
    # def create
    #    params_email_downcase = params[:reader][:email].downcase
