@@ -11,4 +11,9 @@ module SessionHelper
 	def signed_in?
 		session[:current_reader_id] ? true : false
 	end
+
+  def store_location
+    session[:return_to] = request.url if request.get?
+  end
+
 end

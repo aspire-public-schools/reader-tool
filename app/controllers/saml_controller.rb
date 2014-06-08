@@ -7,7 +7,7 @@ class SamlController < ApplicationController
 
   def index
     request = OneLogin::RubySaml::Authrequest.new
-    redirect_to(request.create(saml_settings))
+    redirect_to(request.create(saml_settings, {:RelayState => session[:return_to]}))
   end
 
   def create
@@ -15,7 +15,12 @@ class SamlController < ApplicationController
     response.settings = saml_settings
     if response.is_valid? && reader = Reader.find_by_email(response.name_id)
       session[:current_reader_id] = reader.id
-      redirect_to observations_path
+      if params["RelayState"]
+        session.delete(:return_to)
+        redirect_to params["RelayState"]
+      else
+        redirect_to observations_path
+      end
     else
       redirect_to "http://aspire.onelogin.com", flash: {error: "Godzilla didn't like your e-mail"}
     end
@@ -42,32 +47,12 @@ class SamlController < ApplicationController
     render :xml => meta.generate(settings)
   end
 
+  private
+
+    def signed_in_user
+      unless signed_in?
+        store_location
+      end
+    end
+
 end
-
-#   root to: 'readers#index'
-
-#   namespace :admin do
-#     get '', to: 'dashboard#index', as: '/'
-#     resources :readers
-#     resources :observations
-#     put 'observations_updates', to: 'observations#update'
-#   end
-
-#   resources :readers, only: [:index, :create, :update, :new]
-#   resources :sessions, only: [:create, :destroy]
-#   resources :observations do
-#     resources :domains do
-#       resources :indicators do
-#        resources :evidences do
-#           get :score, on: :collection
-#         end
-#       end
-#     end
-#   end
-
-# match 'admin/readers/:id' => 'admin/readers#edit'
-
-#   match '/logout', to: 'sessions#destroy', via: 'delete'
-
-#   get 'login' => 'readers#index', as: 'login'
-# end
