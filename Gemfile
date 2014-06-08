@@ -8,6 +8,7 @@ gem 'simple_form'
 gem 'pg'
 gem 'thin'
 gem 'XMLCanonicalizer'
+gem 'ruby-saml'
 gem 'humanize'
 
 group :development do
