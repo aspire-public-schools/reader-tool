@@ -12,9 +12,17 @@
   color: #777777;
 }
 
-.navbar .btn {
-  margin-top: 12px
+.navbar {
+  line-height: 30%
 }
+
+li {
+  line-height: 50%;
+}
+
+/*.navbar .btn {
+  margin-top: 12px
+}*/
 
 #reader{
   width: 100%;
