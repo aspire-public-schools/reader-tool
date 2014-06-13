@@ -30,6 +30,7 @@ class SamlController < ApplicationController
 
     settings = OneLogin::RubySaml::Settings.new
 
+    # settings.assertion_consumer_service_url = "http://localhost:3000/saml"
     settings.assertion_consumer_service_url = "http://aspirereader.herokuapp.com/saml"
     settings.issuer                         = "https://app.onelogin.com/saml/metadata/365951"
     settings.idp_sso_target_url             = "https://app.onelogin.com/saml/signon/365951"
