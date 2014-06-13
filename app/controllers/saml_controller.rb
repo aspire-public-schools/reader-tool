@@ -22,12 +22,11 @@ class SamlController < ApplicationController
         redirect_to observations_path
       end
     else
-      redirect_to "http://aspire.onelogin.com", flash: {error: "Godzilla didn't like your e-mail"}
+      redirect_to "http://aspire.onelogin.com"
     end
   end
 
   def saml_settings
-
     settings = OneLogin::RubySaml::Settings.new
 
     # settings.assertion_consumer_service_url = "http://localhost:3000/saml"
