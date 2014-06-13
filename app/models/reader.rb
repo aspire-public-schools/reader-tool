@@ -6,10 +6,16 @@ class Reader < ActiveRecord::Base
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
 
   def show_yes_no
-    is_reader1a == "1" || is_reader1b == "1" || is_reader2 == "1" ? "Yes" : "No"
+    self.send(attribute) == 1 ? "Yes" : "No"
+    if is_reader1a == "1" || is_reader1b == "1" || is_reader2 == "1"
+      "Yes"
+    else
+      "No"
+    end
   end
 
   def reader2?
     is_reader2 == "1"
   end
+
 end
