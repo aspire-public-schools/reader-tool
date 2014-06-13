@@ -17,7 +17,9 @@
       <a><%= link_to "Aspire Reader", observations_path, class:"navbar-brand" %></a>
       <ul class="nav navbar-right">
         <li class="navbar-text">Welcome, <%= current_user.first_name %></li>
-        <li><%= link_to "Admin", admin_path, class: "navbar-text" %></li>
+        <% if current_user.reader2? %>
+          <li><%= link_to "Admin", admin_path, class: "navbar-text" %></li>
+        <% end %>
         <li><%= button_to "logout", logout_path, method: 'delete', class: "btn btn-default navbar-btn navbar-right" %></li>
       </ul>
     </div>

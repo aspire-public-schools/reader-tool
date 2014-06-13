@@ -1,8 +1,9 @@
 class Admin::ObservationsController < ApplicationController
   include ApplicationHelper
+  layout "admin"
 
   def index
-    @readers = Reader.all
+    @readers = Reader.all.sort
     @observation_reads = ObservationRead.all
     @readers_for_select = Reader.all.map { |reader| [reader.first_name, reader.id] }
     @edit_reader_list = edit_reader_list

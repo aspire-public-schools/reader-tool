@@ -25,7 +25,7 @@ STATUS_WORD_MAPPING = {1 => :waiting, 2 => :ready, 3 => :finish}.freeze
   end
 
   def self.reader_1b_count
-    where(reader_number: '1a').count
+    where(reader_number: '1b').count
   end
 
   def self.reader_2_count
