@@ -1,6 +1,5 @@
 class Admin::ObservationsController < ApplicationController
   include ApplicationHelper
-  layout "admin"
 
   def index
     @readers = Reader.all.sort
