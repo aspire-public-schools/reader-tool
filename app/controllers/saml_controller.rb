@@ -22,19 +22,19 @@ class SamlController < ApplicationController
         redirect_to observations_path
       end
     else
-      redirect_to "http://aspire.onelogin.com", flash: {error: "Godzilla didn't like your e-mail"}
+      redirect_to "http://aspire.onelogin.com"
     end
   end
 
   def saml_settings
-
     settings = OneLogin::RubySaml::Settings.new
 
+    # settings.assertion_consumer_service_url = "http://localhost:3000/saml"
     settings.assertion_consumer_service_url = "http://aspirereader.herokuapp.com/saml"
     settings.issuer                         = "https://app.onelogin.com/saml/metadata/365951"
-    settings.idp_sso_target_url             = "https://app.onelogin.com/saml/signon/365951"
+    settings.idp_sso_target_url             = "https://app.onelogin.com/trust/saml2/http-post/sso/365951"
     settings.idp_cert_fingerprint           = ENV['ONELOGIN_FINGERPRINT']
-    settings.name_identifier_format         = "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress"
+    settings.name_identifier_format         = "urn:oasis:names:tc:SAML:2.0:nameid-format:transient"
 
     settings.authn_context = "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport"
 
