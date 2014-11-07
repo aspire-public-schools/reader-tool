@@ -1,21 +1,19 @@
 class SessionsController < ApplicationController
-   include SessionHelper
+  include SessionHelper
 
-   #Onelogin creates your session no need for this
-
-   # def create
-   #    params_email_downcase = params[:reader][:email].downcase
-   #    reader = Reader.find_by_email(params_email_downcase)
-   #    if reader
-   #       session[:current_reader_id] = reader.id
-   #       redirect_to observations_path
-   #    else
-   #       redirect_to root_path, flash: {error: "Godzilla didn't like your e-mail"}
-   #    end
-   # end
-
-   def destroy
-      logout
-      redirect_to "https://aspire.onelogin.com"
-   end
+  if Rails.env.development?
+    def create
+      if reader = Reader.find_by_employee_number(params[:eid])
+        session[:current_reader_id] = reader.id
+        redirect_to observations_path
+      else
+        redirect_to root_path, flash: {error: "Reader not found!"}
+      end
+    end
+  end
+  
+  def destroy
+    logout
+    redirect_to "https://aspire.onelogin.com"
+  end
 end

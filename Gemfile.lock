@@ -235,7 +235,7 @@ DEPENDENCIES
   populator
   quiet_assets
   rack_session_access
-  rails (= 3.2.14)
+  rails (~> 3.2.14)
   rspec-rails
   ruby-saml
   sass-rails (~> 3.2.3)

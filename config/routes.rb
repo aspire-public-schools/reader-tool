@@ -28,5 +28,11 @@ ReaderTool::Application.routes.draw do
 
   match 'admin/readers/:id' => 'admin/readers#edit'
   match '/logout', to: 'sessions#destroy', via: 'delete'
+
   get 'login' => 'saml#index', as: 'login'
+
+  if Rails.env.development?
+    get 'login_as/:eid' => 'sessions#create'
+  end
+
 end
