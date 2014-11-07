@@ -9,8 +9,7 @@
 
 #You can also populate this way
 
-# %x(rake db:migrate:reset)
-# %x(rake db:seed)
+# %x(rake db:schema:load db:seed)
 
 
 

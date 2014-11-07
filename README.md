@@ -56,7 +56,7 @@ External Dependencies
 * [jQuery] - of course
 * Rpec - Rails testing suite
 * Capybara - testing feature testing
-* Should-Matchers - testing models
+* Shoulda-Matchers - testing models
 * Jasmine - JavaScript Testing
 * Heroku - for Database
 * Factory-girl - to create factories for testing.
