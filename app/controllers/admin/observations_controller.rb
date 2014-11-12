@@ -4,7 +4,7 @@ class Admin::ObservationsController < ApplicationController
   def index
     @readers = Reader.all.sort
     @observation_reads = ObservationRead.all
-    @readers_for_select = Reader.all.map { |reader| [reader.first_name, reader.id] }
+    @readers_for_select = Reader.active.map { |reader| [reader.first_name, reader.id] }
     @edit_reader_list = edit_reader_list
   end
 
