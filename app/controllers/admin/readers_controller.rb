@@ -36,6 +36,16 @@ class Admin::ReadersController < ApplicationController
     end
   end
 
+  def deactivate
+    @reader = Reader.find(params[:id])
+    if @reader.update_attributes(is_reader1a: "0", is_reader1b: "0", is_reader2: "0")
+      flash[:success] = "Godzilla says #{@reader.first_name} #{@reader.last_name} was deactivated"
+    else
+      flash[:error] = "Mothra defeats Godzilla, try again!"
+    end
+    redirect_to admin_readers_path
+  end
+
   def show
     @reader = Reader.find(params[:id])
   end
