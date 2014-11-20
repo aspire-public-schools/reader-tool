@@ -37,14 +37,6 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.0.4)
-    capybara (2.3.0)
-      mime-types (>= 1.16)
-      nokogiri (>= 1.3.3)
-      rack (>= 1.0.0)
-      rack-test (>= 0.5.4)
-      xpath (~> 2.0)
-    childprocess (0.5.3)
-      ffi (~> 1.0, >= 1.0.11)
     coderay (1.1.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -79,7 +71,6 @@ GEM
       railties (>= 3.0.0)
     faker (1.3.0)
       i18n (~> 0.5)
-    ffi (1.9.3)
     hike (1.2.3)
     humanize (1.1.0)
     i18n (0.6.9)
@@ -158,17 +149,11 @@ GEM
     ruby-saml (0.8.1)
       nokogiri (>= 1.5.0)
       uuid (~> 2.3)
-    rubyzip (1.1.4)
     sass (3.3.8)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
-    selenium-webdriver (2.42.0)
-      childprocess (>= 0.5.0)
-      multi_json (~> 1.0)
-      rubyzip (~> 1.0)
-      websocket (~> 1.0.4)
     sextant (0.2.4)
       rails (>= 3.2)
     shoulda-matchers (2.6.1)
@@ -210,9 +195,6 @@ GEM
       json (>= 1.8.0)
     uuid (2.3.7)
       macaddr (~> 1.0)
-    websocket (1.0.7)
-    xpath (2.0.0)
-      nokogiri (~> 1.3)
 
 PLATFORMS
   ruby
@@ -221,7 +203,6 @@ DEPENDENCIES
   XMLCanonicalizer
   better_errors
   binding_of_caller
-  capybara
   coffee-rails (~> 3.2.1)
   database_cleaner
   debugger
@@ -239,7 +220,6 @@ DEPENDENCIES
   rspec-rails
   ruby-saml
   sass-rails (~> 3.2.3)
-  selenium-webdriver
   sextant
   shoulda-matchers
   simple_form

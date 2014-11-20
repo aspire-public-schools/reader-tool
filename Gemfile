@@ -20,8 +20,8 @@ group :development do
 end
 
 group :test do
-  gem 'capybara'
-  gem 'selenium-webdriver'
+  # gem 'capybara'
+  # gem 'selenium-webdriver'
   gem 'shoulda-matchers'
   gem 'simplecov'
   gem 'database_cleaner'
