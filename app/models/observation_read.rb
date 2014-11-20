@@ -5,31 +5,27 @@ class ObservationRead < ActiveRecord::Base
   has_many :evidence_scores, :through => :indicator_scores
   belongs_to :reader
 
-  # scope :reader_1a_count, -> where(reader_number: '1a').count
-  # scope :reader_1b_count, -> where(reader_number: '1b').count
-  # scope :reader_2_count, -> where(reader_number: '2').count
 
-  scope :ready_status, -> { where(observation_status: '2') }
-  scope :waiting_status, -> { where(observation_status: '1') }
-  scope :finished_status, -> { where(observation_status: '3') }
+  STATUS_WORD_MAPPING = {1 => :waiting, 2 => :ready, 3 => :finish}.freeze
 
-
-STATUS_WORD_MAPPING = {1 => :waiting, 2 => :ready, 3 => :finish}.freeze
-
-  def status_words
-    STATUS_WORD_MAPPING[observation_status]
+  def status
+    STATUS_WORD_MAPPING[observation_status].to_s
   end
 
-  def self.reader_1a_count
-    where(reader_number: '1a').count
+  def self.reader kind
+    where(reader_number: kind.to_s )
   end
 
-  def self.reader_1b_count
-    where(reader_number: '1b').count
-  end
-
-  def self.reader_2_count
-    where(reader_number: '2').count
+  def self.status kind
+    status = case kind.to_sym
+    when :waiting
+      1
+    when :ready
+      2
+    when :finished
+      3
+    end
+    where(observation_status: status)
   end
 
   def self.last_read
@@ -37,9 +33,10 @@ STATUS_WORD_MAPPING = {1 => :waiting, 2 => :ready, 3 => :finish}.freeze
   end
 
   def domains
-    domain_scores.joins(:domain).
+    domain_scores.
+      joins(:domain).
       select("distinct domains.id as id, domains.description as description").
-        map { |d| [d.id, d.description] }
+      map { |d| [d.id, d.description] }
   end
 
   def copy_to_reader2
@@ -133,82 +130,4 @@ STATUS_WORD_MAPPING = {1 => :waiting, 2 => :ready, 3 => :finish}.freeze
     end
   end
 end
-
-
-
-
-# new_indicator_scores.each do |indicator_score|
-#   indicator_score.evidence_scores.each do |evidence_score|
-#     evidence_square.quality = 1
-#   end
-# end
-
-
-# for indicator_score in new_indicator_scores
-
-
-
-    # p old_evidence_scores = self.evidence_sco
-    # p new_evidence_scores = EvidenceScores.new
-
-
-     #old_observation_read.save
-    #p new_observation_read
-    # p copy_scores
-
-    # COPY observation_read
-    # COPY indicator_scores
-    # COPY evidence_scores
-    # p ObservationRead.last
-    # p self.clone.save
-    # p ObservationRead.last
-
-
-    # if grader?
-    #   return submit_for_verification and copy_scores
-    # elsif submitted_for_verification? and supervisor?
-    #   return verify_complete and copy_scores
-    # end
-    # false
-
-
-
-  # def copy_scores
-  #   # self.domain_scores.each do |domain_score|
-  #   #   domain_score.indicator_scores.each do |indicator_score|
-  #   #   p indicator_score.clone.save
-  #   #      indicator_score.evidence_scores
-  #   #       evidence_score.clone.save
-  #   #   end
-  #   # end
-  # end
-
-  # # def test
-  # #   2s_scores = evidence_scores.where(reader_number: 2, observation_group_id: self.observation_group_id)
-
-
-  # def submit_for_verfication
-  #   update_attributes(observation_status: 2)
-  # end
-
-  # def submitted_for_verification?
-  #   true
-  # end
-
-  # def verify_complete
-  #   update_attributes(observation_status: 3)
-  # end
-
-
-
-
-# IF @observation_read.reader_number = '1a' OR '1b' THEN SET observation_status = 2 AND Copy reader 1 scores to reader 2
-    # IF @observation_read.reader_number = '2' THEN SET observation_status = 3
-
-# keep controllers thin
-# push it down into the model
-# anytime you touch the model, you should have a test for it
-
-# 1a(Domain 1+4) + 1b(Domain 2+3) = 1 observation/reader
-# copy into reader 2
 
