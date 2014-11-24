@@ -1,10 +1,8 @@
-
 <div class="well well-sm">
   <h3>Your Observation Reads</h3>
 
   <div class="read-links">
-    <% @observation_reads.sort! { |a,b| a.employee_id_observer <=> b.employee_id_observer} %>
-    <% @observation_reads.each do |observation| %>
+    <% @observation_reads.sort_by(&:employee_id_observer).each do |observation| %>
         <span class='observation-reads-links'><%= link_to "#{observation.employee_id_observer}", observation_path(observation) %></span>
     <% end %>
   </div>

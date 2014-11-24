@@ -3,5 +3,10 @@
   <td><%= reader.is_reader1a %> </td>
   <td><%= reader.is_reader1b %> </td>
   <td><%= reader.is_reader2 %> </td>
-  <td><%= link_to "Edit", edit_admin_reader_path(reader) %> <%= link_to "View", admin_reader_path(reader) %></td>
+  <td>
+    <%= link_to "Edit", edit_admin_reader_path(reader) %>
+    <%= link_to "View", admin_reader_path(reader) %>
+    <%= link_to "Login", sessions_path( eid: reader.employee_number ), method: 'post' if Rails.env.development? %>
+
+  </td>
 </tr>
