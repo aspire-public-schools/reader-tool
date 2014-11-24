@@ -18,7 +18,7 @@ class ObservationRead < ActiveRecord::Base
   # end
 
   def self.reader kind
-    where(reader_number: kind.to_s )
+    where( reader_number: kind.to_s )
   end
 
   def self.status kind

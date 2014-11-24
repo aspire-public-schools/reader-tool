@@ -59,10 +59,8 @@
             </div>
           </div>
       <% end %>
-        <%= f.text_area :comments, class: 'form-control', rows: "1", placeholder: "Comments"  %>
-      <% if current_user.reader2? %>
-        <%= f.input :flags, as: :radio_buttons %>
-      <% end %>
+      <%= f.text_area :comments, class: 'form-control', rows: "1", placeholder: "Comments"  %>
+      <%= f.input :flags, as: :radio_buttons  if current_user.reader2? %>
       <div class="observation-read-button">
         <div class="btn btn-danger" id="finalize-button">Finalize Read</div>
       </div>
