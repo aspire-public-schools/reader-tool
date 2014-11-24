@@ -10,11 +10,11 @@
               <th> Reads for 3 </th>
               <th> Last Read </th>
             </tr>
-            <% if reader.observation_reads.any? %>
-              <% @readers.each do |reader| %>
+            <% @readers.each do |reader| %>
+              <% if reader.observation_reads.any? %>
               <tr>
                 <td> <%= reader.first_name %> </td>
-                <td> <%= reader.observation_reads.reader('1a')count %> </td>
+                <td> <%= reader.observation_reads.reader('1a').count %> </td>
                 <td> <%= reader.observation_reads.reader('1b').count %> </td>
                 <td> <%= reader.observation_reads.reader('2').count %> </td>
                 <td> <%= reader.observation_reads.last_read %> </td>
