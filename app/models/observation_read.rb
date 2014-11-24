@@ -5,27 +5,24 @@ class ObservationRead < ActiveRecord::Base
   has_many :evidence_scores, :through => :indicator_scores
   belongs_to :reader
 
+  default_scope order(:observation_group_id)
 
-  STATUS_WORD_MAPPING = {1 => :waiting, 2 => :ready, 3 => :finish}.freeze
+  STATUS_WORD_MAPPING = {1 => :waiting, 2 => :ready, 3 => :finished}.freeze
 
   def status
-    STATUS_WORD_MAPPING[observation_status].to_s
+    STATUS_WORD_MAPPING[@observation_status].to_s
   end
+
+  # def status= kind
+  #   self.observation_status = STATUS_WORD_MAPPING.invert[status.to_sym]
+  # end
 
   def self.reader kind
     where(reader_number: kind.to_s )
   end
 
   def self.status kind
-    status = case kind.to_sym
-    when :waiting
-      1
-    when :ready
-      2
-    when :finished
-      3
-    end
-    where(observation_status: status)
+    where(observation_status: STATUS_WORD_MAPPING.invert[kind.to_sym] )
   end
 
   def self.last_read

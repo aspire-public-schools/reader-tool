@@ -39,7 +39,7 @@
 
   def current_reads
     @reader = current_user
-    @observation_reads = @reader.observation_reads.where(observation_status: 2)
+    @observation_reads = @reader.observation_reads.status(:ready)
   end
 
 end
