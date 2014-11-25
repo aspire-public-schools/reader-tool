@@ -21,6 +21,17 @@ class ObservationRead < ActiveRecord::Base
     where( reader_number: kind.to_s )
   end
 
+  def reader_number
+    case super
+    when '1a'
+      '1'
+    when '1b'
+      '2'
+    when '2'
+      '3'
+    end
+  end
+
   def self.status kind
     where(observation_status: STATUS_WORD_MAPPING.invert[kind.to_sym] )
   end
@@ -40,23 +51,23 @@ class ObservationRead < ActiveRecord::Base
     r1_observation_read = self
     r2_observation_read = ObservationRead.where("observation_group_id = ? AND reader_number = ?", self.observation_group_id, '2').first
 
-    if reader_number == '1a'
+    case reader_number
+    when '1a'
       certification_scores = {:document_quality => self.document_quality, :document_alignment => self.document_alignment}
-    elsif reader_number == '1b'
+    when '1b'
       certification_scores = {:live_quality => self.live_quality, :live_alignment => self.live_alignment}
     end
 
     r2_observation_read.update_attributes(certification_scores)
-    if r2_observation_read.comments == nil
-      comments = "#{self.reader_number}: #{self.comments}"
-    else
-      comments = "#{self.reader_number}: #{self.comments}\n#{r2_observation_read.comments}"
-    end
+    comments = "#{self.reader_number}: #{self.comments}"
+    comments += "\n#{r2_observation_read.comments}" if r2_observation_read.comments.any?
+
     r2_observation_read.update_attributes(comments: comments)
 
-    if reader_number == '1a'
+    case reader_number
+    when '1a'
       r2_indicator_scores = r2_observation_read.indicator_scores.where("domain_scores.domain_id IN (1,4)").order(:indicator_id)
-    elsif reader_number == '1b'
+    when '1b'
       r2_indicator_scores = r2_observation_read.indicator_scores.where("domain_scores.domain_id IN (2,3)").order(:indicator_id)
     end
 

@@ -2,7 +2,7 @@
 
   <div class="container-fluid">
 
-  <h1><%=@reader.first_name %> <%=@reader.last_name %></h1>
+  <h1><%= @reader.first_name %> <%=@reader.last_name %></h1>
 
   <div class="row">
     <div class="col-md-10">
@@ -16,12 +16,17 @@
                   <th> Reader Number</th>
                   <th> Comments</th>
                 <tr>
-              <% @reader.observation_reads.each do |observation_read| %>
+              <% @reader.observation_reads.order('created_at ASC').each do |observation_read| %>
                 <tr>
                     <td><%= observation_read.employee_id_observer %></td>
                     <td><%= observation_read.status %></td>
                     <td><%= observation_read.reader_number %></td>
-                    <td><%= observation_read.comments %></td>
+                    <td>
+                      <ul><% observation_read.comments.split("\r\n").each do |comment| %>
+                        <li><%= comment %></li>
+                        <% end %>
+                      </ul>
+                    </td>
                 </tr>
                   <% end %>
 
