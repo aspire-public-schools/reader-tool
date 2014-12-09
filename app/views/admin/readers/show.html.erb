@@ -10,12 +10,15 @@
         <div class="panel-heading">Observation Reads</div>
 
               <table class="table table-hover table-bordered">
+                <thead>
                 <tr>
                   <th> Employee ID </th>
                   <th> State </th>
                   <th> Reader Number</th>
                   <th> Comments</th>
                 <tr>
+                </thead>
+                <tbody>
               <% @reader.observation_reads.order('created_at ASC').each do |observation_read| %>
                 <tr>
                     <td><%= observation_read.employee_id_observer %></td>
@@ -28,8 +31,8 @@
                       </ul>
                     </td>
                 </tr>
-                  <% end %>
-
+              <% end %>
+              </tbody>
               </table>
         </div>
       </div>
