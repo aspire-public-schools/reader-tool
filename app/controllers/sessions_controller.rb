@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   include SessionHelper
 
-  if Rails.env.development?
+  if Rails.env.development? || Rails.env.staging?
     def create
       if reader = Reader.find_by_employee_number(params[:eid])
         session[:current_reader_id] = reader.id

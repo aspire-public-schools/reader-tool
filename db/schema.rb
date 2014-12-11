@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140603224056) do
+ActiveRecord::Schema.define(:version => 20140215042950) do
+
+  create_table "all_evidence", :id => false, :force => true do |t|
+    t.integer "observation_group_id"
+    t.string  "employee_id_observer", :limit => 10
+    t.string  "observer_name",        :limit => 100
+    t.string  "employee_id_learner",  :limit => 10
+    t.integer "evidence_id"
+    t.text    "evidence"
+    t.string  "indicator_code",       :limit => 10
+  end
 
   create_table "domain_scores", :force => true do |t|
     t.integer  "observation_read_id"
@@ -33,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20140603224056) do
     t.boolean  "alignment"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "evidence_id"
   end
 
   create_table "indicator_scores", :force => true do |t|
@@ -53,14 +64,12 @@ ActiveRecord::Schema.define(:version => 20140603224056) do
 
   create_table "observation_reads", :force => true do |t|
     t.integer  "observation_group_id"
-    t.integer  "employee_id_observer"
-    t.integer  "employee_id_learner"
     t.float    "correlation"
     t.float    "average_difference"
     t.float    "percent_correct"
     t.integer  "reader_id"
-    t.datetime "created_at",                                            :null => false
-    t.datetime "updated_at",                                            :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at"
     t.string   "reader_number",        :limit => 10
     t.integer  "document_quality"
     t.integer  "document_alignment"
@@ -68,7 +77,9 @@ ActiveRecord::Schema.define(:version => 20140603224056) do
     t.integer  "live_alignment"
     t.integer  "observation_status"
     t.text     "comments"
-    t.boolean  "flags",                              :default => false
+    t.boolean  "flags"
+    t.string   "employee_id_observer", :limit => 10
+    t.string   "employee_id_learner",  :limit => 10
   end
 
   create_table "readers", :force => true do |t|

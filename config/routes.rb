@@ -31,7 +31,7 @@ ReaderTool::Application.routes.draw do
 
   get 'login' => 'saml#index', as: 'login'
 
-  if Rails.env.development?
+  if Rails.env.staging? || Rails.env.development?
     get 'login_as/:eid' => 'sessions#create'
   end
 

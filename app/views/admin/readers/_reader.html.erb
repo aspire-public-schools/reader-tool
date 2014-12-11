@@ -6,7 +6,7 @@
   <td>
     <%= link_to "Edit", edit_admin_reader_path(reader) %>
     <%= link_to "View", admin_reader_path(reader) %>
-    <%= link_to "Login", sessions_path( eid: reader.employee_number ), method: 'post' if Rails.env.development? %>
+    <%= link_to "Login", sessions_path( eid: reader.employee_number ), method: 'post' if Rails.env.development? || Rails.env.staging? %>
 
   </td>
 </tr>
