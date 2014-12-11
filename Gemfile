@@ -6,7 +6,10 @@ gem 'rails', '~> 3.2.14'
 gem 'jquery-rails'
 gem 'simple_form'
 gem 'pg'
-gem 'thin'
+
+gem 'unicorn'
+gem 'rack-timeout'
+
 gem 'XMLCanonicalizer'
 gem 'ruby-saml'
 gem 'humanize'
