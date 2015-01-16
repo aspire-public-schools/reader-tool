@@ -15,7 +15,7 @@ class Admin::ObservationsController < ApplicationController
           end
         redirect_to admin_observations_path, :flash => { :success => "Your changes were saved!" }
       else
-        redirect_to admin_observations_path, :flash => { :error => "Your changes didn't save, contact Godzilla"}
+        redirect_to admin_observations_path, :flash => { :error => "Your changes didn't save, contact the system Administrator"}
       end
   end
 

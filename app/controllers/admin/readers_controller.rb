@@ -28,7 +28,7 @@ class Admin::ReadersController < ApplicationController
   def update
     @reader = Reader.find(params[:id])
     if @reader.update_attributes(params[:reader])
-      flash[:success] = "Godzilla says #{@reader.first_name} #{@reader.last_name} was Updated"
+      flash[:success] = "#{@reader.first_name} #{@reader.last_name} was saved"
       redirect_to admin_readers_path
     else
       flash[:error] = "#{@reader.errors.full_messages.to_sentence}."
@@ -39,9 +39,9 @@ class Admin::ReadersController < ApplicationController
   def deactivate
     @reader = Reader.find(params[:id])
     if @reader.update_attributes(is_reader1a: "0", is_reader1b: "0", is_reader2: "0")
-      flash[:success] = "Godzilla says #{@reader.first_name} #{@reader.last_name} was deactivated"
+      flash[:success] = "#{@reader.first_name} #{@reader.last_name} was deactivated"
     else
-      flash[:error] = "Mothra defeats Godzilla, try again!"
+      flash[:error] = "There was a system error, could not deactivate"
     end
     redirect_to admin_readers_path
   end
