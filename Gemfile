@@ -37,6 +37,7 @@ group :development, :test do
   gem "rack_session_access"
   gem 'populator'
   gem 'dotenv'
+  gem 'railroady'
 end
 
 group :assets do
