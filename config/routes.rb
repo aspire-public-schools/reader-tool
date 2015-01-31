@@ -1,20 +1,13 @@
 ReaderTool::Application.routes.draw do
 
-  resources :sessions, only: [:create, :destroy]
-  if Rails.env.staging? || Rails.env.development?
-    get 'login_as/:eid' => 'sessions#create'
-  end
+  root to: 'sessions#new'
 
-  # TODO: remove saml stuff  
-  resources :saml
-  get 'login' => 'saml#index', as: 'login'
+  resources :sessions, only: [:new, :create, :destroy]
+  get 'login'     => 'sessions#new', as: 'login'
   delete 'logout' => 'sessions#destroy', as: 'logout'
-  root to: 'saml#index'
-
 
   resources :readers, only: [:index, :create, :update, :new]
 
-  # TODO fix for only second-level nesting
   resources :observation_reads do
     resources :domains
   end
@@ -26,16 +19,6 @@ ReaderTool::Application.routes.draw do
       get :score, on: :collection
     end
   end
-
-  # resources :observation_reads do
-  #   resources :domains do
-  #     resources :indicators do
-  #      resources :evidences do
-  #         get :score, on: :collection
-  #       end
-  #     end
-  #   end
-  # end
 
   # TODO: password protect this with HTTP auth
   namespace :admin do

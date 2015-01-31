@@ -16,4 +16,8 @@ module SessionHelper
     session[:return_to] = request.url if request.get?
   end
 
+  def require_login
+    redirect_to login_path unless signed_in?
+  end
+
 end

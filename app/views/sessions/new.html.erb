@@ -1,0 +1,54 @@
+
+<div id="main" class="container">
+  <div class="jumbotron">
+    <h2>Welcome to the Aspire Reader Tool</h2>
+      <%= simple_form_for :reader, :html => {:class => 'input-group-lg'}, url: sessions_path do |f| %>
+          <%= f.text_field :email, class: "form-control", placeholder: "Enter your Aspire Email" %>
+          <%= f.text_field :eid, class: "form-control", placeholder: "Employee ID" %>
+          <%= f.submit "Login", class: "btn btn-primary" %>
+      <% end %>
+
+    <% if flash[:error] %>
+       <div class="alert alert-danger alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <%= flash[:error] %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+
+
+<!-- <h1>Login</h1><br>
+
+
+<div class="container container-fluid">
+
+  <div class="panel panel-default panel-info">
+    <div class="panel-heading">Please sign in</div>
+    <div class="panel-body">
+      <%= form_for :reader, url: sessions_path, class: "form-horizontal center" do |f| %>
+
+      <div class="form-group">
+        <%= f.label :email, "Email:", class: "col-md-4 control-label reader-admin-label" %>
+        <div class="col-md-8">
+          <%= f.text_field :email, class: "form-control reader-admin-label" %>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <%= f.label :eid, "Employee Number:", class: "col-md-4 control-label reader-admin-label" %>
+        <div class="col-md-8">
+          <%= f.text_field :eid, class: "form-control reader-admin-label" %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <%= f.submit "Sign in", class: "btn btn-default btn-primary" %>
+  <% end %>
+</div>
+
+ -->
