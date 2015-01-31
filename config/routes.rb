@@ -6,14 +6,14 @@ ReaderTool::Application.routes.draw do
   get 'login'     => 'sessions#new', as: 'login'
   delete 'logout' => 'sessions#destroy', as: 'logout'
 
-  resources :readers, only: [:index, :create, :update, :new]
-
   resources :observation_reads do
     resources :domains
   end
+
   resources :domains do
     resources :indicators
   end
+
   resources :indicators do
     resources :evidence_scores do
       get :score, on: :collection
@@ -28,6 +28,7 @@ ReaderTool::Application.routes.draw do
         put :deactivate
       end
     end
+
     resources :observation_reads
     put 'observations_updates', to: 'observations#update'
   end
