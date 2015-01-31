@@ -1,4 +1,4 @@
-class EvidencesController < ApplicationController
+class EvidenceScoresController < ApplicationController
   include EvidenceScoreHelper
 
   def index

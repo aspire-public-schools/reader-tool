@@ -16,16 +16,16 @@
             <td><%= read['employee_id_observer'] %></td>
             <td class=<%= read['document_status'].to_i.humanize %>>
               <%= select_tag("observation_read_id[#{read['document_observation_read_id']}]", options_for_select(@readers_for_select, read['document_reader_id']), prompt: "Select a reader") %><br>
-              <%= link_to "Observation Read", observation_path(read['document_observation_read_id'])%>
+              <%= link_to "Observation Read", observation_read_path(read['document_observation_read_id'])%>
             </td>
             <td class=<%= read['live_status'].to_i.humanize %>>
               <%= select_tag("observation_read_id[#{read['live_observation_read_id']}]", options_for_select(@readers_for_select, read['live_reader_id']), prompt: "Select a reader") %><br>
-              <%= link_to "Observation Read", observation_path(read['live_observation_read_id'])%>
+              <%= link_to "Observation Read", observation_read_path(read['live_observation_read_id'])%>
             </td>
             <td class=<%= read['second_status'].to_i.humanize %>>
               <% if read.oneb_flags == "t" %>
                 <%= select_tag("observation_read_id[#{read['second_observation_read_id']}]", options_for_select(@readers_for_select, read['second_reader_id']), prompt: "Select a reader")%><br>
-                <%= link_to "Observation Read", observation_path(read['second_observation_read_id'])%>
+                <%= link_to "Observation Read", observation_read_path(read['second_observation_read_id'])%>
               <% else %>
                 Cannot assign reader until flagged.
               <% end %>
