@@ -1,4 +1,4 @@
-class Admin::ObservationReadsController < ApplicationController
+class Admin::ObservationReadsController < AdminController
   include ApplicationHelper
 
   def index

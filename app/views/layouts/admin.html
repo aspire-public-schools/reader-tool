@@ -1,34 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>ReaderTool</title>
+  <title>ReaderTool Admin</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
-
 </head>
 <body>
-
-  <% if signed_in? %>
 
   <div id='cssmenu'>
     <nav class="navbar-fixed-top" id="fixed-nav">
       <ul>
-       <li><%= link_to "Aspire Reader", observation_reads_path %></li>
-       <% if current_user.reader2? %>
-       <li><%= link_to "Admin", admin_path %></li>
-       <% end %>
+       <li><%= link_to "Aspire Reader", root_path %></li>
        <div class="right-nav">
-         <li><a><span id="welcome">Welcome, <%= current_user.first_name %></span></a></li>
+         <li><a><span id="welcome">Welcome, Admin</span></a></li>
          <li><span id="welcome-button"><%= button_to "logout", logout_path, method: 'delete', class: "btn btn-default nav-button navbar-btn" %></li>
        </div>
      </ul>
    </nav>
  </div>
-
- <% end %>
 
 
  <%= yield %>

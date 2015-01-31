@@ -1,4 +1,4 @@
-class Admin::ReadersController < ApplicationController
+class Admin::ReadersController < AdminController
 
   def create
     @reader = Reader.new(params[:reader])

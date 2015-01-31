@@ -1,15 +1,27 @@
+#dashboard{
+  font-size: 2em;
+}
+#dashboard ul {
+}
+
+#dashboard li {
+  padding: 0.25em;
+  list-style-type: circle;
+}
+
 /*
 .admin-form, a:link {
   color: purple;
 }
 
-.dashboard-links, a:visited {
+#dashboard a:visited {
   color: blue;
 }
 
-.dashboard-links, a:hover {
+#dashboard a:hover {
   color: red;
 }*/
+
 
 .reader-assignment a:link{
   color: white;
