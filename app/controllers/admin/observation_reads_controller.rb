@@ -2,7 +2,7 @@ class Admin::ObservationReadsController < ApplicationController
   include ApplicationHelper
 
   def index
-    @readers = Reader.all.sort
+    @readers = Reader.all.sort_by(&:first_name)
     @observation_reads = ObservationRead.all
     @readers_for_select = Reader.active.map{ |reader| [reader.first_name, reader.id] }
     @edit_reader_list = edit_reader_list
@@ -16,7 +16,7 @@ class Admin::ObservationReadsController < ApplicationController
       end
       flash[:success] = "Your changes were saved!"
     else
-      flash[:error] = "Your changes didn't save, contact the system Administrator"}
+      flash[:error] = "Your changes didn't save, contact the system Administrator"
     end
     redirect_to admin_observation_reads_path, :flash => flash
   end

@@ -3,7 +3,7 @@
   before_filter :require_reader
   before_filter :current_reads, :only => [:index, :show]
 
-	def index
+  def index
   end
 
   def show
@@ -21,7 +21,7 @@
     if @observation_read.update_attributes(params[:observation_read])
       @observation_read.copy_to_reader2
       @observation_read.update_status
-      render :json => { :saved_message => "You've Successfully Finalized!", :document_live_form => render_to_string(:partial => "document-live-form", locals: { :observation_read => @observation_read } )}
+      render :json => { :saved_message => "You've Successfully Finalized!", :document_live_form => render_to_string(:partial => "document-live-form", locals: { :observation_read => @observation_read }) }
     else
       render :json => { :error => @observation_read.errors.full_messages.join(", ")}, :status => :unprocessable_entity
     end
@@ -31,7 +31,7 @@
 
   def require_reader
     store_location
-    redirect_to "/login" unless current_user
+    redirect_to login_path unless current_user
   end
 
   def current_reads
