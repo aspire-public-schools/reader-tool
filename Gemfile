@@ -5,13 +5,13 @@ ruby "1.9.3"
 gem 'rails', '~> 3.2.14'
 gem 'jquery-rails'
 gem 'simple_form'
+
 gem 'pg'
+gem 'rails_12factor'
 
 gem 'unicorn'
 gem 'rack-timeout'
 
-gem 'XMLCanonicalizer'
-gem 'ruby-saml'
 gem 'humanize'
 
 group :development do
