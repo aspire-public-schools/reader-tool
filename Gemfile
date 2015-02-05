@@ -33,7 +33,7 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem "factory_girl_rails", "~> 4.0"
-  gem 'faker'
+  # gem 'faker'
   gem "rack_session_access"
   gem 'populator'
   gem 'dotenv'
