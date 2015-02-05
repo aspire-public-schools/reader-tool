@@ -47,6 +47,15 @@ module EvidenceScoreHelper
     section_scores = ObservationRead.find_by_sql(sql)
   end
 
+  def print_cert value
+    case value
+    when 1
+      "NOTCERT"
+    when 2
+      "CERT"
+    end
+  end
+
 end
 
 

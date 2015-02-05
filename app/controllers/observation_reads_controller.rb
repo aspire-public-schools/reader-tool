@@ -13,6 +13,8 @@
     @get_section_scores = get_section_scores(params[:id])
     @domain_percentages.sort_by!(&:number)
     @domain = Domain.all
+    @observation_read.update_scores( @get_section_scores )
+
     render 'index'
   end
 

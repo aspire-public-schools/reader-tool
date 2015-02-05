@@ -21,6 +21,10 @@ class ObservationRead < ActiveRecord::Base
     where( reader_number: kind.to_s )
   end
 
+  def final?
+    reader_number == 3 || (reader_number != '1a' && reader_number != '1b')
+  end
+
   def reader_number
     case super
     when '1a'
@@ -52,9 +56,9 @@ class ObservationRead < ActiveRecord::Base
     r2_observation_read = ObservationRead.where("observation_group_id = ? AND reader_number = ?", self.observation_group_id, '2').first
 
     case reader_number
-    when '1a'
+    when '1a','1'
       certification_scores = {:document_quality => self.document_quality, :document_alignment => self.document_alignment}
-    when '1b'
+    when '1b','2'
       certification_scores = {:live_quality => self.live_quality, :live_alignment => self.live_alignment}
     end
 
@@ -65,13 +69,13 @@ class ObservationRead < ActiveRecord::Base
     r2_observation_read.update_attributes(comments: comments)
 
     case reader_number
-    when '1a'
+    when '1a','1'
       r2_indicator_scores = r2_observation_read.indicator_scores.where("domain_scores.domain_id IN (1,4)").order(:indicator_id)
-    when '1b'
+    when '1b','2'
       r2_indicator_scores = r2_observation_read.indicator_scores.where("domain_scores.domain_id IN (2,3)").order(:indicator_id)
     end
 
-    if reader_number == '1a' || reader_number == '1b'
+    if !final? #reader_number == '1a' || reader_number == '1b'
     # this copies reader 1 scores into reader 2
         r1_indicator_scores = r1_observation_read.indicator_scores.order(:indicator_id)
 
@@ -101,6 +105,27 @@ class ObservationRead < ActiveRecord::Base
     end
   end
 
+  # this method is called from the controller
+  def update_scores scores
+    score = scores[0]
+    document_quality = quality_cert( score )
+    document_alignment = alignment_cert( score )
+
+    score = scores[1] if final?
+    live_quality = quality_cert( score )
+    live_alignment = alignment_cert( score )
+  end
+
+  def quality_cert score
+    score.quality_average.to_f*100 >= 80 ? 2 : 1
+  end
+
+  def alignment_cert score
+    score.alignment_average.to_f*100 >= 75 ? 2 : 1
+  end
+
+
+  # FIXME: these belong as helper methods
   def document_quality_string
     doc_quality_string = document_quality.to_s
     if document_quality == 1
