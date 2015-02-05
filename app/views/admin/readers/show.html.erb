@@ -23,7 +23,8 @@
                 <tr>
                     <td><%= observation_read.employee_id_observer %></td>
                     <td><%= observation_read.status %></td>
-                    <td><%= observation_read.reader_number %></td>
+                    <!-- <td><%= observation_read.reader_number %></td> -->
+                    <td><%= print_reader_number observation_read %></td>
                     <td>
                       <ul><% observation_read.comments.split("\r\n").each do |comment| %>
                         <li><%= comment %></li>

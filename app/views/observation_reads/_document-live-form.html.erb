@@ -11,7 +11,7 @@
               <div class="col-md-6">
                 <div class="row">
                   <% if @observation_read.reader_number == "2" %>
-                  <p class="r1score">Reader 1 Score: <%= @observation_read.document_quality_string %></p>
+                  <p class="r1score">Reader 1 Score: <%=print_cert @observation_read.document_quality %></p>
                   <% end %>
                 </div>
                 <div class="row">
@@ -21,7 +21,7 @@
               <div class="col-md-6">
                   <div class="row">
                      <% if @observation_read.reader_number == "2" %>
-                     <p class="r1score">Reader 1 Score: <%= @observation_read.document_alignment_string %></p>
+                     <p class="r1score">Reader 1 Score: <%= print_cert @observation_read.document_alignment %></p>
                      <% end %>
                   </div>
                  <div class="row">
@@ -39,7 +39,7 @@
               <div class="col-md-6">
                   <div class="row">
                     <% if @observation_read.reader_number == "2" %>
-                        <p class="r1score">Reader 1 Score: <%= @observation_read.live_quality_string %></p>
+                        <p class="r1score">Reader 1 Score: <%=print_cert @observation_read.live_quality %></p>
                     <% end %>
                   </div>
                   <div class="row">
@@ -49,7 +49,7 @@
               <div class="col-md-6">
                   <div class="row">
                     <% if @observation_read.reader_number == "2" %>
-                        <p class="r1score">Reader 1 Score: <%= @observation_read.live_alignment_string %></p>
+                        <p class="r1score">Reader 1 Score: <%= print_cert @observation_read.live_alignment %></p>
                     <% end %>
                   </div>
                   <div class="row">

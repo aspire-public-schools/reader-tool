@@ -1,5 +1,5 @@
  class ObservationReadsController < ApplicationController
-  include EvidenceScoreHelper
+
   before_filter :require_reader
   before_filter :current_reads, :only => [:index, :show]
 
@@ -9,8 +9,8 @@
   def show
     @observation_read = ObservationRead.find(params[:id])
     @domains = @observation_read.domain_scores
-    @domain_percentages = get_percentages(params[:id])
-    @get_section_scores = get_section_scores(params[:id])
+    @domain_percentages = @observation_read.find_percentages
+    @get_section_scores = @observation_read.find_section_scores
     @domain_percentages.sort_by!(&:number)
     @domain = Domain.all
     @observation_read.update_scores( @get_section_scores )

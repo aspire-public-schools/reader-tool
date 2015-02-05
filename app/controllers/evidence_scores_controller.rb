@@ -1,5 +1,4 @@
 class EvidenceScoresController < ApplicationController
-  include EvidenceScoreHelper
 
   def index
     @indicator_score = IndicatorScore.find(params[:indicator_id])
@@ -13,7 +12,7 @@ class EvidenceScoresController < ApplicationController
   def score
     @reader = current_user
     @observation_read = @reader.observation_reads.find(params[:observation_id])
-    @observation_read.update_scores( )
+    @observation_read.update_scores
 
     if params[:evidence_scores]
       params[:evidence_scores].keys.each do |score_id|
@@ -26,8 +25,8 @@ class EvidenceScoresController < ApplicationController
     @indicator_score_update = IndicatorScore.update(params[:indicator_id], {comments: params[:comments]}).touch
     if @indicator_score_update
       @indicator_score    = IndicatorScore.find(params[:indicator_id])
-      @get_section_scores = get_section_scores(params[:observation_id])
-      @domain_percentages = get_percentages(params[:observation_id])
+      @get_section_scores = ObservationRead.find_section_scores( params[:observation_id] )
+      @domain_percentages = ObservationRead.find_percentages( params[:observation_id] )
       @domain_percentages_sort = @domain_percentages.sort_by!(&:number)
       render json: { info: "Score saved!",
                      submit_list: render_to_string( partial: "evidence_score_form", locals: { indicator_score: @indicator_score } ),

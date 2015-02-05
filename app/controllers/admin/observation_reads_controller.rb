@@ -1,11 +1,10 @@
 class Admin::ObservationReadsController < AdminController
-  include ApplicationHelper
 
   def index
     @readers = Reader.all.sort_by(&:first_name)
     @observation_reads = ObservationRead.all
     @readers_for_select = Reader.active.map{ |reader| [reader.first_name, reader.id] }
-    @edit_reader_list = edit_reader_list
+    @edit_reader_list = ObservationRead.edit_reader_list
   end
 
   def update

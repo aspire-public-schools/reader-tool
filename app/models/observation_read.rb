@@ -22,18 +22,7 @@ class ObservationRead < ActiveRecord::Base
   end
 
   def final?
-    reader_number == 3 || (reader_number != '1a' && reader_number != '1b')
-  end
-
-  def reader_number
-    case super
-    when '1a'
-      '1'
-    when '1b'
-      '2'
-    when '2'
-      '3'
-    end
+    reader_number == '2'
   end
 
   def self.status kind
@@ -56,9 +45,9 @@ class ObservationRead < ActiveRecord::Base
     r2_observation_read = ObservationRead.where("observation_group_id = ? AND reader_number = ?", self.observation_group_id, '2').first
 
     case reader_number
-    when '1a','1'
+    when '1a'
       certification_scores = {:document_quality => self.document_quality, :document_alignment => self.document_alignment}
-    when '1b','2'
+    when '1b'
       certification_scores = {:live_quality => self.live_quality, :live_alignment => self.live_alignment}
     end
 
@@ -69,9 +58,9 @@ class ObservationRead < ActiveRecord::Base
     r2_observation_read.update_attributes(comments: comments)
 
     case reader_number
-    when '1a','1'
+    when '1a'
       r2_indicator_scores = r2_observation_read.indicator_scores.where("domain_scores.domain_id IN (1,4)").order(:indicator_id)
-    when '1b','2'
+    when '1b'
       r2_indicator_scores = r2_observation_read.indicator_scores.where("domain_scores.domain_id IN (2,3)").order(:indicator_id)
     end
 
@@ -105,14 +94,14 @@ class ObservationRead < ActiveRecord::Base
     end
   end
 
-  # this method is called from the controller
-  def update_scores scores
+  def update_scores scores=nil
+    scores ||= find_section_scores
     score = scores[0]
-    document_quality = quality_cert( score )
+    document_quality   = quality_cert( score )
     document_alignment = alignment_cert( score )
 
     score = scores[1] if final?
-    live_quality = quality_cert( score )
+    live_quality   = quality_cert( score )
     live_alignment = alignment_cert( score )
   end
 
@@ -124,43 +113,77 @@ class ObservationRead < ActiveRecord::Base
     score.alignment_average.to_f*100 >= 75 ? 2 : 1
   end
 
-
-  # FIXME: these belong as helper methods
-  def document_quality_string
-    doc_quality_string = document_quality.to_s
-    if document_quality == 1
-      doc_quality_string.replace "NOTCERT"
-    elsif document_quality == 2
-      doc_quality_string.replace "CERT"
-    end
+  def find_percentages
+    self.class.find_percentages self.id
   end
 
-  def document_alignment_string
-    doc_align_string = document_alignment.to_s
-    if document_alignment == 1
-      doc_align_string.replace "NOTCERT"
-    elsif document_alignment == 2
-      doc_align_string.replace "CERT"
-    end
+  def find_section_scores
+    self.class.find_section_scores self.id
   end
 
-  def live_quality_string
-    live_quality_string = live_quality.to_s
-    if live_quality == 1
-      live_quality_string.replace "NOTCERT"
-    elsif live_quality == 2
-      live_quality_string = live_quality.to_s
-      live_quality_string.replace "CERT"
-    end
+  def self.find_percentages id
+    find_by_sql <<-SQL
+      SELECT obr.id, dom.number,AVG(evds.quality::integer) AS quality_average,  AVG(evds.alignment::integer) AS alignment_average
+      FROM observation_reads obr
+        LEFT JOIN domain_scores doms
+            ON doms.observation_read_id = obr.id
+        LEFT JOIN domains dom
+            ON doms.domain_id = dom.id
+        LEFT JOIN indicator_scores inds
+            ON inds.domain_score_id = doms.id
+        LEFT JOIN evidence_scores evds
+            ON evds.indicator_score_id = inds.id
+        WHERE obr.id = #{id}
+        GROUP BY obr.id, dom.number
+    SQL
   end
 
-  def live_alignment_string
-    live_align_string = live_alignment.to_s
-    if live_alignment == 1
-      live_align_string.replace "NOTCERT"
-    elsif live_alignment == 2
-      live_align_string.replace "CERT"
-    end
+  def self.find_section_scores id
+     find_by_sql <<-SQL
+     SELECT obr.id, 'document' AS Type, AVG(evds.quality::integer) AS quality_average,  AVG(evds.alignment::integer) AS alignment_average
+      FROM observation_reads obr
+      LEFT JOIN domain_scores doms
+           ON doms.observation_read_id = obr.id
+      LEFT JOIN domains dom
+          ON doms.domain_id = dom.id
+      LEFT JOIN indicator_scores inds
+          ON inds.domain_score_id = doms.id
+      LEFT JOIN evidence_scores evds
+          ON evds.indicator_score_id = inds.id
+      WHERE dom.number IN (1,4)
+        AND obr.id = #{id}
+      GROUP BY obr.id
+    UNION
+      SELECT obr.id, 'live' AS Type, AVG(evds.quality::integer) AS quality_average,  AVG(evds.alignment::integer) AS alignment_average
+      FROM observation_reads obr
+      LEFT JOIN domain_scores doms
+          ON doms.observation_read_id = obr.id
+      LEFT JOIN domains dom
+          ON doms.domain_id = dom.id
+      LEFT JOIN indicator_scores inds
+          ON inds.domain_score_id = doms.id
+      LEFT JOIN evidence_scores evds
+          ON evds.indicator_score_id = inds.id
+      WHERE dom.number IN (2,3)
+        AND obr.id = #{id}
+      GROUP BY obr.id
+    SQL
   end
+
+
+  def self.edit_reader_list
+    find_by_sql <<-SQL
+    SELECT onea.employee_id_observer, onea.id AS document_observation_read_id, onea.observation_status AS document_status, onea.reader_id AS Document_reader_id, oneb.id AS live_observation_read_id, oneb.observation_status AS live_status, oneb.reader_id AS Live_reader_id, two.id AS second_observation_read_id, two.reader_id AS second_reader_id, two.observation_status AS second_status, onea.flags AS onea_flags, oneb.flags AS oneb_flags, two.flags AS two_flags
+    FROM observation_reads onea
+    JOIN observation_reads oneb
+    ON oneb.reader_number = '1b' AND onea.observation_group_id = oneb.observation_group_id
+    JOIN observation_reads two
+    ON two.reader_number = '2' AND onea.observation_group_id = two.observation_group_id
+    WHERE onea.reader_number = '1a'
+    ORDER BY onea.employee_id_observer
+    SQL
+  end
+
+
 end
 
