@@ -6,7 +6,7 @@
   <% else %>
   <div class="read-links">
     <% @observation_reads.sort_by(&:employee_id_observer).each do |observation| %>
-    <span class='observation-reads-links'><%= link_to "#{observation.employee_id_observer}", observation_read_path(observation) %></span>
+    <span class='observation-reads-links <%=highlight_if_showing(observation)%>'><%= link_to "#{observation.employee_id_observer}", observation_read_path(observation) %></span>
     <% end %>
   </div>
   <% end %>

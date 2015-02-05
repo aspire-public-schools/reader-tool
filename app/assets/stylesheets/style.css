@@ -283,6 +283,11 @@ p.alert-success{
   cursor: pointer;
 }
 
+.observation-reads-links.selected{
+  background-color: #5CA092;
+}
+
+
 .observation-reads-links:hover {
   background-color:rgba(0,0,0,.5);
 }
