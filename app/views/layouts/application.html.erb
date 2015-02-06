@@ -16,7 +16,7 @@
   <div id='cssmenu'>
     <nav class="navbar-fixed-top" id="fixed-nav">
       <ul>
-       <li><%= link_to "Aspire Reader", observation_reads_path %></li>
+       <li><%= link_to "#{organization_name(:short)} Reader", observation_reads_path %></li>
        <% if current_user.reader2? %>
        <li><%= link_to "Admin", admin_path %></li>
        <% end %>

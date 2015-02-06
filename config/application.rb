@@ -67,3 +67,6 @@ module ReaderTool
 
   end
 end
+
+ENV["ORGANIZATION_NAME"] = "The College-Ready Promise"
+ENV["ORGANIZATION_NAME_SHORT"] = "TCRP"

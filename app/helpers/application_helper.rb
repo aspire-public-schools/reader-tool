@@ -15,4 +15,13 @@ module ApplicationHelper
     end
   end
 
+  def organization_name kind=:long
+    case kind
+    when :short
+      ENV["ORGANIZATION_NAME_SHORT"]
+    else
+      ENV["ORGANIZATION_NAME"]
+    end
+  end
+
 end
