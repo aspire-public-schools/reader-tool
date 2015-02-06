@@ -16,7 +16,7 @@ class Admin::ReadersController < AdminController
 
 
   def index
-    @readers = Reader.all.sort
+    @readers = Reader.all.sort_by(&:last_name)
   end
 
   def edit
