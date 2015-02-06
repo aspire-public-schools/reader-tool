@@ -1,86 +1,108 @@
 <% if @observation_read %>
-  <div class="well well-sm">
-    <%= simple_form_for @observation_read, url: {action: "update"}, :remote => true, id: 'document-live-form' do |f| %>
-      <% if @observation_read.reader_number == '2' %>
-        <h5 class="read-title">Second Read</h5>
-      <% end %>
-      <% if @observation_read.reader_number != '1b' %>
-          <div class="col-md-6">
-            <div class="document">
-              <h4>Document</h4>
-              <div class="col-md-6">
-                <div class="row">
-                  <% if @observation_read.reader_number == "2" %>
-                  <p class="r1score">Reader 1 Score: <%=print_cert @observation_read.document_quality %></p>
-                  <% end %>
-                </div>
-                <div class="row">
-                  <%= f.input :document_quality, label: "Quality", collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"], wrapper_html: { class: 'document' }, prompt: "Select" %>
-                </div>
-              </div>
-              <div class="col-md-6">
-                  <div class="row">
-                     <% if @observation_read.reader_number == "2" %>
-                     <p class="r1score">Reader 1 Score: <%= print_cert @observation_read.document_alignment %></p>
-                     <% end %>
-                  </div>
-                 <div class="row">
-                    <%= f.input :document_alignment, label: "Alignment", collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"], wrapper_html: { class: 'document'}, prompt: "Select" %>
-                 </div>
-              </div>
-            </div>
-          </div>
-      <% end %>
+<div class="well well-sm">
+  <%= simple_form_for @observation_read, url: {action: "update"}, :remote => true, id: 'document-live-form' do |f| %>
+  <% if @observation_read.reader_number == '2' %>
+  <h5 class="read-title">Second Read</h5>
+  <% end %>
 
-      <%if @observation_read.reader_number != '1a' %>
-          <div class="col-md-6">
-            <div class="live">
-              <h4>Live</h4>
-              <div class="col-md-6">
-                  <div class="row">
-                    <% if @observation_read.reader_number == "2" %>
-                        <p class="r1score">Reader 1 Score: <%=print_cert @observation_read.live_quality %></p>
-                    <% end %>
-                  </div>
-                  <div class="row">
-                    <%= f.input :live_quality, label: "Quality", collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"], wrapper_html: {class: 'live' }, prompt: "Select" %>
-                  </div>
-              </div>
-              <div class="col-md-6">
-                  <div class="row">
-                    <% if @observation_read.reader_number == "2" %>
-                        <p class="r1score">Reader 1 Score: <%= print_cert @observation_read.live_alignment %></p>
-                    <% end %>
-                  </div>
-                  <div class="row">
-                      <%= f.input :live_alignment, label: "Alignment", collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"], wrapper_html: {class: 'live' }, prompt: "Select" %>
-                  </div>
-              </div>
-            </div>
-          </div>
-      <% end %>
-      <%= f.text_area :comments, class: 'form-control', rows: "1", placeholder: "Comments"  %>
-      <%= f.input :flags, as: :radio_buttons  if current_user.reader2? %>
-      <div class="observation-read-button">
-        <div class="btn btn-danger" id="finalize-button">Finalize Read</div>
+  <div class="row">
+  <% if @observation_read.reader_number != '1b' %>
+  <div class="col-md-6">
+    <div class="document">
+      <h4>Document</h4>
+
+      <div class="col-md-6">
+        <div class="row">
+          <% if @observation_read.reader_number == "2" %>
+          <p class="r1score">Reader 1 Score: <%=print_cert @observation_read.document_quality %></p>
+          <% end %>
+        </div>
+
+        <div class="row">
+          <%= f.input :document_quality, label: "Quality", collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"], wrapper_html: { class: 'document' }, prompt: "Select" %>
+        </div>
       </div>
 
 
+      <div class="col-md-6">
+        <div class="row">
+         <% if @observation_read.reader_number == "2" %>
+         <p class="r1score">Reader 1 Score: <%= print_cert @observation_read.document_alignment %></p>
+         <% end %>
+        </div>
+        <div class="row">
+        <%= f.input :document_alignment, label: "Alignment", collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"], wrapper_html: { class: 'document'}, prompt: "Select" %>
+        </div>
+      </div>
+
+    </div> <!-- document -->
+  </div>  <!-- column -->
+<% end %>
+
+  <div class="col-md-6">
+    <div class="live">
+    <%if @observation_read.reader_number != '1a' %>
+      <h4>Live</h4>
+
+      <div class="col-md-6">
+        <div class="row">
+          <% if @observation_read.reader_number == "2" %>
+          <p class="r1score">Reader 1 Score: <%=print_cert @observation_read.live_quality %></p>
+          <% end %>
+        </div>
+        <div class="row">
+          <%= f.input :live_quality, label: "Quality", collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"], wrapper_html: {class: 'live' }, prompt: "Select" %>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="row">
+          <% if @observation_read.reader_number == "2" %>
+          <p class="r1score">Reader 1 Score: <%= print_cert @observation_read.live_alignment %></p>
+          <% end %>
+        </div>
+        <div class="row">
+          <%= f.input :live_alignment, label: "Alignment", collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"], wrapper_html: {class: 'live' }, prompt: "Select" %>
+        </div>
+      </div>
+
+    <% end %>
+    </div> <!-- live -->
+  </div> <!-- column -->
+  </div> <!-- row -->
+  
+  <div class="row">
+    <div class="col-md-12">
+    <label for="observation_read_comments">Comments</label>
+      <%= f.text_area :comments, class: 'form-control', rows: "3", placeholder: "Comments"  %>
+    </div>
   </div>
-      <div class="login_modal">
-        <div class="login_close">
-          <i class="fa fa-times-circle"></i>
-        </div>
-        <div class="modal-buttons">
-          <p>Are you sure you want to finalize the read?</p>
-          <p>Doing so will lock your scores.</p>
-          <%= f.button :submit, value: "Yes", class: "btn-success", id: "observation-read-button" %>
-          <div class="btn btn-warning" id="cancel-read">Cancel</div>
-        </div>
-      </div>
- <% end %>
+  <div class="row">
+    <div class="col-md-12">
+    <br/>
+      <%= f.input :flags, as: :radio_buttons  if current_user.reader2? %>
+    </div>
+  </div>
+  
+  <div class="observation-read-button">
+    <div class="btn btn-danger" id="finalize-button">Finalize Read</div>
+  </div>
 
-  <p class="alert alert-success", id="submit-message">
+</div> <!-- well -->
 
-  </p>
+
+<div class="login_modal">
+  <div class="login_close">
+    <i class="fa fa-times-circle"></i>
+  </div>
+  <div class="modal-buttons">
+    <p>Are you sure you want to finalize the read?</p>
+    <p>Doing so will lock your scores.</p>
+    <%= f.button :submit, value: "Yes", class: "btn-success", id: "observation-read-button" %>
+    <div class="btn btn-warning" id="cancel-read">Cancel</div>
+  </div>
+</div>
+<% end %>
+
+<p class="alert alert-success", id="submit-message"></p>
 <% end %>
