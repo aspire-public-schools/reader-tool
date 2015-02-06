@@ -13,6 +13,7 @@ class Reader < ActiveRecord::Base
     Reader.all - Reader.deactive
   end
 
+  # TODO: refactor this into view helpers
   def show_yes_no
     self.send(attribute) == 1 ? "Yes" : "No"
     if is_reader1a == "1" || is_reader1b == "1" || is_reader2 == "1"
