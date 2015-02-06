@@ -229,16 +229,28 @@ textarea#comments {
 /* dashboard */
 
 select.optional{
-  height: 2rem;
+  height: 2.5rem;
   width: 8rem;
   font-size: 1rem;
 }
 
 
-.document-live-form{
-  border: 5px solid black;
+.document-live-form-holder .well {
+  border: 1px solid black;
 }
 
+.document-live-form-holder h4 {
+  padding: 0.5rem;  
+}
+
+#observation_read_comments {
+  margin-bottom: 1em;
+}
+
+.observation_read_flags .controls{
+  margin-left: 1em;
+  margin-top: -0.75em;
+}
 .document h4 {
   background-color: #3498db;
   text-align: center;
