@@ -1,5 +1,5 @@
 <dl>
-  <% unless current_page?(action: 'index') %>
+  <% unless @domains.blank? %>
     <% @domains.each do |domain_score| %>
     <dt>
       <h5>
