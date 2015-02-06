@@ -1,12 +1,13 @@
  class ObservationReadsController < ApplicationController
 
   before_filter :require_reader
-  before_filter :current_reads, :only => [:index, :show]
 
   def index
+    fetch_current_reads
   end
 
   def show
+    fetch_current_reads
     @observation_read = ObservationRead.find(params[:id])
     @domains = @observation_read.domain_scores
     @domain_percentages = @observation_read.find_percentages
@@ -36,7 +37,7 @@
     redirect_to login_path unless current_user
   end
 
-  def current_reads
+  def fetch_current_reads
     @reader = current_user
     @observation_reads = @reader.observation_reads.status(:ready)
   end
