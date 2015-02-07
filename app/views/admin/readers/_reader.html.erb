@@ -1,12 +1,12 @@
 <tr>
-  <td><%= reader.first_name %> <%=reader.last_name %> </td>
+  <td><%= link_to reader.full_name, admin_reader_path(reader) %> </td>
   <td class="centered"><%= print_check reader.reader1a? %> </td>
   <td class="centered"><%= print_check reader.reader1b? %> </td>
   <td class="centered"><%= print_check reader.reader2? %> </td>
   <td>
     <%= link_to "Edit", edit_admin_reader_path(reader) %>
     <%= link_to "View", admin_reader_path(reader) %>
-    <%= link_to "Login", sessions_path( reader: { eid: reader.employee_number, email: reader.email} ), method: 'post' if Rails.env.development? || Rails.env.staging? %>
-
+    <%= link_to "Login", sessions_path( reader: { eid: reader.employee_number, email: reader.email} ), method: :post %>
+    <%= link_to "Deactivate", deactivate_admin_reader_path(reader), method: :put %>
   </td>
 </tr>

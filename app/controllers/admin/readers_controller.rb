@@ -11,12 +11,12 @@ class Admin::ReadersController < AdminController
   end
 
   def new
-    @reader = Reader.new
+    @reader = Reader.new.set_defaults
   end
 
 
   def index
-    @readers = Reader.all.sort_by(&:last_name)
+    @readers = Reader.order("last_name").all
   end
 
   def edit
