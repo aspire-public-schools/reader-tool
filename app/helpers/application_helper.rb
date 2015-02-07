@@ -24,4 +24,8 @@ module ApplicationHelper
     end
   end
 
+  def print_check bool
+    content_tag(:span,"&#10004;".html_safe, class: 'checkmark') if bool
+  end
+
 end

@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'factory_girl'
 
-describe ReadersController do
+describe Admin::ReadersController do
 	before(:each) do
 		@reader = build(:reader)
 	end

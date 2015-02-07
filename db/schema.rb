@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140215042950) do
+ActiveRecord::Schema.define(:version => 20140603224056) do
 
   create_table "all_evidence", :id => false, :force => true do |t|
     t.integer "observation_group_id"

@@ -33,11 +33,14 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem "factory_girl_rails", "~> 4.0"
-  # gem 'faker'
   gem "rack_session_access"
   gem 'populator'
   gem 'dotenv'
   gem 'railroady'
+end
+
+group :test do
+  gem 'faker'
 end
 
 group :assets do

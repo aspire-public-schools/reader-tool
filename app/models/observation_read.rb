@@ -51,9 +51,10 @@ class ObservationRead < ActiveRecord::Base
       certification_scores = {:live_quality => self.live_quality, :live_alignment => self.live_alignment}
     end
 
+    # initialize reader 2 observation with comments from reader 1a
     r2_observation_read.update_attributes(certification_scores)
     comments = "#{self.reader_number}: #{self.comments}"
-    comments += "\n#{r2_observation_read.comments}" if r2_observation_read.comments.any?
+    comments += "\n#{r2_observation_read.comments}" if r2_observation_read.comments.present? && r2_observation_read.comments != self.comments
 
     r2_observation_read.update_attributes(comments: comments)
 
@@ -64,9 +65,9 @@ class ObservationRead < ActiveRecord::Base
       r2_indicator_scores = r2_observation_read.indicator_scores.where("domain_scores.domain_id IN (2,3)").order(:indicator_id)
     end
 
-    if !final? #reader_number == '1a' || reader_number == '1b'
+    if reader_number == '1a' || reader_number == '1b'
     # this copies reader 1 scores into reader 2
-        r1_indicator_scores = r1_observation_read.indicator_scores.order(:indicator_id)
+      r1_indicator_scores = r1_observation_read.indicator_scores.order(:indicator_id)
 
       r2_indicator_scores.count.times{ |i|
           r2_indicator_scores[i].update_attributes(:comments => r1_indicator_scores[i].comments )
@@ -85,12 +86,14 @@ class ObservationRead < ActiveRecord::Base
     end
   end
 
-  def update_status
-    update_attributes(observation_status: 3)
+  def finalize!
+    copy_to_reader2
+    update_attributes(observation_status: 3) # finished
+    # if 1a and 1b are both finished then 2 goes to ready
     completed_group_reads = ObservationRead.where(observation_group_id: self.observation_group_id, reader_number: ['1a','1b'], observation_status: 3)
     if completed_group_reads.count == 2
       read_2 = ObservationRead.where(observation_group_id: self.observation_group_id, reader_number: '2').first
-      read_2.update_attributes(observation_status: 2)
+      read_2.update_attributes(observation_status: 2) # ready
     end
   end
 

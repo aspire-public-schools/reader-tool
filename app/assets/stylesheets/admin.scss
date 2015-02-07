@@ -89,3 +89,10 @@ ul.admin-employee, li {
   height: 40px;
   width: 300px;
 }
+
+table#readers td.centered {
+  .checkmark {
+    font-size: 2rem;
+  }
+  text-align: center;
+}
