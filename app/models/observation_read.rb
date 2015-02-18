@@ -1,8 +1,8 @@
 class ObservationRead < ActiveRecord::Base
   attr_accessible :document_quality, :document_alignment, :live_alignment, :live_quality, :observation_status, :id, :observation_group_id, :employee_id_observer, :employee_id_learner, :correlation, :average_difference, :percent_correct, :reader_id, :created_at, :updated_at, :reader_number, :comments, :flags
   has_many :domain_scores
-  has_many :indicator_scores, :through => :domain_scores
-  has_many :evidence_scores, :through => :indicator_scores
+  has_many :indicator_scores, through: :domain_scores
+  has_many :evidence_scores,  through: :indicator_scores
   belongs_to :reader
 
   default_scope order(:observation_group_id)
@@ -10,7 +10,7 @@ class ObservationRead < ActiveRecord::Base
   STATUS_WORD_MAPPING = {1 => :waiting, 2 => :ready, 3 => :finished}.freeze
 
   def status
-    STATUS_WORD_MAPPING[@observation_status].to_s
+    STATUS_WORD_MAPPING[self.observation_status].to_s
   end
 
   # def status= kind
@@ -23,14 +23,6 @@ class ObservationRead < ActiveRecord::Base
 
   def final?
     reader_number == '2'
-  end
-
-  def self.status kind
-    where(observation_status: STATUS_WORD_MAPPING.invert[kind.to_sym] )
-  end
-
-  def self.last_read
-    order('updated_at DESC').first.try(:updated_at)
   end
 
   def domains
@@ -124,6 +116,18 @@ class ObservationRead < ActiveRecord::Base
     self.class.find_section_scores self.id
   end
 
+  #####################
+  #   class methods
+  #####################
+
+  def self.status kind
+    where(observation_status: STATUS_WORD_MAPPING.invert[kind.to_sym] )
+  end
+
+  def self.last_read
+    order('updated_at DESC').first.try(:updated_at)
+  end
+
   def self.find_percentages id
     find_by_sql <<-SQL
       SELECT obr.id, dom.number,AVG(evds.quality::integer) AS quality_average,  AVG(evds.alignment::integer) AS alignment_average
@@ -173,7 +177,6 @@ class ObservationRead < ActiveRecord::Base
     SQL
   end
 
-
   def self.edit_reader_list
     find_by_sql <<-SQL
     SELECT onea.employee_id_observer, onea.id AS document_observation_read_id, onea.observation_status AS document_status, onea.reader_id AS Document_reader_id, oneb.id AS live_observation_read_id, oneb.observation_status AS live_status, oneb.reader_id AS Live_reader_id, two.id AS second_observation_read_id, two.reader_id AS second_reader_id, two.observation_status AS second_status, onea.flags AS onea_flags, oneb.flags AS oneb_flags, two.flags AS two_flags
@@ -187,6 +190,4 @@ class ObservationRead < ActiveRecord::Base
     SQL
   end
 
-
 end
-
