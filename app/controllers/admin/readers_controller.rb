@@ -1,5 +1,19 @@
 class Admin::ReadersController < AdminController
 
+  before_filter :find_reader, except: [:index, :new, :create]
+
+  def index
+    @readers = Reader.order("last_name").all
+  end
+
+  def show
+    @observation_reads = @reader.observation_reads.order('created_at ASC')
+  end
+
+  def new
+    @reader = Reader.new.set_defaults
+  end
+
   def create
     @reader = Reader.new(params[:reader])
     if @reader.save
@@ -10,23 +24,12 @@ class Admin::ReadersController < AdminController
     end
   end
 
-  def new
-    @reader = Reader.new.set_defaults
-  end
-
-
-  def index
-    @readers = Reader.order("last_name").all
-  end
-
   def edit
-    @reader = Reader.find(params[:id])
     # @reader_name = Reader.all
     # @pagetitle = "Edit #{@reader.first_name} #{@reader.last_name}"
   end
 
   def update
-    @reader = Reader.find(params[:id])
     if @reader.update_attributes(params[:reader])
       flash[:success] = "#{@reader.first_name} #{@reader.last_name} was saved"
       redirect_to admin_readers_path
@@ -37,7 +40,6 @@ class Admin::ReadersController < AdminController
   end
 
   def deactivate
-    @reader = Reader.find(params[:id])
     if @reader.update_attributes(is_reader1a: "0", is_reader1b: "0", is_reader2: "0")
       flash[:success] = "#{@reader.first_name} #{@reader.last_name} was deactivated"
     else
@@ -46,7 +48,9 @@ class Admin::ReadersController < AdminController
     redirect_to admin_readers_path
   end
 
-  def show
+  private
+
+  def find_reader
     @reader = Reader.find(params[:id])
   end
 
