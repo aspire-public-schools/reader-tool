@@ -28,4 +28,8 @@ module ApplicationHelper
     content_tag(:span,"&#10004;".html_safe, class: 'checkmark') if bool
   end
 
+  def display_flash_messages
+    render partial: "shared/flash_messages"
+  end
+
 end
