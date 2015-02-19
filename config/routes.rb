@@ -6,15 +6,9 @@ ReaderTool::Application.routes.draw do
   get 'login'     => 'sessions#new', as: 'login'
   delete 'logout' => 'sessions#destroy', as: 'logout'
 
-  resources :observation_reads do
-    resources :domains
-  end
+  resources :observation_reads, only: [:index, :show, :update]
 
-  resources :domains do
-    resources :indicators
-  end
-
-  resources :indicators do
+  resources :indicators, only:[] do   # namespace :indicators do
     resources :evidence_scores do
       get :score, on: :collection
     end
@@ -23,7 +17,7 @@ ReaderTool::Application.routes.draw do
   # TODO: password protect this with HTTP auth
   namespace :admin do
     get '', to: 'dashboard#index', as: '/'
-    resources :readers do
+    resources :readers, except: [:destroy] do
       member do
         put :deactivate
       end
