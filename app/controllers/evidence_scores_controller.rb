@@ -1,9 +1,10 @@
 class EvidenceScoresController < ApplicationController
 
   def index
-    @indicator_score = IndicatorScore.find(params[:indicator_id])
+    @indicator_score = IndicatorScore.find( params[:indicator_score_id] )
+    @evidence_scores = @indicator_score.evidence_scores
     if @indicator_score
-      render json: { evidence_list: render_to_string( partial: "evidence_score_form", locals: { indicator_score: @indicator_score} ) }
+      render json: { evidence_list: render_to_string( partial: "evidence_score_form" ) }
     else
       render json: { error: reader.errors.full_messages.join(", ")}, status: :unprocessable_entity
     end

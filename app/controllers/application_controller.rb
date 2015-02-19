@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def require_login
+    store_location
     redirect_to login_path unless signed_in?
   end
 

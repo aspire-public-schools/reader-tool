@@ -8,7 +8,7 @@ ReaderTool::Application.routes.draw do
 
   resources :observation_reads, only: [:index, :show, :update]
 
-  resources :indicators, only:[] do   # namespace :indicators do
+  resources :indicator_scores, only:[] do   # namespace :indicators do
     resources :evidence_scores do
       get :score, on: :collection
     end

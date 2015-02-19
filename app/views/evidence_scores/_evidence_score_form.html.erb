@@ -1,39 +1,43 @@
-<%= form_tag(score_observation_domain_indicator_evidences_path, :method => 'get', :remote => true, :id => "evidence-form") do %>
+<%= form_tag score_indicator_score_evidence_scores_path, method: 'get', remote: true, id: "evidence-form" do %>
 <div class="well well-lg">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3>You are reading the following indicator:</h3>
-        <h3 id="indicator-heading"><%= @indicator_score.indicator.code %> <%= @indicator_score.indicator.description %></h3>
-      </div>
-      <div class="panel-body">
-        <p>Directions: Score the following indicators by checking if the observer met QUALITY or ALIGNMENT.<br/>
-        *Note, if you make a mistake you may click "Submit Scores" again and it will save again.<p>
-      </div>
-      <div class="table-responsive">
-            <table class="table table-bordered table-striped table-hover">
-              <tr>
-                <th><h4> Evidence </h4></th>
-                <th><h4> Quality </h4></th>
-                <th><h4> Alignment</h4></th>
-              </tr>
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3>You are reading the following indicator:</h3>
+      <h3 id="indicator-heading"><%= @indicator_score %></h3>
+    </div>
+    <div class="panel-body">
+      <p>Score the following indicators by checking only if the observer has a mistake in either QUALITY or ALIGNMENT on the piece of evidence.<br/>
+        (If you make a mistake you may click "Submit Scores" again and it will save again.)
+      </p>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-hover">
+        <tr>
+          <th><h4>#</h4></th>
+          <th><h4> Evidence </h4></th>
+          <th><h4> Quality </h4></th>
+          <th><h4> Alignment</h4></th>
+        </tr>
 
-            <% @indicator_score.evidence_scores.each do |evidence_score| %>
-                  <td><%= raw evidence_score.description %></td>
-                  <td><%= check_box_tag("evidence_scores[#{evidence_score.id}][quality]", true, evidence_score.quality) %></td>
-                  <%= hidden_field_tag("evidence_scores[#{evidence_score.id}][alignment]", '0') %>
-                  <td><%= check_box_tag("evidence_scores[#{evidence_score.id}][alignment]", true, evidence_score.alignment) %></td>
-                </tr>
-              <% end %>
-            </table>
-        </div>
-          <div id="blast">
-            <div class="alert alert-success alert-dismissable"></div>
-          </div>
-      </div>
-
-          <%= text_area_tag('comments', @indicator_score.comments, class: 'form-control', placeholder: "Your Feedback for the Observer") %><br>
-          <%= submit_tag "Submit Scores", :id => 'submit-evidence', :remote => true, class: "btn btn-primary score-button" %>
-
+        <% @evidence_scores.each do |evidence_score| %>
+        <tr>
+          <td><%#= [1, evidence_score.description.count(".")].max %> </td>
+          <td><%= raw evidence_score.description.gsub(".",".\n") %></td>
+          <td><%= check_box_tag("evidence_scores[#{evidence_score.id}][quality]", true, evidence_score.quality) %></td>
+          <%= hidden_field_tag("evidence_scores[#{evidence_score.id}][alignment]", '0') %>
+          <td><%= check_box_tag("evidence_scores[#{evidence_score.id}][alignment]", true, evidence_score.alignment) %></td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+    <div id="blast">
+      <div class="alert alert-success alert-dismissable"></div>
     </div>
   </div>
+
+  <label>Comment for Observer on this Indicator:</label>
+  <%= text_area_tag('comments', @indicator_score.comments, class: 'form-control', placeholder: "Your Feedback for the Observer") %><br>
+  <%= submit_tag "Submit Scores", id: 'submit-evidence', remote: true, class: "btn btn-primary score-button" %>
+</div>
+</div>
 <% end %>
