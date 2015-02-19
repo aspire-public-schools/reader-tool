@@ -8,7 +8,7 @@
   <% if @observation_read.reader_number != '1b' %>
   <div class="col-md-6">
     <div class="document">
-      <h4>Document</h4>
+      <h4>Reader <%= @observation_read.reader_number[0]%></h4>
 
       <div class="col-md-6">
         <div class="row">
@@ -72,7 +72,7 @@
   
   <div class="row">
     <div class="col-md-12">
-    <label for="observation_read_comments">Comments</label>
+    <label for="observation_read_comments">Summative Comment for Observer:</label>
       <%= f.text_area :comments, class: 'form-control', rows: "3", placeholder: "Comments"  %>
     </div>
   </div>
