@@ -16,6 +16,15 @@ class Reader < ActiveRecord::Base
     "#{first_name} #{last_name}".strip
   end
 
+  def to_s kind=:long
+    case kind
+    when :short
+      first_with_last_initial
+    else
+      full_name
+    end
+  end
+
   def first_with_last_initial
     "#{first_name} #{last_initials}".strip
   end

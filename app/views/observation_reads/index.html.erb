@@ -1,38 +1,37 @@
 <div class="container-fluid">
   <div class="row">
     <div class="sidebar fixed">
-        <%= render partial: "sidebar" %>
+      <%= render partial: "sidebar" %>
     </div>
   </div>
 
   <div class="content">
     <div class="content right">
+
       <div class='row'>
         <div class="observation-reads">
           <%= render partial: "observation_reads" %>
         </div>
       </div>
+
       <div class='row'>
         <div class="main-dashboard">
           <div class="col-md-6">
             <div class="dashboard-holder">
-              <%= render partial: "domain_percentages" %>
+              <%= render partial: "domain_percentages" if @domain_percentages && @get_section_scores %>
             </div>
           </div>
 
           <div class="col-md-6">
             <div class="document-live-form-holder">
-              <%= render partial: "document-live-form" %>
+              <%= render partial: "document-live-form" if @observation_read %>
             </div>
           </div>
+        </div>
+      </div>
 
-        </div>
-      </div>
-        <div class="main-forms">
-        </div>
-        <div id="evidence-form-holder">
-        </div>
-      </div>
+      <div class="main-forms"></div>
+      <div id="evidence-form-holder"></div>
     </div>
   </div>
 </div>

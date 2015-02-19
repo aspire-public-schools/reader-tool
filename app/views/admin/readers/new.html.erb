@@ -1,14 +1,15 @@
-<h1>Create Readers new page</h1><br>
-
 <div class="container container-fluid">
-  <%= render partial: "flash_messages", flash: flash %>
-    <div class="panel panel-default panel-info">
-      <div class="panel-heading">Create your readers</div>
-      <div class="panel-body">
-        <%= form_for ([:admin, @reader]), class: "form-horizontal center" do |f| %>
-        <%= render partial: "reader_form", :locals => { :f => f } %>
-       </div>
-    </div>
+  <%= display_flash_messages %>
+
+  <div class="panel panel-default panel-info">
+    <div class="panel-heading">New Reader</div>
+
+    <div class="panel-body">
+      <%= simple_form_for [:admin, @reader], class: "form-horizontal center" do |f| %>
+        <%= render partial: "reader_form", locals: { f: f } %>
         <%= f.submit "Create Reader", class: "btn btn-default btn-primary" %>
-   <% end %>
+      <% end %>
+    </div>
+
+  </div>
 </div>

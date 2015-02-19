@@ -35,6 +35,7 @@ class Admin::ReadersController < AdminController
       redirect_to admin_readers_path
     else
       flash[:error] = "#{@reader.errors.full_messages.to_sentence}."
+      @reader.reload
       render :edit
     end
   end

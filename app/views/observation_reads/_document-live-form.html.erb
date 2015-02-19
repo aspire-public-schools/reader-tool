@@ -1,9 +1,8 @@
-<% if @observation_read %>
 <div class="well well-sm">
   <%= simple_form_for @observation_read, url: {action: "update"}, :remote => true, id: 'document-live-form' do |f| %>
-  <% if @observation_read.reader_number == '2' %>
-  <h5 class="read-title">Second Read</h5>
-  <% end %>
+   <% if @observation_read.reader_number == '2' %>
+      <h5 class="read-title">Second Read</h5>
+    <% end %>
 
   <div class="row">
   <% if @observation_read.reader_number != '1b' %>
@@ -78,8 +77,8 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-6">
-        <%= f.input :flags, as: :radio_buttons  if current_user.reader2? %>
+    <div class="col-md-8">
+        <%= f.input :flags, as: :boolean, label: false, inline_label: "Check to Request a 3rd Reader" if current_user.reader2? %>
     </div>
   </div>
   
@@ -103,5 +102,4 @@
 </div>
 <% end %>
 
-<p class="alert alert-success", id="submit-message"></p>
-<% end %>
+<p class="alert alert-success" id="submit-message"></p>

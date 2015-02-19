@@ -1,19 +1,22 @@
 <div class="container-fluid container">
+
   <div id="create-button">
     <%= link_to "New Reader", new_admin_reader_path(@reader) %>
   </div>
 
-  <%= render partial: "flash_messages", flash: flash %>
+  <%= display_flash_messages %>
+
   <table id="readers" class="table table-hover table-bordered" style="width: auto;">
 
-  <tr style="background-color: #f5f5f5;">
-    <th class="col-sm-2"> Reader Name </th>
-    <th class="col-sm-1"> Reader 1</th>
-    <th class="col-sm-1"> Reader 2</th>
-    <th class="col-sm-1"> Reader 3</th>
-    <th class="col-sm-2"></th>    
-  <tr>
-    <%= render partial: "reader", collection: @readers %>
+    <tr style="background-color: #f5f5f5;">
+      <th class="col-sm-2"> Reader Name </th>
+      <th class="col-sm-1"> Reader 1</th>
+      <th class="col-sm-1"> Reader 2</th>
+      <th class="col-sm-1"> Reader 3</th>
+      <th class="col-sm-2"></th>    
+    <tr>
 
+    <%= render partial: @readers %>
   </table>
+
 </div>

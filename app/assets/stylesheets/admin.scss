@@ -96,3 +96,10 @@ table#readers td.centered {
   }
   text-align: center;
 }
+
+form#new_reader, form.edit_reader {
+  input[type=submit] {
+    margin-top: 1em;
+    float: right;
+  }
+}

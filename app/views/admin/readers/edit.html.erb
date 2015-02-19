@@ -1,14 +1,15 @@
-<h1>Create Readers Edit Readers</h1><br>
-
 <div class='container container-fluid'>
-<%= render partial: "flash_messages", flash: flash %>
+  <%= display_flash_messages %>
+
   <div class="panel panel-default panel-info">
-    <div class="panel-heading">Edit <%= @reader.first_name %> <%=@reader.last_name%></div>
+    <div class="panel-heading">Edit Reader</div>
     <div class="panel-body">
-      <%= form_for(@reader, :url => {:action => 'update', :id => @reader.id} ) do |f| %>
-        <%= render partial: "reader_form", :locals => { :f => f } %>
-     </div>
+      <%= simple_form_for @reader, url: admin_reader_path(@reader),class: "form-horizontal center" do |f| %>
+        <%= render partial: "reader_form", locals: { f: f } %>
+
+        <%= f.submit "Update Reader", class: "btn btn-default btn-primary" %>
+      <% end %>
+    </div>
   </div>
-      <%= f.submit "Update Reader", class: "btn btn-default btn-primary" %>
- <% end %>
- </div>
+
+</div>
