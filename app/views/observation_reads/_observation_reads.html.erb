@@ -2,7 +2,7 @@
   <h3>Your Observation Reads</h3>
 
   <% if @observation_reads.empty? %>
-  <h4>None assigned yet.</h4>
+    <h4>None assigned yet.</h4>
   <% else %>
   <div class="read-links">
     <% @observation_reads.sort_by(&:employee_id_observer).each do |observation| %>
