@@ -19,10 +19,10 @@
           <th><h4> Alignment</h4></th>
         </tr>
 
-        <% @evidence_scores.each do |evidence_score| %>
+        <% @evidence_scores.each.with_index do |evidence_score,idx| %>
         <tr>
-          <td><%#= [1, evidence_score.description.count(".")].max %> </td>
-          <td><%= raw evidence_score.description.gsub(".",".\n") %></td>
+          <td><%= idx+1 %></td>
+          <td><%= raw evidence_score.description.gsub(/\s([TS]\s)/){ "\n"+$1 }.gsub("\n","<br/>") %></td>
           <td><%= check_box_tag("evidence_scores[#{evidence_score.id}][quality]", true, evidence_score.quality) %></td>
           <%= hidden_field_tag("evidence_scores[#{evidence_score.id}][alignment]", '0') %>
           <td><%= check_box_tag("evidence_scores[#{evidence_score.id}][alignment]", true, evidence_score.alignment) %></td>
