@@ -1,6 +1,6 @@
 class EvidenceScoresController < ApplicationController
 
-  def index
+  def show
     @indicator_score = IndicatorScore.find( params[:indicator_score_id] )
     @evidence_scores = @indicator_score.evidence_scores
     if @indicator_score

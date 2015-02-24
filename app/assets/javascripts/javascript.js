@@ -26,7 +26,7 @@ var evidenceScore = {
     },
     appendEvidence: function(event, data, status, xhr) {
       $('#evidence-form').remove()
-      $('#evidence-form-holder').append(data.evidence_list)
+      $('#evidence-form-holder').append(data.evidence_list).siblings('.row').hide()
       scrollOn.indicator()
     }
 }

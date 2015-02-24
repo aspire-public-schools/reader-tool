@@ -9,7 +9,7 @@
 
 
 </head>
-<body>
+<body id="<%= "controller-#{controller.controller_name.gsub('_','-')}"%>" class="<%= "action-#{controller.action_name.gsub('_','-')}"%>">
 
   <% if signed_in? %>
 
@@ -18,11 +18,11 @@
       <ul>
        <li><%= link_to "#{organization_name(:short)} Reader", observation_reads_path %></li>
        <% if current_user.reader2? %>
-       <li><%= link_to "Admin", admin_path %></li>
+         <li><%= link_to "Admin", admin_path %></li>
        <% end %>
        <div class="right-nav">
-         <li><a><span id="welcome">Welcome, <%= current_user.first_name %></span></a></li>
-         <li><span id="welcome-button"><%= button_to "logout", logout_path, method: 'delete', class: "btn btn-default nav-button navbar-btn" %></li>
+         <li><%= link_to "Welcome, #{current_user.first_name}", observation_reads_path, id: 'welcome' %></li>
+         <li><%= button_to "logout", logout_path, method: 'delete', class: "btn btn-default nav-button navbar-btn", id: 'welcome-button'%></li>
        </div>
      </ul>
    </nav>

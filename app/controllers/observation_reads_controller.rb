@@ -5,14 +5,13 @@
   end
 
   def show
-    fetch_current_reads
+    # fetch_reader
     @observation_read = ObservationRead.find(params[:id])
     @domains            = @observation_read.domain_scores
     @domain_percentages = @observation_read.find_percentages.sort_by(&:number)
     @get_section_scores = @observation_read.find_section_scores
     @observation_read.update_scores( @get_section_scores )
-
-    render :index
+    # render :index
   end
 
   def update
@@ -28,9 +27,12 @@
 
   private
 
-  def fetch_current_reads
+  def fetch_reader
     @reader = current_user
-    @observation_reads = @reader.observation_reads.status(:ready)
+  end
+
+  def fetch_current_reads
+    @observation_reads = fetch_reader.observation_reads.status(:ready)
   end
 
 end

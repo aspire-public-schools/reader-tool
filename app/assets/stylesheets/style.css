@@ -364,3 +364,8 @@ h5.read-title{
 .flagged-t {
   background-color: #e74c3c;
 }
+
+#controller-observation-reads.action-show .row h2 {
+  text-align: center;
+  margin-bottom: 1em;
+}
