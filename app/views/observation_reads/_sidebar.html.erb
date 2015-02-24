@@ -1,11 +1,12 @@
 <dl>
+
   <% if @observation_read %>
   <dt class="summary">
     <h5><%= link_to "&Gt; Summary".html_safe, @observation_read, class: 'summary-link' %></h5>
   </dt>
   <% end %>
-  <% unless @domains.blank? %>
-  
+
+  <% unless @domains.blank? %>  
     <% @domains.each do |domain_score| %>
     <dt>
       <h5>

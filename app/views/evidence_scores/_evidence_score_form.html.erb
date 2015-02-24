@@ -22,7 +22,7 @@
         <% @evidence_scores.each.with_index do |evidence_score,idx| %>
         <tr>
           <td><%= idx+1 %></td>
-          <td><%= raw evidence_score.description.gsub(/\s([TS]\s)/){ "\n"+$1 }.gsub("\n","<br/>") %></td>
+          <td><%= evidence_score.formatted_description.html_safe %></td>
           <td><%= check_box_tag("evidence_scores[#{evidence_score.id}][quality]", true, evidence_score.quality) %></td>
           <%= hidden_field_tag("evidence_scores[#{evidence_score.id}][alignment]", '0') %>
           <td><%= check_box_tag("evidence_scores[#{evidence_score.id}][alignment]", true, evidence_score.alignment) %></td>
