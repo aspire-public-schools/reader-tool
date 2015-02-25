@@ -1,9 +1,9 @@
 <table class="table table-condensed table-bordered table-resonsive" id="domain-table">
 
   <tr>
-    <td></td>
+    <th></th>
     <% @domain_percentages.each do |domain_percentage| %>
-      <td> Domain <%= domain_percentage.number %> </td>
+      <th> Domain <%= domain_percentage.number %></th>
     <% end %>
   </tr>
 
@@ -25,30 +25,18 @@
 
 <table class="table table-condensed table-bordered" id="domain-table-weighted">
   <tr>
-    <th> Weighted Score</th>
-    <% if @observation_read.reader_number != '1b'%>
-    <td> Domains (1 + 4) </td>
-    <% end %>
-    <% if @observation_read.reader_number != '1a' %>
-    <td> Domains (2 + 3) </td>
-    <% end %>
+    <th>Weighted Score</th>
+    <th>Domains 1-4</th>
   </tr>
 
   <tr class="quality-weighted">
     <td>Quality</td>
-    <% @get_section_scores.each_with_index  do |section_score, index| %>
-    <td id='id_<%="#{index}"%>'>
-      <%= section_score.quality_sum %></td>
-    <% end %>
+    <td><%= @domain_percentages.map(&:quality_sum).sum %></td>
   </tr>
 
   <tr class="alignment-weighted">
     <td>Alignment</td>
-    <% @get_section_scores.each_with_index do |section_score, index| %>
-    <td id='id_<%="#{index+2}"%>'>
-      <%= section_score.alignment_sum %>
-    </td>
-    <% end %>
+    <td><%= @domain_percentages.map(&:alignment_sum).sum %></td>
   </tr>
 
 </table>
