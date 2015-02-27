@@ -8,6 +8,7 @@
     # fetch_reader
     @observation_read = ObservationRead.find(params[:id])
     @domains            = @observation_read.domain_scores
+
     @domain_percentages = @observation_read.find_percentages.sort_by(&:number)
     @get_section_scores = @observation_read.find_section_scores
     @observation_read.update_scores( @get_section_scores )

@@ -1,6 +1,7 @@
 class ObservationRead < ActiveRecord::Base
   attr_accessible :document_quality, :document_alignment, :live_alignment, :live_quality, :observation_status, :id, :observation_group_id, :employee_id_observer, :employee_id_learner, :correlation, :average_difference, :percent_correct, :reader_id, :created_at, :updated_at, :reader_number, :comments, :flags
   has_many :domain_scores
+  has_many :domains, through: :domain_scores, uniq: true
   has_many :indicator_scores, through: :domain_scores
   has_many :evidence_scores,  through: :indicator_scores
   belongs_to :reader
@@ -23,13 +24,6 @@ class ObservationRead < ActiveRecord::Base
 
   def final?
     reader_number == '2'
-  end
-
-  def domains
-    domain_scores.
-      joins(:domain).
-      select("distinct domains.id as id, domains.description as description").
-      map { |d| [d.id, d.description] }
   end
 
   def copy_to_reader2
@@ -89,6 +83,7 @@ class ObservationRead < ActiveRecord::Base
     end
   end
 
+  # FIXME
   def update_scores scores=nil
     scores ||= find_section_scores
     score = scores[0]
