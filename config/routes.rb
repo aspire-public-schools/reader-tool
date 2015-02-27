@@ -6,10 +6,12 @@ ReaderTool::Application.routes.draw do
   get 'login'     => 'sessions#new', as: 'login'
   delete 'logout' => 'sessions#destroy', as: 'logout'
 
-  resources :observation_reads, only: [:index, :show, :update]
+  resources :observation_reads, only: [:index, :show, :update] do
+    resources :indicator_scores, only: [:update]  
+  end
 
-  resources :indicator_scores, only:[] do   # namespace :indicators do
-    resource :evidence_scores, only:[:show] do
+  resources :indicator_scores, only: [] do
+    resources :evidence_scores, only: [:index] do
       get :score, on: :collection
     end
   end

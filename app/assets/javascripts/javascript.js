@@ -31,26 +31,6 @@ var evidenceScore = {
     }
 }
 
-var submitScore = {
-  init: function () {
-    $('#evidence-form-holder').on("ajax:success", '#evidence-form', this.submitScoreAndDashboard)
-  },
-  submitScoreAndDashboard: function(event, data, status, xhr){
-    $('#evidence-form').remove()
-    $('#domain-table').remove()
-    $('#domain-table-weighted').remove()
-    var $indicator = $("." + data.indicator.toString())
-    $indicator.parent().css('background-color', '#27ae60')
-    $('#evidence-form-holder').append(data.submit_list)
-    $('.dashboard-holder').append(data.domain_percentages)
-    scrollOn.submit()
-    $('#blast div').fadeIn('slow')
-    $('#blast div').fadeOut(4000)
-    $('#blast div').text(data.info)
-    $('#blast').css({'display':'block'})
-  }
-}
-
 var docLiveForm = {
   init: function() {
     $('.document-live-form-holder').on("ajax:success", this.updateDocLiveForm)
@@ -108,7 +88,6 @@ $(document).ready(function(){
   observationAdmin.highlightGrey();
   sideBar.toggle();
   evidenceScore.init();
-  submitScore.init();
   docLiveForm.init();
   indicatorLinks.highlight();
   $('#finalize-button').on('click', LogIn.displayIt)

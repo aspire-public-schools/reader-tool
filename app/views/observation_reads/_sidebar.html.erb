@@ -10,13 +10,13 @@
     <% @domains.each do |domain_score| %>
     <dt>
       <h5>
-        <%= domain_score.domain.description %>
+        <%= domain_score.description %>
         <span class="caret"></span>
       </h5>
     </dt>
-    <% domain_score.indicator_scores.sort_by(&:indicator_code).each do |indicator_score| %>
+    <% domain_score.indicator_scores.each do |indicator_score| %>
       <dd class="indicators">
-        <%= link_to "#{indicator_score} (#{indicator_score.evidence_scores.count})", indicator_score_evidence_scores_path(indicator_score), class: "indicator-link #{'highlight' if indicator_score.updated?}", :remote => true %>
+        <%= link_to "#{indicator_score} (#{indicator_score.evidence_scores.count})", indicator_score_evidence_scores_path(indicator_score), class: "indicator-link #{'highlight' if indicator_score.updated?}", method: :get, remote: true %>
       </dd>
       <% end %>
     <% end %>

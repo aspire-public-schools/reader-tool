@@ -1,4 +1,4 @@
-<%= form_tag score_indicator_score_evidence_scores_path, method: 'get', remote: true, id: "evidence-form" do %>
+<%= form_for [@observation_read, @indicator_score], html:{ id: "evidence-form" } do |f| %>
 <div class="well well-lg">
   <div class="panel panel-primary">
     <div class="panel-heading">
@@ -19,14 +19,15 @@
           <th><h4> Alignment</h4></th>
         </tr>
 
-        <% @evidence_scores.each.with_index do |evidence_score,idx| %>
-        <tr>
-          <td><%= idx+1 %></td>
-          <td><%= evidence_score.formatted_description.html_safe %></td>
-          <td><%= check_box_tag("evidence_scores[#{evidence_score.id}][quality]", true, evidence_score.quality) %></td>
-          <%= hidden_field_tag("evidence_scores[#{evidence_score.id}][alignment]", '0') %>
-          <td><%= check_box_tag("evidence_scores[#{evidence_score.id}][alignment]", true, evidence_score.alignment) %></td>
-        </tr>
+        <% @evidence_scores.each.with_index do |evidence,idx| %>
+          <%= f.fields_for :evidence_scores, evidence, include_id: true do |es| %>
+            <tr>
+              <td><%= idx + 1 %></td>
+              <td><%= es.object.formatted_description.html_safe %></td>
+              <td><%= es.check_box :quality   %></td>
+              <td><%= es.check_box :alignment %></td>
+            </tr>
+          <% end %>
         <% end %>
       </table>
     </div>
@@ -36,8 +37,9 @@
   </div>
 
   <label>Comment for Observer on this Indicator:</label>
-  <%= text_area_tag('comments', @indicator_score.comments, class: 'form-control', placeholder: "Your Feedback for the Observer") %><br>
-  <%= submit_tag "Submit Scores", id: 'submit-evidence', remote: true, class: "btn btn-primary score-button" %>
+  <%= f.text_area :comments, class: 'form-control', placeholder: "Your Feedback for the Observer" %>
+  <br/>
+  <%= f.submit "Submit Scores", id: 'submit-evidence', class: "btn btn-primary score-button" %>
 </div>
-</div>
+
 <% end %>
