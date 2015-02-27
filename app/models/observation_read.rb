@@ -83,7 +83,7 @@ class ObservationRead < ActiveRecord::Base
     end
   end
 
-  # FIXME
+  # FIXME call this after scoring
   def update_scores scores=nil
     scores ||= find_section_scores
     score = scores[0]
