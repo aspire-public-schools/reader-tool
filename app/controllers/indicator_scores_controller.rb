@@ -9,7 +9,7 @@ class IndicatorScoresController < ApplicationController
     end 
     
     if @indicator_score = IndicatorScore.find(params[:id])
-      @observation_read.update_scores
+      @observation_read.update_scores!
       @indicator_score.update_attributes( params[:indicator_score] )
       flash[:success] = "Scores were updated."
     end

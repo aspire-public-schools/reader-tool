@@ -7,13 +7,9 @@
   def show
     @observation_read = ObservationRead.find(params[:id])
     @domains          = @observation_read.domain_scores
+    @domain_scores    = @observation_read.find_scores_by_domain_number
 
     @domain_numbers = Domain.all_numbers
-
-    @domain_scores = @observation_read.find_scores_by_domain_number
-
-    @get_section_scores = @observation_read.find_section_scores
-    @observation_read.update_scores( @get_section_scores )
   end
 
   def update

@@ -83,16 +83,21 @@ class ObservationRead < ActiveRecord::Base
     end
   end
 
-  # FIXME call this after scoring
-  def update_scores scores=nil
-    scores ||= find_section_scores
-    score = scores[0]
-    document_quality   = quality_cert( score )
-    document_alignment = alignment_cert( score )
+  # this gets called from IndicatorScoresController#update
+  def update_scores!
+    scores = find_section_scores
 
-    score = scores[1] if final?
-    live_quality   = quality_cert( score )
-    live_alignment = alignment_cert( score )
+    if score = scores[0]
+      document_quality   = quality_cert( score )
+      document_alignment = alignment_cert( score )
+    end
+
+    if final && score = scores[1]
+      live_quality   = quality_cert( score )
+      live_alignment = alignment_cert( score )
+    end
+
+    save!
   end
 
   def quality_cert score
