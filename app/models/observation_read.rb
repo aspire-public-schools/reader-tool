@@ -103,8 +103,9 @@ class ObservationRead < ActiveRecord::Base
     score.alignment_average.to_f*100 >= 75 ? 2 : 1
   end
 
-  def find_percentages
-    self.class.find_percentages self.id
+  def find_scores_by_domain_number
+    output = self.class.find_scores_by_domain_number(self.id)
+    Hash[ output.map{|x| [ x.number.to_i, x ] } ]
   end
 
   def find_section_scores
@@ -123,12 +124,12 @@ class ObservationRead < ActiveRecord::Base
     order('updated_at DESC').first.try(:updated_at)
   end
 
-  def self.find_percentages id
+  def self.find_scores_by_domain_number id
     find_by_sql <<-SQL
       SELECT obr.id, dom.number,
           AVG(evds.quality::integer)   AS quality_average, 
           AVG(evds.alignment::integer) AS alignment_average,
-          SUM(evds.quality::integer)   AS quality_sum, 
+          SUM(evds.quality::integer)   AS quality_sum,
           SUM(evds.alignment::integer) AS alignment_sum
       FROM observation_reads obr
         LEFT JOIN domain_scores doms

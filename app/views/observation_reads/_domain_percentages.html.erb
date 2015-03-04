@@ -2,22 +2,22 @@
 
   <tr>
     <th></th>
-    <% @domain_percentages.each do |domain_percentage| %>
-      <th> Domain <%= domain_percentage.number %></th>
+    <% @domain_numbers.each do |num| %>
+      <th> Domain <%= num %></th>
     <% end %>
   </tr>
 
   <tr class="quality">
     <td>Quality</td>
-    <% @domain_percentages.each_with_index do |domain_percentage, index| %>
-      <td><%= print_percent domain_percentage.quality_average %></td>
+    <% @domain_numbers.each do |num| %>
+      <td><%= @domain_scores[num].try(&:quality_sum).to_i %></td>
     <% end %>
   </tr>
   
   <tr class="alignment">
     <td>Alignment</td>
-    <% @domain_percentages.each_with_index do |domain_percentage, index| %>
-      <td><%= print_percent domain_percentage.alignment_average %></td>
+    <% @domain_numbers.each do |num| %>
+      <td><%= @domain_scores[num].try(&:alignment_sum).to_i %></td>
     <% end %>
   </tr>
 
@@ -31,12 +31,12 @@
 
   <tr class="quality-weighted">
     <td>Quality</td>
-    <td><%= @domain_percentages.map(&:quality_sum).sum %></td>
+    <td><%= @domain_scores.values.sum{|x| x.quality_sum.to_i } %></td>
   </tr>
 
   <tr class="alignment-weighted">
     <td>Alignment</td>
-    <td><%= @domain_percentages.map(&:alignment_sum).sum %></td>
+    <td><%= @domain_scores.values.sum{|x| x.alignment_sum.to_i } %></td>
   </tr>
 
 </table>

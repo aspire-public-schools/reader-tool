@@ -25,8 +25,6 @@ class Admin::ReadersController < AdminController
   end
 
   def edit
-    # @reader_name = Reader.all
-    # @pagetitle = "Edit #{@reader.first_name} #{@reader.last_name}"
   end
 
   def update

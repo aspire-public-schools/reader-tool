@@ -3,7 +3,7 @@ class IndicatorScore < ActiveRecord::Base
 
   belongs_to :indicator
   belongs_to :domain_score
-  delegate :domain, to: :domain_score
+  delegate :domain, :domain_number, to: :domain_score
   delegate :code, :description, to: :indicator, prefix: true
 
   has_one :observation_read, through: :domain_score

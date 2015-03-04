@@ -4,4 +4,9 @@ class Domain < ActiveRecord::Base
   has_many :indicators
 
   accepts_nested_attributes_for :indicators
+
+  def self.all_numbers
+    Domain.order(:number).pluck(:number)
+  end
+
 end

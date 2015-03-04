@@ -16,13 +16,13 @@
         <div class="main-dashboard">
           <div class="col-md-6">
             <div class="dashboard-holder">
-              <%= render partial: "domain_percentages" if @domain_percentages && @get_section_scores %>
+              <%= render partial: "domain_percentages" %>
             </div>
           </div>
 
           <div class="col-md-6">
             <div class="document-live-form-holder">
-              <%= render partial: "document-live-form" if @observation_read %>
+              <%= render partial: "document-live-form" %>
             </div>
           </div>
         </div>

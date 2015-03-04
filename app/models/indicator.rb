@@ -2,7 +2,8 @@ class Indicator < ActiveRecord::Base
   attr_accessible :code, :description, :domain_id, :evidence_score_attributes
 
   belongs_to :domain
-
+  delegate :number, to: :domain, prefix: true
+  
   has_one :indicator_score
   
   has_one :domain_score,     through: :indicator_score
