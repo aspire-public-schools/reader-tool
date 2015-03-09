@@ -96,7 +96,7 @@
   <div class="modal-buttons">
     <p>Are you sure you want to finalize the read?</p>
     <p>Doing so will lock your scores.</p>
-    <%= f.button :submit, value: "Yes", class: "btn-success", id: "observation-read-button" %>
+    <%= f.submit value: "Yes", class: "btn-success", id: "observation-read-button", disable_with: "Submitting..." %>
     <div class="btn btn-warning" id="cancel-read">Cancel</div>
   </div>
 </div>

@@ -7,7 +7,7 @@
     <div class="panel-body">
       <%= simple_form_for [:admin, @reader], class: "form-horizontal center" do |f| %>
         <%= render partial: "reader_form", locals: { f: f } %>
-        <%= f.submit "Create Reader", class: "btn btn-default btn-primary" %>
+        <%= f.submit "Create Reader", class: "btn btn-default btn-primary", disable_with: "Creating..." %>
       <% end %>
     </div>
 
