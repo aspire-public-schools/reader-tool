@@ -1,5 +1,9 @@
 <dl>
 
+  <dt>
+    <h5><%= link_to "Assigned Observation Reads", root_path, class: "summary-link" %></h5>
+  </dt>
+  
   <% if @observation_read %>
   <dt class="summary">
     <h5><%= link_to "&Gt; Summary".html_safe, @observation_read, class: 'summary-link' %></h5>
