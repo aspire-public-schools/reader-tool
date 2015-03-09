@@ -208,7 +208,7 @@ class ObservationRead < ActiveRecord::Base
     FROM observation_reads onea
     JOIN observation_reads oneb
       ON oneb.reader_number = '1b'
-      AND nea.observation_group_id = oneb.observation_group_id
+      AND onea.observation_group_id = oneb.observation_group_id
     JOIN observation_reads two
       ON two.reader_number = '2'
       AND onea.observation_group_id = two.observation_group_id
