@@ -14,9 +14,9 @@ class ObservationRead < ActiveRecord::Base
     STATUS_WORD_MAPPING[self.observation_status].to_s
   end
 
-  # def status= kind
-  #   self.observation_status = STATUS_WORD_MAPPING.invert[status.to_sym]
-  # end
+  def reader_number_ordinal
+    %w[ 1a 1b 2 ].find_index( reader_number ) + 1
+  end
 
   def self.reader kind
     where( reader_number: kind.to_s )
