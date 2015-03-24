@@ -1,4 +1,18 @@
+<div class="container container-fluid" id="login">
+  <div class="logo"><%= logo_tag %></div>
+  <div class="panel panel-default panel-info">
+    <div class="panel-heading">Please sign in</div>
+    <div class="panel-body">
+      <%= form_for :reader, url: sessions_path, class: "form-horizontal center" do |f| %>
 
+      <div class="form-group">
+        <%= f.label :email, "Email:", class: "col-md-4 control-label reader-admin-label" %>
+        <div class="col-md-8">
+          <%= f.text_field :email, class: "form-control reader-admin-label",placeholder: "Enter your #{organization_name(:short)} Email" %>
+        </div>
+      </div>
+
+<<<<<<< HEAD
 <div id="main" class="container">
   <div class="jumbotron">
     <h1><%= organization_name %></h1>
@@ -8,14 +22,19 @@
           <%= f.text_field :eid, class: "form-control", placeholder: "Employee ID" %>
           <%= f.submit "Login", class: "btn btn-primary" %>
       <% end %>
+=======
+>>>>>>> 7dc440a... branding styles
 
-    <% if flash[:error] %>
-       <div class="alert alert-danger alert-dismissable">
-          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-          <%= flash[:error] %>
+      <div class="form-group">
+        <%= f.label :eid, "Employee Number:", class: "col-md-4 control-label reader-admin-label" %>
+        <div class="col-md-8">
+          <%= f.text_field :eid, class: "form-control reader-admin-label", placeholder: "Employee ID" %>
+        </div>
       </div>
-    <% end %>
+
+    </div>
   </div>
+<<<<<<< HEAD
 </div>
 
 
@@ -53,3 +72,8 @@
 </div>
 
  -->
+=======
+  <%= f.submit "Sign in", class: "btn btn-default btn-primary" %>
+  <% end %>
+</div>
+>>>>>>> 7dc440a... branding styles

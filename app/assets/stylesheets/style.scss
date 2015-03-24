@@ -1,4 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:700);
+@import 'brand';
 
 .landing {
   background-image:url('low_contrast_linen.png');
@@ -8,125 +9,6 @@
   padding-top: 80px
 }
 
-/* navbar styling */
-
-div.right-nav{
-  float: right;
-}
-
-#fixed-nav{
-  position: fixed;
-  background-color: black;
-  height: 65px;
-}
-
-#cssmenu {
-  background: #f96e5b;
-  width: auto;
-}
-#cssmenu ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  line-height: 1;
-  display: block;
-  zoom: 1;
-}
-#cssmenu ul:after {
-  content: ' ';
-  display: block;
-  font-size: 0;
-  height: 0;
-  clear: both;
-  visibility: hidden;
-}
-#cssmenu ul li {
-  float: left;
-  display: block;
-  padding: 0;
-}
-#cssmenu ul li a {
-  color: #ffffff;
-  text-decoration: none;
-  display: block;
-  padding: 15px 25px;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 14px;
-  position: relative;
-  -webkit-transition: color .25s;
-  -moz-transition: color .25s;
-  -ms-transition: color .25s;
-  -o-transition: color .25s;
-  transition: color .25s;
-}
-#cssmenu ul li a:hover {
-  color: orange;
-}
-#cssmenu ul li a:hover:before {
-  width: 100%;
-}
-#cssmenu ul li a:after {
-  /*content: '';*/
-  display: block;
-  position: absolute;
-  right: -3px;
-  top: 19px;
-  height: 6px;
-  width: 6px;
-  background: #ffffff;
-  opacity: .5;
-}
-#cssmenu ul li a:before {
-  content: '';
-  display: block;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 3px;
-  width: 0;
-  background: orange;
-  -webkit-transition: width .25s;
-  -moz-transition: width .25s;
-  -ms-transition: width .25s;
-  -o-transition: width .25s;
-  transition: width .25s;
-}
-#cssmenu ul li.last > a:after,
-#cssmenu ul li:last-child > a:after {
-  display: none;
-}
-#cssmenu ul li.active a {
-  color: #333333;
-}
-#cssmenu ul li.active a:before {
-  width: 100%;
-}
-@media screen and (max-width: 768px) {
-  #cssmenu ul li {
-    float: none;
-  }
-  #cssmenu ul li a {
-    width: 100%;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-  }
-  #cssmenu ul li a:after {
-    display: none;
-  }
-  #cssmenu ul li a:before {
-    height: 1px;
-    background: #ffffff;
-    width: 100%;
-    opacity: .2;
-  }
-  #cssmenu ul li.last > a:before,
-  #cssmenu ul li:last-child > a:before {
-    display: none;
-  }
-}
 
 #reader{
   width: 100%;
@@ -136,7 +18,7 @@ div.right-nav{
 
 .sidebar.fixed {
   position: fixed;
-  background-color: #611f73;
+  background-color: $brand-color;
   top: 66px;
   width: 24%;
   float: left;
@@ -163,19 +45,19 @@ dd a {
 }
 
 dt:hover {
-  background-color: #8e44ad;
+  background-color: $brand-color-light;
 }
 
 dl {
   text-indent: 1em;
-  background-color: #611f73;
+  background-color: $brand-color;
 }
 
 dt {
   text-indent: 1em;
   padding: .5rem;
   cursor: pointer;
-  background-color: #611f73;
+  background-color: $brand-color;
   color:#ecf0f1;
 }
 
@@ -378,4 +260,13 @@ a.summary-link:active {
 }
 dt.summary {
   border-bottom: 1px solid gray;
+}
+
+.panel-info {
+  border-color: $brand-color;
+}
+.panel-info > .panel-heading {
+  background-color: $brand-color;
+  border-color: $brand-color;
+  color: #ffffff;
 }
