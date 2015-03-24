@@ -68,8 +68,10 @@ module ReaderTool
   end
 end
 
-ENV["ORGANIZATION_NAME"]       = "The College-Ready Promise"
-ENV["ORGANIZATION_NAME_SHORT"] = "TCRP"
+org = Rails.root.join("config","organization_name").read.chomp
+name, short = org.split(",")
+ENV["ORGANIZATION_NAME"]       ||= name
+ENV["ORGANIZATION_NAME_SHORT"] ||= short
 
 sftp = Rails.root.join("config","sftp_credentials").read.chomp
 sftp, sftp_pw = sftp.split(':')
