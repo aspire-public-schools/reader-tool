@@ -17,3 +17,5 @@
 
 .DS_Store
 .env
+
+config/sftp_credentials

@@ -14,6 +14,8 @@ gem 'rack-timeout'
 
 gem 'humanize'
 
+gem 'net-sftp'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'

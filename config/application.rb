@@ -68,5 +68,13 @@ module ReaderTool
   end
 end
 
-ENV["ORGANIZATION_NAME"] = "The College-Ready Promise"
+ENV["ORGANIZATION_NAME"]       = "The College-Ready Promise"
 ENV["ORGANIZATION_NAME_SHORT"] = "TCRP"
+
+sftp = Rails.root.join("config","sftp_credentials").read.chomp
+sftp, sftp_pw = sftp.split(':')
+sftp_login, sftp_server = sftp.split("@")
+
+ENV["SFTP_SERVER"]   ||= sftp_server
+ENV["SFTP_LOGIN"]    ||= sftp_login
+ENV["SFTP_PASSWORD"] ||= sftp_pw

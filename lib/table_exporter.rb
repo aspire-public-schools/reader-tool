@@ -1,32 +1,25 @@
 require 'CSV'
 require 'pathname'
 require 'fileutils'
-CMO_NAME = "TCRP"
 
 module TableExporter
   extend self
 
   MODELS = %w[ DomainScore IndicatorScore EvidenceScore ObservationRead ]
 
-  def dump_tables
-    directory.mkpath
-    MODELS.each{|m| dump_table(m.constantize) }
-    directory.parent.join( "#{CMO_NAME}_#{Date.today}.tgz").tap do |filename|
-      `cd #{filename.dirname} && \
-      tar -czvf #{filename.basename} #{File.join(CMO_NAME,"*.csv")}`
-      FileUtils.rm_rf directory
-    end
+  def dump_tables cmo_name
+    FileUtils.rm_rf directory(cmo_name).tap{|m| m.mkpath}.join("*")
+    MODELS.each{|m| dump_table(m.constantize,cmo_name) }
   end
-
 
   private
 
-  def directory
-    Rails.root.join( "tmp", CMO_NAME )
+  def directory cmo_name
+    Rails.root.join( "tmp", cmo_name, "export" )
   end
 
-  def dump_table model
-    CSV.open(directory.join("#{model.name}.csv"), "w") do |csv|
+  def dump_table model, cmo_name
+    CSV.open(directory(cmo_name).join("#{model.name}.csv"), "w") do |csv|
       cols = model.column_names
       csv << cols
       model.all.each do |obj|
