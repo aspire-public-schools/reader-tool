@@ -1,6 +1,4 @@
-DROP TABLE all_evidence CASCADE;
-
-CREATE TABLE all_evidence
+CREATE TABLE IF NOT EXISTS all_evidence 
 (
   Observation_Group_ID integer,
   employee_ID_observer character varying(50),
@@ -13,3 +11,9 @@ CREATE TABLE all_evidence
 WITH (
   OIDS=FALSE
 );
+
+CREATE OR REPLACE VIEW vw_all_observations AS 
+SELECT DISTINCT all_evidence.observation_group_id,
+   all_evidence.employee_id_observer,
+   all_evidence.employee_id_learner
+  FROM all_evidence;
