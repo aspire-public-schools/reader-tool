@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby "1.9.3"
+ruby "2.2.0"
 
 gem 'rails', '~> 3.2.14'
 gem 'jquery-rails'
@@ -17,19 +17,21 @@ gem 'humanize'
 gem 'net-sftp'
 
 group :development do
+  gem 'pry'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'debugger'
+  # gem 'pry-debugger'
   gem 'quiet_assets'
   gem 'sextant'
+  gem 'lol_dba'
 end
 
 group :test do
   # gem 'capybara'
   # gem 'selenium-webdriver'
-  gem 'shoulda-matchers'
+  # gem 'shoulda-matchers'
   gem 'simplecov'
-  gem 'database_cleaner'
+  # gem 'database_cleaner'
 end
 
 group :development, :test do
