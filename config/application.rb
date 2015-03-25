@@ -69,13 +69,14 @@ module ReaderTool
 end
 
 org = Rails.root.join("config","organization_name").read.chomp
-name, short = org.split(",")
-ENV["ORGANIZATION_NAME"]       ||= name
-ENV["ORGANIZATION_NAME_SHORT"] ||= short
+name, short, dir = org.split(",")
+ENV["ORG_NAME"]       ||= name
+ENV["ORG_NAME_SHORT"] ||= short
+ENV["ORG_SFTP_DIR"]   ||= dir 
 
 sftp = Rails.root.join("config","sftp_credentials").read.chomp
-sftp, sftp_pw = sftp.split(':')
-sftp_login, sftp_server = sftp.split("@")
+creds, sftp_server    = sftp.split("@")
+sftp_login, sftp_pw   = creds.split(":")
 
 ENV["SFTP_SERVER"]   ||= sftp_server
 ENV["SFTP_LOGIN"]    ||= sftp_login

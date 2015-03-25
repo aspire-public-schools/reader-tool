@@ -7,16 +7,16 @@ namespace :schoolzilla do
 
   desc "import CSV from schoozilla FTP server"
   task :import => :environment do
-    filename    = 'raw_BloomBoard_vw.csv'
-    remote_path = File.join(ENV['CMO'],'export',filename)
-    local_path  = Rails.root.join('tmp',ENV['CMO'],'import')
+    filename    = ENV['FILENAME'] || 'raw_BloomBoard_vw.csv'
+    remote_path = File.join(ENV['SFTP_DIR'],'export',filename)
+    local_path  = Rails.root.join('tmp',ENV["ORG_NAME_SHORT"],'import')
     Rails.logger.info "downloading CSV from schoolzilla SFTP"
     # sftp_connection do |sftp|
     #   p remote_path, local_path
     #   sftp.download! remote_path.to_s, local_path.join(filename).to_s
     #   sftp.loop 
     # end
-    Rails.logger.info "importing tables from CSV..."
+    Rails.logger.info "importing evidence from CSV..."
     TableImporter.import_from_csv local_path.join(filename)
     Rails.logger.info "done!"
   end
@@ -24,9 +24,9 @@ namespace :schoolzilla do
   desc "export CSVs to schoozilla FTP server"
   task :export => :environment do
     Rails.logger.info "dumping tables to CSV..."
-    TableExporter.dump_tables(ENV['CMO'])
-    remote_path = Pathname.new(ENV['CMO']).join('import')
-    local_path  = Rails.root.join('tmp', ENV['CMO'],'export')
+    TableExporter.dump_tables(ENV["ORG_NAME_SHORT"])
+    remote_path = Pathname.new(ENV['SFTP_DIR']).join('import')
+    local_path  = Rails.root.join('tmp', ENV["ORG_NAME_SHORT"],'export')
     Rails.logger.info "uploading CSVs to schoolzilla SFTP"
     sftp_connection do |sftp|
       # sftp.mkdir! remote_path

@@ -18,9 +18,9 @@ module ApplicationHelper
   def organization_name kind=:long
     case kind
     when :short
-      ENV["ORGANIZATION_NAME_SHORT"]
+      ENV["ORG_NAME_SHORT"]
     else
-      ENV["ORGANIZATION_NAME"]
+      ENV["ORG_NAME"]
     end
   end
 
