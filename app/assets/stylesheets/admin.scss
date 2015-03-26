@@ -1,3 +1,5 @@
+@import 'brand';
+
 #dashboard{
   font-size: 2em;
 }
@@ -76,13 +78,16 @@ ul.admin-employee, li {
   }
 
 #create-button {
-    font-size: 15px;
-    margin: 10px 2px;
-    display: inline-block;
-    padding: 6px 14px;
-    background-color: #611f73;
-    border: 1px solid transparent;
-    border-radius: 15px;
+  font-size: 15px;
+  margin: 10px 2px;
+  display: inline-block;
+  padding: 6px 14px;
+  background-color: $brand-color;
+  border: 1px solid transparent;
+  border-radius: 15px;
+  a {
+    color: white;
+  }
 }
 
 .form-control.reader-admin-label {
