@@ -41,4 +41,8 @@ module ApplicationHelper
     "%0.1f %" % (val.to_f*100)
   end
 
+  def staging?
+    Rails.env.development? || ENV['STAGING']
+  end
+
 end

@@ -6,7 +6,7 @@
   <td>
     <%= link_to "Edit", edit_admin_reader_path(reader) %>
     <%= link_to "View", admin_reader_path(reader) %>
-    <%= link_to "Login", sessions_path( reader: { eid: reader.employee_number, email: reader.email} ), method: :post %>
+    <%= link_to "Login", sessions_path( reader: { eid: reader.employee_number, email: reader.email} ), method: :post unless staging? %>
     <%= link_to "Deactivate", deactivate_admin_reader_path(reader), method: :put %>
   </td>
 </tr>
