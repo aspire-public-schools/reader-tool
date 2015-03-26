@@ -8,7 +8,7 @@ reader_list = [
 ]
 
 reader_list.each do | email, employee_number, first_name, last_name |
-  Reader.create( email: email, employee_number: employee_number, first_name: first_name, last_name: last_name)
+  Reader.create! email: email, employee_number: employee_number, first_name: first_name, last_name: last_name
 end
 
 # domain_list = [
