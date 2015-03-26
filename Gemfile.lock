@@ -73,14 +73,9 @@ GEM
       actionpack (>= 3.1)
       less (~> 2.6.0)
     libv8 (3.16.14.7)
-    lol_dba (1.6.7)
-      actionpack (>= 3.0, < 5.0)
-      activerecord (>= 3.0, < 5.0)
-      railties (>= 3.0, < 5.0)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    method_source (0.8.2)
     mime-types (1.25.1)
     multi_json (1.11.0)
     net-sftp (2.1.2)
@@ -89,10 +84,6 @@ GEM
     pg (0.18.1)
     polyglot (0.3.5)
     populator (1.0.0)
-    pry (0.10.1)
-      coderay (~> 1.1.0)
-      method_source (~> 0.8.1)
-      slop (~> 3.4)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.4.5)
@@ -164,7 +155,6 @@ GEM
       multi_json (~> 1.0)
       simplecov-html (~> 0.9.0)
     simplecov-html (0.9.0)
-    slop (3.6.0)
     sprockets (2.2.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -205,11 +195,9 @@ DEPENDENCIES
   humanize
   jquery-rails
   less-rails
-  lol_dba
   net-sftp
   pg
   populator
-  pry
   quiet_assets
   rack-timeout
   rack_session_access

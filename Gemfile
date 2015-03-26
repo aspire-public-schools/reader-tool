@@ -1,8 +1,10 @@
 source 'https://rubygems.org'
 
-ruby "2.2.0"
+ruby "2.1.5"
 
 gem 'rails', '~> 3.2.14'
+# gem 'rails', github: 'rails/rails', branch: '3-2-stable'
+
 gem 'jquery-rails'
 gem 'simple_form'
 
@@ -17,13 +19,13 @@ gem 'humanize'
 gem 'net-sftp'
 
 group :development do
-  gem 'pry'
+  # gem 'pry'
   gem 'better_errors'
   gem 'binding_of_caller'
   # gem 'pry-debugger'
   gem 'quiet_assets'
   gem 'sextant'
-  gem 'lol_dba'
+  # gem 'lol_dba'
 end
 
 group :test do
