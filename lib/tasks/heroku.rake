@@ -4,7 +4,7 @@ namespace :heroku do
   task :deploy do
     branch = ENV['BRANCH'] || `git rev-parse --abbrev-ref HEAD`.chomp
     # staging collegeready-readertool
-    exec "git push #{ENV['ENV']||'heroku'} #{branch}:master" 
+    exec "git push #{ENV['ENV']||branch} #{branch}:master" 
   end
 
 end
