@@ -11,11 +11,11 @@ namespace :schoolzilla do
     remote_path = File.join(ENV['SFTP_DIR'],'export',filename)
     local_path  = Rails.root.join('tmp',ENV["ORG_NAME_SHORT"],'import')
     Rails.logger.info "downloading CSV from schoolzilla SFTP"
-    # sftp_connection do |sftp|
-    #   p remote_path, local_path
-    #   sftp.download! remote_path.to_s, local_path.join(filename).to_s
-    #   sftp.loop 
-    # end
+    sftp_connection do |sftp|
+      p remote_path, local_path
+      sftp.download! remote_path.to_s, local_path.join(filename).to_s
+      sftp.loop 
+    end
     Rails.logger.info "importing evidence from CSV..."
     TableImporter.import_from_csv local_path.join(filename)
     Rails.logger.info "done!"
