@@ -24,6 +24,11 @@ module ApplicationHelper
     end
   end
 
+  def logo_tag opts={}
+    opts.reverse_merge! alt: organization_name
+    image_tag "logos/#{organization_name(:short)}.png", opts
+  end
+
   def print_check bool
     content_tag(:span,"&#10004;".html_safe, class: 'checkmark') if bool
   end
