@@ -34,30 +34,30 @@ class Reader < ActiveRecord::Base
   end
 
   def self.deactive
-    where(is_reader1a: "0", is_reader1b: "0", is_reader2: "0")
+    where(is_reader1a: false, is_reader1b: false, is_reader2: false)
   end
 
   def self.active
-    # TODO: use rails 4  where.not(is_reader1a: "0", is_reader1b: "0", is_reader2: "0")
+    # TODO: use rails 4  where.not(is_reader1a: false, is_reader1b: false, is_reader2: false)
     Reader.order(:last_name).all - Reader.deactive
   end
 
   def reader1a?
-    is_reader1a == "1"
+    is_reader1a?
   end
 
   def reader1b?
-    is_reader1b == "1"
+    is_reader1b?
   end
 
   def reader2?
-    is_reader2 == "1"
+    is_reader2?
   end
 
   def set_defaults
-    self.is_reader1a ||= "1"
-    self.is_reader1b ||= "1"
-    self.is_reader2  ||= "0"
+    self.is_reader1a ||= true
+    self.is_reader1b ||= true
+    self.is_reader2  ||= false
     self
   end
 
