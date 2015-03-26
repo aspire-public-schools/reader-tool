@@ -74,10 +74,13 @@ ENV["ORG_NAME"]       ||= name
 ENV["ORG_NAME_SHORT"] ||= short
 ENV["ORG_SFTP_DIR"]   ||= dir 
 
-sftp = Rails.root.join("config","sftp_credentials").read.chomp
-creds, sftp_server    = sftp.split("@")
-sftp_login, sftp_pw   = creds.split(":")
+if Rails.env.development? || Rails.env.test?
+  sftp = Rails.root.join("config","sftp_credentials").read.chomp
+  creds, sftp_server    = sftp.split("@")
+  sftp_login, sftp_pw   = creds.split(":")
 
-ENV["SFTP_SERVER"]   ||= sftp_server
-ENV["SFTP_LOGIN"]    ||= sftp_login
-ENV["SFTP_PASSWORD"] ||= sftp_pw
+  ENV["SFTP_SERVER"]   ||= sftp_server
+  ENV["SFTP_LOGIN"]    ||= sftp_login
+  ENV["SFTP_PASSWORD"] ||= sftp_pw
+
+end
