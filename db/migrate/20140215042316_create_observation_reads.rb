@@ -20,7 +20,8 @@ class CreateObservationReads < ActiveRecord::Migration
       t.integer :observation_status
       t.boolean :flagged
       t.text    :comments
-      t.timestamps
+      t.datetime :created_at
+      t.datetime :updated_at
     end
   end
 end

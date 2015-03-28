@@ -28,6 +28,7 @@ class CreateAllEvidence < ActiveRecord::Migration
 
     TableImporter::MODELS.map(&:tableize).each do |table_name|
       add_default_now(table_name, :created_at)
+      add_default_now(table_name, :updated_at)
       add_updated_at_trigger(table_name)
     end
 

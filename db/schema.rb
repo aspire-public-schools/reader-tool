@@ -27,12 +27,9 @@ ActiveRecord::Schema.define(:version => 20150328012930) do
     t.integer  "observation_read_id"
     t.integer  "quality_score"
     t.integer  "domain_id"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
-
-  add_index "domain_scores", ["domain_id"], :name => "index_domain_scores_on_domain_id"
-  add_index "domain_scores", ["observation_read_id"], :name => "index_domain_scores_on_observation_read_id"
 
   create_table "domains", :force => true do |t|
     t.integer "number"
@@ -41,28 +38,24 @@ ActiveRecord::Schema.define(:version => 20150328012930) do
 
   create_table "evidence_scores", :force => true do |t|
     t.integer  "indicator_score_id"
+    t.integer  "evidence_id"
     t.text     "description"
     t.text     "comments"
     t.boolean  "quality"
     t.boolean  "alignment"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
-
-  add_index "evidence_scores", ["indicator_score_id"], :name => "index_evidence_scores_on_indicator_score_id"
 
   create_table "indicator_scores", :force => true do |t|
     t.integer  "domain_score_id"
     t.integer  "indicator_id"
     t.integer  "alignment_score"
     t.integer  "evidence_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.text     "comments"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
-
-  add_index "indicator_scores", ["domain_score_id", "indicator_id"], :name => "index_indicator_scores_on_domain_score_id_and_indicator_id"
-  add_index "indicator_scores", ["domain_score_id"], :name => "index_indicator_scores_on_domain_score_id"
-  add_index "indicator_scores", ["indicator_id"], :name => "index_indicator_scores_on_indicator_id"
 
   create_table "indicators", :force => true do |t|
     t.string  "code"
@@ -92,8 +85,8 @@ ActiveRecord::Schema.define(:version => 20150328012930) do
     t.integer  "observation_status"
     t.boolean  "flagged"
     t.text     "comments"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "readers", :force => true do |t|

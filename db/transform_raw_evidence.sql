@@ -3,6 +3,7 @@
 --   all_evidence.employee_id_learner
 --  FROM all_evidence;
    
+assign_reader_1a = <<-SQL.squish
 /* Insert observation_read records for Reader 1a.  Evenly distribute reads among readers who have been designated as 1a */
 INSERT INTO observation_reads (observation_group_id,employee_id_observer,employee_id_learner,reader_number,reader_id,document_quality,document_alignment,observation_status)
 SELECT observation_group_id, employee_id_observer, employee_id_learner, reader_number, readers.id AS reader_id, 1 AS document_quality, 1 AS document_alignment,2 AS observation_status
@@ -23,7 +24,8 @@ SELECT observation_group_id, employee_id_observer, employee_id_learner, reader_n
 		WHERE is_reader1a = '1'
 	) readers	--This uses the modulo operator to equitably distribute the reads
 		ON obs.obs_num % (SELECT CASE WHEN COUNT(*) = 0 THEN 1 ELSE COUNT(*) END FROM readers WHERE is_reader1a = '1') = readers.reader_num;
-
+SQL
+assign_reader_1b = <<-SQL.squish
 /* Assign Reader 1b - this code is duplicated from above except that it filters on 1b instead of 1a */	
 INSERT INTO observation_reads (observation_group_id,employee_id_observer,employee_id_learner,reader_number,reader_id,document_quality,document_alignment,observation_status)
 SELECT observation_group_id, employee_id_observer, employee_id_learner, reader_number, readers.id AS reader_id, 1 AS document_quality, 1 AS document_alignment,2 AS observation_status
@@ -44,7 +46,9 @@ SELECT observation_group_id, employee_id_observer, employee_id_learner, reader_n
 		WHERE is_reader1b = '1'
 	) readers
 		ON obs.obs_num % (SELECT CASE WHEN COUNT(*) = 0 THEN 1 ELSE COUNT(*) END  FROM readers WHERE is_reader1b = '1') = readers.reader_num;
+SQL
 
+assign_reader_2 = <<-SQL.squish
 /* Assign Reader 2 */	
 INSERT INTO observation_reads (observation_group_id,employee_id_observer,employee_id_learner,reader_number,reader_id,document_quality,document_alignment,observation_status)
 SELECT observation_group_id, employee_id_observer, employee_id_learner, reader_number, readers.id AS reader_id, 1 AS document_quality, 1 AS document_alignment,1 AS observation_status
@@ -65,7 +69,9 @@ SELECT observation_group_id, employee_id_observer, employee_id_learner, reader_n
 		WHERE is_reader2 = '1'
 	) readers
 		ON obs.obs_num % (SELECT COUNT(*) FROM readers WHERE is_reader2 = '1') = readers.reader_num; 
+SQL
 
+populate_domain_scores = <<-SQL.squish
 /* POPULATE DOMAIN SCORES - Currently not using domain 5 in the reader tool.  Only create domain_scores for the
 appropriate 1a/1b/2 reader */
 
@@ -96,8 +102,9 @@ UNION
 	WHERE obs.reader_number = '2'
 		AND dom.id <> '5'
 		AND domcheck.id IS NULL;
+SQL
 
-
+populate_indicator_scores = <<-SQL.squish
 /* POPULATE INDICATOR SCORES - Currently not using domain 5 and only 4.1A and 4.1B from dom 4 */
 INSERT INTO indicator_scores (domain_score_id, indicator_id, alignment_score,comments)
 	SELECT doms.id AS domain_score_id, ind.id AS indicator_id, NULL as alignment_score, null as comments
@@ -113,8 +120,9 @@ INSERT INTO indicator_scores (domain_score_id, indicator_id, alignment_score,com
 	WHERE ind.domain_id <> '5'
 		AND (ind.domain_id <> '4' OR ind.Code in('4.1A', '4.1B')) 
 		AND indcheck.id IS NULL;
+SQL
 
-
+populate_evidence_scores = <<-SQL.squish
 /* Generate evidence scores.  Join to other tables to ensure the correct id is inserted */
 INSERT INTO evidence_scores(evidence_id,indicator_score_id,description,quality,alignment)
 	SELECT evid.evidence_id AS evidence_id, inds.id AS indicator_score_id, evid.evidence AS description, '1' AS quality, '1' AS alignment
@@ -130,3 +138,4 @@ INSERT INTO evidence_scores(evidence_id,indicator_score_id,description,quality,a
 	LEFT JOIN evidence_scores evdcheck
 		ON inds.id = evdcheck.indicator_score_id AND evid.evidence_id = evdcheck.evidence_id
 	WHERE  evdcheck.id IS NULL
+SQL

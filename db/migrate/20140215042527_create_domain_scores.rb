@@ -5,7 +5,8 @@ class CreateDomainScores < ActiveRecord::Migration
       t.integer :quality_score
       t.integer :domain_id
 
-      t.timestamps
+      t.datetime :created_at
+      t.datetime :updated_at
     end
   end
 end

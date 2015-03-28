@@ -5,8 +5,9 @@ class CreateIndicatorScores < ActiveRecord::Migration
       t.integer :indicator_id
       t.integer :alignment_score
       t.integer :evidence_id
-
-      t.timestamps
+      t.text :comments
+      t.datetime :created_at
+      t.datetime :updated_at
     end
   end
 end
