@@ -74,8 +74,8 @@ ActiveRecord::Schema.define(:version => 20150328012930) do
 
   create_table "observation_reads", :force => true do |t|
     t.integer  "observation_group_id"
-    t.integer  "employee_id_observer"
-    t.integer  "employee_id_learner"
+    t.string   "employee_id_observer"
+    t.string   "employee_id_learner"
     t.string   "alignment_overall"
     t.integer  "correlation"
     t.integer  "average_difference"
@@ -95,8 +95,6 @@ ActiveRecord::Schema.define(:version => 20150328012930) do
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
   end
-
-  add_index "observation_reads", ["reader_id"], :name => "index_observation_reads_on_reader_id"
 
   create_table "readers", :force => true do |t|
     t.integer "employee_number"

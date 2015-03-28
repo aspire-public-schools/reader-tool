@@ -2,8 +2,8 @@ class CreateObservationReads < ActiveRecord::Migration
   def change
     create_table :observation_reads do |t|
       t.integer :observation_group_id
-      t.integer :employee_id_observer
-      t.integer :employee_id_learner
+      t.string :employee_id_observer
+      t.string :employee_id_learner
       t.string :alignment_overall
       t.integer :correlation
       t.integer :average_difference
