@@ -70,41 +70,36 @@ SELECT observation_group_id, employee_id_observer, employee_id_learner, reader_n
 appropriate 1a/1b/2 reader */
 
 INSERT INTO domain_scores (observation_read_id,domain_id)
-
-SELECT obs.id AS observation_read_id, dom.id AS domain_id
-FROM observation_reads obs
-CROSS JOIN domains dom
-LEFT JOIN domain_scores domcheck
-	ON obs.id = domcheck.observation_read_id AND dom.id = domcheck.domain_id
-WHERE obs.reader_number = '1a'
-	AND dom.id IN('1', '4') --1a only reads doms 1 & 4
-	AND domcheck.id IS NULL
-
-		
+	SELECT obs.id AS observation_read_id, dom.id AS domain_id
+	FROM observation_reads obs
+	CROSS JOIN domains dom
+	LEFT JOIN domain_scores domcheck
+		ON obs.id = domcheck.observation_read_id AND dom.id = domcheck.domain_id
+	WHERE obs.reader_number = '1a'
+		AND dom.id IN('1', '4') --1a only reads doms 1 & 4
+		AND domcheck.id IS NULL
 UNION 
-
-SELECT obs.id AS observation_reads_id, dom.id AS domain_id
-FROM observation_reads obs
-CROSS JOIN domains dom
-LEFT JOIN domain_scores domcheck
-	ON obs.id = domcheck.observation_read_id AND dom.id = domcheck.domain_id
-WHERE obs.reader_number = '1b'
-	AND dom.id  IN('2', '3') --1b only reads doms 2 & 3
-	AND domcheck.id IS NULL
-
+	SELECT obs.id AS observation_reads_id, dom.id AS domain_id
+	FROM observation_reads obs
+	CROSS JOIN domains dom
+	LEFT JOIN domain_scores domcheck
+		ON obs.id = domcheck.observation_read_id AND dom.id = domcheck.domain_id
+	WHERE obs.reader_number = '1b'
+		AND dom.id  IN('2', '3') --1b only reads doms 2 & 3
+		AND domcheck.id IS NULL
 UNION
+	SELECT  obs.id AS observation_reads_id, dom.id AS domain_id
+	FROM observation_reads obs
+	CROSS JOIN domains dom
+	LEFT JOIN domain_scores domcheck
+		ON obs.id = domcheck.observation_read_id AND dom.id = domcheck.domain_id
+	WHERE obs.reader_number = '2'
+		AND dom.id <> '5'
+		AND domcheck.id IS NULL;
 
-SELECT  obs.id AS observation_reads_id, dom.id AS domain_id
-FROM observation_reads obs
-CROSS JOIN domains dom
-LEFT JOIN domain_scores domcheck
-	ON obs.id = domcheck.observation_read_id AND dom.id = domcheck.domain_id
-WHERE obs.reader_number = '2'
-	AND dom.id <> '5'
-	AND domcheck.id IS NULL;
 
 /* POPULATE INDICATOR SCORES - Currently not using domain 5 and only 4.1A and 4.1B from dom 4 */
-	INSERT INTO indicator_scores (domain_score_id, indicator_id, alignment_score,comments)
+INSERT INTO indicator_scores (domain_score_id, indicator_id, alignment_score,comments)
 	SELECT doms.id AS domain_score_id, ind.id AS indicator_id, NULL as alignment_score, null as comments
 	FROM Observation_Reads obs
 	LEFT JOIN domain_scores doms
@@ -119,18 +114,19 @@ WHERE obs.reader_number = '2'
 		AND (ind.domain_id <> '4' OR ind.Code in('4.1A', '4.1B')) 
 		AND indcheck.id IS NULL;
 
+
 /* Generate evidence scores.  Join to other tables to ensure the correct id is inserted */
 INSERT INTO evidence_scores(evidence_id,indicator_score_id,description,quality,alignment)
-SELECT evid.evidence_id AS evidence_id, inds.id AS indicator_score_id, evid.evidence AS description, '1' AS quality, '1' AS alignment
-FROM Observation_Reads obs
-LEFT JOIN domain_scores dom
-	ON dom.observation_read_id = obs.id
-LEFT JOIN indicator_scores inds
-	ON inds.domain_score_id = dom.id
-LEFT JOIN indicators ind
-	ON inds.indicator_id = ind.id
-INNER JOIN all_evidence evid
-	ON obs.observation_group_id = evid.observation_group_id AND LEFT(evid.indicator_code,3) || RIGHT(evid.indicator_code,1) = ind.Code --Bloomboard uses two dots while we use one (1.1.A vs 1.1A)
-LEFT JOIN evidence_scores evdcheck
-	ON inds.id = evdcheck.indicator_score_id AND evid.evidence_id = evdcheck.evidence_id
-WHERE  evdcheck.id IS NULL
+	SELECT evid.evidence_id AS evidence_id, inds.id AS indicator_score_id, evid.evidence AS description, '1' AS quality, '1' AS alignment
+	FROM Observation_Reads obs
+	LEFT JOIN domain_scores dom
+		ON dom.observation_read_id = obs.id
+	LEFT JOIN indicator_scores inds
+		ON inds.domain_score_id = dom.id
+	LEFT JOIN indicators ind
+		ON inds.indicator_id = ind.id
+	INNER JOIN all_evidence evid
+		ON obs.observation_group_id = evid.observation_group_id AND LEFT(evid.indicator_code,3) || RIGHT(evid.indicator_code,1) = ind.Code --Bloomboard uses two dots while we use one (1.1.A vs 1.1A)
+	LEFT JOIN evidence_scores evdcheck
+		ON inds.id = evdcheck.indicator_score_id AND evid.evidence_id = evdcheck.evidence_id
+	WHERE  evdcheck.id IS NULL

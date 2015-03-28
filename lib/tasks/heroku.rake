@@ -7,4 +7,14 @@ namespace :heroku do
     exec "git push #{ENV['ENV']||branch} #{branch}:master" 
   end
 
+  desc "Seed database"
+  task :seed do
+    `heroku run rake db:seed --app #{branch}-readertool`
+  end
+
+
+  def branch
+    ENV['BRANCH'] || `git rev-parse --abbrev-ref HEAD`.chomp
+  end
+
 end

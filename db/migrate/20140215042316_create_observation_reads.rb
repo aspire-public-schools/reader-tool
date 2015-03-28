@@ -18,8 +18,8 @@ class CreateObservationReads < ActiveRecord::Migration
       t.integer :live_alignment
       t.integer :live_quality
       t.integer :observation_status
-      t.integer :flagged
-
+      t.boolean :flagged
+      t.text    :comments
       t.timestamps
     end
   end

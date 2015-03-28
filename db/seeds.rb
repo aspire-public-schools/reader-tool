@@ -1,15 +1,32 @@
-reader_list = [
-  [ "benjamin.crosby@aspirepublicschools.org", 2043, "Benjamin", "Crosby"],
-  [ "matt.seigel@aspirepublicschools.org", 1491, "Matthew", "Seigel"],
-  [ "kimberly.whitehead@aspirepublicschools.org", 2862, "Kimberly", "Whitehead"],
-  [ "james.gallagher@aspirepublichschools.org", 1118, "James", "Gallagher"],
-  [ "abbey.esposto@aspirepublicschools.org", 5058, "Abbey", "Esposto"],
-  [ "julie.tsai@aspirepublicschools.org", 3605, "Julie", "Tsai"]
-]
-
-reader_list.each do | email, employee_number, first_name, last_name |
-  Reader.create! email: email, employee_number: employee_number, first_name: first_name, last_name: last_name
+def execute sql, msg=nil
+  sql = sql.read if sql.is_a? Pathname
+  Rails.logger.info "#{msg}..." if msg
+  ActiveRecord::Base.connection.execute sql
+  Rails.logger.info "#{msg} done!" if msg
 end
+
+%w[ readers domains indicators ].each do |table|
+  execute begin
+    <<-SQL
+    TRUNCATE table #{table};
+    COPY #{table} FROM '#{Rails.root.join("db","seeds",table+".csv")}'
+      DELIMITER ',' CSV HEADER;
+    SQL
+  end , "importing #{table}.csv"
+end
+
+# reader_list = [
+#   [ "benjamin.crosby@aspirepublicschools.org", 2043, "Benjamin", "Crosby"],
+#   [ "matt.seigel@aspirepublicschools.org", 1491, "Matthew", "Seigel"],
+#   [ "kimberly.whitehead@aspirepublicschools.org", 2862, "Kimberly", "Whitehead"],
+#   [ "james.gallagher@aspirepublichschools.org", 1118, "James", "Gallagher"],
+#   [ "abbey.esposto@aspirepublicschools.org", 5058, "Abbey", "Esposto"],
+#   [ "julie.tsai@aspirepublicschools.org", 3605, "Julie", "Tsai"]
+# ]
+
+# reader_list.each do | email, employee_number, first_name, last_name |
+#   Reader.create! email: email, employee_number: employee_number, first_name: first_name, last_name: last_name
+# end
 
 # domain_list = [
 #   [ 1, "Data-Driven Planning and Assessment"],
@@ -21,7 +38,6 @@ end
 # domain_list.each do | number, description |
 #   Domain.create( number: number, description: description )
 # end
-
 
 # indicator_list = [
 #   [ "1.1A", "Selection of Learning Objectives", 1],

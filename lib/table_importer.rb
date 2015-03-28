@@ -1,17 +1,13 @@
 module TableImporter
   extend self
-# 1a: 1002000msec
-# 1b: 876091msec
-# 2
 
   MODELS = %w[ DomainScore IndicatorScore EvidenceScore ObservationRead ]
 
   def import_from_csv file_path, truncate=true
-    execute Rails.root.join('db','create_evidence_table.sql'), "creating table"
     execute "COPY all_evidence FROM '#{file_path}' DELIMITER ',' CSV HEADER;", "importing csv"
     truncate_tables! if truncate
     update_timestamps!
-  # http://stackoverflow.com/questions/4069718/postgres-insert-if-does-not-exist-already
+    # TODO: http://stackoverflow.com/questions/4069718/postgres-insert-if-does-not-exist-already
     execute Rails.root.join('db','transform_raw_evidence.sql'), "transforming evidence"
   end
 
