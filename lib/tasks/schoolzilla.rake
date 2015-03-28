@@ -1,15 +1,16 @@
 require 'net/sftp'
+require 'fileutils'
 
-# TODO: do this in a cron job
-ENV['CMO'] = "TCRP_test"
+# TODO: do this in a nightly cron job
 
 namespace :schoolzilla do
 
   desc "import CSV from schoozilla FTP server"
   task :import => :environment do
     filename    = ENV['FILENAME'] || 'raw_BloomBoard_vw.csv'
-    remote_path = File.join(ENV['SFTP_DIR'],'export',filename)
+    remote_path = File.join(ENV['ORG_SFTP_DIR'],'export',filename)
     local_path  = Rails.root.join('tmp',ENV["ORG_NAME_SHORT"],'import')
+    FileUtils.mkdir_p local_path
     Rails.logger.info "downloading CSV from schoolzilla SFTP"
     sftp_connection do |sftp|
       p remote_path, local_path
@@ -17,8 +18,12 @@ namespace :schoolzilla do
       sftp.loop 
     end
     Rails.logger.info "importing evidence from CSV..."
-    TableImporter.import_from_csv local_path.join(filename)
+    file = local_path.join(filename)
+    `tr < #{file} -d '\\000' > #{file}.clean`
+    file.delete
+    TableImporter.import_from_csv "#{file}.clean"
     Rails.logger.info "done!"
+    # FileUtils.rm "#{file}.clean"
   end
 
   desc "export CSVs to schoozilla FTP server"
@@ -27,6 +32,7 @@ namespace :schoolzilla do
     TableExporter.dump_tables(ENV["ORG_NAME_SHORT"])
     remote_path = Pathname.new(ENV['SFTP_DIR']).join('import')
     local_path  = Rails.root.join('tmp', ENV["ORG_NAME_SHORT"],'export')
+    FileUtils.mkdir_p local_path
     Rails.logger.info "uploading CSVs to schoolzilla SFTP"
     sftp_connection do |sftp|
       # sftp.mkdir! remote_path
