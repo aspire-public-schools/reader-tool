@@ -76,7 +76,7 @@
   </div>
   <div class="row">
     <div class="col-md-8">
-        <%= f.input :flags, as: :boolean, label: false, inline_label: "Check to Request a 3rd Reader" if current_user.reader2? %>
+        <%= f.input :flagged, as: :boolean, label: false, inline_label: "Check to Request a 3rd Reader" if current_user.reader2? %>
     </div>
   </div>
   

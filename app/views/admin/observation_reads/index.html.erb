@@ -67,15 +67,15 @@
               <%= link_to "Observation Read", observation_read_path(read['live_observation_read_id'])%>
             </td>
             <td class=<%= read['second_status'].to_i.humanize %>>
-              <% if read.oneb_flags == "t" %>
+              <% if read.oneb_flagged? %>
               <%= select_tag("observation_read_id[#{read['second_observation_read_id']}]", options_for_select(@readers_for_select_2, read['second_reader_id']), prompt: "Select a reader")%><br>
               <%= link_to "Observation Read", observation_read_path(read['second_observation_read_id'])%>
               <% else %>
               Cannot assign reader until flagged.
               <% end %>
             </td>
-            <td class=<%= "flagged-#{read.oneb_flags}" %> >
-              <%= read.oneb_flags == "t" ? "Yes" : "No" %>
+            <td class=<%= "flagged-#{read.oneb_flagged}" %> >
+              <%= read.oneb_flagged? ? "Yes" : "No" %>
             </td>
           </tr>
           <% end %>

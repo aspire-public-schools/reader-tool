@@ -45,8 +45,8 @@ ActiveRecord::Schema.define(:version => 20150328012930) do
     t.text     "comments"
     t.boolean  "quality"
     t.boolean  "alignment"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   add_index "evidence_scores", ["indicator_score_id"], :name => "index_evidence_scores_on_indicator_score_id"
@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(:version => 20150328012930) do
     t.integer  "live_alignment"
     t.integer  "live_quality"
     t.integer  "observation_status"
-    t.boolean  "flags"
+    t.boolean  "flagged"
     t.text     "comments"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false

@@ -1,5 +1,5 @@
 class ObservationRead < ActiveRecord::Base
-  attr_accessible :document_quality, :document_alignment, :live_alignment, :live_quality, :observation_status, :id, :observation_group_id, :employee_id_observer, :employee_id_learner, :correlation, :average_difference, :percent_correct, :reader_id, :created_at, :updated_at, :reader_number, :comments, :flags
+  attr_accessible :document_quality, :document_alignment, :live_alignment, :live_quality, :observation_status, :id, :observation_group_id, :employee_id_observer, :employee_id_learner, :correlation, :average_difference, :percent_correct, :reader_id, :created_at, :updated_at, :reader_number, :comments, :flagged
   has_many :domain_scores
   has_many :domains, through: :domain_scores, uniq: true
   has_many :indicator_scores, through: :domain_scores
@@ -195,16 +195,16 @@ class ObservationRead < ActiveRecord::Base
     SELECT onea.employee_id_observer,
       onea.id AS document_observation_read_id,
       onea.observation_status AS document_status,
-      onea.reader_id AS Document_reader_id,
+      onea.reader_id AS document_reader_id,
       oneb.id AS live_observation_read_id,
       oneb.observation_status AS live_status,
       oneb.reader_id AS Live_reader_id,
       two.id AS second_observation_read_id,
       two.reader_id AS second_reader_id,
       two.observation_status AS second_status,
-      onea.flags AS onea_flags,
-      oneb.flags AS oneb_flags,
-      two.flags AS two_flags
+      onea.flagged AS onea_flagged,
+      oneb.flagged AS oneb_flagged,
+      two.flagged AS two_flagged
     FROM observation_reads onea
     JOIN observation_reads oneb
       ON oneb.reader_number = '1b'
