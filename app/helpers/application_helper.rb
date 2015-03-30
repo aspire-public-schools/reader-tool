@@ -42,7 +42,7 @@ module ApplicationHelper
   end
 
   def staging?
-    Rails.env.development? || ENV['STAGING']
+    Rails.env.development? || !!ENV['STAGING']
   end
 
 end
