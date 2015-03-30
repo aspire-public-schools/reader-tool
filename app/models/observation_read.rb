@@ -6,8 +6,6 @@ class ObservationRead < ActiveRecord::Base
   has_many :evidence_scores,  through: :indicator_scores
   belongs_to :reader
 
-  default_scope order(:observation_group_id)
-
   STATUS_WORD_MAPPING = {1 => :waiting, 2 => :ready, 3 => :finished}.freeze
 
   def status

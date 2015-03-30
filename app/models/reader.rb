@@ -5,7 +5,7 @@ class Reader < ActiveRecord::Base
     where(sql, *params)
   end
 
-  has_many :observation_reads
+  has_many :observation_reads, order: "created_at DESC"
   attr_accessible :employee_number, :first_name, :last_name, :email, :is_reader1a, :is_reader1b, :is_reader2
   validates :first_name, presence: true
 	validates :email, presence: true, uniqueness: true, format: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
