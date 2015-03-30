@@ -15,13 +15,13 @@ namespace :schoolzilla do
       FileUtils.mkdir_p local_path
       Rails.logger.info "downloading CSV from schoolzilla SFTP"
       file = local_path.join(filename)
-      # sftp_connection do |sftp|
-      #   p remote_path, local_path
-      #   sftp.download! remote_path.to_s, file.to_s
-      #   sftp.loop 
-      # end
-      # Rails.logger.info "importing evidence from CSV..."
-      # `tr < #{file} -d '\\000' > #{file}.clean`
+      sftp_connection do |sftp|
+        p remote_path, local_path
+        sftp.download! remote_path.to_s, file.to_s
+        sftp.loop 
+      end
+      Rails.logger.info "importing evidence from CSV..."
+      `tr < #{file} -d '\\000' > #{file}.clean`
 
       TableImporter.import_from_csv "#{file}.clean"
       FileUtils.rm_f "#{file}.clean"
