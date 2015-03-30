@@ -17,7 +17,7 @@
         </div>
 
         <div class="row">
-          <%= f.input :document_quality, label: "Quality", collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"], wrapper_html: { class: 'document' }, prompt: "Select" %>
+          <%= f.input :document_quality, label: "Quality", collection: @dropdown, priority: @priority, wrapper_html: { class: 'document' }, prompt: "Select" %>
         </div>
       </div>
 
@@ -28,7 +28,7 @@
          <% end %>
         </div>
         <div class="row">
-        <%= f.input :document_alignment, label: "Alignment", collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"], wrapper_html: { class: 'document'}, prompt: "Select" %>
+        <%= f.input :document_alignment, label: "Alignment", collection: @dropdown, priority: @priority, wrapper_html: { class: 'document'}, prompt: "Select" %>
         </div>
       </div>
 
@@ -48,7 +48,7 @@
           <% end %>
         </div>
         <div class="row">
-          <%= f.input :live_quality, label: "Quality", collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"], wrapper_html: {class: 'live' }, prompt: "Select" %>
+          <%= f.input :live_quality, label: "Quality", collection: @dropdown, priority: @priority, wrapper_html: {class: 'live' }, prompt: "Select" %>
         </div>
       </div>
 
@@ -59,7 +59,7 @@
           <% end %>
         </div>
         <div class="row">
-          <%= f.input :live_alignment, label: "Alignment", collection: [["CERT", 2], ["NOTCERT", 1]], priority: ["CERT"], wrapper_html: {class: 'live' }, prompt: "Select" %>
+          <%= f.input :live_alignment, label: "Alignment", collection: @dropdown, priority: @priority, wrapper_html: {class: 'live' }, prompt: "Select" %>
         </div>
       </div>
 

@@ -10,6 +10,9 @@
     @domain_scores    = @observation_read.find_scores_by_domain_number
 
     @domain_numbers = Domain.all_numbers
+
+    @dropdown = [["CERT", 2], ["NOTCERT", 1]]
+    @priority = [ @dropdown.first.first ]
   end
 
   def update
