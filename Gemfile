@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby "2.1.5"
 
-gem 'rails', '~> 3.2.14'
+gem 'rails', '~> 3.2.21'
 # gem 'rails', github: 'rails/rails', branch: '3-2-stable'
 
 gem 'jquery-rails'
@@ -17,6 +17,16 @@ gem 'rack-timeout'
 gem 'humanize'
 
 gem 'net-sftp'
+
+group :assets do
+  gem 'sass',   '< 3.3.0' # prevent heroku assets compilation error
+  gem 'sass-rails',   '< 3.3.0'
+  gem 'coffee-rails', '~> 3.2.1'
+  gem 'uglifier', '>= 1.0.3'
+  gem 'twitter-bootstrap-rails'
+  gem "less-rails"
+  gem "therubyracer"
+end
 
 group :development do
   # gem 'pry'
@@ -33,7 +43,7 @@ group :test do
   # gem 'selenium-webdriver'
   # gem 'shoulda-matchers'
   gem 'simplecov'
-  # gem 'database_cleaner'
+  gem 'database_cleaner'
 end
 
 group :development, :test do
@@ -47,13 +57,4 @@ end
 
 group :test do
   gem 'faker'
-end
-
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier', '>= 1.0.3'
-  gem 'twitter-bootstrap-rails'
-  gem "less-rails"
-  gem "therubyracer"
 end
