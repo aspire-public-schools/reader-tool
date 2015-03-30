@@ -5,7 +5,8 @@ class CreateAllEvidence < ActiveRecord::Migration
   end
 
   def up
-    create_table "all_evidence", :id => false, :force => true do |t|
+    execute "DROP TABLE IF EXISTS all_evidence CASCADE"
+    create_table "all_evidence", :id => false do |t|
       t.integer "observation_group_id"
       t.string  "employee_id_observer"
       t.string  "observer_name"
@@ -57,18 +58,19 @@ class CreateAllEvidence < ActiveRecord::Migration
     execute create_trigger
   end
 
-  def add_default_now(table_name, column_name)
+  def add_default_now(table_name, column_name, enforce_not_null=true)
     set_not_null = <<-SQL.squish
       ALTER TABLE #{table_name}
         ALTER COLUMN #{column_name}
           SET NOT NULL;
     SQL
+    execute set_not_null if enforce_not_null
+
     set_default = <<-SQL.squish
       ALTER TABLE #{table_name}
         ALTER COLUMN #{column_name}
           SET DEFAULT CURRENT_TIMESTAMP AT TIME ZONE 'UTC';
     SQL
-    execute set_not_null
     execute set_default
   end
 

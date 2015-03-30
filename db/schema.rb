@@ -27,8 +27,8 @@ ActiveRecord::Schema.define(:version => 20150328012930) do
     t.integer  "observation_read_id"
     t.integer  "quality_score"
     t.integer  "domain_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "domains", :force => true do |t|
@@ -43,8 +43,8 @@ ActiveRecord::Schema.define(:version => 20150328012930) do
     t.text     "comments"
     t.boolean  "quality"
     t.boolean  "alignment"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "indicator_scores", :force => true do |t|
@@ -53,8 +53,8 @@ ActiveRecord::Schema.define(:version => 20150328012930) do
     t.integer  "alignment_score"
     t.integer  "evidence_id"
     t.text     "comments"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "indicators", :force => true do |t|
@@ -85,8 +85,8 @@ ActiveRecord::Schema.define(:version => 20150328012930) do
     t.integer  "observation_status"
     t.boolean  "flagged"
     t.text     "comments"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
   end
 
   create_table "readers", :force => true do |t|
