@@ -14,3 +14,6 @@ end
     SQL
   end , "importing #{table}.csv"
 end
+
+#for heroku:
+#$ PGPASSWORD=PWHERE psql -h HOSTHERE -U USERHERE DBNAMEHERE -c "\copy my_things FROM 'my_data.csv' WITH CSV;"
