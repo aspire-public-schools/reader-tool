@@ -3,8 +3,9 @@ ReaderTool::Application.routes.draw do
   root to: 'observation_reads#index'
 
   resource :sessions, only: [:new, :create, :destroy]
-  get 'login'  => 'sessions#new',     as: 'login'
-  get 'logout' => 'sessions#destroy', as: 'logout'
+  get 'login'     => 'sessions#new',     as: 'login'
+  delete 'logout' => 'sessions#destroy', as: 'logout'
+  get 'logout'    => 'sessions#destroy', as: 'logout'
 
   resources :observation_reads, only: [:index, :show, :update] do
     resources :indicator_scores, only: [:update]  
