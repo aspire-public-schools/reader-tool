@@ -4,21 +4,21 @@
       <th></th>
       <% @domain_numbers.each do |num| %>
       <th> Domain <%= num %></th>
-      <% end %>
+    <% end %>
     </tr>
   </thead>
   <tbody>
     <tr class="quality">
       <td>Quality</td>
       <% @domain_numbers.each do |num| %>
-      <td><%= @domain_scores[num].try(&:quality_sum).to_i %></td>
+        <td><%= @domain_scores[num].try(&:quality_sum).to_f %></td>
       <% end %>
     </tr>
     
     <tr class="alignment">
       <td>Alignment</td>
       <% @domain_numbers.each do |num| %>
-      <td><%= @domain_scores[num].try(&:alignment_sum).to_i %></td>
+        <td><%= @domain_scores[num].try(&:alignment_sum).to_f %></td>
       <% end %>
     </tr>
   </tbody>
@@ -34,12 +34,12 @@
   <tbody>
     <tr class="quality-weighted">
       <td>Quality</td>
-      <td><%= @domain_scores.values.sum{|x| x.quality_sum.to_i } %></td>
+      <td><%= @domain_scores.values.sum{|x| x.quality_sum.to_f } %></td>
     </tr>
 
     <tr class="alignment-weighted">
       <td>Alignment</td>
-      <td><%= @domain_scores.values.sum{|x| x.alignment_sum.to_i } %></td>
+      <td><%= @domain_scores.values.sum{|x| x.alignment_sum.to_f } %></td>
     </tr>
   </tbody>
 </table>

@@ -7,4 +7,5 @@ class EvidenceScore < ActiveRecord::Base
   def formatted_description
     description.gsub(/\s([TS](\(\w+\))?:?[\s\/])/){  "\n"+$1 }.gsub("\n","<br/>"*2) 
   end
+
 end

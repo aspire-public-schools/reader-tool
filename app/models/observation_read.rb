@@ -92,7 +92,7 @@ class ObservationRead < ActiveRecord::Base
       document_alignment = alignment_cert( score )
     end
 
-    if final && score = scores[1]  # live
+    if final? && score = scores[1]  # live
       live_quality   = quality_cert( score )
       live_alignment = alignment_cert( score )
     end
@@ -101,11 +101,29 @@ class ObservationRead < ActiveRecord::Base
   end
 
   def quality_cert score
-    score.quality_average.to_f*100 >= 80 ? 2 : 1
+    case score.quality_sum.to_f
+    when 0...2
+      STATES[3] # Cert w. Dist
+    when 2...4
+      STATES[2] # Cert
+    when 4...6.5
+      STATES[1] # Cond Cert
+    else
+      STATES[9] # NYC
+    end
   end
 
   def alignment_cert score
-    score.alignment_average.to_f*100 >= 75 ? 2 : 1
+    case score.alignment_sum.to_f
+    when 0...2
+      STATES[3] # Cert w. Dist
+    when 2...4
+      STATES[2] # Cert
+    when 4..7
+      STATES[1] # Cond Cert
+    else
+      STATES[9] # NYC
+    end
   end
 
   def find_scores_by_domain_number
@@ -116,6 +134,7 @@ class ObservationRead < ActiveRecord::Base
   def find_section_scores
     self.class.find_section_scores self.id
   end
+
 
   #####################
   #   class methods
@@ -132,10 +151,10 @@ class ObservationRead < ActiveRecord::Base
   def self.find_scores_by_domain_number id
     find_by_sql <<-SQL
       SELECT obr.id, dom.number,
-          AVG(evds.quality::integer)   AS quality_average, 
-          AVG(evds.alignment::integer) AS alignment_average,
-          SUM(evds.quality::integer)   AS quality_sum,
-          SUM(evds.alignment::integer) AS alignment_sum
+          AVG(evds.quality::float)   AS quality_average, 
+          AVG(evds.alignment::float) AS alignment_average,
+          SUM(evds.quality::float)   AS quality_sum,
+          SUM(evds.alignment::float) AS alignment_sum
       FROM observation_reads obr
         LEFT JOIN domain_scores doms
             ON doms.observation_read_id = obr.id
@@ -153,10 +172,10 @@ class ObservationRead < ActiveRecord::Base
   def self.find_section_scores id
      find_by_sql <<-SQL
      SELECT obr.id, 'document' AS Type,
-          AVG(evds.quality::integer)   AS quality_average, 
-          AVG(evds.alignment::integer) AS alignment_average,
-          SUM(evds.quality::integer)   AS quality_sum, 
-          SUM(evds.alignment::integer) AS alignment_sum
+          AVG(evds.quality::float)   AS quality_average, 
+          AVG(evds.alignment::float) AS alignment_average,
+          SUM(evds.quality::float)   AS quality_sum, 
+          SUM(evds.alignment::float) AS alignment_sum
       FROM observation_reads obr
       LEFT JOIN domain_scores doms
            ON doms.observation_read_id = obr.id
@@ -171,10 +190,10 @@ class ObservationRead < ActiveRecord::Base
       GROUP BY obr.id
     UNION
       SELECT obr.id, 'live' AS Type,
-          AVG(evds.quality::integer)   AS quality_average, 
-          AVG(evds.alignment::integer) AS alignment_average,
-          SUM(evds.quality::integer)   AS quality_sum, 
-          SUM(evds.alignment::integer) AS alignment_sum
+          AVG(evds.quality::float)   AS quality_average, 
+          AVG(evds.alignment::float) AS alignment_average,
+          SUM(evds.quality::float)   AS quality_sum, 
+          SUM(evds.alignment::float) AS alignment_sum
       FROM observation_reads obr
       LEFT JOIN domain_scores doms
           ON doms.observation_read_id = obr.id

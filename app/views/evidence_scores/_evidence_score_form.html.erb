@@ -26,8 +26,8 @@
             <tr>
               <td><%= idx + 1 %></td>
               <td><%= es.object.formatted_description.html_safe %></td>
-              <td><%= es.check_box :quality   %></td>
-              <td><%= es.check_box :alignment %></td>
+              <td><%= es.collection_radio_buttons :quality, [[0.5,'Half'],[1,'One']], :first, :last %></td>
+              <td><%= es.collection_radio_buttons :alignment, [[0.5,'Half'],[1,'One']], :first, :last %></td>
             </tr>
           <% end %>
         <% end %>
