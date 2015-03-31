@@ -6,7 +6,7 @@ class ObservationRead < ActiveRecord::Base
   has_many :evidence_scores,  through: :indicator_scores
   belongs_to :reader
 
-  STATES = ["NYC","Cond Cert","Cert","Cert w. Dist"]
+  STATES = %w[ 1 2 3]
 
   STATUS_WORD_MAPPING = {1 => :waiting, 2 => :ready, 3 => :finished}.freeze
 
@@ -100,12 +100,31 @@ class ObservationRead < ActiveRecord::Base
     save!
   end
 
+# Have the drop downs autofill for Quality with: 
+# “1” when total count of flags equals or is greater than 8 
+# “2” when total count of flags is greater than or equal to 4 and less than or equal to 7
+# “3” when total count of flags is less than 4 
+
   def quality_cert score
-    score.quality_average.to_f*100 >= 80 ? 2 : 1
+    case score.quality_sum.to_i
+    when 0...4
+      "3"
+    when 4...8
+      "2"
+    else
+      "1"
+    end
   end
 
   def alignment_cert score
-    score.alignment_average.to_f*100 >= 75 ? 2 : 1
+    case score.alignment_sum.to_i
+    when 0...4
+      "3"
+    when 4...8
+      "2"
+    else
+      "1"
+    end
   end
 
   def find_scores_by_domain_number
