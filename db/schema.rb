@@ -41,10 +41,10 @@ ActiveRecord::Schema.define(:version => 20150328012930) do
     t.integer  "evidence_id"
     t.text     "description"
     t.text     "comments"
-    t.boolean  "quality"
-    t.boolean  "alignment"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.float    "quality"
+    t.float    "alignment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "indicator_scores", :force => true do |t|
