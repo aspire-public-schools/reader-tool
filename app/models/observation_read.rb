@@ -6,7 +6,7 @@ class ObservationRead < ActiveRecord::Base
   has_many :evidence_scores,  through: :indicator_scores
   belongs_to :reader
 
-  STATES = %w[ NOTCERT CERT ]
+  STATES = ["NYC","Cond Cert","Cert","Cert w. Dist"]
 
   STATUS_WORD_MAPPING = {1 => :waiting, 2 => :ready, 3 => :finished}.freeze
 
@@ -87,12 +87,12 @@ class ObservationRead < ActiveRecord::Base
   def update_scores!
     scores = find_section_scores
 
-    if score = scores[0]
+    if score = scores[0]  # document
       document_quality   = quality_cert( score )
       document_alignment = alignment_cert( score )
     end
 
-    if final && score = scores[1]
+    if final && score = scores[1]  # live
       live_quality   = quality_cert( score )
       live_alignment = alignment_cert( score )
     end
