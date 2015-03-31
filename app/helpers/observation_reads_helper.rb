@@ -1,12 +1,7 @@
 module ObservationReadsHelper
 
   def print_cert value
-    case value
-    when 1
-      "NOTCERT"
-    when 2
-      "CERT"
-    end
+    @dropdown.find{|d| d.last == value }.try(:first)
   end
 
   def print_reader_number observation_read

@@ -110,12 +110,15 @@ textarea#comments, #indicator_score_comments {
 
 /* dashboard */
 
-select.optional{
-  height: 2.5rem;
-  width: 8rem;
-  font-size: 1rem;
+.control-group.select.document {
+  padding-left: 3em;
 }
 
+select.optional{
+  height: 2.5em;
+  width: 8em;
+  font-size: 1em;
+}
 
 .document-live-form-holder .well {
   border: 1px solid black;
@@ -143,8 +146,10 @@ select.optional{
   text-align: center;
 }
 
-p.r1score {
-  font-size: 10px;
+.r1score {
+  font-size: 0.85em;
+  margin: 0 5px;
+  font-weight: bold;
 }
 
 div.observation-read-button {
