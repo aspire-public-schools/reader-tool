@@ -10,9 +10,7 @@
     @domain_scores    = @observation_read.find_scores_by_domain_number
 
     @domain_numbers = Domain.all_numbers
-
-    @dropdown = [["CERT", 2], ["NOTCERT", 1]]
-    @priority = [ @dropdown.first.first ]
+    @dropdown = ObservationRead::STATES.map.with_index{|state,idx| [state, idx+1]}
   end
 
   def update
