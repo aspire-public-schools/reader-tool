@@ -187,26 +187,24 @@ p.alert-success{
 }
 
 
-.observation-reads-links:hover {
+a.observation-reads-links:hover {
   background-color:rgba(0,0,0,.5);
-}
-
-.observation-reads-links a:hover{
   text-decoration: none;
 }
 
-.observation-reads-link:visited{
-/*  background-color: #E74C3C;*/
-  background-color: red;
+.observation-reads-links:visited{
+  // background-color: #E74C3C;
+  background-color: #0F7A65;
+  // color: lightgray;
 }
 
-span a{
+span a, a.observation-reads-links{
   color: white;
   list-style-type: none;
   text-decoration: none;
 }
 
-span.observation-reads-links{
+.observation-reads-links{
   font-size: 15px;
   margin: 10px 2px;
   display: inline-block;

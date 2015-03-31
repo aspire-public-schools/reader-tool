@@ -6,7 +6,7 @@
   <% else %>
   <div class="read-links">
     <% @observation_reads.sort_by(&:employee_id_observer).each do |observation| %>
-    <span class='observation-reads-links <%=highlight_if_showing(observation)%>'><%= link_to "#{observation.employee_id_observer}", observation_read_path(observation) %></span>
+      <%= link_to "#{observation.employee_id_observer}", observation_read_path(observation), class: "observation-reads-links #{highlight_if_showing(observation)}".squish %>
     <% end %>
   </div>
   <% end %>
