@@ -1,15 +1,16 @@
 class Reader < ActiveRecord::Base
-  def self.where_not(opts)
-    params = []        
-    sql = opts.map{|k, v| params << v; "#{quoted_table_name}.#{quote_column_name k} != ?"}.join(' AND ')
-    where(sql, *params)
-  end
+  attr_accessible :employee_number, :first_name, :last_name, :email, :is_reader1a, :is_reader1b, :is_reader2
+
+  has_secure_password
+  after_create :send_password_reset
 
   has_many :observation_reads, order: "created_at DESC"
-  attr_accessible :employee_number, :first_name, :last_name, :email, :is_reader1a, :is_reader1b, :is_reader2
+
   validates :first_name, presence: true
 	validates :email, presence: true, uniqueness: true, format: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
   validates_uniqueness_of :employee_number, allow_blank: true
+
+
   before_validation :set_defaults, on: :create
 
   def full_name
@@ -54,11 +55,43 @@ class Reader < ActiveRecord::Base
     is_reader2?
   end
 
+  def send_password_reset
+    generate_token(:password_reset_token)
+    self.password_reset_sent_at = Time.zone.now
+    save!
+    UserMailer.password_reset(self).deliver
+  end
+
+  def temporary_password
+    full_name.downcase.split(' ').join
+  end
+
+  def make_temporary_password!
+    self.password = temporary_password
+    save!
+  end
+
+  def self.where_not(opts)
+    params = []        
+    sql = opts.map{|k, v| params << v; "#{quoted_table_name}.#{quote_column_name k} != ?"}.join(' AND ')
+    where(sql, *params)
+  end
+
   def set_defaults
     self.is_reader1a ||= true
     self.is_reader1b ||= true
     self.is_reader2  ||= false
+    self.password    ||= temporary_password
     self
+  end
+
+
+  private
+
+  def generate_token(column)
+    begin
+      self[column] = SecureRandom.urlsafe_base64
+    end while Reader.exists?(column => self[column])
   end
 
 end

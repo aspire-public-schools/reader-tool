@@ -31,4 +31,6 @@ ReaderTool::Application.routes.draw do
   end
   match 'admin/readers/:id' => 'admin/readers#edit'
 
+  resources :password_resets
+
 end

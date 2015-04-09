@@ -13,7 +13,7 @@ class Admin::ReadersController < AdminController
   def new
     @reader = Reader.new.set_defaults
   end
-
+  
   def create
     @reader = Reader.new(params[:reader])
     if @reader.save
@@ -25,6 +25,7 @@ class Admin::ReadersController < AdminController
   end
 
   def edit
+    session[:return_to] = admin_readers_path
   end
 
   def update

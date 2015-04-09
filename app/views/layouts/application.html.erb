@@ -5,15 +5,13 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
-  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-
-
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"
 </head>
 <body id="<%= "controller-#{controller.controller_name.gsub('_','-')}"%>" class="<%= "action-#{controller.action_name.gsub('_','-')}"%>">
 
   <% if signed_in? %>
 
-  <div id='cssmenu'>
+  <header id='cssmenu'>
     <nav class="navbar-fixed-top" id="fixed-nav">
       <ul>
        <li><%= link_to "#{organization_name(:short)} Reader", observation_reads_path %></li>
@@ -26,11 +24,11 @@
        </div>
      </ul>
    </nav>
- </div>
+ </header>
 
  <% end %>
 
-
  <%= yield %>
+
 </body>
 </html>

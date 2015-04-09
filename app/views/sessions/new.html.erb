@@ -13,15 +13,17 @@
       </div>
 
       <div class="form-group">
-        <%= f.label :eid, "Employee Number:", class: "col-md-4 control-label reader-admin-label" %>
+        <%= f.label :password, "Password:", class: "col-md-4 control-label reader-admin-label" %>
         <div class="col-md-8">
-          <%= f.text_field :eid, class: "form-control reader-admin-label", placeholder: "Employee ID" %>
+          <%= f.password_field :password, class: "form-control reader-admin-label" %>
         </div>
       </div>
 
       <%= f.submit "Sign in", class: "btn btn-default btn-primary" %>
       <% end %>
 
+    <%= link_to "forgotten password?", new_password_reset_path %>
+    
     </div>
   </div>
 

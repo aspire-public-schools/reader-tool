@@ -5,6 +5,12 @@ class ApplicationController < ActionController::Base
 
   before_filter :require_login
 
+  def staging?
+    Rails.env.development? || !!ENV['STAGING']
+  end
+
+  helper_method :staging?
+
   protected
 
   def require_login

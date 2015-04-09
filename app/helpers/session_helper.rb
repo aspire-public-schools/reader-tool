@@ -16,4 +16,8 @@ module SessionHelper
     session[:return_to] = request.url if request.get?
   end
 
+  def return_to_location
+    session.delete(:return_to)
+  end
+
 end

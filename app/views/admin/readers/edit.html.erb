@@ -9,6 +9,9 @@
 
         <%= f.submit "Update Reader", class: "btn btn-default btn-primary" %>
       <% end %>
+
+      <%= button_to "Reset Password", password_resets_path(email: @reader.email), method: :post, class: "btn btn-default btn-secondary" %>
+
     </div>
   </div>
 

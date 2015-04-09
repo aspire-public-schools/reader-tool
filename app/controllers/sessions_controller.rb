@@ -7,10 +7,10 @@ class SessionsController < ApplicationController
   end
 
   def create
-    params[:reader][:eid] = nil if params[:reader][:eid] == ""
-    if reader = Reader.find_by_employee_number_and_email(params[:reader][:eid], params[:reader][:email])
+    reader = Reader.find_by_email(params[:reader][:email])
+    if reader && (staging? && !reader.password_digest?) || reader.authenticate(params[:password])
       session[:current_reader_id] = reader.id
-      redirect_to session.delete(:return_to) || observation_reads_path
+      redirect_to return_to_location || observation_reads_path
     else
       redirect_to login_path, flash: {error: "Invalid credentials!"}
     end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150328012930) do
+ActiveRecord::Schema.define(:version => 20150408235157) do
 
   create_table "all_evidence", :id => false, :force => true do |t|
     t.integer "observation_group_id"
@@ -90,13 +90,16 @@ ActiveRecord::Schema.define(:version => 20150328012930) do
   end
 
   create_table "readers", :force => true do |t|
-    t.integer "employee_number"
-    t.string  "first_name"
-    t.string  "last_name"
-    t.string  "email"
-    t.boolean "is_reader1a"
-    t.boolean "is_reader1b"
-    t.boolean "is_reader2"
+    t.integer  "employee_number"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.boolean  "is_reader1a"
+    t.boolean  "is_reader1b"
+    t.boolean  "is_reader2"
+    t.string   "password_digest"
+    t.string   "password_reset_token"
+    t.datetime "password_reset_sent_at"
   end
 
 end

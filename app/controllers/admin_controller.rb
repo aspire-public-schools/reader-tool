@@ -1,7 +1,11 @@
 class AdminController < ApplicationController
-  skip_before_filter :require_login
+  before_filter :require_admin
 
-  http_basic_authenticate_with :name => "admin", :password => "password" # unless Rails.env.development?
+  private
+
+  def require_admin
+    redirect_to root_path, flash: {error: "Not authorized for admin access!"} unless current_user.reader2?
+  end
 
 end
 

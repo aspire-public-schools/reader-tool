@@ -18,6 +18,8 @@ gem 'humanize'
 
 gem 'net-sftp'
 
+gem 'bcrypt-ruby', '~> 3.0.0' 
+
 group :assets do
   gem 'sass',   '< 3.3.0' # prevent heroku assets compilation error
   gem 'sass-rails',   '< 3.3.0'
@@ -36,6 +38,10 @@ group :development do
   gem 'quiet_assets'
   gem 'sextant'
   # gem 'lol_dba'
+
+  ## ?? these are needed for rails console.. weird mismatch between ruby 2 and rails 3?
+  gem 'minitest'
+  gem 'test-unit'
 end
 
 group :test do
