@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby "2.1.5"
+ruby "1.9.3"
 
 gem 'rails', '~> 3.2.21'
 # gem 'rails', github: 'rails/rails', branch: '3-2-stable'
@@ -32,7 +32,7 @@ end
 
 group :development do
   # gem 'pry'
-  gem 'better_errors'
+  gem 'better_errors', "~> 1.1.0"
   gem 'binding_of_caller'
   # gem 'pry-debugger'
   gem 'quiet_assets'
