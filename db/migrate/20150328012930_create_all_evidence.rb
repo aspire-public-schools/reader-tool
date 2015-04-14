@@ -18,6 +18,8 @@ class CreateAllEvidence < ActiveRecord::Migration
       t.datetime "imported_at"
     end
     
+    add_index :all_evidence, :observation_group_id    
+
     # remove_timestamps :all_evidence # why are these added by default?
 
     # TODO: use reversible block
