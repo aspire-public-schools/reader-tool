@@ -4,6 +4,7 @@
   <div class="panel panel-default panel-info">
     <div class="panel-heading">Please sign in</div>
     <div class="panel-body">
+      <%= display_flash_messages %>
       <%= form_for :reader, url: sessions_path, class: "form-horizontal center" do |f| %>
       <div class="form-group">
         <%= f.label :email, "Email:", class: "col-md-4 control-label reader-admin-label" %>

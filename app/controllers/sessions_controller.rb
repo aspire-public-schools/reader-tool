@@ -7,12 +7,13 @@ class SessionsController < ApplicationController
   end
 
   def create
+    redirect_invalid and return unless credentials_present?
     reader = Reader.find_by_email(params[:reader][:email])
-    if reader && (staging? && !reader.password_digest?) || reader.authenticate(params[:password])
+    if reader && reader.authenticate(params[:reader][:password])
       session[:current_reader_id] = reader.id
       redirect_to return_to_location || observation_reads_path
     else
-      redirect_to login_path, flash: {error: "Invalid credentials!"}
+      redirect_invalid
     end
   end
   
@@ -20,4 +21,16 @@ class SessionsController < ApplicationController
     logout
     redirect_to login_path, flash: {notice: "You are now logged out"}
   end
+
+  private
+
+  def redirect_invalid
+    redirect_to login_path, flash: {error: "Invalid credentials!"}
+  end
+
+
+  def credentials_present?
+    params[:reader][:email].present? && params[:reader][:password].present?
+  end
+
 end
