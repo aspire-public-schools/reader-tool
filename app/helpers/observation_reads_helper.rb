@@ -1,7 +1,7 @@
 module ObservationReadsHelper
 
   def print_cert value
-    @dropdown.find{|d| d.last == value }.try(:first)
+    @dropdown.find{|d| d.last == value }.try(:first) || 'unscored'
   end
 
   def highlight_if_showing obs

@@ -5,63 +5,44 @@
     <h5 class="read-title">Reader <%= @observation_read.reader_number_ordinal %></h5>
   </div>
 
-  <div class="row">
   <% if @observation_read.reader_number != '1b' %>
-  <div class="col-md-12">
-    <div class="document">
+  <div class="row">
+    <div class="col-md-12 document">
       <!-- <h4>Document</h4> -->
-
-
       <div class="col-md-6">
-        <div class="row">
-        <% info = tag(:br) + content_tag(:span, "(Reader 1 Score: #{print_cert @observation_read.document_quality})", class:"r1score") %>
-          <%= f.input :document_quality, label: "Quality#{info if @observation_read.final? }".html_safe, collection: @dropdown, priority: @priority, wrapper_html: { class: 'document' }, prompt: "Select" %>
-        </div>
+        <% info = tag(:br) + content_tag(:span, "Reader 1 Score: #{print_cert @observation_read.document_quality}", class:"r1score") %>
+          <%= f.input :document_quality, label: "Quality#{info if @observation_read.final? }".html_safe, collection: @dropdown, priority: @priority, prompt: "Select" %>
       </div>
 
       <div class="col-md-6">
-        <div class="row">
-        <% info = tag(:br) + content_tag(:span, "(Reader 1 Score: #{print_cert @observation_read.document_alignment})", class:"r1score") %>
+        <% info = tag(:br) + content_tag(:span, "Reader 1 Score: #{print_cert @observation_read.document_alignment}", class:"r1score") %>
 
-        <%= f.input :document_alignment, label: "Alignment#{info if @observation_read.final? }".html_safe, collection: @dropdown, priority: @priority, wrapper_html: { class: 'document'}, prompt: "Select" %>
-        </div>
+        <%= f.input :document_alignment, label: "Alignment#{info if @observation_read.final? }".html_safe, collection: @dropdown, priority: @priority, prompt: "Select" %>
       </div>
 
     </div> <!-- document -->
-  </div>  <!-- column -->
-<% end %>
+  </div>  <!-- row -->
+  <% end %>
 
-  <div class="col-md-6">
-    <div class="live">
-    <%if @observation_read.reader_number != '1a' %>
+  <%if @observation_read.reader_number != '1a' %>
+  <div class="row">
+    <div class="col-md-12 live">
       <!-- <h4>Live</h4> -->
 
       <div class="col-md-6">
-        <div class="row">
-          <% if @observation_read.final? %>
-          <p class="r1score">Reader 2 Score: <%=print_cert @observation_read.live_quality %></p>
-          <% end %>
-        </div>
-        <div class="row">
-          <%= f.input :live_quality, label: "Quality", collection: @dropdown, priority: @priority, wrapper_html: {class: 'live' }, prompt: "Select" %>
-        </div>
+        <% info = tag(:br) + content_tag(:span, "Reader 2 Score: #{print_cert @observation_read.live_quality}", class:"r1score") %>
+
+        <%= f.input :live_quality, label: "Quality#{info if @observation_read.final? }".html_safe, collection: @dropdown, priority: @priority, prompt: "Select" %>
       </div>
 
       <div class="col-md-6">
-        <div class="row">
-          <% if @observation_read.final? %>
-          <p class="r1score">Reader 2 Score: <%= print_cert @observation_read.live_alignment %></p>
-          <% end %>
-        </div>
-        <div class="row">
-          <%= f.input :live_alignment, label: "Alignment", collection: @dropdown, priority: @priority, wrapper_html: {class: 'live' }, prompt: "Select" %>
-        </div>
-      </div>
+        <% info = tag(:br) + content_tag(:span, "Reader 2 Score: #{print_cert @observation_read.live_alignment}", class:"r1score") %>
 
-    <% end %>
-    </div> <!-- live -->
-  </div> <!-- column -->
+        <%= f.input :live_alignment, label: "Quality#{info if @observation_read.final? }".html_safe, collection: @dropdown, priority: @priority, prompt: "Select" %>
+      </div>
+    </div> <!--live -->
   </div> <!-- row -->
+  <% end %>
   
   <div class="row">
     <div class="col-md-12">
