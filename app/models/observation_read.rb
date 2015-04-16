@@ -214,6 +214,7 @@ class ObservationRead < ActiveRecord::Base
       AND onea.observation_group_id = two.observation_group_id
     WHERE onea.reader_number = '1a'
     ORDER BY onea.employee_id_observer
+    --- LIMIT 100
     SQL
   end
 

@@ -2,24 +2,30 @@ module TableImporter
   extend self
 
   MODELS = %w[ DomainScore IndicatorScore EvidenceScore ObservationRead ]
-  READER_TYPES = %w[ 1a 1b 2 ]
 
   def import_from_csv file_path, truncate=false
     truncate_tables! if truncate
+    import_all_evidence!
+    populate!
+  end
+
+  private
+
+  def import_all_evidence!
     execute begin <<-SQL
       TRUNCATE TABLE all_evidence;
       COPY all_evidence FROM '#{file_path}'
         DELIMITER ',' CSV HEADER;
     SQL
     end , "importing csv"
-
-    READER_TYPES.each{|k| assign_reader!(k) }
-    execute POPULATE_DOMAIN_SCORES,    "populating domain scores"
-    execute POPULATE_INDICATOR_SCORES, "populating indicator scores"
-    execute POPULATE_EVIDENCE_SCORES , "populating evidence scores"
   end
 
-  private
+  def populate!
+    execute POPULATE_OBSERVATION_READS, "populating observation reads"
+    execute POPULATE_DOMAIN_SCORES,     "populating domain scores"
+    execute POPULATE_INDICATOR_SCORES,  "populating indicator scores"
+    execute POPULATE_EVIDENCE_SCORES ,  "populating evidence scores"
+  end
 
   def execute sql, msg=nil
     sql = sql.read if sql.is_a? Pathname
@@ -40,30 +46,50 @@ module TableImporter
     execute MODELS.map{ |model| "TRUNCATE table #{model.tableize};" }.join
   end
 
-  def assign_reader!(kind)
-    raise ArgumentError, "reader type must be one of: #{READER_TYPES.join(', ')}" unless READER_TYPES.include?(kind.to_s)
+  # READER_TYPES = %w[ 1a 1b 2 ]
+  # def assign_reader!(kind)
+  #   raise ArgumentError, "reader type must be one of: #{READER_TYPES.join(', ')}" unless READER_TYPES.include?(kind.to_s)
 
-    execute begin <<-SQL
-      INSERT INTO observation_reads (observation_group_id,employee_id_observer,employee_id_learner,reader_number,reader_id,document_quality,document_alignment,observation_status)
-        SELECT observation_group_id, employee_id_observer, employee_id_learner, reader_number, readers.id AS reader_id, 1 AS document_quality, 1 AS document_alignment,2 AS observation_status
-        FROM(
-          SELECT DISTINCT observation_group_id, employee_id_observer, employee_id_learner,
-            '#{kind}' AS reader_number,
-            ROW_NUMBER() OVER(ORDER BY observation_group_id) -1 AS obs_num 
-          FROM vw_all_observations obs
-          WHERE observation_group_id NOT IN (  --This is error checking code to prevent creating duplicate observation_reads
-              SELECT DISTINCT observation_group_id FROM observation_reads WHERE reader_number = '#{kind}'
-            )
-            AND (SELECT COUNT(*) FROM all_evidence evd WHERE evd.observation_group_id = obs.observation_group_id) > 10 --If the observer tagged less than 10 pieces of evidence it's probably bad data and shouldn't be read              
-        ) obs
-        LEFT JOIN
-          (SELECT *, ROW_NUMBER() OVER(ORDER BY employee_number) -1 AS reader_num
-            FROM readers
-            WHERE is_reader#{kind} = '1'
-          ) readers --This uses the modulo operator to equitably distribute the reads
-          ON obs.obs_num % (SELECT COUNT(*) FROM readers WHERE is_reader#{kind} = '1') = readers.reader_num;
-    SQL
-    end , "assigning reader #{kind}"
+  #   execute begin <<-SQL
+  #     INSERT INTO observation_reads (observation_group_id,employee_id_observer,employee_id_learner,reader_number,reader_id,document_quality,document_alignment,observation_status)
+  #       SELECT observation_group_id, employee_id_observer, employee_id_learner, reader_number, readers.id AS reader_id, 1 AS document_quality, 1 AS document_alignment,2 AS observation_status
+  #       FROM(
+  #         SELECT DISTINCT observation_group_id, employee_id_observer, employee_id_learner,
+  #           '#{kind}' AS reader_number,
+  #           ROW_NUMBER() OVER(ORDER BY observation_group_id) -1 AS obs_num 
+  #         FROM vw_all_observations obs
+  #         WHERE observation_group_id NOT IN (  --This is error checking code to prevent creating duplicate observation_reads
+  #             SELECT DISTINCT observation_group_id FROM observation_reads WHERE reader_number = '#{kind}'
+  #           )
+  #           AND (SELECT COUNT(*) FROM all_evidence evd WHERE evd.observation_group_id = obs.observation_group_id) > 10 --If the observer tagged less than 10 pieces of evidence it's probably bad data and shouldn't be read              
+  #       ) obs
+  #       LEFT JOIN
+  #         (SELECT *, ROW_NUMBER() OVER(ORDER BY employee_number) -1 AS reader_num
+  #           FROM readers
+  #           WHERE is_reader#{kind} = '1'
+  #         ) readers --This uses the modulo operator to equitably distribute the reads
+  #         ON obs.obs_num % (SELECT COUNT(*) FROM readers WHERE is_reader#{kind} = '1') = readers.reader_num;
+  #   SQL
+  #   end , "assigning reader #{kind}"
+  # end
+
+  def populate_observation_reads
+    READER_TYPES.each do |kind|
+      execute begin <<-SQL
+        INSERT INTO observation_reads (observation_group_id,employee_id_observer,employee_id_learner,reader_number,document_quality,document_alignment,observation_status)
+          SELECT observation_group_id, employee_id_observer, employee_id_learner, '#{kind}' as reader_number, 1 AS document_quality, 1 AS document_alignment,1 AS observation_status
+          FROM(
+            SELECT DISTINCT observation_group_id, employee_id_observer, employee_id_learner,
+              '#{kind}' AS reader_number
+            FROM vw_all_observations obs
+            WHERE observation_group_id NOT IN (  --This is error checking code to prevent creating duplicate observation_reads
+                SELECT DISTINCT observation_group_id FROM observation_reads WHERE reader_number = '#{kind}'
+              )
+              AND (SELECT COUNT(*) FROM all_evidence evd WHERE evd.observation_group_id = obs.observation_group_id) > 10 --If the observer tagged less than 10 pieces of evidence it's probably bad data and shouldn't be read              
+          ) obs
+      SQL
+      end , "populating observation reads for reader #{kind}"
+    end
   end
 
   POPULATE_DOMAIN_SCORES = <<-SQL
@@ -76,27 +102,8 @@ module TableImporter
     CROSS JOIN domains dom
     LEFT JOIN domain_scores domcheck
       ON obs.id = domcheck.observation_read_id AND dom.id = domcheck.domain_id
-    WHERE obs.reader_number = '1a'
-      AND dom.id IN('1', '4') --1a only reads doms 1 & 4  "document"
-      AND domcheck.id IS NULL
-  UNION 
-    SELECT obs.id AS observation_reads_id, dom.id AS domain_id
-    FROM observation_reads obs
-    CROSS JOIN domains dom
-    LEFT JOIN domain_scores domcheck
-      ON obs.id = domcheck.observation_read_id AND dom.id = domcheck.domain_id
-    WHERE obs.reader_number = '1b'
-      AND dom.id  IN('2', '3') --1b only reads doms 2 & 3 "live"
-      AND domcheck.id IS NULL
-  UNION
-    SELECT  obs.id AS observation_reads_id, dom.id AS domain_id
-    FROM observation_reads obs
-    CROSS JOIN domains dom
-    LEFT JOIN domain_scores domcheck
-      ON obs.id = domcheck.observation_read_id AND dom.id = domcheck.domain_id
-    WHERE obs.reader_number = '2'
       AND dom.id <> '5'
-      AND domcheck.id IS NULL;
+      AND domcheck.id IS NULL
   SQL
 
   POPULATE_INDICATOR_SCORES = <<-SQL
