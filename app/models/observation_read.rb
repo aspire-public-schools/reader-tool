@@ -85,27 +85,7 @@ class ObservationRead < ActiveRecord::Base
 
   # this gets called from IndicatorScoresController#update
   def update_scores!
-    scores = find_section_scores
-
-    if score = scores[0]  # document
-      document_quality   = quality_cert( score )
-      document_alignment = alignment_cert( score )
-    end
-
-    if final && score = scores[1]  # live
-      live_quality   = quality_cert( score )
-      live_alignment = alignment_cert( score )
-    end
-
-    save!
-  end
-
-  def quality_cert score
-    score.quality_average.to_f*100 >= 80 ? 2 : 1
-  end
-
-  def alignment_cert score
-    score.alignment_average.to_f*100 >= 75 ? 2 : 1
+    # no automatic scoring for Alliance
   end
 
   def find_scores_by_domain_number
