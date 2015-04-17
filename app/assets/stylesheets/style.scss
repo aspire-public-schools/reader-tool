@@ -1,12 +1,16 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:700);
 @import 'brand';
 
+body, nav {
+  min-width: 1200px;
+}
+
 .landing {
   background-image:url('low_contrast_linen.png');
 }
 
 .container-fluid {
-  padding-top: 80px
+  padding-top: 80px;
 }
 
 
@@ -28,6 +32,7 @@
   overflow-x: hidden;
   overflow-y: auto;
   z-index: 1010;
+  min-width: 300px;
 }
 
 .content.right {
@@ -277,3 +282,7 @@ dt.summary {
 }
 
 .checkmark { color: $brand-color; }
+
+form.edit_observation_read .row {
+  padding: 0 1em 0 2em; // this is weird hack :(
+}
