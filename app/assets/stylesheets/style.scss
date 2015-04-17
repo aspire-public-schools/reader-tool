@@ -88,7 +88,7 @@ dt {
 
 
 dd:hover {
-  background-color: #8e44ad;
+  background-color: $brand-color-light;
 }
 
 dd a:visited {
@@ -242,7 +242,7 @@ span a, a.observation-reads-links{
 }
 
 h3#indicator-heading{
-  color: #e74c3c;
+  color: $brand-color-light;
 }
 
 #evidence-form .panel-primary{
