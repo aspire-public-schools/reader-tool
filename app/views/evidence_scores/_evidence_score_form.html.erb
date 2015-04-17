@@ -12,13 +12,15 @@
     </div>
     <div class="table-responsive">
       <table class="table table-bordered table-striped table-hover">
-        <tr>
-          <th><h4>#</h4></th>
-          <th><h4> Evidence </h4></th>
-          <th><h4> Quality </h4></th>
-          <th><h4> Alignment</h4></th>
-        </tr>
-
+        <thead>
+          <tr>
+            <th><h4>#</h4></th>
+            <th><h4> Evidence </h4></th>
+            <th><h4> Quality </h4></th>
+            <th><h4> Alignment</h4></th>
+          </tr>
+        </thead>
+        <tbody>
         <% @evidence_scores.each.with_index do |evidence,idx| %>
           <%= f.fields_for :evidence_scores, evidence, include_id: true do |es| %>
             <tr>
@@ -29,6 +31,7 @@
             </tr>
           <% end %>
         <% end %>
+        </tbody>
       </table>
     </div>
     <div id="blast">

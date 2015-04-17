@@ -1,42 +1,45 @@
 <table class="table table-condensed table-bordered table-resonsive" id="domain-table">
-
-  <tr>
-    <th></th>
-    <% @domain_numbers.each do |num| %>
+  <thead>
+    <tr>
+      <th></th>
+      <% @domain_numbers.each do |num| %>
       <th> Domain <%= num %></th>
-    <% end %>
-  </tr>
-
-  <tr class="quality">
-    <td>Quality</td>
-    <% @domain_numbers.each do |num| %>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="quality">
+      <td>Quality</td>
+      <% @domain_numbers.each do |num| %>
       <td><%= @domain_scores[num].try(&:quality_sum).to_i %></td>
-    <% end %>
-  </tr>
-  
-  <tr class="alignment">
-    <td>Alignment</td>
-    <% @domain_numbers.each do |num| %>
+      <% end %>
+    </tr>
+    
+    <tr class="alignment">
+      <td>Alignment</td>
+      <% @domain_numbers.each do |num| %>
       <td><%= @domain_scores[num].try(&:alignment_sum).to_i %></td>
-    <% end %>
-  </tr>
-
+      <% end %>
+    </tr>
+  </tbody>
 </table>
 
 <table class="table table-condensed table-bordered" id="domain-table-weighted">
-  <tr>
-    <th>Total Count</th>
-    <th>Domains <%= @domain_numbers.first %>-<%= @domain_numbers.last %></th>
-  </tr>
+  <thead>
+    <tr>
+      <th>Total Count</th>
+      <th>Domains <%= @domain_numbers.first %>-<%= @domain_numbers.last %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="quality-weighted">
+      <td>Quality</td>
+      <td><%= @domain_scores.values.sum{|x| x.quality_sum.to_i } %></td>
+    </tr>
 
-  <tr class="quality-weighted">
-    <td>Quality</td>
-    <td><%= @domain_scores.values.sum{|x| x.quality_sum.to_i } %></td>
-  </tr>
-
-  <tr class="alignment-weighted">
-    <td>Alignment</td>
-    <td><%= @domain_scores.values.sum{|x| x.alignment_sum.to_i } %></td>
-  </tr>
-
+    <tr class="alignment-weighted">
+      <td>Alignment</td>
+      <td><%= @domain_scores.values.sum{|x| x.alignment_sum.to_i } %></td>
+    </tr>
+  </tbody>
 </table>
