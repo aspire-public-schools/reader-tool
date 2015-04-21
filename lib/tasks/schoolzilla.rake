@@ -5,9 +5,6 @@ require 'fileutils'
 # https://devcenter.heroku.com/articles/scheduler
 
 namespace :schoolzilla do
-  task :first_import => :environment do
-
-  end
 
   desc "import CSV from schoozilla FTP server"
   task :import => :environment do
