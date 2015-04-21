@@ -30,35 +30,33 @@
         </table>
       </div>
     </div>
-
-    <div class="col-md-4">
-      <div class='my-legend'>
-        <div class='legend-title'> Color Code for Reads </div>
-        <div class='legend-scale'>
-          <ul class='legend-labels'>
-            <li><span class='green' style='background:#1abc9c;'></span> Ready to Read </li>
-            <li><span class='yellow' style='background:#f1c40f;'></span> Waiting for Reader 1 to Finish  </li>
-            <li><span class='grey' style='background:#7f8c8d;'></span> Completed Reads </li>
-          </ul>
-        </div>
-      </div>
-    </div>
   </div>
 
 <!-- Reads List -->
   <div class="row">
     <div class="well">
+      <div class="my-legend pull-right">
+        <div class='legend-title'> Color Code for Reads </div>
+        <div class='legend-scale'>
+          <ul class='legend-labels'>
+            <li><span class='green'></span> Ready to Read </li>
+            <li><span class='yellow'></span> Waiting for Reader 1 to Finish  </li>
+            <li><span class='gray'></span> Completed Reads </li>
+          </ul>
+        </div>
+      </div>
       <div class="panel-heading">Change Reader Assignments</div>
+
       <%= form_tag(admin_observation_reads_path, method: :put, class: 'admin-form') %>
       <div class="table-responsive reader-assignment">
         <table class="table table-bordered table-striped">
           <thead>
             <tr>
-              <th><h4> Employee Number </h4></th>
-              <th><h4> Reader 1 </h4></th>
-              <th><h4> Reader 2</h4></th>
-              <th><h4> Reader 3</h4></th>
-              <th><h4> Flagged</h4></th>
+              <th>Employee Number</th>
+              <th>Reader 1</th>
+              <th>Reader 2</th>
+              <th>Reader 3</th>
+              <th>Flagged</th>
             </tr>
           </thead>
           <tbody>
@@ -67,16 +65,16 @@
               <td><%= read['employee_id_observer'] %></td>
               <td class=<%= read['document_status'].to_i.humanize %>>
                 <%= select_tag("observation_read_id[#{read['document_observation_read_id']}]", options_for_select(@readers_for_select_1a, read['document_reader_id']), prompt: "Select a reader") %><br>
-                <%= link_to "Observation Read", observation_read_path(read['document_observation_read_id'])%>
+                <%= link_to "View Observation Read", observation_read_path(read['document_observation_read_id'])%>
               </td>
               <td class=<%= read['live_status'].to_i.humanize %>>
                 <%= select_tag("observation_read_id[#{read['live_observation_read_id']}]", options_for_select(@readers_for_select_1b, read['live_reader_id']), prompt: "Select a reader") %><br>
-                <%= link_to "Observation Read", observation_read_path(read['live_observation_read_id'])%>
+                <%= link_to "View Observation Read", observation_read_path(read['live_observation_read_id'])%>
               </td>
               <td class=<%= read['second_status'].to_i.humanize %>>
                 <% if read.oneb_flagged? %>
                 <%= select_tag("observation_read_id[#{read['second_observation_read_id']}]", options_for_select(@readers_for_select_2, read['second_reader_id']), prompt: "Select a reader")%><br>
-                <%= link_to "Observation Read", observation_read_path(read['second_observation_read_id'])%>
+                <%= link_to "View Observation Read", observation_read_path(read['second_observation_read_id'])%>
                 <% else %>
                 Cannot assign reader until flagged.
                 <% end %>
@@ -89,8 +87,8 @@
           </tbody>
         </table>
       </div>
+        <%= submit_tag nil, class: "btn btn-primary pull-right" %>
 
-      <%= submit_tag nil, class: "btn btn-primary" %>
 
     </div>
   </div>

@@ -23,59 +23,70 @@
 #dashboard a:hover {
   color: red;
 }*/
-
-
-.reader-assignment a:link{
-  color: white;
-  text-decoration: none;
+.admin-form {
+  clear: both;
 }
 
-.reader-assignment a:visited{
-  color: blue;
-  text-decoration: none;
-}
+.reader-assignment {
+  a:link{
+    color: #333;
+    text-decoration: none;
+  }
 
-.reader-assignment a:hover {
-  color: #2980b9;
-  text-decoration: none;
+  a:visited{
+    color: blue;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: #2980b9;
+    text-decoration: underline;
+  }
+
+  th { font-size: 1.35em; font-weight: bold; text-align: center;}
+
 }
 
 ul.admin-employee, li {
   list-style-type: none;
 }
 
-.my-legend .legend-title {
-  text-align: left;
-  margin-bottom: 5px;
-  font-weight: bold;
-  font-size: 2rem;
-}
+.my-legend {
 
-.my-legend .legend-scale ul {
-  margin: 0;
-  margin-bottom: 5px;
-  padding: 0;
-  float: left;
-  list-style: none;
-}
+  .legend-title {
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
 
-.my-legend .legend-scale ul li {
-    font-size: 1em;
+  .legend-scale ul {
+    margin: 1em 0;
+    padding: 0 1em;
+    float: left;
     list-style: none;
-    margin-left: 0;
-    line-height: 18px;
-    margin-bottom: 2px;
+
+    li {
+      font-size: 1em;
+      list-style: none;
+      margin-left: 0;
+      line-height: 18px;
+      margin-bottom: 2px;
     }
 
-.my-legend ul.legend-labels li span {
-    display: block;
-    float: left;
-    height: 16px;
-    width: 30px;
-    margin-right: 5px;
-    margin-left: 0;
-    border: 1px solid #999;
   }
+}
+
+ul.legend-labels li span {
+  display: block;
+  float: left;
+  height: 16px;
+  width: 30px;
+  margin-right: 5px;
+  margin-left: 0;
+  border: 1px solid #999;
+}
+
 
 #create-button {
   font-size: 15px;
@@ -107,4 +118,21 @@ form#new_reader, form.edit_reader {
     margin-top: 1em;
     float: right;
   }
+}
+
+
+$label-yellow: #EDCF5A;
+$label-green:  #83DB7D;
+$label-gray:   #CCCCCC;
+
+.reader-assignment {
+  td.one {   background-color: $label-yellow !important; }
+  td.two {   background-color: $label-green !important; }
+  td.three { background-color: $label-gray !important; }
+}
+
+.legend-labels {
+  .green { background: $label-green; }
+  .gray { background: $label-gray; }
+  .yellow { background: $label-yellow; }
 }
