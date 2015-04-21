@@ -20,6 +20,8 @@ gem 'net-sftp'
 
 gem 'bcrypt-ruby', '~> 3.0.0' 
 
+gem 'postgres-copy', '~> 0.6.0' #, git: "git://github.com/diogob/postgres-copy.git"
+
 group :assets do
   gem 'sass',   '< 3.3.0' # prevent heroku assets compilation error
   gem 'sass-rails',   '< 3.3.0'

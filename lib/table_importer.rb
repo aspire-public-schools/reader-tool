@@ -12,12 +12,18 @@ module TableImporter
   private
 
   def import_all_evidence! file_path
-    execute begin <<-SQL
-      TRUNCATE TABLE all_evidence;
-      COPY all_evidence FROM '#{file_path}'
-        DELIMITER ',' CSV HEADER;
-    SQL
-    end , "importing csv"
+    Evidence.truncate!
+    Evidence.pg_copy_from file_path, map: {
+      'Observation_Group_ID'     => 'observation_group_id',
+      'employee_ID_observer'     => 'employee_id_observer',
+      'observer_name'            => 'observer_name',
+      'employee_id_learner'      => 'employee_id_learner',
+      'evidence_id'              => 'evidence_id',
+      'evidence'                 => 'evidence',
+      'Indicator_Code'           => 'indicator_code',
+      'RowID'                    => 'row_id',
+      'Observation_Created_Date' => 'created_at'
+    }
   end
 
   def populate!

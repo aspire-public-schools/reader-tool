@@ -13,6 +13,7 @@ namespace :schoolzilla do
   task :import => :environment do
     begin
       filename    = ENV['FILENAME'] || 'raw_BloomBoard_vw.csv'
+      raise "ENV['ORG_*'] not configured for this branch!" if ENV['ORG_SFTP_DIR'].blank?
       remote_path = File.join(ENV['ORG_SFTP_DIR'],'export',filename)
       local_path  = Rails.root.join('tmp',ENV["ORG_NAME_SHORT"],'import')
       FileUtils.mkdir_p local_path
@@ -26,7 +27,7 @@ namespace :schoolzilla do
           sftp.loop 
         end
       end
-      Rails.logger.info "importing evidence from CSV..."
+      Rails.logger.info "importing all Evidence from CSV..."
       `tr < #{file} -d '\\000' > #{file}.clean`
 
       TableImporter.import_from_csv "#{file}.clean", ENV['TRUNCATE'] || false

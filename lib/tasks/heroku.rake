@@ -7,6 +7,15 @@ namespace :heroku do
     exec "git push #{ENV['ENV']||branch} #{branch}:master -f" 
   end
 
+  task :bootstrap => [:deploy] do
+    exec "heroku run rake db:migrate db:seed schoolzilla:import TRUNCATE=true --app #{branch}-readertool"
+  end
+
+  task :import do
+    exec "heroku run rake schoolzilla:import"
+  end
+
+
   desc "Seed database"
   task :seed do
     `heroku run rake db:seed --app #{branch}-readertool`
