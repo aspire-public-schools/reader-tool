@@ -14,7 +14,7 @@ id,employee_number,first_name,last_name,email,is_reader1a,is_reader1b,is_reader2
 19,,Marcie,Swan,marcie.swan@aspirepublicschools.org,1,0,1,,,
 16,,Demo,Reader,demo.reader@aspirepublicschools.org,0,0,0,,,
 7,3654,Natalie,Castelo,natalie.castelo@aspirepublicschools.org,0,0,0,,,
-15,,Erin,Abshere,eabshere@thecollegereadypromise.org,0,0,0,,,
+15,,Erin,Abshere,eabshere@thecollegereadypromise.org,0,0,1,,,
 8,3596,Stefan,Bean,stefan.bean@aspirepublicschools.org,0,0,0,,,
 1,2043,Benjamin,Crosby,benjamin.crosby@aspirepublicschools.org,0,1,1,,,
 2,1491,Matthew,Seigel,matt.seigel@aspirepublicschools.org,1,0,1,,,
