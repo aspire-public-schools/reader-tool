@@ -25,6 +25,7 @@
 }*/
 .admin-form {
   clear: both;
+  input[type=submit] { float: right; margin-right: 8em;}
 }
 
 .reader-assignment {
@@ -136,3 +137,5 @@ $label-gray:   #CCCCCC;
   .gray { background: $label-gray; }
   .yellow { background: $label-yellow; }
 }
+
+.well { overflow: auto; zoom: 1;}
