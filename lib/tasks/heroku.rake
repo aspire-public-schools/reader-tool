@@ -7,23 +7,30 @@ namespace :heroku do
     exec "git push #{ENV['ENV']||branch} #{branch}:master -f" 
   end
 
-  task :bootstrap => [:deploy] do
-    exec "heroku run rake db:migrate db:seed schoolzilla:import TRUNCATE=true --app #{branch}-readertool"
+  task :bootstrap_db do
+    run_rake_task "db:migrate db:seed schoolzilla:import TRUNCATE=true"
   end
 
-  task :import do
-    exec "heroku run rake schoolzilla:import"
-  end
+  task :bootstrap => [:deploy, :bootstrap_db]
 
+  # task :import do
+  #   exec "heroku run rake schoolzilla:import --app #{branch}-readertool"
+  # end
 
   desc "Seed database"
   task :seed do
-    `heroku run rake db:seed --app #{branch}-readertool`
+    run_rake_task "db:seed"
   end
 
 
   def branch
     ENV['BRANCH'] || `git rev-parse --abbrev-ref HEAD`.chomp
+  end
+
+
+  def run_rake_task task
+    task = task.join(" ") if task.is_a?(Array)
+    exec "heroku run rake #{task} --app #{branch}-readertool"
   end
 
 end
