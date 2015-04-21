@@ -5,6 +5,9 @@ require 'fileutils'
 # https://devcenter.heroku.com/articles/scheduler
 
 namespace :schoolzilla do
+  task :first_import => :environment do
+
+  end
 
   desc "import CSV from schoozilla FTP server"
   task :import => :environment do
@@ -15,17 +18,19 @@ namespace :schoolzilla do
       FileUtils.mkdir_p local_path
       Rails.logger.info "downloading CSV from schoolzilla SFTP"
       file = local_path.join(filename)
-      sftp_connection do |sftp|
-        p remote_path, local_path
-        sftp.download! remote_path.to_s, file.to_s
-        sftp.loop 
+      unless file.exist? && ENV['SKIP_FTP']
+        FileUtils.rm_f file
+        sftp_connection do |sftp|
+          p remote_path, local_path
+          sftp.download! remote_path.to_s, file.to_s
+          sftp.loop 
+        end
       end
       Rails.logger.info "importing evidence from CSV..."
       `tr < #{file} -d '\\000' > #{file}.clean`
 
-      TableImporter.import_from_csv "#{file}.clean"
+      TableImporter.import_from_csv "#{file}.clean", ENV['TRUNCATE'] || false
       FileUtils.rm_f "#{file}.clean"
-      FileUtils.rm_f file
       Rails.logger.info "done!"
     end
   end

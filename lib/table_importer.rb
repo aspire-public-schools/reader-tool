@@ -5,13 +5,13 @@ module TableImporter
 
   def import_from_csv file_path, truncate=false
     truncate_tables! if truncate
-    import_all_evidence!
+    import_all_evidence! file_path
     populate!
   end
 
   private
 
-  def import_all_evidence!
+  def import_all_evidence! file_path
     execute begin <<-SQL
       TRUNCATE TABLE all_evidence;
       COPY all_evidence FROM '#{file_path}'
@@ -21,7 +21,7 @@ module TableImporter
   end
 
   def populate!
-    execute POPULATE_OBSERVATION_READS, "populating observation reads"
+    populate_observation_reads
     execute POPULATE_DOMAIN_SCORES,     "populating domain scores"
     execute POPULATE_INDICATOR_SCORES,  "populating indicator scores"
     execute POPULATE_EVIDENCE_SCORES ,  "populating evidence scores"
@@ -46,7 +46,7 @@ module TableImporter
     execute MODELS.map{ |model| "TRUNCATE table #{model.tableize};" }.join
   end
 
-  # READER_TYPES = %w[ 1a 1b 2 ]
+  READER_TYPES = %w[ 1a 1b 2 ]
   # def assign_reader!(kind)
   #   raise ArgumentError, "reader type must be one of: #{READER_TYPES.join(', ')}" unless READER_TYPES.include?(kind.to_s)
 

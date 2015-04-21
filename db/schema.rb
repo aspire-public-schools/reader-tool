@@ -22,8 +22,10 @@ ActiveRecord::Schema.define(:version => 20150408235157) do
     t.text     "evidence"
     t.string   "indicator_code"
     t.integer  "row_id"
-    t.datetime "imported_at"
+    t.datetime "created_at"
   end
+
+  add_index "all_evidence", ["observation_group_id"], :name => "index_all_evidence_on_observation_group_id"
 
   create_table "domain_scores", :force => true do |t|
     t.integer  "observation_read_id"
