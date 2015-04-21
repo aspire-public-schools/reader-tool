@@ -76,10 +76,10 @@ module TableImporter
   def populate_observation_reads
     READER_TYPES.each do |kind|
       execute begin <<-SQL
-        INSERT INTO observation_reads (observation_group_id,employee_id_observer,employee_id_learner,reader_number,document_quality,document_alignment,observation_status)
-          SELECT observation_group_id, employee_id_observer, employee_id_learner, '#{kind}' as reader_number, 1 AS document_quality, 1 AS document_alignment,1 AS observation_status
+        INSERT INTO observation_reads (observation_group_id,employee_id_observer,employee_id_learner,reader_number,document_quality,document_alignment,observation_status,observer_name)
+          SELECT observation_group_id, employee_id_observer, employee_id_learner, '#{kind}' as reader_number, 1 AS document_quality, 1 AS document_alignment,1 AS observation_status, observer_name
           FROM(
-            SELECT DISTINCT observation_group_id, employee_id_observer, employee_id_learner,
+            SELECT DISTINCT observation_group_id, employee_id_observer, employee_id_learner, observer_name,
               '#{kind}' AS reader_number
             FROM vw_all_observations obs
             WHERE observation_group_id NOT IN (  --This is error checking code to prevent creating duplicate observation_reads

@@ -195,6 +195,7 @@ class ObservationRead < ActiveRecord::Base
     SELECT onea.employee_id_observer,
       onea.id AS document_observation_read_id,
       onea.observation_status AS document_status,
+      onea.observer_name AS observer_name,
       onea.reader_id AS document_reader_id,
       oneb.id AS live_observation_read_id,
       oneb.observation_status AS live_status,

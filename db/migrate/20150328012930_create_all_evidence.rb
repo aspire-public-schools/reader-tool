@@ -20,14 +20,13 @@ class CreateAllEvidence < ActiveRecord::Migration
     
     add_index :all_evidence, :observation_group_id    
 
-    # remove_timestamps :all_evidence # why are these added by default?
-
     # TODO: use reversible block
     execute <<-SQL.squish
       CREATE OR REPLACE VIEW vw_all_observations AS 
       SELECT DISTINCT all_evidence.observation_group_id,
          all_evidence.employee_id_observer,
          all_evidence.employee_id_learner,
+         all_evidence.observer_name,
          all_evidence.created_at
         FROM all_evidence
         WHERE created_at >= (now() - interval '1 month');

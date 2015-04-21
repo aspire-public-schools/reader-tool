@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150408235157) do
+ActiveRecord::Schema.define(:version => 20150421214033) do
 
   create_table "all_evidence", :id => false, :force => true do |t|
     t.integer  "observation_group_id"
@@ -100,6 +100,7 @@ ActiveRecord::Schema.define(:version => 20150408235157) do
     t.text     "comments"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
+    t.string   "observer_name"
   end
 
   add_index "observation_reads", ["observation_group_id"], :name => "index_observation_reads_on_observation_group_id"
