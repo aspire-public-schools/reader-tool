@@ -26,8 +26,11 @@ ReaderTool::Application.routes.draw do
       end
     end
 
-    resources :observation_reads
-    put 'observations_updates', to: 'observations#update'
+    resource :observation_reads, only: [:index, :update] do
+      collection do
+        get :index
+      end
+    end
   end
   match 'admin/readers/:id' => 'admin/readers#edit'
 
