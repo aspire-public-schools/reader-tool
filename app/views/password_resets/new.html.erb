@@ -1,9 +1,22 @@
-<h1>Reset Password</h1>
+<div class="container container-fluid" id="login">
+  <div class="logo"><%= logo_tag %></div>
 
-<%= form_tag password_resets_path, :method => :post do %>
-  <div class="field">
-    <%= label_tag :email %>
-    <%= text_field_tag :email, params[:email] %>
+  <div class="panel panel-default panel-info">
+    <div class="panel-heading">Reset Password</div>
+    <div class="panel-body">
+      <%= display_flash_messages %>
+
+      <%= form_tag password_resets_path, class: "form-horizontal center" do |f| %>
+        <div class="form-group">
+          <%= label_tag :email, "Email:", class: "col-md-4 control-label reader-admin-label"%>
+          <div class="col-md-8">
+            <%= text_field_tag :email, params[:email] %>
+          </div>
+        </div>
+        <%= submit_tag "Reset Password", class: "btn btn-default btn-primary" %>
+      <% end %>
+
+    </div>
   </div>
-  <div class="actions"><%= submit_tag "Reset Password" %></div>
-<% end %>
+  
+</div>
