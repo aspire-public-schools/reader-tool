@@ -3,10 +3,10 @@ module Truncate
     connection.execute "TRUNCATE TABLE #{table_name};"
   end
 
-  def update_sequence!
+  def pg_update_sequence!
     connection.execute <<-SQL.squish
-      WITH mx AS (SELECT MAX(id) AS id FROM public.#{table})
-      SELECT setval('public.#{table}_id_seq', mx.id) AS curseq
+      WITH mx AS (SELECT MAX(id) AS id FROM public.#{table_name})
+      SELECT setval('public.#{table_name}_id_seq', mx.id) AS curseq
       FROM mx;
     SQL
   end

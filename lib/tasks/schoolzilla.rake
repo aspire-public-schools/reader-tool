@@ -19,7 +19,7 @@ namespace :schoolzilla do
       unless file.exist? && ENV['SKIP_FTP']
         FileUtils.rm_f file
         sftp_connection do |sftp|
-          p remote_path, local_path
+          # p remote_path, local_path
           sftp.download! remote_path.to_s, file.to_s
           sftp.loop 
         end
