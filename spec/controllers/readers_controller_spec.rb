@@ -1,9 +1,11 @@
 require 'spec_helper'
 require 'factory_girl'
 
-describe Admin::ReadersController do
+RSpec.describe Admin::ReadersController, :type => :controller do
+  let(:admin){ create(:reader, is_reader2: true ) }
+
 	before(:each) do
-		@reader = build(:reader)
+    login admin
 	end
 
   describe "GET #index" do
@@ -13,4 +15,5 @@ describe Admin::ReadersController do
       expect(response.status).to eq(200)
     end
   end
+
 end
