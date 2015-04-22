@@ -29,7 +29,7 @@ class CreateAllEvidence < ActiveRecord::Migration
          all_evidence.observer_name,
          all_evidence.created_at
         FROM all_evidence
-        WHERE created_at >= (now() - interval '1 month');
+        WHERE created_at >= (now() - interval '6 months');
     SQL
 
   end
