@@ -60,6 +60,8 @@ ReaderTool::Application.configure do
     :authentication => :plain,
   }
 
+  config.action_mailer.default_url_options = { host: "#{ENV["ORG_NAME_SHORT"].downcase}-readertool.heroku.com" }
+
   # Enable threaded mode
   # config.threadsafe!
 
