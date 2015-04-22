@@ -28,7 +28,9 @@ namespace :schoolzilla do
       `tr < #{file} -d '\\000' > #{file}.clean`
 
       TableImporter.import_from_csv "#{file}.clean", ENV['TRUNCATE'] || false
+      Rails.logger.info "cleanup up..."
       FileUtils.rm_f "#{file}.clean"
+      Evidence.truncate!
       Rails.logger.info "done!"
     end
   end
