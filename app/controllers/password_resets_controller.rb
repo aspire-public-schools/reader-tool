@@ -1,4 +1,6 @@
 class PasswordResetsController < ApplicationController
+  skip_before_filter :require_login
+
   # taken from http://railscasts.com/episodes/274-remember-me-reset-password?view=asciicast
 
   def create

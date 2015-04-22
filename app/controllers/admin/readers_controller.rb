@@ -17,7 +17,7 @@ class Admin::ReadersController < AdminController
   def create
     @reader = Reader.new(params[:reader])
     if @reader.save
-      redirect_to admin_readers_path, :flash => { :success => "Your changes were saved!" }
+      redirect_to admin_readers_path, flash: {success: "#{@reader.full_name} was created. An password reset email has been sent to #{@reader.email}" }
     else
       flash[:error] = "#{@reader.errors.full_messages.to_sentence}."
       render :new
@@ -30,8 +30,7 @@ class Admin::ReadersController < AdminController
 
   def update
     if @reader.update_attributes(params[:reader])
-      flash[:success] = "#{@reader.first_name} #{@reader.last_name} was saved"
-      redirect_to admin_readers_path
+      redirect_to admin_readers_path, flash: {success: "#{@reader.full_name} was saved" }
     else
       flash[:error] = "#{@reader.errors.full_messages.to_sentence}."
       @reader.reload
