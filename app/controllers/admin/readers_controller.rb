@@ -17,7 +17,7 @@ class Admin::ReadersController < AdminController
   def create
     @reader = Reader.new(params[:reader])
     if @reader.save
-      redirect_to admin_readers_path, flash: {success: "#{@reader.full_name} was created. An password reset email has been sent to #{@reader.email}" }
+      redirect_to admin_readers_path, flash: {success: "Account was created. A password reset email has been sent to #{@reader.email}" }
     else
       flash[:error] = "#{@reader.errors.full_messages.to_sentence}."
       render :new

@@ -20,4 +20,8 @@ module SessionHelper
     session.delete(:return_to)
   end
 
+  def login reader
+    session[:current_reader_id] = reader.id
+  end
+
 end

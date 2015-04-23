@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     redirect_invalid and return unless credentials_present?
     reader = Reader.find_by_email(params[:reader][:email])
     if reader && reader.authenticate(params[:reader][:password])
-      session[:current_reader_id] = reader.id
+      login reader
       redirect_to return_to_location || observation_reads_path
     else
       redirect_invalid

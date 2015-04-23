@@ -10,13 +10,13 @@
         <div class="form-group">
           <%= f.label :password, "Password:", class: "col-md-4 control-label reader-admin-label"%>
           <div class="col-md-8">
-            <%= f.password_field :password %>
+            <%= f.password_field :password, class: "form-control reader-admin-label" %>
           </div>
         </div>
         <div class="form-group">
           <%= f.label :password_confirmation, "Password Confirmation:", class: "col-md-4 control-label reader-admin-label"%>
           <div class="col-md-8">
-            <%= f.password_field :password_confirmation %>
+            <%= f.password_field :password_confirmation, class: "form-control reader-admin-label" %>
           </div>
         </div>
         <%= submit_tag "Update Password", class: "btn btn-default btn-primary" %>
