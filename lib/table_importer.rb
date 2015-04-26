@@ -84,7 +84,7 @@ module TableImporter
       status = kind == '2' ? 2 : 1  # ready if 1a or 1b, waiting if 2
       execute begin <<-SQL
         INSERT INTO observation_reads (observation_group_id,employee_id_observer,employee_id_learner,reader_number,document_quality,document_alignment,observation_status,observer_name)
-          SELECT observation_group_id, employee_id_observer, employee_id_learner, '#{kind}' as reader_number, 1 AS document_quality, 1 AS document_alignment,{status} AS observation_status, observer_name
+          SELECT observation_group_id, employee_id_observer, employee_id_learner, '#{kind}' as reader_number, 0 AS document_quality, 0 AS document_alignment,{status} AS observation_status, observer_name
           FROM(
             SELECT DISTINCT observation_group_id, employee_id_observer, employee_id_learner, observer_name,
               '#{kind}' AS reader_number
