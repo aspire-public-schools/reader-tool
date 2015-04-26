@@ -2,6 +2,8 @@
 
   def index
     @observation_reads = current_user.observation_reads.status(:ready)
+    @waiting_reads     = current_user.observation_reads.status(:waiting)
+    @finalized_reads   = current_user.observation_reads.status(:finished)
   end
 
   def show
@@ -15,13 +17,13 @@
 
   def update
     @observation_read = ObservationRead.find(params[:id])
-
     if @observation_read.update_attributes(params[:observation_read])
       @observation_read.finalize!
-      render :json => { :saved_message => "You've Successfully Finalized!", :document_live_form => render_to_string(:partial => "document-live-form", locals: { :observation_read => @observation_read }) }
+      messages = {success: "You've Successfully Finalized!"}
     else
-      render :json => { :error => @observation_read.errors.full_messages.join(", ")}, :status => :unprocessable_entity
+      messages = {error: @observation_read.errors.full_messages.join(", ")}
     end
+    redirect_to observation_reads_path, flash: messages
   end
 
 end

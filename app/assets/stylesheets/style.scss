@@ -192,10 +192,6 @@ p.alert-success{
 }
 
 /* observation-reads buttons */
-.observation-reads-links{
-  color: white;
-  cursor: pointer;
-}
 
 .observation-reads-links.selected{
   background-color: #5CA092;
@@ -219,6 +215,8 @@ span a, a.observation-reads-links{
 }
 
 .observation-reads-links{
+  color: white;
+  cursor: pointer;
   font-size: 15px;
   margin: 10px 2px;
   display: inline-block;
@@ -227,6 +225,11 @@ span a, a.observation-reads-links{
   border: 1px solid transparent;
   border-radius: 15px;
 }
+
+.finalized .observation-reads-links{
+  background-color: gray;
+}
+
 
 .read-links{
   text-align: center;

@@ -14,7 +14,31 @@
 
       <div class='row'>
         <div class="observation-reads">
-          <%= render partial: "observation_reads" %>
+          <div class="well well-sm">
+            <h3>Your Observation Reads</h3>
+
+            <% if @observation_reads.empty? %>
+            <h4>
+               <% if @waiting_reads.any? %>
+                <%= @waiting_reads.count %> assigned but not yet ready.
+               <% else %>
+                None assigned.
+               <% end %>
+            <% else %>
+            <div class="read-links">
+              <% @observation_reads.sort_by(&:employee_id_observer).each do |observation| %>
+                <%= link_to "#{observation.employee_id_observer}", observation_read_path(observation), class: "observation-reads-links" %>
+              <% end %>
+            </div>
+            <% end %>
+            <br/>
+            <div class="read-links finalized">
+            <h3>Finalized Reads</h3>
+              <% @finalized_reads.each do |observation| %>
+                <%= link_to "#{observation.employee_id_observer}", observation_read_path(observation), class: "observation-reads-links" %>
+              <% end %>
+            </div>
+          </div>
         </div>
       </div>
 
