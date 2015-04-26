@@ -56,6 +56,26 @@ dt:hover {
 dl {
   text-indent: 1em;
   background-color: $brand-color;
+  dd {
+    display: none;
+    text-indent: 1.5em;
+    cursor: pointer;
+    a:link, a:visited, a:hover, a:active {
+      text-decoration: none;
+      color: white;
+    }
+  }
+
+  .caret {
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #ecf0f1;
+    display: none;
+    margin-top: 0.5em;
+  }
+
+  .open .caret { display: inline-block; }
+
 }
 
 dt {
@@ -66,16 +86,6 @@ dt {
   color:#ecf0f1;
 }
 
-dl dd {
-    display: none;
-    text-indent: 1em;
-    cursor: pointer;
-}
-
-dl dd a:link a:visited a:hover a:active {
-  text-decoration: none;
-  color: white;
-}
 
 dd:hover {
   background-color: #8e44ad;

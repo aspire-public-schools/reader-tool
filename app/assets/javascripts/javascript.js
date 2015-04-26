@@ -5,6 +5,9 @@ var sideBar = {
         $firstGroup = $this.nextUntil('dt');
       $firstGroup.toggle('fast', 'swing');
       $this.siblings('dd').not($firstGroup).hide()
+      marker = $this.find('h5')
+      $('dl h5').not(marker).removeClass('open');
+      marker.toggleClass('open');
     })
   }
 }
