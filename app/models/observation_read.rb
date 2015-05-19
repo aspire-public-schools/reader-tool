@@ -26,6 +26,10 @@ class ObservationRead < ActiveRecord::Base
     reader_number == '2'
   end
 
+  def display_title
+    "#{observer_name} - #{reader.to_s(:short)}"
+  end
+
   def copy_to_reader2
     r1_observation_read = self
     r2_observation_read = ObservationRead.where("observation_group_id = ? AND reader_number = ?", self.observation_group_id, '2').first
