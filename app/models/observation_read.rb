@@ -93,11 +93,7 @@ class ObservationRead < ActiveRecord::Base
       document_alignment = alignment_cert( score )
     end
 
-<<<<<<< HEAD
-    if final && score = scores[1]  # live
-=======
     if final? && score = scores[1]  # live
->>>>>>> affba3b03a927c158ffe8060b925494c7f34924d
       live_quality   = quality_cert( score )
       live_alignment = alignment_cert( score )
     end
@@ -111,15 +107,6 @@ class ObservationRead < ActiveRecord::Base
 # “3” when total count of flags is less than 4 
 
   def quality_cert score
-<<<<<<< HEAD
-    case score.quality_sum.to_i
-    when 0...4
-      "3"
-    when 4...8
-      "2"
-    else
-      "1"
-=======
     case score.quality_sum.to_f
     when 0...2
       STATES[3] # Cert w. Dist
@@ -129,20 +116,10 @@ class ObservationRead < ActiveRecord::Base
       STATES[1] # Cond Cert
     else
       STATES[9] # NYC
->>>>>>> affba3b03a927c158ffe8060b925494c7f34924d
     end
   end
 
   def alignment_cert score
-<<<<<<< HEAD
-    case score.alignment_sum.to_i
-    when 0...4
-      "3"
-    when 4...8
-      "2"
-    else
-      "1"
-=======
     case score.alignment_sum.to_f
     when 0...2
       STATES[3] # Cert w. Dist
@@ -152,7 +129,6 @@ class ObservationRead < ActiveRecord::Base
       STATES[1] # Cond Cert
     else
       STATES[9] # NYC
->>>>>>> affba3b03a927c158ffe8060b925494c7f34924d
     end
   end
 
