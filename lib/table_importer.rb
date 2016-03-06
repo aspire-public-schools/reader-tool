@@ -1,37 +1,67 @@
+require 'csv'
 module TableImporter
   extend self
 
-  MODELS = %w[ DomainScore IndicatorScore EvidenceScore ObservationRead ]
+  MODELS = %w[ DomainScore IndicatorScore EvidenceScore ObservationRead]
 
-  def import_from_csv file_path, truncate=false
-    truncate_tables! if truncate
-    import_all_evidence! file_path
-    populate!
-  end
-
-  private
-
-  def import_all_evidence! file_path
-    Evidence.truncate!
-    Evidence.pg_copy_from file_path, map: {
-      'Observation_Group_ID'     => 'observation_group_id',
-      'employee_ID_observer'     => 'employee_id_observer',
-      'observer_name'            => 'observer_name',
-      'employee_id_learner'      => 'employee_id_learner',
-      'evidence_id'              => 'evidence_id',
-      'evidence'                 => 'evidence',
-      'Indicator_Code'           => 'indicator_code',
-      'RowID'                    => 'row_id',
-      'Observation_Created_Date' => 'created_at'
-    }
+  def import_from_csv file_name, file_path, truncate=false
+    import_all_evidence! file_name, file_path
   end
 
   def populate!
+    #truncate_tables! if truncate #Bad, Bad, dont do this without being sure that you need to.  This currently truncates ALL tables
+    Rails.logger.info "Populating tables"
+    execute POPULATE_ALL_EVIDENCE,      "populating all_evidence"
     populate_observation_reads
     execute POPULATE_DOMAIN_SCORES,     "populating domain scores"
     execute POPULATE_INDICATOR_SCORES,  "populating indicator scores"
     execute POPULATE_EVIDENCE_SCORES ,  "populating evidence scores"
   end
+
+  private
+
+  def import_all_evidence! file_name, file_path
+    file_path_stripped = "#{file_path}/Stripped_#{file_name}"
+    Rails.logger.info "Loading #{file_path}"
+
+    original = CSV.read("#{file_path}/#{file_name}", { headers: true, return_headers: true })
+    
+    columns_to_keep = ""
+    case file_name
+      when "Observations.csv"
+        columns_to_keep = %w(observation_group_id employee_id_learner employee_id_observer first_name_observer last_name_observer observation_group_status)
+      when "Observation_Comments.csv"
+          columns_to_keep = %w(observation_group_id comment_id indicator_id comment)
+      when "Indicators.csv"
+          columns_to_keep = %w(indicator_id indicator_text indicator_code)
+    end
+
+    # remove unwanted columns.  change to column mode, filter by column name and change back to default
+    # mode of operation
+    original.by_col!.delete_if do |col_name, col_values|
+      !columns_to_keep.include?(col_name)
+    end.by_col_or_row!
+
+    FileUtils.rm_f "#{file_path_stripped}"
+    CSV.open("#{file_path_stripped}", 'w', col_sep: ',') do |csv|
+      original.each do |row|
+        csv << row
+      end
+    end
+
+    case file_name
+      when "Observations.csv"
+        BBObservation.truncate!
+        BBObservation.pg_copy_from "#{file_path_stripped}"
+      when "Indicators.csv"
+        BBIndicator.truncate!
+        BBIndicator.pg_copy_from "#{file_path_stripped}"
+      when "Observation_Comments.csv"
+        BBObservationComment.truncate!
+        BBObservationComment.pg_copy_from "#{file_path_stripped}"
+    end
+  end
+
 
   def execute sql, msg=nil
     sql = sql.read if sql.is_a? Pathname
@@ -99,6 +129,11 @@ module TableImporter
     end
   end
 
+  POPULATE_ALL_EVIDENCE = <<-SQL
+    SELECT fn_load_all_evidence() --This function truncates all_evidence and reloads it from vw_load_all_evidence
+  SQL
+
+##TODO - This needs to be rewritten.  Can we create a vw_observations_to_load
   POPULATE_DOMAIN_SCORES = <<-SQL
   /* POPULATE DOMAIN SCORES - Currently not using domain 5 in the reader tool.  Only create domain_scores for the
   appropriate 1a/1b/2 reader */
@@ -109,8 +144,9 @@ module TableImporter
     CROSS JOIN domains dom
     LEFT JOIN domain_scores domcheck
       ON obs.id = domcheck.observation_read_id AND dom.id = domcheck.domain_id
-      AND dom.id <> '5'
+      WHERE dom.id <> '5'
       AND domcheck.id IS NULL
+    --WHERE obs.id NOT IN (SELECT DISTINCT observation_read_id FROM domain_scores)
   SQL
 
   POPULATE_INDICATOR_SCORES = <<-SQL
@@ -128,7 +164,8 @@ module TableImporter
       ON doms.id = indcheck.domain_score_id AND ind.id = indcheck.indicator_id
     WHERE ind.domain_id <> '5'
       AND (ind.domain_id <> '4' OR ind.Code in('4.1A', '4.1B')) 
-      AND indcheck.id IS NULL;
+      AND indcheck.id IS NULL
+      --AND dom.id NOT IN (SELECT DISTINCT domain_score_id FROM indicator_scores);
   SQL
 
   POPULATE_EVIDENCE_SCORES = <<-SQL
