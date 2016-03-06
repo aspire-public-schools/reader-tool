@@ -6,7 +6,7 @@ class ObservationRead < ActiveRecord::Base
   has_many :evidence_scores,  through: :indicator_scores
   belongs_to :reader
 
-  STATES = %w[ 1 2 3]
+  STATES = ["NYC","Cond Cert","Cert","Cert w. Dist"]
 
   STATUS_WORD_MAPPING = {1 => :waiting, 2 => :ready, 3 => :finished}.freeze
 
@@ -24,10 +24,6 @@ class ObservationRead < ActiveRecord::Base
 
   def final?
     reader_number == '2'
-  end
-
-  def display_title
-    "#{observer_name} - #{reader.to_s(:short)}"
   end
 
   def copy_to_reader2
@@ -96,7 +92,11 @@ class ObservationRead < ActiveRecord::Base
       document_alignment = alignment_cert( score )
     end
 
+<<<<<<< HEAD
     if final && score = scores[1]  # live
+=======
+    if final? && score = scores[1]  # live
+>>>>>>> affba3b03a927c158ffe8060b925494c7f34924d
       live_quality   = quality_cert( score )
       live_alignment = alignment_cert( score )
     end
@@ -110,6 +110,7 @@ class ObservationRead < ActiveRecord::Base
 # “3” when total count of flags is less than 4 
 
   def quality_cert score
+<<<<<<< HEAD
     case score.quality_sum.to_i
     when 0...4
       "3"
@@ -117,10 +118,22 @@ class ObservationRead < ActiveRecord::Base
       "2"
     else
       "1"
+=======
+    case score.quality_sum.to_f
+    when 0...2
+      STATES[3] # Cert w. Dist
+    when 2...4
+      STATES[2] # Cert
+    when 4...6.5
+      STATES[1] # Cond Cert
+    else
+      STATES[9] # NYC
+>>>>>>> affba3b03a927c158ffe8060b925494c7f34924d
     end
   end
 
   def alignment_cert score
+<<<<<<< HEAD
     case score.alignment_sum.to_i
     when 0...4
       "3"
@@ -128,6 +141,17 @@ class ObservationRead < ActiveRecord::Base
       "2"
     else
       "1"
+=======
+    case score.alignment_sum.to_f
+    when 0...2
+      STATES[3] # Cert w. Dist
+    when 2...4
+      STATES[2] # Cert
+    when 4..7
+      STATES[1] # Cond Cert
+    else
+      STATES[9] # NYC
+>>>>>>> affba3b03a927c158ffe8060b925494c7f34924d
     end
   end
 
@@ -139,6 +163,7 @@ class ObservationRead < ActiveRecord::Base
   def find_section_scores
     self.class.find_section_scores self.id
   end
+
 
   #####################
   #   class methods
@@ -155,10 +180,10 @@ class ObservationRead < ActiveRecord::Base
   def self.find_scores_by_domain_number id
     find_by_sql <<-SQL
       SELECT obr.id, dom.number,
-          AVG(evds.quality::integer)   AS quality_average, 
-          AVG(evds.alignment::integer) AS alignment_average,
-          SUM(evds.quality::integer)   AS quality_sum,
-          SUM(evds.alignment::integer) AS alignment_sum
+          AVG(evds.quality::float)   AS quality_average, 
+          AVG(evds.alignment::float) AS alignment_average,
+          SUM(evds.quality::float)   AS quality_sum,
+          SUM(evds.alignment::float) AS alignment_sum
       FROM observation_reads obr
         LEFT JOIN domain_scores doms
             ON doms.observation_read_id = obr.id
@@ -176,10 +201,10 @@ class ObservationRead < ActiveRecord::Base
   def self.find_section_scores id
      find_by_sql <<-SQL
      SELECT obr.id, 'document' AS Type,
-          AVG(evds.quality::integer)   AS quality_average, 
-          AVG(evds.alignment::integer) AS alignment_average,
-          SUM(evds.quality::integer)   AS quality_sum, 
-          SUM(evds.alignment::integer) AS alignment_sum
+          AVG(evds.quality::float)   AS quality_average, 
+          AVG(evds.alignment::float) AS alignment_average,
+          SUM(evds.quality::float)   AS quality_sum, 
+          SUM(evds.alignment::float) AS alignment_sum
       FROM observation_reads obr
       LEFT JOIN domain_scores doms
            ON doms.observation_read_id = obr.id
@@ -194,10 +219,10 @@ class ObservationRead < ActiveRecord::Base
       GROUP BY obr.id
     UNION
       SELECT obr.id, 'live' AS Type,
-          AVG(evds.quality::integer)   AS quality_average, 
-          AVG(evds.alignment::integer) AS alignment_average,
-          SUM(evds.quality::integer)   AS quality_sum, 
-          SUM(evds.alignment::integer) AS alignment_sum
+          AVG(evds.quality::float)   AS quality_average, 
+          AVG(evds.alignment::float) AS alignment_average,
+          SUM(evds.quality::float)   AS quality_sum, 
+          SUM(evds.alignment::float) AS alignment_sum
       FROM observation_reads obr
       LEFT JOIN domain_scores doms
           ON doms.observation_read_id = obr.id
@@ -210,6 +235,40 @@ class ObservationRead < ActiveRecord::Base
       WHERE dom.number IN (2,3)
         AND obr.id = #{id}
       GROUP BY obr.id
+    SQL
+  end
+
+  def self.edit_reader_list_single
+    find_by_sql <<-SQL
+    SELECT *
+    FROM(
+      SELECT onea.employee_id_observer,
+        onea.id AS document_observation_read_id,
+        onea.observation_status AS document_status,
+        onea.observer_name AS observer_name,
+        onea.reader_id AS document_reader_id,
+        oneb.id AS live_observation_read_id,
+        oneb.observation_status AS live_status,
+        oneb.reader_id AS Live_reader_id,
+        two.id AS second_observation_read_id,
+        two.reader_id AS second_reader_id,
+        two.observation_status AS second_status,
+        onea.flagged AS onea_flagged,
+        oneb.flagged AS oneb_flagged,
+        two.flagged AS two_flagged
+         , row_number() OVER(PARTITION BY onea.employee_id_observer ORDER BY onea.observation_group_id DESC) AS obsnum
+  --SELECT *
+      FROM observation_reads onea
+      JOIN observation_reads oneb
+        ON oneb.reader_number = '1b'
+        AND onea.observation_group_id = oneb.observation_group_id
+      JOIN observation_reads two
+        ON two.reader_number = '2'
+        AND onea.observation_group_id = two.observation_group_id
+      WHERE onea.reader_number = '1a'
+      ORDER BY onea.employee_id_observer
+      ) obs
+      WHERE obsnum = 1
     SQL
   end
 
