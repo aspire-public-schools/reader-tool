@@ -9,7 +9,7 @@ namespace :ftp do
   desc "import CSV from schoozilla FTP server"
   task :import => :environment do
     begin
-      files_to_download = ['Observations.csv', 'Indicators.csv', 'Observation_Comments.csv']
+      files_to_download = ['Observations.csv', 'Indicators.csv','Observation_Comments.csv'] # 
       files_to_download.each { |filename| 
         raise "ENV['ORG_*'] not configured for this branch!" if ENV['ORG_SFTP_DIR'].blank?
         remote_path = File.join(ENV['ORG_SFTP_DIR'],'export',filename)

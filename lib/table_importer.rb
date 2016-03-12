@@ -24,20 +24,37 @@ module TableImporter
     file_path_stripped = "#{file_path}/Stripped_#{file_name}"
     Rails.logger.info "Loading #{file_path}"
 
-    original = CSV.read("#{file_path}/#{file_name}", { headers: true, return_headers: true })
-    
     columns_to_keep = ""
     case file_name
       when "Observations.csv"
         columns_to_keep = %w(observation_group_id employee_id_learner employee_id_observer first_name_observer last_name_observer observation_group_status)
       when "Observation_Comments.csv"
-          columns_to_keep = %w(observation_group_id comment_id indicator_id comment)
+          columns_to_keep = %w(observation_group_id comment_id indicator_id comment employee_id_learner)
       when "Indicators.csv"
           columns_to_keep = %w(indicator_id indicator_text indicator_code)
     end
 
-    # remove unwanted columns.  change to column mode, filter by column name and change back to default
-    # mode of operation
+    # original = CSV.read("#{file_path}/#{file_name}", { headers: true, return_headers: true })
+      
+    Rails.logger.info "Starting load into CSV read" #loading into a CSV.table took over 30 min and didn't complete
+    original = CSV.read("#{file_path}/#{file_name}", { headers: true, return_headers: true }) #loading into an array of arrays took 2 min
+    Rails.logger.info "Completed load into CSV read"
+    # name = db.execute "SELECT employee_id_learner FROM current_certification_teacher"
+
+    #results = ActiveRecord::Base.connection.execute("SELECT employee_id_learner FROM current_certification_teacher")
+    
+    #heroku throws a memory error when pulling a 250+ MB CSV into the file so we need to remove unnecessary comments
+    if file_name == "Observation_Comments.csv"
+      Rails.logger.info "Deleting from observation_comments file"
+      original.delete_if { |x| x[0] != '5312' && x[0] != 'employee_id_learner' } 
+    end
+
+    if file_name == "Observations.csv"
+      Rails.logger.info "Deleting from observation file"
+      original.delete_if { |x| x[2] != '5312' && x[2] != 'employee_id_learner' } 
+    end
+    
+    #delete unwanted columns
     original.by_col!.delete_if do |col_name, col_values|
       !columns_to_keep.include?(col_name)
     end.by_col_or_row!
