@@ -22,7 +22,7 @@ module TableImporter
 
   def import_all_evidence! file_name, file_path
     file_path_stripped = "#{file_path}/Stripped_#{file_name}"
-    Rails.logger.info "Loading #{file_path}"
+    Rails.logger.info "Starting load of #{file_path}/Stripped_#{file_name}"
 
     columns_to_keep = ""
     case file_name
