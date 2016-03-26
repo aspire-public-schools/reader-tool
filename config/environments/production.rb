@@ -50,14 +50,14 @@ ReaderTool::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
-  ENV['APP_DOMAIN'] = "#{ENV["ORG_NAME_SHORT"].downcase}-readertool.heroku.com"
+  #ENV['APP_DOMAIN'] = "#{ENV["ORG_NAME_SHORT"].downcase}-readertool.heroku.com"
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :port           => ENV['MAILGUN_SMTP_PORT'],
     :address        => ENV['MAILGUN_SMTP_SERVER'],
     :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
     :password       => ENV['MAILGUN_SMTP_PASSWORD'],
-    :domain         => ENV['APP_DOMAIN'],
+    #:domain         => ENV['APP_DOMAIN'],
     :authentication => :plain,
   }
 
