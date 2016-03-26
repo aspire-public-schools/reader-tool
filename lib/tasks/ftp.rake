@@ -17,7 +17,7 @@ namespace :ftp do
         FileUtils.mkdir_p local_path
         Rails.logger.info "downloading CSV from SFTP"
         file = local_path.join(filename)
-        Rails.logger.info "Found file"
+        Rails.logger.info "Found on file on FTP"
         unless file.exist? && ENV['SKIP_FTP']
           FileUtils.rm_f file
           sftp_connection do |sftp|

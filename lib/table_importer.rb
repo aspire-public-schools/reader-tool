@@ -24,6 +24,10 @@ module TableImporter
     file_path_stripped = "#{file_path}/Stripped_#{file_name}"
     Rails.logger.info "Starting load of #{file_path}/Stripped_#{file_name}"
 
+    #There should only be a single, current certificaiton teacher that is being read.  Lookup their ID in the DB for filtering
+    certification_teacher = ActiveRecord::Base.connection.select_all("SELECT employee_id_learner FROM current_certification_teacher LIMIT 1")
+    current_certification_teacher = certification_teacher[0]["employee_id_learner"]
+
     columns_to_keep = ""
     case file_name
       when "Observations.csv"
@@ -34,24 +38,20 @@ module TableImporter
           columns_to_keep = %w(indicator_id indicator_text indicator_code)
     end
 
-    # original = CSV.read("#{file_path}/#{file_name}", { headers: true, return_headers: true })
       
     Rails.logger.info "Starting load into CSV read" #loading into a CSV.table took over 30 min and didn't complete
     original = CSV.read("#{file_path}/#{file_name}", { headers: true, return_headers: true }) #loading into an array of arrays took 2 min
     Rails.logger.info "Completed load into CSV read"
-    # name = db.execute "SELECT employee_id_learner FROM current_certification_teacher"
 
-    #results = ActiveRecord::Base.connection.execute("SELECT employee_id_learner FROM current_certification_teacher")
-    
     #heroku throws a memory error when pulling a 250+ MB CSV into the file so we need to remove unnecessary comments
     if file_name == "Observation_Comments.csv"
       Rails.logger.info "Deleting from observation_comments file"
-      original.delete_if { |x| x[0] != '5312' && x[0] != 'employee_id_learner' } 
+      original.delete_if { |x| x[0] != current_certification_teacher && x[0] != 'employee_id_learner' } 
     end
 
     if file_name == "Observations.csv"
       Rails.logger.info "Deleting from observation file"
-      original.delete_if { |x| x[2] != '5312' && x[2] != 'employee_id_learner' } 
+      original.delete_if { |x| x[2] != current_certification_teacher && x[2] != 'employee_id_learner' } 
     end
     
     #delete unwanted columns
