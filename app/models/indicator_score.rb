@@ -13,7 +13,7 @@ class IndicatorScore < ActiveRecord::Base
   accepts_nested_attributes_for :evidence_scores
 
 	def updated?
-		created_at - updated_at > 1.second
+		updated_at - created_at > 1.second
 	end
 
   def to_s

@@ -73,7 +73,7 @@
                 <%= link_to "View Observation Read", observation_read_path(read['live_observation_read_id'])%>
               </td>
               <td class=<%= read['second_status'].to_i.humanize %>>
-                <% if read.oneb_flagged? %>
+                <% if read.second_status == "2" %>
                 <%= select_tag("observation_read_id[#{read['second_observation_read_id']}]", options_for_select(@readers_for_select_2, read['second_reader_id']), prompt: "Select a reader")%><br>
                 <%= link_to "View Observation Read", observation_read_path(read['second_observation_read_id'])%>
                 <% else %>

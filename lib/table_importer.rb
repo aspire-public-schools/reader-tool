@@ -188,7 +188,7 @@ module TableImporter
   POPULATE_EVIDENCE_SCORES = <<-SQL
   /* Generate evidence scores.  Join to other tables to ensure the correct id is inserted */
   INSERT INTO evidence_scores(evidence_id,indicator_score_id,description,quality,alignment)
-    SELECT evid.evidence_id AS evidence_id, inds.id AS indicator_score_id, evid.evidence AS description, '1' AS quality, '1' AS alignment
+    SELECT evid.evidence_id AS evidence_id, inds.id AS indicator_score_id, evid.evidence AS description, '0' AS quality, '0' AS alignment
     FROM Observation_Reads obs
     LEFT JOIN domain_scores dom
       ON dom.observation_read_id = obs.id

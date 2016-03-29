@@ -27,58 +27,10 @@ class ObservationRead < ActiveRecord::Base
     reader_number == '2'
   end
 
-  def copy_to_reader2
-    r1_observation_read = self
-    r2_observation_read = ObservationRead.where("observation_group_id = ? AND reader_number = ?", self.observation_group_id, '2').first
-
-    case reader_number
-    when '1a'
-      certification_scores = {:document_quality => self.document_quality, :document_alignment => self.document_alignment}
-    when '1b'
-      certification_scores = {:live_quality => self.live_quality, :live_alignment => self.live_alignment}
-    end
-
-    # initialize reader 2 observation with comments from reader 1a
-    r2_observation_read.update_attributes(certification_scores)
-    comments = "#{self.reader_number}: #{self.comments}"
-    comments += "\n#{r2_observation_read.comments}" if r2_observation_read.comments.present? && r2_observation_read.comments != self.comments
-
-    r2_observation_read.update_attributes(comments: comments)
-
-    case reader_number
-    when '1a'
-      r2_indicator_scores = r2_observation_read.indicator_scores.where("domain_scores.domain_id IN (1,4)").order(:indicator_id)
-    when '1b'
-      r2_indicator_scores = r2_observation_read.indicator_scores.where("domain_scores.domain_id IN (2,3)").order(:indicator_id)
-    end
-
-    if reader_number == '1a' || reader_number == '1b'
-    # this copies reader 1 scores into reader 2
-      r1_indicator_scores = r1_observation_read.indicator_scores.order(:indicator_id)
-
-      r2_indicator_scores.count.times{ |i|
-          r2_indicator_scores[i].update_attributes(:comments => r1_indicator_scores[i].comments )
-
-          sorted_r1_indicator_scores = r1_indicator_scores[i].evidence_scores.order(:description)
-          sorted_r2_indicator_scores = r2_indicator_scores[i].evidence_scores.order(:description)
-
-            r1_indicator_scores[i].evidence_scores.count.times { |j|
-
-                 new_scores = {:quality => sorted_r1_indicator_scores[j].quality, :alignment => sorted_r1_indicator_scores[j].alignment }
-
-                 sorted_r2_indicator_scores[j].update_attributes(new_scores)
-
-            }
-        }
-    end
-  end
-
   def finalize!
-    copy_to_reader2
     update_attributes(observation_status: 3) # finished
-    # if 1a and 1b are both finished then 2 goes to ready
-    completed_group_reads = ObservationRead.where(observation_group_id: self.observation_group_id, reader_number: ['1a','1b'], observation_status: 3)
-    if completed_group_reads.count == 2
+    #open up the 2nd read if one is flagged
+  if self.flagged
       read_2 = ObservationRead.where(observation_group_id: self.observation_group_id, reader_number: '2').first
       read_2.update_attributes(observation_status: 2) # ready
     end
