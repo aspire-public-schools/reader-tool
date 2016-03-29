@@ -1,5 +1,5 @@
 class Reader < ActiveRecord::Base
-  attr_accessible :employee_number, :first_name, :last_name, :email, :is_reader1a, :is_reader1b, :is_reader2
+  attr_accessible :employee_number, :first_name, :last_name, :email, :is_reader1a, :is_reader1b, :is_reader2, :password, :password_confirmation
 
   has_secure_password
   after_create :send_password_reset
