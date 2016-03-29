@@ -6,7 +6,7 @@ class Admin::ObservationReadsController < AdminController
     @readers_for_select_1a = select_for('1a')
     @readers_for_select_1b = select_for('1b')
     @readers_for_select_2  = select_for('2')    
-    @edit_reader_list = ObservationRead.edit_reader_list_single
+    @edit_reader_list = ObservationRead.edit_reader_list
   end
 
   def update

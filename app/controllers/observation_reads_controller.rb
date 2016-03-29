@@ -8,7 +8,7 @@
 
   def show
     @observation_read = ObservationRead.find(params[:id])
-    @domains          = @observation_read.domain_scores
+    @domains          = @observation_read.domain_scores.order("domain_id ASC")
     @domain_scores    = @observation_read.find_scores_by_domain_number
 
     @domain_numbers = Domain.all_numbers
