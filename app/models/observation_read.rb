@@ -7,7 +7,7 @@ class ObservationRead < ActiveRecord::Base
   belongs_to :reader
 
 
-  STATES = ["NYC","Cond Cert","Cert","Cert w. Dist"]
+  STATES = ["1","2","3"]
 
   STATUS_WORD_MAPPING = {1 => :waiting, 2 => :ready, 3 => :finished}.freeze
 
