@@ -9,7 +9,7 @@
   def show
     @observation_read = ObservationRead.find(params[:id])
     @domains          = @observation_read.domain_scores.order("domain_id ASC")
-    @domain_scores    = @observation_read.find_scores_by_domain_number
+    @domain_scores    = @observation_read.find_scores_by_unique_indicator
 
     @domain_numbers = Domain.all_numbers
     @dropdown = ObservationRead::STATES.map.with_index{|state,idx| [state, idx+1]}

@@ -34,12 +34,12 @@
   <tbody>
     <tr class="quality-weighted">
       <td>Quality</td>
-      <td><%= @domain_scores.values.sum{|x| x.quality_sum.to_i } %></td>
+      <td id='0'><%= @domain_scores.values.sum{|x| x.quality_sum.to_i } %></td>
     </tr>
 
     <tr class="alignment-weighted">
       <td>Alignment</td>
-      <td><%= @domain_scores.values.sum{|x| x.alignment_sum.to_i } %></td>
+      <td id='1'><%= @domain_scores.values.sum{|x| x.alignment_sum.to_i } %></td>
     </tr>
   </tbody>
 </table>

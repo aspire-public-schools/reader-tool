@@ -66,12 +66,38 @@ var LogIn = {
   }
 }
 
+var setCert = {
+  quality: function() {
+    var qualityCount = parseInt($('.quality-weighted #0').text())
+    if (qualityCount >= 8) {
+      $('#observation_read_quality_overall').val(1)
+    } else if (qualityCount >= 4 && qualityCount <= 7) {
+      $('#observation_read_quality_overall').val(2)
+    } else if(qualityCount < 4) {
+      $('#observation_read_quality_overall').val(3)
+    }
+  },
+
+  alignment: function() {
+    var alignmentCount = parseFloat($('.alignment-weighted #1').text())
+    if (alignmentCount >= 8) {
+      $('#observation_read_alignment_overall').val(1)
+    } else if(alignmentCount >= 4 && alignmentCount <= 7) {
+      $('#observation_read_alignment_overall').val(2)
+    } else if(alignmentCount < 4) {
+      $('#observation_read_alignment_overall').val(3)
+    }
+  }
+}
+
 
 $(document).ready(function(){
   sideBar.toggle();
   evidenceScore.init();
   docLiveForm.init();
   indicatorLinks.highlight();
+  setCert.alignment();
+  setCert.quality();
   $('#finalize-button').on('click', LogIn.displayIt)
   $('.fa-times-circle').on('click', LogIn.hide)
   $('#cancel-read').on('click', LogIn.hide)

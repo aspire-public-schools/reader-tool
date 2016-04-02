@@ -1,5 +1,5 @@
 class ObservationRead < ActiveRecord::Base
-  attr_accessible :document_quality, :document_alignment, :live_alignment, :live_quality, :observation_status, :id, :observation_group_id, :employee_id_observer, :employee_id_learner, :correlation, :average_difference, :percent_correct, :reader_id, :created_at, :updated_at, :reader_number, :comments, :flagged
+  attr_accessible :quality_overall, :alignment_overall, :observation_status, :id, :observation_group_id, :employee_id_observer, :employee_id_learner, :correlation, :average_difference, :percent_correct, :reader_id, :created_at, :updated_at, :reader_number, :comments, :flagged
   has_many :domain_scores
   has_many :domains, through: :domain_scores, uniq: true
   has_many :indicator_scores, through: :domain_scores
@@ -89,6 +89,11 @@ class ObservationRead < ActiveRecord::Base
     Hash[ output.map{|x| [ x.number.to_i, x ] } ]
   end
 
+  def find_scores_by_unique_indicator
+    output = self.class.find_scores_by_unique_indicator(self.id)
+    Hash[ output.map{|x| [ x.number.to_i, x ] } ]
+  end
+
   def find_section_scores
     self.class.find_section_scores self.id
   end
@@ -104,6 +109,45 @@ class ObservationRead < ActiveRecord::Base
 
   def self.last_read
     order('updated_at DESC').first.try(:updated_at)
+  end
+
+  def self.find_scores_by_unique_indicator id
+    find_by_sql <<-SQL
+      SELECT #{id}
+        AS id 
+        , domains.number
+        , COALESCE(quality_sum,0) AS quality_sum
+        , COALESCE(alignment_sum,0) AS alignment_sum
+      FROM domains
+      LEFT JOIN (SELECT obr.id, dom.number, COUNT(DISTINCT inds.indicator_id) AS quality_sum
+          FROM observation_reads obr
+      LEFT JOIN domain_scores doms
+          ON doms.observation_read_id = obr.id
+      LEFT JOIN domains dom
+          ON doms.domain_id = dom.id
+      LEFT JOIN indicator_scores inds
+          ON inds.domain_score_id = doms.id
+      LEFT JOIN evidence_scores evds
+          ON evds.indicator_score_id = inds.id
+      WHERE obr.id = #{id}
+        AND quality <> 0
+      GROUP BY obr.id, dom.number) qual
+    ON qual.number = domains.number
+   LEFT JOIN (SELECT obr.id, dom.number, COUNT(DISTINCT inds.indicator_id) AS alignment_sum
+      FROM observation_reads obr
+      LEFT JOIN domain_scores doms
+          ON doms.observation_read_id = obr.id
+      LEFT JOIN domains dom
+          ON doms.domain_id = dom.id
+      LEFT JOIN indicator_scores inds
+          ON inds.domain_score_id = doms.id
+      LEFT JOIN evidence_scores evds
+          ON evds.indicator_score_id = inds.id
+      WHERE obr.id = #{id}
+        AND alignment <> 0
+      GROUP BY obr.id, dom.number) ali
+    ON ali.number = domains.number
+    SQL
   end
 
   def self.find_scores_by_domain_number id
