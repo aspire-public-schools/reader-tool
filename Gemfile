@@ -8,6 +8,8 @@ gem 'rails', '~> 3.2.21'
 gem 'jquery-rails'
 gem 'simple_form'
 
+gem 'thin'
+
 gem 'pg'
 gem 'rails_12factor'
 

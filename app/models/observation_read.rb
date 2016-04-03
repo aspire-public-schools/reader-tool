@@ -60,14 +60,12 @@ class ObservationRead < ActiveRecord::Base
 
   def quality_cert score
     case score.quality_sum.to_f
-    when 0...2
-      STATES[3] # Cert w. Dist
-    when 2...4
+    when 0..4
+      STATES[3] #3
+    when 5..7
       STATES[2] # Cert
-    when 4...6.5
-      STATES[1] # Cond Cert
     else
-      STATES[9] # NYC
+      STATES[1] # NYC
     end
   end
 
@@ -81,6 +79,44 @@ class ObservationRead < ActiveRecord::Base
       STATES[1] # Cond Cert
     else
       STATES[9] # NYC
+    end
+  end
+
+  #for alignment & quality_overall values, return the stored value if it exists, otherwise calc based on the num # of indicator dings
+  def alignment_overall
+    current_score = self[:alignment_overall]
+    if current_score == "" || current_score == nil
+      scores = self.find_scores_by_unique_indicator()
+      alignment_sum = scores.values.sum{|x| x.alignment_sum.to_i }
+      case alignment_sum
+      when 0..4
+        return "1"
+      when 5..7
+        return "2"
+      else
+        return "3"
+      end
+    else
+      p "Not null: #{current_score}"
+      return current_score
+    end
+  end
+
+  def quality_overall
+    current_score = self[:quality_overall]
+    if current_score == "" || current_score == nil
+      scores = self.find_scores_by_unique_indicator()
+      quality_sum = scores.values.sum{|x| x.quality_sum.to_i }
+      case quality_sum
+      when 0..4
+        return "1"
+      when 5..7
+        return "2"
+      else
+        return "3"
+      end
+    else
+      return current_score
     end
   end
 

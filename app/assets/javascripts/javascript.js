@@ -65,30 +65,30 @@ var LogIn = {
     $('.login_modal').css('display','none')
   }
 }
+//Originally this was used to set the dropdowns but that logic has been moved to the ObservationReads model
+// var setCert = {
+//   quality: function() {
+//     var qualityCount = parseInt($('.quality-weighted #0').text())
+//     if (qualityCount >= 8) {
+//       $('#observation_read_quality_overall').val(1)
+//     } else if (qualityCount >= 4 && qualityCount <= 7) {
+//       $('#observation_read_quality_overall').val(2)
+//     } else if(qualityCount < 4) {
+//       $('#observation_read_quality_overall').val(3)
+//     }
+//   },
 
-var setCert = {
-  quality: function() {
-    var qualityCount = parseInt($('.quality-weighted #0').text())
-    if (qualityCount >= 8) {
-      $('#observation_read_quality_overall').val(1)
-    } else if (qualityCount >= 4 && qualityCount <= 7) {
-      $('#observation_read_quality_overall').val(2)
-    } else if(qualityCount < 4) {
-      $('#observation_read_quality_overall').val(3)
-    }
-  },
-
-  alignment: function() {
-    var alignmentCount = parseFloat($('.alignment-weighted #1').text())
-    if (alignmentCount >= 8) {
-      $('#observation_read_alignment_overall').val(1)
-    } else if(alignmentCount >= 4 && alignmentCount <= 7) {
-      $('#observation_read_alignment_overall').val(2)
-    } else if(alignmentCount < 4) {
-      $('#observation_read_alignment_overall').val(3)
-    }
-  }
-}
+//   alignment: function() {
+//     var alignmentCount = parseFloat($('.alignment-weighted #1').text())
+//     if (alignmentCount >= 8) {
+//       $('#observation_read_alignment_overall').val(1)
+//     } else if(alignmentCount >= 4 && alignmentCount <= 7) {
+//       $('#observation_read_alignment_overall').val(2)
+//     } else if(alignmentCount < 4) {
+//       $('#observation_read_alignment_overall').val(3)
+//     }
+//   }
+// }
 
 
 $(document).ready(function(){
@@ -96,8 +96,8 @@ $(document).ready(function(){
   evidenceScore.init();
   docLiveForm.init();
   indicatorLinks.highlight();
-  setCert.alignment();
-  setCert.quality();
+  //setCert.alignment();
+  //setCert.quality();
   $('#finalize-button').on('click', LogIn.displayIt)
   $('.fa-times-circle').on('click', LogIn.hide)
   $('#cancel-read').on('click', LogIn.hide)
