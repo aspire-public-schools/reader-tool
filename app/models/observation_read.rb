@@ -29,8 +29,13 @@ class ObservationRead < ActiveRecord::Base
 
   def finalize!
     update_attributes(observation_status: 3) # finished
-    #open up the 2nd read if one is flagged
-  if self.flagged
+    #open up the 2nd read if one is flagged or if read_1a & read_1b scores don't match
+    reads = ObservationRead.where("observation_group_id = ? AND reader_number <> '2'", self.observation_group_id)
+    if ((reads[0][:alignment_overall] != nil && reads[1][:alignment_overall] != nil && reads[0][:alignment_overall] != reads[1][:alignment_overall]) ||
+       (reads[0][:quality_overall] != nil && reads[1][:quality_overall] != nil && reads[0][:quality_overall] != reads[1][:quality_overall]) ||
+       self.flagged)
+      p "Setting flagged"
+      self.update_attributes(flagged: 't')
       read_2 = ObservationRead.where(observation_group_id: self.observation_group_id, reader_number: '2').first
       read_2.update_attributes(observation_status: 2) # ready
     end
@@ -305,7 +310,7 @@ class ObservationRead < ActiveRecord::Base
       ON two.reader_number = '2'
       AND onea.observation_group_id = two.observation_group_id
     WHERE onea.reader_number = '1a'
-    ORDER BY onea.employee_id_observer
+    ORDER BY onea.observation_group_id
     --- LIMIT 100
     SQL
   end

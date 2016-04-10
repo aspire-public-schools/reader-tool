@@ -80,8 +80,9 @@
                 Cannot assign reader until flagged.
                 <% end %>
               </td>
-              <td class=<%= "flagged-#{read.oneb_flagged}" %> >
-                <%= read.oneb_flagged? ? "Yes" : "No" %>
+              <td class=<%= flag = (read.oneb_flagged? || read.onea_flagged?)
+                  "flagged-#{flag}" %> >
+                <%= flag ? "Yes" : "No" %>
               </td>
             </tr>
           <% end %>
