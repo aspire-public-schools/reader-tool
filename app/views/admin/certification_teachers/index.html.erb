@@ -1,0 +1,11 @@
+<div class="container container-fluid" id="dashboard">
+<%= form_tag("/admin/certification_teachers", method: "put", class: "form-inline") do %>
+  <%= label_tag(:q, "Enter the id of the current certification teacher: ") %>
+  <%= text_field_tag(:employee_id_learner, value = @CertificationTeacher.employee_id_learner) %>
+  <br>
+  <%= label_tag(:q, "Check the box if you would like to delete the current read data.") %>
+  <%= check_box_tag(:truncate_data) %>
+  <br>
+  <%= submit_tag("Update", :onclick => "return check_truncate();") %>
+<% end %>
+</div>

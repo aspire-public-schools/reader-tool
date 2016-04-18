@@ -31,6 +31,12 @@ ReaderTool::Application.routes.draw do
         get :index
       end
     end
+
+    resource :certification_teachers, only: [:index, :update] do
+      collection do
+        get :index
+      end
+    end
   end
   match 'admin/readers/:id' => 'admin/readers#edit'
 

@@ -65,6 +65,16 @@ var LogIn = {
     $('.login_modal').css('display','none')
   }
 }
+
+function check_truncate(){
+
+  if(document.getElementById('truncate_data').checked) {
+    if (confirm("Are you sure you want to remove all the read data?  Please make sure that you have waited at least 24 hours since your last read in order to allow the data to sync."))
+      return true;
+    else
+      return false;
+  }
+}
 //Originally this was used to set the dropdowns but that logic has been moved to the ObservationReads model
 // var setCert = {
 //   quality: function() {
